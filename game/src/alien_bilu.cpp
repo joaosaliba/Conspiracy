@@ -60,7 +60,7 @@ void Bilu::specialAction(){
         if(InputManager::instance.isKeyPressed(InputManager::KEY_PRESS_SPACE) && isSelected) {
                 // Paper interaction
                 if(paper != NULL) {
-                        if(!editing) {
+                        if(! editing) {
                                 editing = true;
                                 blockMovement = true;
                                 ((Paper*)(paper))->playEffect();
