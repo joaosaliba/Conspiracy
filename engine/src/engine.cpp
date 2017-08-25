@@ -8,11 +8,11 @@ namespace engine{
     SceneManager* sceneManager;
     WindowManager* windowManager;
     SDLManager* sdlManager;
-    double startTime;
-    double stepTime;
-    double timeElapsed;
-    double frameTime;
-    double frameRate = 60.0;
+    double start_time;
+    double step_time;
+    double time_elapsed;
+    double frame_time;
+    double frame_rate = 60.0;
     SceneManager* getSceneManager(){
         return sceneManager;
     }
@@ -20,9 +20,9 @@ namespace engine{
         sceneManager = new SceneManager();
         windowManager = new WindowManager();
         sdlManager = new SDLManager();
-        startTime = SDL_GetTicks();
-        stepTime = startTime;
-        frameTime = 1000.0/frameRate;
+        start_time = SDL_GetTicks();
+        step_time = start_time;
+        frame_time = 1000.0/frame_rate;
 
         if(!sdlManager->initSDL()){
             ERROR("ERRO AO INICIAR SDL");
@@ -34,35 +34,35 @@ namespace engine{
     }
 
     void run(){
-        bool isRunning = true;
+        bool is_running = true;
         SDL_Event event;
 
-        while(isRunning){
-            stepTime = SDL_GetTicks();
+        while(is_running){
+            step_time = SDL_GetTicks();
 
             engine::InputManager::instance.update(event);
             SDL_RenderClear(WindowManager::getGameCanvas());
 
             if(engine::InputManager::instance.getQuitRequest()){
-                isRunning = false;
+                is_running = false;
                 sdlManager->finalizeSDL();
                 windowManager->destroyWindow();
                 continue;
             }
 
 
-            timeElapsed = SDL_GetTicks() - stepTime;
+            time_elapsed = SDL_GetTicks() - step_time;
             DEBUG("TICKS:" + std::to_string(SDL_GetTicks()));
-            DEBUG("frameTime:" + std::to_string(frameTime));
-            DEBUG("timeElapsed: " + std::to_string(timeElapsed));
-            if(frameTime > timeElapsed){
-                DEBUG("SDL_DELAY: " + std::to_string(frameTime - timeElapsed));
-                SDL_Delay(frameTime - timeElapsed);
-                timeElapsed = SDL_GetTicks() - stepTime;
+            DEBUG("frame_time:" + std::to_string(frame_time));
+            DEBUG("time_elapsed: " + std::to_string(time_elapsed));
+            if(frame_time > time_elapsed){
+                DEBUG("SDL_DELAY: " + std::to_string(frame_time - time_elapsed));
+                SDL_Delay(frame_time - time_elapsed);
+                time_elapsed = SDL_GetTicks() - step_time;
             }
 
             if(sceneManager->getCurrentScene() != NULL){
-              sceneManager->getCurrentScene()->update(timeElapsed);
+              sceneManager->getCurrentScene()->update(time_elapsed);
               sceneManager->getCurrentScene()->draw();
             }
             AnimationManager::instance.draw_quads();
