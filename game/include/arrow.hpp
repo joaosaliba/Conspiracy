@@ -8,15 +8,20 @@
 using namespace engine;
 
 class Arrow: public GameObject{
-public:
-    Arrow(std::string objectName, double positionX, double positionY, int width, int height);
+    public:Arrow(std::string object_name, double position_x, double position_y,
+                 int width, int height);
+
     ~Arrow();
+
     void update(double timeElapsed);
+
     void draw();
+
     void init();
+
     Animation * getAnimation();
-protected:
-    Animation* animator;
+
+    protected:Animation* animator;
 };
 
 #endif

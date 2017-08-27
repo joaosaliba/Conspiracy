@@ -9,15 +9,20 @@
 using namespace engine;
 
 class Button: public GameObject{
-public:
-    Button(std::string objectName, double positionX, double positionY, int width, int height, std::string title, int sizeTitle);
+    public: Button(std::string object_name, double position_x, double position_y,
+                   int width, int height, std::string title, int size_title);
+
     ~Button();
+
     void update(double timeElapsed);
+
     void setTextColor(Color * newTextColor);
+
     void draw();
+
     Text * getText();
-protected:
-    Text * text;
+
+    protected: Text * text;
 };
 
 #endif

@@ -1,12 +1,16 @@
+/*
+Objective: this class implements a button.
+Author of the last update: lucas kishima dos santos.
+Date:27/08/2017.
+*/
+
 #include "button.hpp"
 
-Button::Button(std::string objectName, double positionX, double positionY,
-                                     int width, int height, std::string title, int sizeTitle) : GameObject(objectName,
-                                                                         positionX,
-                                                                         positionY,
-                                                                         width, height){
-
-    text = new Text(title, objectName, sizeTitle, true, new Color(0,0,0,0), new Color(0,0,0,0));
+Button::Button(std::string object_name, double position_x, double position_X, int width,
+               int height, std::string title, int size_title) : GameObject(object_name, position_x,
+                                                                           position_y, width,
+                                                                           height) {
+    text = new Text(title, object_name, size_title, true, new Color(0,0,0,0), new Color(0,0,0,0));
 }
 
 Button::~Button(){}
