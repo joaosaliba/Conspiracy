@@ -2,7 +2,7 @@
 
 using namespace engine;
 
-Line::Line(double x1, double y1, int size, double p_angle){
+Line::Line(double x1, double y1, int size, double Pangle){
     point1.first = x1;
     point1.second = y1;
     point2.first = x1 + size;
@@ -60,11 +60,11 @@ void Line::setPoint2(double x, double y){
     point2.second = y;
 }
 
-void Line::rotateLine(double p_angle){
+void Line::rotateLine(double Pangle){
     if(angle > 360){
         angle -= 360;
     }
-    double newAngle = p_angle;
+    double newAngle = Pangle;
 
     //Centralizar na origem
     point2.first -= point1.first;
@@ -73,8 +73,8 @@ void Line::rotateLine(double p_angle){
     //transformar em radianos
     p_angle = ((-p_angle)*PI)/180.0;
 
-    double c = cos(p_angle);
-    double s = sin(p_angle);
+    double c = cos(Pangle);
+    double s = sin(Pangle);
 
     //rotacionar o ponto
     std::pair<double,double> aux;
@@ -91,7 +91,7 @@ void Line::rotateLine(double p_angle){
     angle += newAngle;
 }
 
-void Line::changeAngleTo(double p_angle){
+void Line::changeAngleTo(double Pangle){
     rotateLine(-angle);
     rotateLine(p_angle);
 }
