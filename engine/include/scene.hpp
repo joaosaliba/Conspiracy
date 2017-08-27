@@ -6,18 +6,19 @@
 #include "log.h"
 
 namespace engine{
-    class Scene{
+
+class Scene{
     public:
         Scene(int id);
         ~Scene(){}
         virtual void load();
         virtual void draw();
-        virtual void update(double timeElapsed) = 0;
+        virtual void update(double time_elapsed) = 0;
         virtual void unload();
-        int getId();
-        void setId(int id);
+        int get_id();
+        void set_id(int id);
     protected:
-        int sceneId;
+        int scene_id;
     };
 }
 #endif

@@ -6,14 +6,14 @@ using namespace engine;
 
 SceneManager::SceneManager(){
     beforeSceneId = 0;
-    currentSceneId = 0;  
+    currentSceneId = 0;
 }
 
 void SceneManager::addScene(Scene* scene){
-    if(scenes.find(scene->getId()) != scenes.end()){
+    if(scenes.find(scene->get_id()) != scenes.end()){
         INFO("Failed to load scene");
     }else{
-        scenes[scene->getId()] = scene;
+        scenes[scene->get_id()] = scene;
     }
 }
 
@@ -28,7 +28,7 @@ void SceneManager::loadScene(int id){
         currentScene = scenes[id];
         currentScene->load();
         beforeSceneId = currentSceneId;
-        currentSceneId = currentScene->getId();
+        currentSceneId = currentScene->get_id();
         if (beforeSceneId >= SaveManager::instance.getStageNumberUnlock() && beforeSceneId < 6 && currentSceneId != 6){
               SaveManager::instance.saveActualSituation(beforeSceneId + 1);
         }
