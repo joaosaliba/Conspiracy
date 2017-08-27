@@ -4,16 +4,16 @@ using namespace engine;
 
 FieldOfVision::FieldOfVision(double x, double y, int size, double angle){
     range = size;
-    totalAngle = angle;
+    total_angle = angle;
 
-    catchEffect = new Audio("assets/sounds/GUARDAVIU.wav", "EFFECT", 128);
+    catch_effect = new Audio("assets/sounds/GUARDAVIU.wav", "EFFECT", 128);
     active = true;
     //not including centerLine
-    numberOfLines = 10;
+    number_of_lines = 10;
     createLines(x,y,range);
 }
 int FieldOfVision::getAngle(){
-    return centerLine->getAngle();
+    return center_line->getAngle();
 }
 void FieldOfVision::resetLines(){
     //free(centerLine);
@@ -32,23 +32,23 @@ bool FieldOfVision::isActive(){
 
 void FieldOfVision::createLines(double x, double y, int size){
     resetLines();
-    centerLine = new Line(x,y,size, 0);
+    center_line = new Line(x,y,size, 0);
 
-    double angleInc = ((double)totalAngle/2.0)/((double)numberOfLines/2.0);
-    for(double i = 0, lineAngle = angleInc; i<numberOfLines/2; i+=1, lineAngle += angleInc){
-        Line* newUpperLine = new Line(centerLine);
-        newUpperLine->rotateLine(lineAngle);
-        lines.push_back(newUpperLine);
+    double angle_inc = ((double)total_angle/2.0)/((double)number_of_lines/2.0);
+    for(double i = 0, line_angle = angle_inc; i<number_of_lines/2; i+=1, line_angle += angle_inc) {
+        Line* new_upper_line = new Line(center_line);
+        new_upper_line->rotateLine(line_angle);
+        lines.push_back(new_upper_line);
 
-        Line* newLowerLine = new Line(centerLine);
-        newLowerLine->rotateLine(-lineAngle);
-        lines.push_back(newLowerLine);
+        Line* new_lower_line = new Line(center_line);
+        new_lower_line->rotateLine(-line_angle);
+        lines.push_back(new_lower_line);
     }
 }
-void FieldOfVision::updateCenter(double incX, double incY){
-    centerLine->updatePosition(incX,incY);
+void FieldOfVision::updateCenter(double inc_x, double inc_y){
+    center_line->updatePosition(inc_x,inc_y);
     for(auto line: lines){
-        line->updatePosition(incX,incY);
+        line->updatePosition(inc_x,inc_y);
     }
 }
 
@@ -59,38 +59,38 @@ void FieldOfVision::draw(){
 }
 
 void FieldOfVision::incrementAngle(double angle){
-    centerLine->rotateLine(angle);
+    center_line->rotateLine(angle);
     for(auto line:lines){
         line->rotateLine(angle);
     }
 }
 
 void FieldOfVision::setAngle(double angle){
-    centerLine->changeAngleTo(angle);
-    double angleInc = ((double)totalAngle/2.0)/((double)numberOfLines/2.0);
+    center_line->changeAngleTo(angle);
+    double angle_inc = ((double)total_angle/2.0)/((double)number_of_lines/2.0);
 
-    double lineAngle = angle;
+    double line_angle = angle;
     int i = 0;
     bool inverteu = false;
     for(auto line:lines){
-        if(i >= numberOfLines/2 && !inverteu){
-            lineAngle = angle;
-            angleInc *= (-1);
+        if(i >= number_of_lines/2 && !inverteu){
+            line_angle = angle;
+            angle_inc *= (-1);
             inverteu = true;
         }
-        lineAngle -= angleInc;
-        line->changeAngleTo(lineAngle);
+        line_angle -= angle_inc;
+        line->changeAngleTo(line_angle);
         i++;
     }
 }
 
 std::vector<Line*> FieldOfVision::getLines(){
-    std::vector<Line*> linesReturn;
-    linesReturn.push_back(centerLine);
+    std::vector<Line*> lines_return;
+    lines_return.push_back(center_line);
     for(auto line:lines){
-        linesReturn.push_back(line);
+        lines_return.push_back(line);
     }
-    return linesReturn;
+    return lines_return;
 }
 
 int FieldOfVision::getRange(){
@@ -98,5 +98,5 @@ int FieldOfVision::getRange(){
 }
 
 void FieldOfVision::playEffect(){
-    catchEffect->play(0);
+    catch_effect->play(0);
 }
