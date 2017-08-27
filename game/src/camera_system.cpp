@@ -15,11 +15,11 @@ CameraSystem::CameraSystem(Camera* p_camera, CameraSwitch* p_cameraSwitch, Camer
     cameraLever = p_cameraLever;
 }
 
-void CameraSystem::update(double timeElapsed){
-    camera->update(timeElapsed);
-    cameraSwitch->update(timeElapsed);
+void CameraSystem::update(double time_elapsed){
+    camera->update(time_elapsed);
+    cameraSwitch->update(time_elapsed);
     if(cameraLever != NULL){
-     cameraLever->update(timeElapsed);
+     cameraLever->update(time_elapsed);
         if(cameraLever->getState() != lastLeverState){
             lastLeverState = cameraLever->getState();
             camera->changeState(cameraLever->getState());
