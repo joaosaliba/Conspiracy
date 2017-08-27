@@ -2,12 +2,12 @@
 
 using namespace engine;
 
-AnimationQuad::AnimationQuad(double p_x, double p_y, SDL_Rect* p_render_quad, SDL_Rect* p_clip_rect, SDL_Texture* p_texture){
-    x = p_x;
-    y = p_y;
+AnimationQuad::AnimationQuad(double pX, double pY, SDL_Rect* p_render_quad, SDL_Rect* p_clip_rect, SDL_Texture* Ptexture){
+    x = pX;
+    y = pY;
     renderQuad = p_render_quad;
     clip_rect = p_clip_rect;
-    texture = p_texture;
+    texture = Ptexture;
 }
 
 AnimationQuad::~AnimationQuad(){
