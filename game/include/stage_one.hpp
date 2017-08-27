@@ -18,15 +18,15 @@
 
 #include <typeinfo>
 
-class stage_one: public game_scene{
+class StageOne: public GameScene{
 public:
-    stage_one(int id, std::string new_tiled_file);
+    StageOne(int id, std::string newTiledFile);
 private:
-    void create_guards();
-    void create_aliens();
-    void create_door_systems();
-    void create_papers();
-    void create_finish_points();
+    void createGuards();
+    void createAliens();
+    void createDoorSystems();
+    void createPapers();
+    void createFinishPoints();
 };
 
 #endif

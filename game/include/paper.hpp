@@ -11,7 +11,7 @@ using namespace engine;
 
 class Paper: public GameObject{
 public:
-    Paper(std::string objectName, double positionX, double positionY, int width, int height);
+    Paper(std::string objectName, double position_x, double position_y, int width, int height);
     ~Paper();
     void update(double timeElapsed);
     void draw();
@@ -28,8 +28,8 @@ protected:
     Animation* animator;
     ProgressBar *editing_bar;
     bool edited;
-    bool isBeingEdited;
-    Audio* paperEditingSound;
+    bool is_being_edited;
+    Audio* paper_editing_sound;
 };
 
 #endif
