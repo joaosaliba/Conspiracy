@@ -7,28 +7,27 @@
 #include "game_object.hpp"
 #include "color.hpp"
 #include "audio.hpp"
-
 #include <vector>
 
 using namespace engine;
 
-class FinishScene: public Scene{
+class finish_scene: public scene {
 public:
-    FinishScene(int id);
-    ~FinishScene();
+    finish_scene(int id);
+    ~finish_scene();
     void load();
     void draw();
-    void update(double timeElapsed);
+    void update(double time_elapsed);
     void unload();
 private:
-    void selectAction();
-    int selectButton;
-    std::vector<std::pair<int, GameObject*>> gameObjectsList;
-    Animation * background;
-    Color * select;
-    Color * notSelect;
-    Audio * soundEffect;
-    Audio * backgroundSound;
+    void select_action();
+    int select_button;
+    std::vector<std::pair<int, game_object*>> game_objects_list;
+    animation * background;
+    color * select;
+    color * not_select;
+    audio * sound_effect;
+    audio * background_sound;
 };
 
 #endif
