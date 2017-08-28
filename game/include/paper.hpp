@@ -11,22 +11,22 @@ using namespace engine;
 
 class Paper: public GameObject{
 public:
-    Paper(std::string objectName, double position_x, double position_y, int width, int height);
+    Paper(std::string object_name, double position_x, double position_y, int width, int height);
     ~Paper();
-    void update(double timeElapsed);
+    void update(double time_elapsed);
     void draw();
     void init();
-    Animation * getAnimation();
+    Animation * get_animation();
     void animate();
-    void stopAnimation();
-    bool isEdited();
-    double getEditingBarPercent();
-    void resetEditingProgress();
-    void playEffect();
-    void stopEffect();
+    void stop_animation();
+    bool is_edited();
+    double get_editing_bar_percent();
+    void reset_editing_progress();
+    void play_effect();
+    void stop_effect();
 protected:
-    Animation* animator;
-    ProgressBar *editing_bar;
+    animation* animator;
+    progress_bar *editing_bar;
     bool edited;
     bool is_being_edited;
     Audio* paper_editing_sound;

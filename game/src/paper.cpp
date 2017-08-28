@@ -1,12 +1,12 @@
 #include "paper.hpp"
 
-Paper::Paper(std::string objectName, double position_x, double position_y,
-                                     int width, int height) : GameObject(objectName,
+Paper::Paper(std::string object_name, double position_x, double position_y,
+                                     int width, int height) : GameObject(object_name,
                                                                          position_x,
                                                                          position_y,
-                                                                         width, height){
+                                                                         width, height) {
 
-    animator = new Animation(objectName, 1, 4, 0.5);
+    animator = new animation(object_name, 1, 4, 0.5);
 
     std::vector<unsigned int> back_color = {22, 206, 26, 1};
     std::vector<unsigned int> front_color = {116, 225, 117, 1};
@@ -14,66 +14,66 @@ Paper::Paper(std::string objectName, double position_x, double position_y,
 
     paper_editing_sound = new Audio("assets/sounds/PAPEROISE.wav", "EFFECT", 100);
 
-    animator->addAction("idle",0,0);
-    animator->addAction("being_edited",1,3);
+    animator->add_action("idle",0,0);
+    animator->add_action("being_edited",1,3);
     edited = false;
     is_being_edited = false;
 }
 
-Paper::~Paper(){}
+Paper::~Paper() {}
 
-void Paper::update(double time_elapsed){
+void Paper::update(double time_elapsed) {
     time_elapsed = time_elapsed;
-    if(is_being_edited){
+    if(is_being_edited) {
         editing_bar->update(time_elapsed);
-        animator->setInterval("being_edited");
-        if(editing_bar->getPercent() <= 0.0){
+        animator->set_interval("being_edited");
+        if(editing_bar->get_percent() <= 0.0) {
             is_being_edited = false;
             edited = true;
         }
     }else{
-        animator->setInterval("idle");
+        animator->set_interval("idle");
     }
     animator->update();
 }
 
-void Paper::animate(){
+void Paper::animate() {
     is_being_edited = true;
 }
 
-void Paper::stopAnimation(){
+void Paper::stop_animation() {
     is_being_edited = false;
 }
 
-bool Paper::isEdited(){
+bool Paper::is_edited() {
     return edited;
 }
 
-void Paper::draw(){
+void Paper::draw() {
     INFO("Paper DRAW");
-    animator->draw(getPositionX(), getPositionY());
-    animator->draw_collider(getPositionX(), getPositionY(), getWidth(), getHeight());
-    if(is_being_edited){
-        AnimationManager::instance.addProgressBar(editing_bar);
+    animator->draw(get_position_x(), get_position_y());
+    animator->draw_collider(get_position_x(), get_position_y(), get_width(), get_height());
+    if(is_being_edited) {
+        animation_manager::instance.add_progress_bar(editing_bar);
     }
 }
 
-Animation * Paper::getAnimation(){
+animation * Paper::get_animation() {
   return animator;
 }
 
-double Paper::getEditingBarPercent(){
-    return editing_bar->getPercent();
+double Paper::get_editing_bar_percent() {
+    return editing_bar->get_percent();
 }
 
-void Paper::resetEditingProgress(){
-    editing_bar->resetPercent();
+void Paper::reset_editing_progress() {
+    editing_bar->reset_Percent();
 }
 
-void Paper::playEffect(){
+void Paper::play_effect() {
     paper_editing_sound->play(0);
 }
 
-void Paper::stopEffect(){
+void Paper::stop_effect() {
     paper_editing_sound->stop();
 }

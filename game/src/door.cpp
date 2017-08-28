@@ -1,69 +1,69 @@
 #include "door.hpp"
 
-Door::Door(std::string objectName, double positionX, double positionY,
-           int width, int height, std::string doorSide) : GameObject(objectName,
-                                                                     positionX,
-                                                                     positionY,
+Door::Door(std::string object_name, double position_x, double position_y,
+           int width, int height, std::string door_side) : GameObject(object_name,
+                                                                     position_x,
+                                                                     position_y,
                                                                      width,
                                                                      height){
 
-    if(doorSide.compare("DOWN") == 0){
-        animator = new Animation(objectName, 1, 4, 0.5);
-        animator->addAction("closed", 0,0);
-        animator->addAction("open",1,3);
-    }else if(doorSide.compare("RIGHT") == 0){
-        animator = new Animation(objectName, 1, 8, 0.5);
-        animator->addAction("closed", 0,0);
-        animator->addAction("open",1,3);
-    }else if(doorSide.compare("LEFT") == 0){
-        animator = new Animation(objectName, 1, 8, 0.5);
-        animator->addAction("closed", 4,4);
-        animator->addAction("open",5,7);
+    if(door_side.compare("DOWN") == 0) {
+        animator = new animation(object_name, 1, 4, 0.5);
+        animator->add_action("closed", 0,0);
+        animator->add_action("open",1,3);
+    }else if(door_side.compare("RIGHT") == 0) {
+        animator = new animation(object_name, 1, 8, 0.5);
+        animator->add_action("closed", 0,0);
+        animator->add_action("open",1,3);
+    }else if(door_side.compare("LEFT") == 0) {
+        animator = new animation(object_name, 1, 8, 0.5);
+        animator->add_action("closed", 4,4);
+        animator->add_action("open",5,7);
     }
 
-    side = doorSide;
+    side = door_side;
     door_effect = new Audio("assets/sounds/DOOR.wav", "EFFECT", 90);
 
-    animator->setDrawSize(width,height);
+    animator->set_draw_size(width,height);
     open = false;
 }
 
 Door::~Door(){}
 
-void Door::update(double timeElapsed){
-    timeElapsed = timeElapsed;
-    if(animator->getCurrentPositionFrame()!=3 && animator->getCurrentPositionFrame()!=7){
+void Door::update(double time_elapsed) {
+    time_elapsed = time_elapsed;
+    if(animator->get_current_position_frame()!=3 && animator->get_current_position_frame() != 7){
         animator->update();
     }
-    if(isOpen()){
-        animator->setInterval("open");
+    if(is_open()) {
+        animator->set_interval("open");
     }else{
-        animator->setInterval("closed");
+        animator->set_interval("closed");
     }
 }
 
-void Door::draw(){
+void Door::draw() {
     INFO("Door DRAW");
-    animator->draw(getPositionX(), getPositionY());
-    animator->draw_collider(getPositionX(), getPositionY(), getWidth(), getHeight());
+    animator->draw(get_position_x(), get_position_y());
+    animator->draw_collider(get_position_x(), get_position_y(), get_width(), get_height());
 }
 
-Animation * Door::getAnimation(){
+animation * Door::get_animation() {
   return animator;
 }
 
-bool Door::isOpen(){
+bool Door::is_open() {
         return open;
 }
 
-void Door::setOpen(bool status){
+void Door::set_open(bool status) {
         open = status;
 }
 
-void Door::playEffect(){
+void Door::play_effect() {
     door_effect->play(0);
 }
 
-std::string Door::getDoorSide(){
+std::string Door::get_door_side() {
     return side;
 }

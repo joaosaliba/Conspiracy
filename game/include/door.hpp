@@ -10,21 +10,21 @@ using namespace engine;
 
 class Door: public GameObject{
 public:
-    Door(std::string objectName, double positionX, double positionY,
-         int width, int height, std::string doorSide);
+    Door(std::string object_name, double position_x, double position_y,
+         int width, int height, std::string door_side);
     ~Door();
-    void update(double timeElapsed);
+    void update(double time_elapsed);
     void draw();
     void init();
-    Animation * getAnimation();
-    bool isOpen();
-    void setOpen(bool status);
-    void playEffect();
-    std::string getDoorSide();
+    animation * get_animation();
+    bool is_open();
+    void set_open(bool status);
+    void play_effect();
+    std::string get_door_side();
 protected:
-    Animation* animator;
+    animation* animator;
 private:
-    Audio *door_effect;
+    audio *door_effect;
     bool open;
     std::string side;
 };
