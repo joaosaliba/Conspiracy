@@ -7,28 +7,28 @@
 
 #include <vector>
 
-namespace engine{
-    class ProgressBar: public GameObject{
+namespace engine {
+    class ProgressBar: public GameObject {
     public:
-        ProgressBar(double positionX, double positionY, int width, int height, double increment);
-        ProgressBar(double positionX, double positionY, int width, int height,
-                    double increment, std::vector<unsigned int> newBackColor, std::vector<unsigned int> newFrontColor);
+        ProgressBar(double position_x, double position_y, int width, int height, double increment);
+        ProgressBar(double position_x, double position_y, int width, int height,
+                    double increment, std::vector<unsigned int> new_back_color, std::vector<unsigned int> new_front_color);
         ~ProgressBar();
-        void update(double timeElapsed);
+        void update(double time_elapsed);
         void draw();
         double getPercent();
         void resetPercent();
 
     private:
         double percent;
-        double progressIncrement;
+        double progress_increment;
         int pw;
         int px;
-        SDL_Rect *backRect;
-        SDL_Rect *frontRect;
-        SDL_Color backColor;
-        SDL_Color frontColor;
-        SDL_Color oldColor;
+        SDL_Rect *back_rect;
+        SDL_Rect *front_rect;
+        SDL_Color back_color;
+        SDL_Color front_color;
+        SDL_Color old_color;
     };
 }
 

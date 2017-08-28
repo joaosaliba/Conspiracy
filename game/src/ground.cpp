@@ -1,17 +1,17 @@
 #include "ground.hpp"
 #include "log.h"
 
-Ground::Ground(std::string objectName, double positionX, double positionY,
-                                     int width, int height) : GameObject(objectName,
-                                                                         positionX,
-                                                                         positionY,
+Ground::Ground(std::string object_name, double position_x, double position_y,
+                                     int width, int height) : GameObject(object_name,
+                                                                         position_x,
+                                                                         position_y,
                                                                          width, height){
-animator = new Animation(objectName, 1, 1, 0.5);
+animator = new Animation(object_name, 1, 1, 0.5);
 }
 
 Ground::~Ground(){}
-void Ground::update(double timeElapsed){
-    timeElapsed = timeElapsed;
+void Ground::update(double time_elapsed){
+    time_elapsed = time_elapsed;
     animator->update();
 }
 

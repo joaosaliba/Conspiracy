@@ -4,68 +4,69 @@
 
 using namespace engine;
 
-Audio::Audio(std::string audioPath, std::string audioType, int volume){
-    if(audioType.compare("MUSIC") == 0){
-        audioMusic = Mix_LoadMUS(audioPath.c_str());
+Audio::Audio(std::string audio_path, std::string audio_type, int volume) {
+    if(audio_type.compare("MUSIC") == 0) {
+        audio_music = Mix_LoadMUS(audio_path.c_str());
         Mix_VolumeMusic(volume);
-        if(audioMusic == NULL){
+        if(audio_music == NULL) {
             ERROR("Audio file could not be loaded");
         }
-    }else if(audioType.compare("EFFECT") == 0){
-        audioEffect = Mix_LoadWAV(audioPath.c_str());
-        Mix_VolumeChunk(audioEffect, volume);
-        if(audioEffect == NULL){
+    }else if(audio_type.compare("EFFECT") == 0) {
+        audio_effect = Mix_LoadWAV(audio_path.c_str());
+        Mix_VolumeChunk(audio_effect, volume);
+        if(audio_effect == NULL) {
             ERROR("Audio file could not be loaded");
         }
-    }else{
+    }else {
         ERROR("Audio type is not correct");
     }
 }
 
-Audio::~Audio(){}
+Audio::~Audio() {
+}
 
-void Audio::play(const int timesToPlay){
-    if(audioMusic != NULL){
-        if(Mix_PlayMusic(audioMusic, timesToPlay) == -1){
+void Audio::play(const int times_to_play) {
+    if(audio_music != NULL) {
+        if(Mix_PlayMusic(audio_music, times_to_play) == -1) {
             ERROR("Audio could not be played");
         }
-    }else{
-        if(Mix_PlayChannel(-1, audioEffect, timesToPlay) == -1){
+    }else {
+        if(Mix_PlayChannel(-1, audio_effect, times_to_play) == -1) {
             ERROR("Audio could not be played");
         }
     }
 }
 
-void Audio::pause(){
-    if(audioMusic != NULL){
-        if(Mix_PausedMusic() != 1){
+void Audio::pause() {
+    if(audio_music != NULL) {
+        if(Mix_PausedMusic() != 1) {
             Mix_PauseMusic();
-        }else{
+        }else {
             ERROR("This audio has already been paused");
         }
-    }else{
+    }else {
         ERROR("Audio effects can not be paused");
     }
 }
 
-void Audio::resume(){
-    if(audioMusic != NULL){
-        if(Mix_PausedMusic() == 1){
+void Audio::resume() {
+    if(audio_music != NULL) {
+        if(Mix_PausedMusic() == 1) {
             Mix_ResumeMusic();
-        }else{
+        }else {
             ERROR("This audio is not paused");
         }
-    }else{
+    }else {
         ERROR("Audio effects can not be resumed");
     }
 }
 
-void Audio::stop(){
-    if(audioMusic != NULL){
+void Audio::stop() {
+    if(audio_music != NULL) {
         Mix_HaltChannel(0);
-    }else if(audioEffect != NULL){
+    }else if(audio_effect != NULL) {
         Mix_HaltChannel(-1);
-    }else{
+    }else {
         ERROR("Audio effects can not be stopped");
     }
 }

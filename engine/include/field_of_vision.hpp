@@ -10,11 +10,11 @@
 namespace engine{
     class FieldOfVision{
     public:
-        FieldOfVision(double x, double y, int range, double totalAngle);
+        FieldOfVision(double x, double y, int range, double total_angle);
         ~FieldOfVision();
         void updateCenter(double x, double y);
         void draw();
-        void incrementAngle(double angleIncrement);
+        void incrementAngle(double angle_increment);
         void setAngle(double angle);
         int getRange();
         void deactivate();
@@ -23,15 +23,15 @@ namespace engine{
         std::vector<Line*> getLines();
         void playEffect();
     private:
-        Line* centerLine;
-        Audio* catchEffect;
+        Line* center_line;
+        Audio* catch_effect;
         std::vector<Line*> lines;
         std::pair<double,double> center;
         void resetLines();
         void createLines(double x, double y, int range);
         int range;
-        double totalAngle;
-        int numberOfLines;
+        double total_angle;
+        int number_of_lines;
         bool active;
     };
 }

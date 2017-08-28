@@ -4,20 +4,19 @@
 #include "sdl2includes.hpp"
 #include <string>
 
-
 namespace engine{
 
-    class Audio{
+class Audio{
     public:
-        Audio(std::string audioPath, std::string audioType, int volume);
+        Audio(std::string audio_path, std::string audio_type, int volume);
         ~Audio();
-        void play(const int timesToPlay);
+        void play(const int times_to_play);
         void pause();
         void resume();
         void stop();
     private:
-        Mix_Music* audioMusic = NULL;
-        Mix_Chunk* audioEffect = NULL;
+        Mix_Music* audio_music = NULL;
+        Mix_Chunk* audio_effect = NULL;
     };
 }
 #endif
