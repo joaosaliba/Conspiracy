@@ -1,5 +1,5 @@
-#ifndef CHOOSE_STAGE_SCENE_HPP
-#define CHOOSE_STAGE_SCENE_HPP
+#ifndef CHOOSE_STAGE_scene_HPP
+#define CHOOSE_STAGE_scene_HPP
 
 #include "engine.hpp"
 #include "scene.hpp"
@@ -8,27 +8,26 @@
 #include "color.hpp"
 #include "audio.hpp"
 #include "save_manager.hpp"
-
 #include <vector>
 
 using namespace engine;
 
-class ChooseStageScene: public Scene{
+class choose_stage_scene: public scene {
 public:
-    ChooseStageScene(int id);
-    ~ChooseStageScene();
+    choose_stage_scene(int id);
+    ~choose_stage_scene();
     void load();
     void draw();
-    void update(double timeElapsed);
+    void update(double time_elapsed);
     void unload();
 private:
-    void selectAction();
-    int selectButton;
-    std::vector<std::pair<int, GameObject*>> gameObjectsList;
-    Sprite * background;
-    Color * select;
-    Color * notSelect;
-    Audio * soundEffect;
+    void select_action();
+    int select_button;
+    std::vector<std::pair<int, game_object*>> game_objects_list;
+    sprite * background;
+    color * select;
+    color * not_select;
+    audio * sound_effect;
 };
 
 #endif
