@@ -12,29 +12,33 @@
 #include <vector>
 #include "log.h"
 
-namespace engine{
+namespace engine {
 class FieldOfVision;
 
-class AnimationManager{
+class AnimationManager {
 public:
     static AnimationManager instance;
-    void add_animation_quad(AnimationQuad *newQuad);
+    void add_animation_quad(AnimationQuad* new_quad);
     void draw_quads();
-    void add_collider(SDL_Rect* renderQuad);
-    void addProgressBar(ProgressBar* newProgressBar);
+    void add_collider(SDL_Rect* render_quad);
+    void addProgressBar(ProgressBar* new_progress_bar);
     void addFieldOfVision(FieldOfVision* field);
     void addGuardVision(FieldOfVision* field);
     void addLine(Line* line);
-    void setBackgroundColor(Color* backgroundColor);
+    void setBackgroundColor(Color* background_color);
+
 private:
     AnimationManager(): color(new Color(100,100,100,0)){};
     bool isActive;
+
     Color * color;
-    std::vector<AnimationQuad*> animationQuads;
-    std::vector<SDL_Rect*> colliderRects;
-    std::vector<ProgressBar*> progressBars;
+
+    std::vector<AnimationQuad*> animation_quads;
+    std::vector<SDL_Rect*> collider_rects;
+    std::vector<ProgressBar*> progress_bars;
     std::vector<FieldOfVision*> fields;
-    std::vector<FieldOfVision*> guardsVision;
+    std::vector<FieldOfVision*> guards_vision;
+
     void clearAnimationQuads();
     void draw_colliders();
     void drawLinesOfVision();
