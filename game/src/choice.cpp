@@ -1,63 +1,70 @@
 #include "choice.hpp"
 
-Choice::Choice(std::string objectName, double positionX, double positionY,
-                                     int width, int height, std::string title, int sizeTitle) : GameObject(objectName,
-                                                                         positionX,
-                                                                         positionY,
-                                                                         width, height){
+Choice::Choice(std::string objectName, double positionX, double positionY, int width, int height,
+               std::string title, int sizeTitle) : GameObject(objectName,
+                                                              positionX,
+                                                              positionY,
+                                                              width, height) {
 
-    button = new Button("assets/fonts/font.ttf", positionX + (width/2)*0.4, positionY + height, 200, 150, title, sizeTitle);
+    button = new Button("assets/fonts/font.ttf", positionX + (width/2)*0.4,
+                        positionY + height, 200, 150, title, sizeTitle);
+
     sprite = new Sprite(objectName);
     sprite->setDrawSize(200,150);
+
     padlock = new Sprite("assets/sprites/padlock.png");
+
     chosen = false;
     unlock = false;
+
     Color *color = new Color(0, 0, 0, 150);
-    rectangle = new Rectangle("Rectangle", positionX, positionY, width, height, true, color);
+    rectangle = new Rectangle("Rectangle", position_x, position_y, width, height, true, color);
 }
 
 Choice::~Choice(){}
 
-void Choice::update(double timeElapsed){
-    if(chosen && unlock){
+void Choice::update(double timeElapsed) {
+    if(chosen && unlock) {
         rectangle->setEnabled(false);
-    }else{
+    }else {
         rectangle->setEnabled(true);
     }
     rectangle->update(timeElapsed);
 
 }
 
-void Choice::draw(){
+void Choice::draw() {
     INFO("TEXT DRAW");
     sprite->draw(getPositionX(), getPositionY());
-    if(!unlock){
+
+    if(!unlock) {
         padlock->draw(getPositionX()+ (getWidth()/2)*0.8, getPositionY()+ (getHeight()/2)*0.8);
     }
+
     button->draw();
     rectangle->draw();
 }
 
-void Choice::setTextColor(Color * newTextColor){
-    button->setTextColor(newTextColor);
+void Choice::setTextColor(Color * new_text_color) {
+    button->setTextColor(new_text_color);
 }
 
-void Choice::setBackgroundColor(Color * newBackgroundColor){
-    button->setTextColor(newBackgroundColor);
+void Choice::setBackgroundColor(Color * new_background_color) {
+    button->setTextColor(new_background_color);
 }
 
-Text * Choice::getText(){
+Text * Choice::getText() {
     return button->getText();
 }
 
-void Choice::setChosen(bool isChosen){
+void Choice::setChosen(bool isChosen) {
   chosen = isChosen;
 }
 
-void Choice::setUnlock(bool isUnlock){
+void Choice::setUnlock(bool isUnlock) {
     unlock = isUnlock;
 }
 
-bool Choice::getUnlock(){
+bool Choice::getUnlock() {
     return unlock;
 }

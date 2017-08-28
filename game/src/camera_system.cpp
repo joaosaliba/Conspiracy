@@ -4,46 +4,50 @@ using namespace engine;
 
 CameraSystem::CameraSystem(Camera* p_camera, CameraSwitch* p_cameraSwitch){
     camera = p_camera;
-    cameraSwitch = p_cameraSwitch;
-    cameraLever = NULL;
-    lastLeverState = 1;
+    camera_switch = p_cameraSwitch;
+    camera_lever = NULL;
+    last_lever_state = 1;
 }
 
-CameraSystem::CameraSystem(Camera* p_camera, CameraSwitch* p_cameraSwitch, CameraLever* p_cameraLever){
+CameraSystem::CameraSystem(Camera* p_camera, CameraSwitch* p_cameraSwitch,
+                           CameraLever* p_cameraLever) {
+
     camera = p_camera;
-    cameraSwitch = p_cameraSwitch;
-    cameraLever = p_cameraLever;
+    camera_switch = p_cameraSwitch;
+    camera_lever = p_cameraLever;
 }
 
-void CameraSystem::update(double timeElapsed){
+void CameraSystem::update(double timeElapsed) {
     camera->update(timeElapsed);
-    cameraSwitch->update(timeElapsed);
-    if(cameraLever != NULL){
-     cameraLever->update(timeElapsed);
-        if(cameraLever->getState() != lastLeverState){
-            lastLeverState = cameraLever->getState();
-            camera->changeState(cameraLever->getState());
+    camera_switch->update(timeElapsed);
+
+    if(camera_lever != NULL) {
+        camera_lever->update(timeElapsed);
+        if(camera_lever->getState() != last_lever_state) {
+            last_lever_state = camera_lever->getState();
+            camera->changeState(camera_lever->getState());
         }
     }
-    if(!cameraSwitch->isWorking() && camera->isTurnedOn()){
-         camera->turnOff();
+    if(!camera_switch->isWorking() && camera->isTurnedOn()){
+       camera->turnOff();
     }
 }
-void CameraSystem::draw(){
+void CameraSystem::draw() {
     camera->draw();
-    cameraSwitch->draw();
-    if(cameraLever != NULL){
-        cameraLever->draw();
+    camera_switch->draw();
+
+    if(camera_lever != NULL) {
+       camera_lever->draw();
     }
 }
-Camera* CameraSystem::getCamera(){
+Camera* CameraSystem::getCamera() {
     return camera;
 }
 
-CameraSwitch* CameraSystem::getCameraSwitch(){
-    return cameraSwitch;
+CameraSwitch* CameraSystem::getCameraSwitch() {
+    return camera_switch;
 }
 
-CameraLever* CameraSystem::getCameraLever(){
-    return cameraLever;
+CameraLever* CameraSystem::getCameraLever() {
+    return camera_lever;
 }
