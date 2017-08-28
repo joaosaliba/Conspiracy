@@ -8,11 +8,13 @@ namespace engine{
     SceneManager* scene_manager;
     WindowManager* window_manager;
     SDLManager* sdl_manager;
+
     double start_time;
     double step_time;
     double time_elapsed;
     double frame_time;
     double frame_rate = 60.0;
+  
     SceneManager* getSceneManager() {
         return scene_manager;
     }
@@ -20,6 +22,7 @@ namespace engine{
         scene_manager = new SceneManager();
         window_manager = new WindowManager();
         sdl_manager = new SDLManager();
+        
         start_time = SDL_GetTicks();
         step_time = start_time;
         frame_time = 1000.0/frame_rate;
@@ -33,7 +36,9 @@ namespace engine{
         }
     }
 
+
     void run() {
+
         bool is_running = true;
         SDL_Event event;
 
@@ -56,6 +61,7 @@ namespace engine{
             DEBUG("frameTime:" + std::to_string(frame_time));
             DEBUG("timeElapsed: " + std::to_string(time_elapsed));
             if(frame_time > time_elapsed) {
+
                 DEBUG("SDL_DELAY: " + std::to_string(frame_time - time_elapsed));
                 SDL_Delay(frame_time - time_elapsed);
                 time_elapsed = SDL_GetTicks() - step_time;
@@ -64,6 +70,7 @@ namespace engine{
             if(scene_manager->get_current_scene() != NULL) {
               scene_manager->get_current_scene()->update(time_elapsed);
               scene_manager->get_current_scene()->draw();
+
             }
             AnimationManager::instance.draw_quads();
             SDL_RenderPresent(WindowManager::getGameCanvas());

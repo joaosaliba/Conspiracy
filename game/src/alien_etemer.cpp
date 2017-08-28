@@ -6,43 +6,43 @@
 #define WIDTH 10
 #define HEIGHT 22
 
-Etemer::Etemer(double positionX, double positionY) : Alien(FILENAME, positionX, positionY, WIDTH, HEIGHT){
+Etemer::Etemer(double position_x, double position_y) : Alien(FILENAME, position_x, position_y, WIDTH, HEIGHT) {
         animator->addAction("special_right",14,17);
         animator->addAction("special_left",10,13);
 
-        isSelected = true;
+        is_selected = true;
         talking = false;
-        inPosition = false;
+        in_position = false;
 }
 
-void Etemer::update(double timeElapsed){
-        inPosition = false;
-        if (blockMovement) {
+void Etemer::update(double time_elapsed) {
+        in_position = false;
+        if (block_movement) {
                 animator->setTotalTime(1.0);
-        }else{
+        }else {
                 animator->setTotalTime(0.3);
         }
 
-        auto incY = 0.15*timeElapsed;
-        auto incX = 0.15*timeElapsed;
+        auto inc_y = 0.15*time_elapsed;
+        auto inc_x = 0.15*time_elapsed;
 
-        if(!blockMovement && isSelected) {
-                walkInX(incX);
-                walkInY(incY, incX);
+        if(!block_movement && is_selected) {
+                walkInX(inc_x);
+                walkInY(inc_y, inc_x);
         }
 
-        if(incX == 0.0 && incY == 0.0 && !blockMovement) {
+        if(inc_x == 0.0 && inc_y == 0.0 && !block_movement) {
                 if(idleAnimationNumber) {
                         animator->setInterval("idle_right");
-                }else{
+                }else {
                         animator->setInterval("idle_left");
                 }
         }
 
-        FinishPoint* finishPoint = (FinishPoint*)CollisionManager::instance.verifyCollisionWithFinishPoints(this);
-        if(finishPoint != NULL){
-            if(finishPoint->getAlienNames().find("E") != std::string::npos){
-                inPosition = true;
+        FinishPoint* finish_point = (FinishPoint*)CollisionManager::instance.verifyCollisionWithFinishPoints(this);
+        if(finish_point != NULL) {
+            if(finish_point->getAlienNames().find("E") != std::string::npos) {
+                in_position = true;
             }
         }
 
@@ -53,16 +53,16 @@ void Etemer::update(double timeElapsed){
         }
         animator->update();
 }
-void Etemer::specialAction(GameObject * guard, double distance){
-        if(InputManager::instance.isKeyPressed(InputManager::KEY_PRESS_SPACE) && guard != NULL && isSelected) {
+void Etemer::specialAction(GameObject * guard, double distance) {
+        if(InputManager::instance.isKeyPressed(InputManager::KEY_PRESS_SPACE) && guard != NULL && is_selected) {
                 animator->setTotalTime(1.0);
                 //TODO Change distance.
                 if(!talking && distance < 60) {
                         talking = true;
-                        blockMovement = true;
+                        block_movement = true;
                         if(((Guard *) (guard))->getPositionX() > getPositionX()) {
                                 ((Guard *)(guard))->talkingToETemer("left");
-                        }else{
+                        }else {
                                 ((Guard *)(guard))->talkingToETemer("right");
                         }
                 }
@@ -73,13 +73,13 @@ void Etemer::specialAction(GameObject * guard, double distance){
                 if(((Guard *) (guard))->getPositionX() >= getPositionX()) {
                         animator->setInterval("special_right");
                         idleAnimationNumber = 5;
-                }else{
+                }else {
                         animator->setInterval("special_left");
                         idleAnimationNumber = 0;
                 }
                 if(((Guard *) (guard))->getTalkingBarPercent() <= 0.0) {
                         talking = false;
-                        blockMovement = false;
+                        block_movement = false;
                         if(idleAnimationNumber) {
                                 animator->setInterval("idle_right");
                         }else{
@@ -89,71 +89,71 @@ void Etemer::specialAction(GameObject * guard, double distance){
         }
 }
 
-void Etemer::draw(){
+void Etemer::draw() {
         INFO("Etemer DRAW");
         animator->draw(getPositionX()-15, getPositionY()-20);
         animator->draw_collider(getPositionX(), getPositionY(), getWidth(), getHeight());
 }
 
-void Etemer::moveChair(){
+void Etemer::moveChair() {
         std::pair<std::string, GameObject *> chair = CollisionManager::instance.verifyCollisionWithChairs(this);
         if(chair.second != NULL) {
                 if(animator->getInterval().first == chair.first) {
                         ((Chair *) (chair.second))->setMoving(true);
                         ((Chair *) (chair.second))->setDirection(chair.first);
-                }else{
+                }else {
                         ((Chair *) (chair.second))->setMoving(false);
                 }
         }
 }
 
 
-void Etemer::walkInX(double & incX){
+void Etemer::walkInX(double & inc_x) {
 
         if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_RIGHT)) {
-                incX = incX;
+                inc_x = inc_x;
                 idleAnimationNumber = 5;
                 animator->setInterval("right");
         }
         else if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_LEFT)) {
                 //movement_sound_effect->play(-1);
-                incX = incX * (0-1);
+                inc_x = inc_x * (0-1);
                 idleAnimationNumber = 0;
                 animator->setInterval("left");
         }
         else {
-                incX = 0;
+                inc_x = 0;
         }
-        setPositionX(getPositionX()+incX);
+        setPositionX(getPositionX()+inc_x);
 
         if(CollisionManager::instance.verifyCollisionWithWallsAndChairs(this)) {
-                setPositionX(getPositionX()+(incX*(0-1)));
+                setPositionX(getPositionX()+(inc_x*(0-1)));
         }
 }
 
-void Etemer::walkInY(double & incY, double incX){
+void Etemer::walkInY(double & inc_y, double inc_x) {
 
         if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_UP)) {
-                incY = incY * (0-1);
+                inc_y = inc_y * (0-1);
                 idleAnimationNumber = 5;
-                if(incX == 0) {
+                if(inc_x == 0) {
                         animator->setInterval("up");
                 }
         }
         else if(engine::InputManager::instance.isKeyPressed(engine::InputManager::KeyPress::KEY_PRESS_DOWN)) {
-                incY = incY;
+                inc_y = inc_y;
                 idleAnimationNumber = 0;
-                if(incX == 0) {
+                if(inc_x == 0) {
                         animator->setInterval("down");
                 }
         }
         else {
-                incY = 0;
+                inc_y = 0;
         }
-        setPositionY(getPositionY()+incY);
+        setPositionY(getPositionY()+inc_y);
 
         if(CollisionManager::instance.verifyCollisionWithWallsAndChairs(this)) {
-                setPositionY(getPositionY()+(incY*(0-1)));
+                setPositionY(getPositionY()+(inc_y*(0-1)));
         }
 }
 
