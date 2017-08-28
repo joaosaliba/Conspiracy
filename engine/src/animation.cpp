@@ -1,21 +1,27 @@
+/*
+Objective: this class implements animations.
+Author of the last update: Lucas kishima.
+Date:27/08/2017
+*/
+
 #include "animation.hpp"
 
 using namespace engine;
 
-Animation::Animation(std::string newDirectory, int rows, int columns, double allTime){
-    directory = newDirectory;
+Animation::Animation(std::string new_directory, int rows, int columns, double all_time){
+    directory = new_directory;
     matrix.first = rows;
     matrix.second = columns;
-    totalTime = allTime;
-    currentPositionFrame = 0;
+    total_time = all_time;
+    current_position_frame = 0;
     init();
 }
 
-Animation::~Animation(){
+Animation::~Animation() {
 
 }
 
-void Animation::init(){
+void Animation::init() {
     INFO("Init sprite.");
     SDL_Surface * image = NULL;
     image = IMG_Load(directory.c_str());
@@ -27,7 +33,7 @@ void Animation::init(){
 
     texture = SDL_CreateTextureFromSurface(WindowManager::getGameCanvas(), image);
 
-    if(texture == NULL){
+    if(texture == NULL) {
         ERROR("CREATE TEXTURE SPRITE ERROR.");
         exit(-1);
     }
@@ -35,8 +41,8 @@ void Animation::init(){
     lenght.first = image->w;
     lenght.second = image->h;
 
-    drawWidth = widthFrame = lenght.first/matrix.second;
-    drawHeight = heightFrame = lenght.second/matrix.first;
+    draw_width = width_frame = lenght.first/matrix.second;
+    draw_height = height_frame = lenght.second/matrix.first;
 
     quantity = static_cast<int>(lenght.first/matrix.second * lenght.second/matrix.first);
 
@@ -45,38 +51,40 @@ void Animation::init(){
 }
 
 void Animation::update(){
-    double timePerFrame = static_cast<double> (totalTime / (interval.second.second - interval.second.first + 1));
+    double time_per_frame = static_cast<double> (total_time / (interval.second.second -
+                                                               interval.second.first + 1));
 
-    timeElapsed = (SDL_GetTicks() - stepTime) / 1000.0f;
-    DEBUG("Time Per Frame: " << timePerFrame << "Time elapsed: " << timeElapsed);
+    time_elapsed = (SDL_GetTicks() - step_time) / 1000.0f;
+    DEBUG("Time Per Frame: " << time_per_frame << "Time elapsed: " << time_elapsed);
 
-    if(timeElapsed >= timePerFrame){
+    if(time_elapsed >= time_per_frame){
         next();
-        stepTime = SDL_GetTicks();
+        step_time = SDL_GetTicks();
     }
 
-    int Y = (currentPositionFrame / (lenght.first / widthFrame));
-    int X = (currentPositionFrame % (lenght.first  / widthFrame));
+    int Y = (current_position_frame / (lenght.first / widthFrame));
+    int X = (current_position_frame % (lenght.first  / widthFrame));
 
-    clipRect = {X*widthFrame, Y*heightFrame, widthFrame, heightFrame};
-    DEBUG("Axis in X:" << X*widthFrame << " Axis in Y:" << Y*heightFrame << " Position:" << currentPositionFrame);
+    clip_rect = {X*width_frame, Y*height_frame, width_frame, height_frame};
+    DEBUG("Axis in X:" << X*width_frame << " Axis in Y:" << Y*height_frame << " Position:"
+          << current_position_frame);
 }
-void Animation::setDrawSize(int width, int height){
-    drawWidth = width;
-    drawHeight = height;
+void Animation::set_draw_size(int width, int height){
+    draw_width = width;
+    draw_height = height;
 }
 void Animation::draw(int x, int y){
     INFO("ANIMATOR DRAW");
     // Rendering in screen
-    renderQuad = {x, y, drawWidth, drawHeight};
+    render_quad = {x, y, draw_width, draw_height};
     DEBUG("X: " + std::to_string(axis.first));
     DEBUG("Y: " + std::to_string(axis.second));
 
-    AnimationQuad* newQuad = new AnimationQuad(x,y,&renderQuad,&clipRect,texture);
+    AnimationQuad* newQuad = new AnimationQuad(x,y,&render_quad,&clip_rect,texture);
     AnimationManager::instance.add_animation_quad(newQuad);
 }
 
-void Animation::draw_collider(int x, int y, int width, int height){
+void Animation::draw_collider(int x, int y, int width, int height) {
     SDL_Rect* quad = new SDL_Rect();
     *quad = {x,y,width,height};
     AnimationManager::instance.add_collider(quad);
@@ -84,41 +92,42 @@ void Animation::draw_collider(int x, int y, int width, int height){
 void Animation::draw_instant(int x, int y){
     INFO("ANIMATOR DRAW");
     // Rendering in screen
-    renderQuad = {x, y, clipRect.w, clipRect.h };
+    render_quad = {x, y, clip_rect.w, clip_rect.h };
     DEBUG("X: " + std::to_string(axis.first));
     DEBUG("Y: " + std::to_string(axis.second));
-    SDL_RenderCopy(WindowManager::getGameCanvas(), texture, &clipRect, &renderQuad);
+    SDL_RenderCopy(WindowManager::getGameCanvas(), texture, &clip_rect, &render_quad);
 
 }
 
 void Animation::next(){
-    currentPositionFrame ++;
+    current_position_frame ++;
 
-    if(currentPositionFrame > interval.second.second){
-       currentPositionFrame = interval.second.first;
+    if(current_position_frame > interval.second.second){
+       current_position_frame = interval.second.first;
     }
 }
 
-void Animation::setCurrentPositionFrame(int positionFrame){
-    currentPositionFrame = positionFrame;
+void Animation::set_current_position_frame(int position_frame){
+    current_position_frame = position_frame;
 }
-int Animation::getCurrentPositionFrame(){
-    return currentPositionFrame;
+int Animation::get_current_position_frame(){
+    return current_position_frame;
 }
 
-void Animation::setInterval(std::string action){
-    currentAction = action;
-    if(action != interval.first){
-        startTime = SDL_GetTicks();
-        stepTime = startTime;
+void Animation::set_interval(std::string action){
+    current_action = action;
+
+    if(action != interval.first) {
+        start_time = SDL_GetTicks();
+        step_time = start_time;
         interval.second =  list_actions[action];
         interval.first = action;
-        currentPositionFrame = interval.second.first;
-        INFO("ACTION: " << action << currentPositionFrame);
+        current_position_frame = interval.second.first;
+        INFO("ACTION: " << action << current_position_frame);
     }
 }
-void Animation::setTotalTime(double newTotalTime){
-    totalTime = newTotalTime;
+void Animation::set_total_time(double new_total_time){
+    total_time = new_total_time;
 }
 
 void Animation::shutdown(){
@@ -127,14 +136,14 @@ void Animation::shutdown(){
     texture = NULL;
 }
 
-std::pair<std::string, std::pair<int, int>> Animation::getInterval(){
+std::pair<std::string, std::pair<int, int>> Animation::get_interval(){
     return interval;
 }
 
-void Animation::addAction(std::string name_action, int initial, int last){
+void Animation::add_action(std::string name_action, int initial, int last){
   list_actions[name_action] = std::pair<int, int>(initial, last);
 }
 
-std::string Animation::getCurrentAction(){
-    return currentAction;
+std::string Animation::get_current_action(){
+    return current_action;
 }
