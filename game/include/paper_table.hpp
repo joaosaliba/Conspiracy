@@ -12,18 +12,18 @@ using namespace engine;
 
 class PaperTable: public GameObject{
 public:
-    PaperTable(std::string objectName, double positionX, double positionY, int width, int height);
+    PaperTable(std::string object_name, double position_x, double position_y, int width, int height);
     ~PaperTable();
-    void update(double timeElapsed);
+    void update(double time_elapsed);
     void draw();
     void init();
-    Animation * getAnimation();
-    Paper * getPaper();
-    Table* getTable();
+    Animation * get_animation();
+    Paper * get_paper();
+    Table* get_table();
 protected:
-    Animation* animator;
-    Paper* paper;
-    Table* table;
+    animation* animator;
+    paper* paper;
+    table* table;
 };
 
 #endif

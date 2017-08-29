@@ -1,13 +1,13 @@
 #include "paper_table.hpp"
 #include "log.h"
 
-PaperTable::PaperTable(std::string objectName, double positionX, double positionY,
-                                     int width, int height) : GameObject(objectName,
-                                                                         positionX,
-                                                                         positionY,
+PaperTable::PaperTable(std::string object_name, double position_x, double position_y,
+                                     int width, int height) : GameObject(object_name,
+                                                                         position_x,
+                                                                         position_y,
                                                                          width, height){
-table = new Table("assets/sprites/mesa.png", positionX, positionY, width, height);
-paper = new Paper("assets/sprites/papeis(19X21).png", positionX + 20, positionY - 2, 10, 40);
+table = new Table("assets/sprites/mesa.png", position_x, position_y, width, height);
+paper = new Paper("assets/sprites/papeis(19X21).png", position_x + 20, position_y - 2, 10, 40);
 }
 
 PaperTable::~PaperTable(){
@@ -24,10 +24,10 @@ void PaperTable::draw(){
    paper->draw();
 }
 
-Paper* PaperTable::getPaper(){
+Paper* PaperTable::get_paper(){
     return paper;
 }
 
-Table* PaperTable::getTable(){
+Table* PaperTable::get_table(){
     return table;
 }
