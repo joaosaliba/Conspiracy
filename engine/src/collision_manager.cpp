@@ -5,10 +5,10 @@ using namespace engine;
 
 CollisionManager CollisionManager::instance;
 
-void CollisionManager::addGuardFieldOfVision(FieldOfVision* f){
+void CollisionManager::addGuardFieldOfVision(Field_of_vision* f){
         guardsVision.push_back(f);
 }
-void CollisionManager::addCameraFieldOfVision(FieldOfVision* f){
+void CollisionManager::addCameraFieldOfVision(Field_of_vision* f){
         camerasVision.push_back(f);
 }
 void CollisionManager::addWall(GameObject* g){
@@ -211,7 +211,7 @@ GameObject* CollisionManager::verifyCollisionWithFinishPoints(GameObject* g1){
 }
 
 
-double CollisionManager::calculateDistance(std::pair<double,double> center, std::pair<double,double> lineCenter){
+double CollisionManager::calculateDistance(std::pair<double,double> center, std::pair<double,double> line_center){
         return sqrt(((center.first-lineCenter.first)*
                      (center.first-lineCenter.first))+
                     ((center.second-lineCenter.second)*
@@ -306,20 +306,20 @@ double CollisionManager::CCW(std::pair<int, int> a, std::pair<int, int> b, std::
 
 std::string CollisionManager::verifyCollisionChair(GameObject* g1, GameObject* g2){
         //The sides of the rectangles
-        int leftA, rightA, topA, bottomA;
-        int leftB, rightB, topB, bottomB;
+        int left_a, right_a, top_a, bottom_a;
+        int left_b, right_b, top_b, bottom_b;
 
         //Calculate the sides of rect A
-        leftA = g1->getPositionX();
-        rightA = leftA + g1->getWidth();
-        topA = g1->getPositionY();
-        bottomA = topA + g1->getHeight();
+        left_a = g1->getPositionX();
+        right_a = left_a + g1->getWidth();
+        top_a = g1->getPositionY();
+        bottom_a = top_a + g1->getHeight();
 
         //Calculate the sides of rect B
-        leftB = g2->getPositionX();
-        rightB = leftB + g2->getWidth();
-        topB = g2->getPositionY();
-        bottomB = topB + g2->getHeight();
+        left_b = g2->getPositionX();
+        right_b = left_b + g2->getWidth();
+        top_b = g2->getPositionY();
+        bottom_b = top_b + g2->getHeight();
 
         if(g2->getWidth() == 0 || g2->getHeight() == 0) {
                 return "none";
@@ -328,38 +328,38 @@ std::string CollisionManager::verifyCollisionChair(GameObject* g1, GameObject* g
                 return "none";
         }
 
-        if(rightB > (leftA - 3) && rightA > (rightB)) {
-                if((bottomB < (bottomA) && bottomB > (topA)) || (topB < bottomA && topB > topA)) {
+        if(rightB > (left_a - 3) && right_a > (right_b)) {
+                if((bottom_b < (bottom_a) && bottom_b > (top_a)) || (top_b < bottom_a && top_b > top_a)) {
                         return "right";
                 }
-                if((bottomA < bottomB && bottomA > topB) || (topA < bottomB && topA > topB)) {
+                if((bottom_a < bottom_b && bottom_a > top_b) || (top_a < bottom_b && top_a > top_b)) {
                         return "right";
                 }
         }
 
-        if(leftB < (rightA + 3) && leftA < (leftB)) {
-                if((bottomB < bottomA && bottomB > topA) ||(topB < bottomA && topB > topA)) {
+        if(left_b < (right_a + 3) && left_a < (left_b)) {
+                if((bottom_b < bottom_a && bottom_b > top_a) ||(top_b < bottom_a && top_b > top_a)) {
                         return "left";
                 }
-                if((bottomA < bottomB && bottomA > topB) || (topA < bottomB && topA > topB)) {
+                if((bottom_a < bottom_b && bottom_a > top_b) || (top__a < bottom_b && top_a > top_b)) {
                         return "left";
                 }
         }
 
-        if(topB <= (bottomA + 3) && (topB) > topA) {
-                if((leftB >= leftA && leftB <= rightA) || (rightB <= rightA && rightB >= leftA)) {
+        if(top_b <= (bottom_a + 3) && (top_b) > top_a) {
+                if((left_b >= left_a && left_b <= right_a) || (right_b <= right_a && right_b >= left_a)) {
                         return "up";
                 }
-                if((leftA >= leftB && leftA <= rightB) || (rightA <= rightB && rightA >= leftB)) {
+                if((left_a >= left_b && left_a <= right_b) || (right_a <= right_b && right_a >= left_b)) {
                         return "up";
                 }
         }
 
-        if(bottomB >= (topA - 3) && bottomA > (bottomB)) {
-                if((leftB >= leftA && leftB <= rightA) || (rightB <= rightA && rightB >= leftA)) {
+        if(bottom_b >= (top_a - 3) && bottom_a > (bottom_b)) {
+                if((left_b >= left_a && left_b <= right_a) || (right_b <= right_a && right_b >= left_a)) {
                         return "down";
                 }
-                if((leftA >= leftB && leftA <= rightB) || (rightA <= rightB && rightA >= leftB)) {
+                if((left_a >= left_b && left_a <= right_b) || (right_a <= right_b && right_a >= left_b)) {
                         return "down";
                 }
         }
