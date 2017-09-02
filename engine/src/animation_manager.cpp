@@ -17,12 +17,12 @@ void AnimationManager::addFieldOfVision(FieldOfVision* field){
 void AnimationManager::addGuardVision(FieldOfVision* field){
     guardsVision.push_back(field);
 }
-void AnimationManager::addProgressBar(ProgressBar* new_progress_bar){
-    progressBars.push_back(new ProgressBar);
+void AnimationManager::addProgressBar(ProgressBar* newProgressBar){
+    progressBars.push_back(newProgressBar);
 }
 
 void AnimationManager::clearAnimationQuads(){
-    for(auto AnimationQuad: animation_quads){
+    for(auto AnimationQuad: animationQuads){
         free(AnimationQuad);
     }
     for(auto collider: colliderRects){
