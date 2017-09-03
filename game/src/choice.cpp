@@ -1,30 +1,30 @@
 #include "choice.hpp"
 
 Choice::Choice(std::string objectName, double positionX, double positionY,
-                                     int width, int height, std::string title, int sizeTitle) : GameObject(objectName,
-                                                                         positionX,
-                                                                         positionY,
+                                     int width, int height, std::string title, int size_title) : GameObject(object_name,
+                                                                         position_x,
+                                                                         position_y,
                                                                          width, height){
 
-    button = new Button("assets/fonts/font.ttf", positionX + (width/2)*0.4, positionY + height, 200, 150, title, sizeTitle);
-    sprite = new Sprite(objectName);
+    button = new Button("assets/fonts/font.ttf", position_x + (width/2)*0.4, position_y + height, 200, 150, title, size_title);
+    sprite = new Sprite(object_name);
     sprite->setDrawSize(200,150);
     padlock = new Sprite("assets/sprites/padlock.png");
     chosen = false;
     unlock = false;
     Color *color = new Color(0, 0, 0, 150);
-    rectangle = new Rectangle("Rectangle", positionX, positionY, width, height, true, color);
+    rectangle = new Rectangle("Rectangle", position_x, position_y, width, height, true, color);
 }
 
 Choice::~Choice(){}
 
-void Choice::update(double timeElapsed){
+void Choice::update(double time_elapsed){
     if(chosen && unlock){
         rectangle->setEnabled(false);
     }else{
         rectangle->setEnabled(true);
     }
-    rectangle->update(timeElapsed);
+    rectangle->update(time_elapsed);
 
 }
 
