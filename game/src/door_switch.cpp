@@ -1,14 +1,14 @@
 #include "door_switch.hpp"
 
-DoorSwitch::DoorSwitch(std::string objectName, double positionX, double positionY,
+DoorSwitch::DoorSwitch(std::string objectName, double position_x, double position_y,
                                      int width, int height) : GameObject(objectName,
-                                                                         positionX,
-                                                                         positionY,
+                                                                         position_x,
+                                                                         position_y,
                                                                          width, height){
     animator = new Animation(objectName, 1, 6, 0.5);
 
     hacking_effect = new Audio("assets/sounds/PCNOISE.wav", "EFFECT", 60);
-    hacking_bar = new ProgressBar(positionX-7, positionY-10, 45, 5, 0.002);
+    hacking_bar = new ProgressBar(position_x-7, position_y-10, 45, 5, 0.002);
 
     animator->addAction("beingHacked", 1,5);
     animator->addAction("idle", 0, 0);
@@ -17,8 +17,8 @@ DoorSwitch::DoorSwitch(std::string objectName, double positionX, double position
 
 DoorSwitch::~DoorSwitch(){}
 
-void DoorSwitch::update(double timeElapsed){
-    timeElapsed = timeElapsed;
+void DoorSwitch::update(double time_elapsed){
+    time_elapsed = time_elapsed;
     animator->update();
     if(isPressed()){
         hacking_bar->update(timeElapsed);
