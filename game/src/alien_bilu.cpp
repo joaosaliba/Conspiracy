@@ -7,7 +7,7 @@
 #define WIDTH 19
 #define HEIGHT 22
 
-Bilu::Bilu(double positionX, double positionY) : Alien(FILENAME, positionX, positionY, WIDTH, HEIGHT){
+Bilu::Bilu(double position_x, double position_y) : Alien(FILENAME, position_x, position_y, WIDTH, HEIGHT){
         animator->addAction("special_right",14,17);
         animator->addAction("special_left",10,13);
 
@@ -21,15 +21,15 @@ Bilu::Bilu(double positionX, double positionY) : Alien(FILENAME, positionX, posi
 void Bilu::update(double timeElapsed){
         inPosition = false;
         animator->setTotalTime(0.3);
-        auto incY = 0.15*timeElapsed;
-        auto incX = 0.15*timeElapsed;
+        auto inc_y = 0.15*time_elapsed;
+        auto inc_x = 0.15*time_elapsed;
 
         if(!blockMovement && isSelected) {
-                walkInX(incX);
-                walkInY(incY, incX);
+                walkInX(inc_x);
+                walkInY(inc_y, inc_x);
         }
 
-        if(incX == 0 && incY == 0) {
+        if(inc_x == 0 && inc_y == 0) {
                 if(idleAnimationNumber) {
                         animator->setInterval("idle_right");
                 }else{
