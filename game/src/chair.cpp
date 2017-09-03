@@ -2,10 +2,10 @@
 #include "chair.hpp"
 #include "log.h"
 
-Chair::Chair(std::string objectName, double positionX, double positionY,
+Chair::Chair(std::string objectName, double position_x, double position_y,
              int width, int height) : GameObject(objectName,
-                                                 positionX,
-                                                 positionY,
+                                                 position_x,
+                                                 position_y,
                                                  width, height){
         chairEffect = new Audio("assets/sounds/DRAG.wav", "EFFECT", 128);
         animator = new Animation(objectName, 1, 4, 0.5);
@@ -19,13 +19,13 @@ Chair::~Chair(){
 
 }
 
-void Chair::update(double timeElapsed){
-        auto incX = 0.15*timeElapsed;
-        auto incY = 0.15*timeElapsed;
+void Chair::update(double time_elapsed){
+        auto inc_x = 0.15*time_elapsed;
+        auto inc_y = 0.15*time_elapsed;
 
         if(isMoving) {
-                moveInX(incX);
-                moveInY(incY);
+                moveInX(inc_x);
+                moveInY(inc_y);
         }else{
           animator->setInterval("idle");
         }
@@ -42,39 +42,39 @@ void Chair::draw(){
 void Chair::moveInX(double incX){
 
         if(direction == "right") {
-                incX = incX;
+                incX = inc_x;
                 animator->setInterval("move");
         }
         else if(direction == "left") {
-                incX = incX * (0-1);
+                inc_x = inc_x * (0-1);
                 animator->setInterval("move");
         }
         else {
                 incX = 0;
         }
-        setPositionX(getPositionX()+incX);
+        setPositionX(getPositionX()+inc_x);
         if(CollisionManager::instance.verifyCollisionWithOtherChairs(this) || CollisionManager::instance.verifyCollisionWithWalls(this) || CollisionManager::instance.verifyCollisionWithGuardsBody(this)) {
-                setPositionX(getPositionX()+(incX*(0-1)));
+                setPositionX(getPositionX()+(inc_x*(0-1)));
         }
 
 }
 
-void Chair::moveInY(double incY){
+void Chair::moveInY(double inc_y){
 
         if(direction == "down") {
-                incY = incY;
+                incY = inc_y;
                 animator->setInterval("move");
         }
         else if(direction == "up") {
-                incY = incY * (0-1);
+                inc_y = inc_y * (0-1);
                 animator->setInterval("move");
         }
         else {
-                incY = 0;
+                inc_y = 0;
         }
-        setPositionY(getPositionY()+incY);
+        setPositionY(getPositionY()+inc_y);
         if(CollisionManager::instance.verifyCollisionWithOtherChairs(this) || CollisionManager::instance.verifyCollisionWithWalls(this) || CollisionManager::instance.verifyCollisionWithGuardsBody(this)) {
-                setPositionY(getPositionY()+(incY*(0-1)));
+                setPositionY(getPositionY()+(inc_y*(0-1)));
         }
 
 }
