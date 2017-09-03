@@ -11,7 +11,7 @@ void Scene::draw(){}
 void Scene::unload(){}
 
 int Scene::getId(){
-    return sceneId;
+    return scene_id;
 }
 void Scene::setId(int new_id){
     sceneId = new_id;
