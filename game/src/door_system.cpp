@@ -3,22 +3,22 @@
 
 using namespace engine;
 
-DoorSystem::DoorSystem(std::pair<int,int> doorPosition,
-                       std::pair<int,int> switchPosition, std::string doorSide){
+DoorSystem::DoorSystem(std::pair<int,int> door_position,
+                       std::pair<int,int> switch_position, std::string door_side){
 
-    if(doorSide.compare("RIGHT") == 0 || doorSide.compare("LEFT") == 0){
-        door = new Door("assets/sprites/cenary/porta_anima_lateral(40X59).png", doorPosition.first, doorPosition.second, 40, 60, doorSide);
+    if(door_side.compare("RIGHT") == 0 || door_side.compare("LEFT") == 0){
+        door = new Door("assets/sprites/cenary/porta_anima_lateral(40X59).png", door_position.first, door_position.second, 40, 60, door_side);
     }else{
-        door = new Door("assets/sprites/cenary/porta_anima.png", doorPosition.first, doorPosition.second, 79, 58, doorSide);
+        door = new Door("assets/sprites/cenary/porta_anima.png", door_position.first, door_position.second, 79, 58, door_side);
     }
 
-    computerTable = new ComputerTable("assets/sprites/PC_sprites(34X20).png", switchPosition.first,switchPosition.second, 60, 24);
+    computer_table = new ComputerTable("assets/sprites/PC_sprites(34X20).png", switch_position.first,switch_position.second, 60, 24);
 }
 DoorSystem::~DoorSystem(){}
 
-void DoorSystem::update(double timeElapsed){
-    door->update(timeElapsed);
-    computerTable->update(timeElapsed);
+void DoorSystem::update(double time_elapsed){
+    door->update(time_elapsed);
+    computerTable->update(time_elapsed);
     if(!computerTable->getDoorSwitch()->isEnabled() && !door->isOpen()){
         door->setOpen(true);
         door->playEffect();
@@ -44,5 +44,5 @@ GameObject* DoorSystem::getSwitch(){
 }
 
 GameObject* DoorSystem::getTable(){
-    return computerTable->getTable();
+    return computer_table->getTable();
 }
