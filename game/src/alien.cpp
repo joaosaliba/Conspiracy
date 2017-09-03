@@ -1,9 +1,9 @@
 #include "alien.hpp"
 
-Alien::Alien(std::string objectName, double positionX, double positionY,
-                                     int width, int height) : GameObject(objectName,
-                                                                         positionX,
-                                                                         positionY,
+Alien::Alien(std::string object_name, double position_x, double position_y,
+                                     int width, int height) : GameObject(object_name,
+                                                                         position_x,
+                                                                         position_y,
                                                                          width, height){
     if(objectName.compare("assets/sprites/bilu_sheet.png") == 0){
         alienName = "Bilu";
@@ -53,28 +53,28 @@ void Alien::walkInX(double & incX){
     }
 }
 
-void Alien::walkInY(double & incY, double incX){
+void Alien::walkInY(double & inc_y, double inc_x){
 
     if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_UP)){
-        incY = incY * (0-1);
+        inc_y = inc_y * (0-1);
         idleAnimationNumber = 5;
-        if(incX == 0){
+        if(inc_x == 0){
             animator->setInterval("up");
         }
     }
     else if(engine::InputManager::instance.isKeyPressed(engine::InputManager::KeyPress::KEY_PRESS_DOWN)){
-        incY = incY;
+        incY = inc_y;
         idleAnimationNumber = 0;
-        if(incX == 0){
+        if(inc_x == 0){
             animator->setInterval("down");
         }
     }
     else {
         incY = 0;
     }
-    setPositionY(getPositionY()+incY);
+    setPositionY(getPositionY()+inc_y);
     if(CollisionManager::instance.verifyCollisionWithWallsAndChairs(this)){
-        setPositionY(getPositionY()+(incY*(0-1)));
+        setPositionY(getPositionY()+(inc_y*(0-1)));
     }
 }
 
