@@ -1,22 +1,22 @@
 #include "door.hpp"
 
-Door::Door(std::string objectName, double positionX, double positionY,
-           int width, int height, std::string doorSide) : GameObject(objectName,
-                                                                     positionX,
-                                                                     positionY,
+Door::Door(std::string objectName, double position_x, double position_y,
+           int width, int height, std::string doorSide) : GameObject(object_name,
+                                                                     position_x,
+                                                                     position_y,
                                                                      width,
                                                                      height){
 
     if(doorSide.compare("DOWN") == 0){
-        animator = new Animation(objectName, 1, 4, 0.5);
+        animator = new Animation(object_name, 1, 4, 0.5);
         animator->addAction("closed", 0,0);
         animator->addAction("open",1,3);
     }else if(doorSide.compare("RIGHT") == 0){
-        animator = new Animation(objectName, 1, 8, 0.5);
+        animator = new Animation(object_name, 1, 8, 0.5);
         animator->addAction("closed", 0,0);
         animator->addAction("open",1,3);
     }else if(doorSide.compare("LEFT") == 0){
-        animator = new Animation(objectName, 1, 8, 0.5);
+        animator = new Animation(object_name, 1, 8, 0.5);
         animator->addAction("closed", 4,4);
         animator->addAction("open",5,7);
     }
@@ -30,8 +30,8 @@ Door::Door(std::string objectName, double positionX, double positionY,
 
 Door::~Door(){}
 
-void Door::update(double timeElapsed){
-    timeElapsed = timeElapsed;
+void Door::update(double time_elapsed){
+    time_elapsed = time_elapsed;
     if(animator->getCurrentPositionFrame()!=3 && animator->getCurrentPositionFrame()!=7){
         animator->update();
     }
