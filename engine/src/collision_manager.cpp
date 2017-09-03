@@ -64,7 +64,7 @@ bool CollisionManager::verifyCollisionWithWalls(GameObject* g1){
 }
 
 bool CollisionManager::verifyCollisionWithWallsAndChairs(GameObject* g1){
-        for(GameObject * wall : wallList) {
+        for(GameObject * wall : wall_list) {
                 if(verifyCollision(wall, g1)) {
                         return true;
                 }
@@ -74,7 +74,7 @@ bool CollisionManager::verifyCollisionWithWallsAndChairs(GameObject* g1){
                         return true;
                 }
         }
-        for(GameObject* door : doorList) {
+        for(GameObject* door : door_list) {
                 if(door->isEnabled() && verifyCollision(door,g1)) {
                         return true;
                 }
@@ -93,7 +93,7 @@ std::pair<std::string, GameObject *> CollisionManager::verifyCollisionWithChairs
 }
 
 bool CollisionManager::verifyCollisionWithOtherChairs(GameObject* g){
-  for(GameObject * chair : chairList) {
+  for(GameObject * chair : chair_list) {
       if(chair != g){
             if(verifyCollision(chair, g)) {
                     return true;
@@ -105,7 +105,7 @@ bool CollisionManager::verifyCollisionWithOtherChairs(GameObject* g){
 
 
 bool CollisionManager::verifyCollisionWithGuardsBody(GameObject* g){
-        for(GameObject * enemy : guardList) {
+        for(GameObject * enemy : guard_list) {
                 if(verifyCollision(enemy, g)) {
                         return true;
                 }
@@ -121,34 +121,34 @@ bool CollisionManager::verifyCollisionWithGuards(GameObject* g1){
         if(status){
             return status;
         }else{
-            status = verifyCollisionWithFieldsOfVision(g1, guardsVision);
+            status = verifyCollisionWithFieldsOfVision(g1, guards_vision);
             return status;
         }
 }
 
 bool CollisionManager::verifyCollisionWithCameras(GameObject* g1){
     bool status = false;
-    status = verifyCollisionWithFieldsOfVision(g1, camerasVision);
+    status = verifyCollisionWithFieldsOfVision(g1, cameras_vision);
     return status;
 }
 
-bool CollisionManager::verifyCollisionWithFieldsOfVision(GameObject* g1, std::vector<FieldOfVision*> fields){
+bool CollisionManager::verifyCollisionWithFieldsOfVision(GameObject* g1, std::vector<Field_of_vision*> fields){
     bool isVisible = true;
-    for(FieldOfVision* field : fields) {
+    for(Field_of_vision* field : fields) {
         if(field->isActive()){
             for(Line* line : field->getLines()) {
                     if(verifyRectangleCollisionWithLine(g1,line->getPoint1(),line->getPoint2())) {
-                            std::pair<double,double> playerCenter = g1->getCenter();
-                            int distanceBetweenPlayer = calculateDistance(playerCenter,line->getPoint1());
+                            std::pair<double,double> player_center = g1->getCenter();
+                            int distanceBetweenPlayer = calculateDistance(player_center,line->getPoint1());
                             // Margin between player and line
                             // Or else just touching a line would make you lose
                             if(distanceBetweenPlayer < field->getRange()*0.85) {
                                     for(auto wall : wallList) {
                                             if(verifyRectangleCollisionWithLine(wall,line->getPoint1(),line->getPoint2())) {
                                                     std::pair<double,double> wallCenter = wall->getCenter();
-                                                    int distanceBetweenWall = calculateDistance(wallCenter,line->getPoint1());
+                                                    int distance_between_wall = calculateDistance(wall_center,line->getPoint1());
                                                     //Wall in front of player
-                                                    if(distanceBetweenWall < distanceBetweenPlayer) {
+                                                    if(distance_between_wall < distanceBetweenPlayer) {
                                                             isVisible = false;
                                                     }
                                             }
@@ -174,7 +174,7 @@ GameObject* CollisionManager::verifyCollisionWithSwitches(GameObject* g1){
 }
 
 GameObject* CollisionManager::verifyCollisionWithCameraSwitches(GameObject* g){
-    for(GameObject * cameraSwitch : cameraSwitchList) {
+    for(GameObject * cameraSwitch : camera_switch_list) {
             if(verifyCollision(cameraSwitch, g)) {
                     return cameraSwitch;
             }
@@ -184,7 +184,7 @@ GameObject* CollisionManager::verifyCollisionWithCameraSwitches(GameObject* g){
 }
 
 GameObject* CollisionManager::verifyCollisionWithCameraLevers(GameObject* g){
-    for(GameObject * lever : cameraLeverList) {
+    for(GameObject * lever : camera_lever_list) {
             if(verifyCollision(lever, g)) {
                     return lever;
             }
@@ -193,7 +193,7 @@ GameObject* CollisionManager::verifyCollisionWithCameraLevers(GameObject* g){
 }
 
 GameObject* CollisionManager::verifyCollisionWithPapers(GameObject* g1){
-        for(GameObject * paper : paperList) {
+        for(GameObject * paper : paper_list) {
                 if(verifyCollision(paper, g1)) {
                         return paper;
                 }
@@ -202,9 +202,9 @@ GameObject* CollisionManager::verifyCollisionWithPapers(GameObject* g1){
 }
 
 GameObject* CollisionManager::verifyCollisionWithFinishPoints(GameObject* g1){
-    for(GameObject * finishPoint : finishPointList) {
-            if(verifyCollision(finishPoint, g1)) {
-                    return finishPoint;
+    for(GameObject * finishPoint : finish_point_list) {
+            if(verifyCollision(finish_point, g1)) {
+                    return finish_point;
             }
     }
     return NULL;
@@ -232,8 +232,8 @@ void CollisionManager::resetLists(){
 
 bool CollisionManager::verifyCollision( GameObject* g1, GameObject* g2){
         //The sides of the rectangles
-        int leftA, rightA, topA, bottomA;
-        int leftB, rightB, topB, bottomB;
+        int left_a, right_a, top_a, bottom_a;
+        int left_b, right_b, top_b, bottom_b;
 
         //Calculate the sides of rect A
         leftA = g1->getPositionX();
@@ -255,10 +255,10 @@ bool CollisionManager::verifyCollision( GameObject* g1, GameObject* g2){
         }
 
         //If any of the sides from A are outside of B
-        if( bottomA <= topB ) { return false; }
-        if( topA >= bottomB ) { return false; }
-        if( rightA <= leftB ) { return false; }
-        if( leftA >= rightB ) { return false; }
+        if( bottom_a <= top_b ) { return false; }
+        if( top_a >= bottom_b ) { return false; }
+        if( right_a <= left_b ) { return false; }
+        if( left_a >= right_b ) { return false; }
         //If none of the sides from A are outside B
         return true;
 }
