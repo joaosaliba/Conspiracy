@@ -15,16 +15,16 @@ bool WindowManager::createWindow(std::string windowTitle, std::pair<int, int> wi
     }
 
     INFO("Create canvas");
-    gameCanvas = SDL_CreateRenderer(gameWindow, -1,
+    game_canvas = SDL_CreateRenderer(gameWindow, -1,
         SDL_RENDERER_ACCELERATED);
 
-        if(gameCanvas == NULL){
+        if(game_canvas == NULL){
             return false;
         }
 
-        SDL_SetRenderDrawColor(gameCanvas, 100, 100, 100, 255);
-        SDL_RenderClear(gameCanvas);
-        SDL_RenderPresent(gameCanvas);
+        SDL_SetRenderDrawColor(game_canvas, 100, 100, 100, 255);
+        SDL_RenderClear(game_canvas);
+        SDL_RenderPresent(game_canvas);
         setImageIcon();
         return true;
     }
@@ -32,23 +32,23 @@ bool WindowManager::createWindow(std::string windowTitle, std::pair<int, int> wi
 
     bool WindowManager::destroyWindow(){
         INFO("Destroying canvas");
-        SDL_DestroyRenderer(gameCanvas);
+        SDL_DestroyRenderer(game_canvas);
         gameCanvas = NULL;
 
         INFO("Destroying window");
-        SDL_DestroyWindow(gameWindow);
-        gameWindow = NULL;
+        SDL_DestroyWindow(game_window);
+        game_window = NULL;
 
         return true;
     }
 
     SDL_Window* WindowManager::GetGameWindow(){
-        return gameWindow;
+        return game_window;
     }
 
 
     SDL_Renderer* WindowManager::getGameCanvas(){
-        return gameCanvas;
+        return game_canvas;
     }
     
     void WindowManager::setImageIcon(){
@@ -60,7 +60,7 @@ bool WindowManager::createWindow(std::string windowTitle, std::pair<int, int> wi
             exit(-1);
       }
 
-      SDL_SetWindowIcon(gameWindow, image);
+      SDL_SetWindowIcon(game_window, image);
       SDL_FreeSurface(image);
 
     }
