@@ -6,7 +6,7 @@ using namespace engine;
 #define WIDTH 14
 #define HEIGHT 16
 #define ADJUSTX 10
-CameraSwitch::CameraSwitch(double positionX, double positionY, std::string direction) : GameObject(FILENAME,positionX - ADJUSTX,positionY - ADJUSTX,
+CameraSwitch::CameraSwitch(double position_x, double position_y, std::string direction) : GameObject(FILENAME,position_x - ADJUSTX,position_y - ADJUSTX,
                                                                      WIDTH+ADJUSTX*2, HEIGHT+ADJUSTX*2){
     animator = new Animation(FILENAME, 1, 2, 0.1);
     switchEfffect = new Audio("assets/sounds/TURNOFFCAMERA.wav", "EFFECT", 128);
@@ -19,12 +19,12 @@ CameraSwitch::CameraSwitch(double positionX, double positionY, std::string direc
 }
 
 void CameraSwitch::draw(){
-    animator->draw_instant(getPositionX()+ADJUSTX, getPositionY()+ADJUSTX);
+    animator->draw_instant(getPositionX()+ADJUSTX, getPositionY()+ADJUST_x);
     animator->draw_collider(getPositionX(), getPositionY(), getWidth(), getHeight());
 }
 
-void CameraSwitch::update(double timeElapsed){
-    timeElapsed = timeElapsed;
+void CameraSwitch::update(double time_elapsed){
+    time_elapsed = time_elapsed;
     animator->update();
 }
 
