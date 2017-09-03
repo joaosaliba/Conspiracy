@@ -11,7 +11,7 @@ using namespace engine;
 
     void Sprite::init(){
         INFO("Init sprite.");
-        SDL_Surface * image = NULL;
+        SDLSurface * image = NULL;
         image = IMG_Load(directory.c_str());
 
         if(image == NULL){
