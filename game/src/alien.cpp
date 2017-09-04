@@ -53,7 +53,7 @@ void Alien::walkInX(double & incX){
     }
 }
 
-void Alien::walkInY(double & inc_y, double inc_x){
+void Alien::walkInY(double & inc_y, double inc_x){ // método para andar .
 
     if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_UP)){
         inc_y = inc_y * (0-1);
