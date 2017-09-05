@@ -124,7 +124,7 @@ void Bilu::draw(){
         animator->draw_collider(getPositionX(), getPositionY(), getWidth(), getHeight());
 }
 
-void Bilu::setSpecialActionAnimator(){
+void Bilu::setSpecialActionAnimator(){// seta o tempo para uma iteração. 
         if(idleAnimationNumber == 5) {
                 animator->setInterval("special_right");
         }else{
