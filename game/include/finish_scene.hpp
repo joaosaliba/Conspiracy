@@ -10,6 +10,11 @@
 
 #include <vector>
 
+/**class to object of finish_scene, where you can find some values and meths "constructor"
+ * and "destructor" to the same.
+ *
+ */
+
 using namespace engine;
 
 class FinishScene: public Scene{
@@ -18,17 +23,17 @@ public:
     ~FinishScene();
     void load();
     void draw();
-    void update(double timeElapsed);
+    void update(double time_elapsed);
     void unload();
 private:
-    void selectAction();
-    int selectButton;
-    std::vector<std::pair<int, GameObject*>> gameObjectsList;
+    void select_action();
+    int select_button;
+    std::vector<std::pair<int, GameObject*>> game_objects_list;
     Animation * background;
     Color * select;
-    Color * notSelect;
-    Audio * soundEffect;
-    Audio * backgroundSound;
+    Color * not_select;
+    Audio * sound_effect;
+    Audio * background_sound;
 };
 
 #endif
