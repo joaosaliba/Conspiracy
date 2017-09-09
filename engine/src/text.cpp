@@ -5,13 +5,13 @@
 
 using namespace engine;
 
-Text::Text( std::string  newText, std::string new_font_path, int new_size, bool is_high_quality, Color *newBackground, Color *new_text_color) {
+Text::Text( std::string  newText, std::string new_font_path, int new_size, bool is_high_quality, Color *new_back_ground, Color *new_text_color) {
     text = newText;
     font_path = new_font_path;
     size = new_size;
     font = NULL;
     high_quality = is_high_quality;
-    background = newBackground;
+    background = new_back_ground;
     text_color = new_text_color;
     init();
 }
@@ -86,8 +86,8 @@ void Text::draw(int x, int y) {
 }
 
 
-void Text::setBackground(Color * newBackground) {
-    background = newBackground;
+void Text::setBackground(Color * new_back_ground) {
+    background = new_back_ground;
     init();
 }
 
