@@ -1,43 +1,47 @@
 #include "door_switch.hpp"
 
-DoorSwitch::DoorSwitch(std::string objectName, double positionX, double positionY,
-                                     int width, int height) : GameObject(objectName,
-                                                                         positionX,
-                                                                         positionY,
+/**class to object of door_switch, where you can find some values and meths to the same.
+ *
+ */
+
+DoorSwitch::DoorSwitch(std::string object_name, double position_x, double position_y,
+                                     int width, int height) : GameObject(object_name,
+                                                                         position_x,
+                                                                         position_y,
                                                                          width, height){
-    animator = new Animation(objectName, 1, 6, 0.5);
+    animator = new Animation(object_name, 1, 6, 0.5);
 
     hacking_effect = new Audio("assets/sounds/PCNOISE.wav", "EFFECT", 60);
-    hacking_bar = new ProgressBar(positionX-7, positionY-10, 45, 5, 0.002);
+    hacking_bar = new ProgressBar(position_x-7, position_y-10, 45, 5, 0.002);
 
-    animator->addAction("beingHacked", 1,5);
-    animator->addAction("idle", 0, 0);
+    animator->add_action("beingHacked", 1,5);
+    animator->add_action("idle", 0, 0);
     pressed = false;
 }
 
 DoorSwitch::~DoorSwitch(){}
 
-void DoorSwitch::update(double timeElapsed){
-    timeElapsed = timeElapsed;
+void DoorSwitch::update(double time_elapsed){
+    time_elapsed = time_elapsed;
     animator->update();
-    if(isPressed()){
-        hacking_bar->update(timeElapsed);
+    if(is_pressed())){
+        hacking_bar->update(time_elapsed);
     }
 }
 
 void DoorSwitch::draw(){
     INFO("DoorSwitch DRAW");
-    if(isPressed()){
-        animator->setInterval("beingHacked");
+    if(is_pressed()){
+        animator->set_interval("beingHacked");
         AnimationManager::instance.addProgressBar(hacking_bar);
-        if(hacking_bar->getPercent() <= 0.0){
+        if(hacking_bar->get_percent() <= 0.0){
             pressed = false;
-            setEnabled(false);
+            set_enabled(false);
         }
     }else{
-        animator->setInterval("idle");
+        animator->set_interval("idle");
     }
-    animator->draw(getPositionX(), getPositionY());
+    animator->draw(get_position_x(), get_position_y());
 }
 
 Animation * DoorSwitch::getAnimation(){
@@ -48,26 +52,26 @@ void DoorSwitch::animate(){
     pressed = true;
 }
 
-void DoorSwitch::stopAnimation(){
+void DoorSwitch::stop_animation(){
     pressed = false;
 }
 
-bool DoorSwitch::isPressed(){
+bool DoorSwitch::is_pressed(){
     return pressed;
 }
 
-void DoorSwitch::playEffect(){
+void DoorSwitch::play_effect()
     hacking_effect->play(2);
 }
 
-void DoorSwitch::stopEffect(){
+void DoorSwitch::stop_effect(){
     hacking_effect->stop();
 }
 
-double DoorSwitch::getHackingBarPercent(){
-    return hacking_bar->getPercent();
+double DoorSwitch::get_hacking_bar_percent(){
+    return hacking_bar->get_percent();
 }
 
-void DoorSwitch::resetHackingProgress(){
-    hacking_bar->resetPercent();
+void DoorSwitch::reset_hacking_progress(){
+    hacking_bar->reset_percent();
 }
