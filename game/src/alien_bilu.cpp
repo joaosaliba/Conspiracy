@@ -8,8 +8,8 @@
 #define HEIGHT 22
 
 /** 
-objects included in the alien_bilu.hpp, door_switch.hpp classes found on lines 1
-* to line 4, where the methods will be responsible for the manipulation and organization 
+objects included in the alien_bilu.hpp, door_switch.hpp classes found on lines 1 to
+* line 4, where the methods will be responsible for the manipulation and organization 
 * of these objects
 */
 
