@@ -7,6 +7,12 @@
 #define WIDTH 19
 #define HEIGHT 22
 
+/** 
+objects included in the alien_bilu.hpp, door_switch.hpp classes found on lines 1
+* to line 4, where the methods will be responsible for the manipulation and organization 
+* of these objects
+*/
+
 Bilu::Bilu(double position_x, double position_y) : 
 Alien(FILENAME, position_x, position_y, WIDTH, HEIGHT) {
     animator->add_action("special_right",14,17);
