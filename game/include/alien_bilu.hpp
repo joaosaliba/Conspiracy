@@ -3,20 +3,20 @@
 
 #include "alien.hpp"
 
-class Bilu: public Alien{
+class Bilu: public Alien {
 public:
-    Bilu(double positionX, double positionY);
+    Bilu(double position_x, double position_y);
     void draw();
-    void update(double timeElapsed);
+    void update(double time_elapsed);
 
 protected:
-    void specialAction();
+    void special_action();
 
 private:
     bool hacking;
     bool editing;
     bool last_action;
-    void setSpecialActionAnimator();
+    void set_special_action_animator();
 };
 
 #endif

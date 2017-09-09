@@ -8,16 +8,18 @@
 #include <vector>
 
 namespace engine {
-    class ProgressBar: public GameObject {
+    class progress_bar: public game_object {
     public:
-        ProgressBar(double position_x, double position_y, int width, int height, double increment);
-        ProgressBar(double position_x, double position_y, int width, int height,
-                    double increment, std::vector<unsigned int> new_back_color, std::vector<unsigned int> new_front_color);
-        ~ProgressBar();
+        progress_bar(double position_x, double position_y, int width, int height, 
+        double increment);
+        progress_bar(double position_x, double position_y, int width, int height,
+                    double increment, std::vector<unsigned int> new_back_color, 
+        std::vector<unsigned int> new_front_color);
+        ~progress_bar();
         void update(double time_elapsed);
         void draw();
-        double getPercent();
-        void resetPercent();
+        double get_percent();
+        void reset_percent();
 
     private:
         double percent;

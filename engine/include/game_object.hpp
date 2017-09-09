@@ -6,33 +6,34 @@
 #include <utility>
 #include "sprite.hpp"
 
-namespace engine{
-    class GameObject{
+namespace engine {
+    class game_object {
     public:
-        GameObject(std::string object_name, double position_x, double position_y,int width, int height);
-        GameObject(double position_x, double position_y,int width, int height);
-        GameObject();
-        ~GameObject();
+        game_object(std::string object_name, double position_x, 
+        double position_y,int width, int height);
+        game_object(double position_x, double position_y,int width, int height);
+        game_object();
+        ~game_object();
 
         virtual void draw() = 0;
         virtual void update(double time_elapsed) = 0;
 
-        std::string getName();
-        double getPositionX();
-        double getPositionY();
-        int getWidth();
-        int getHeight();
-        std::pair<double,double> getCenter();
-        bool isEnabled();
-        bool isVisible();
+        std::string get_name();
+        double get_position_x();
+        double get_position_y();
+        int get_width();
+        int get_height();
+        std::pair<double,double> get_center();
+        bool is_enabled();
+        bool is_visible();
 
-        void setName(std::string new_name);
-        void setPositionX(double new_position);
-        void setPositionY(double new_position);
-        void setWidth(int new_width);
-        void setHeight(int new_height);
-        void setEnabled(bool param_enabled);
-        void setVisible(bool param_visible);
+        void set_name(std::string new_name);
+        void set_position_x(double new_position);
+        void set_position_y(double new_position);
+        void set_width(int new_width);
+        void set_height(int new_height);
+        void set_enabled(bool param_enabled);
+        void set_visible(bool param_visible);
 
     private:
         std::string name;
