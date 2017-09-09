@@ -9,8 +9,8 @@ using namespace engine;
 
 class CameraSystem: public GameObject{
 public:
-    CameraSystem(Camera* camera, CameraSwitch* cameraSwitch);
-    CameraSystem(Camera* camera, CameraSwitch* cameraSwitch, CameraLever* cameraLever);
+    CameraSystem(Camera* camera, CameraSwitch* camera_switch);
+    CameraSystem(Camera* camera, CameraSwitch* camera_switch, CameraLever* camera_lever);
     ~CameraSystem();
     void update(double timeElapsed);
     void draw();
@@ -19,8 +19,8 @@ public:
     CameraSwitch* getCameraSwitch();
 private:
     Camera* camera;
-    CameraSwitch* cameraSwitch;
-    CameraLever* cameraLever;
+    CameraSwitch* camera_switch;
+    CameraLever* camera_lever;
     int lastLeverState;
 };
 

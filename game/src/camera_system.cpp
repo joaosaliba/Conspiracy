@@ -2,38 +2,38 @@
 
 using namespace engine;
 
-CameraSystem::CameraSystem(Camera* p_camera, CameraSwitch* p_cameraSwitch){
+CameraSystem::CameraSystem(Camera* p_camera, CameraSwitch* p_camera_switch){
     camera = p_camera;
-    cameraSwitch = p_cameraSwitch;
-    cameraLever = NULL;
+    camera_switch = p_camera_switch;
+    camera_lever = NULL;
     lastLeverState = 1;
 }
 
-CameraSystem::CameraSystem(Camera* p_camera, CameraSwitch* p_cameraSwitch, CameraLever* p_cameraLever){
+CameraSystem::CameraSystem(Camera* p_camera, CameraSwitch* p_camera_switch, CameraLever* p_camera_lever){
     camera = p_camera;
-    cameraSwitch = p_cameraSwitch;
-    cameraLever = p_cameraLever;
+    camera_switch = p_camera_switch;
+    camera_lever = p_camera_lever;
 }
 
 void CameraSystem::update(double timeElapsed){
     camera->update(timeElapsed);
-    cameraSwitch->update(timeElapsed);
-    if(cameraLever != NULL){
-     cameraLever->update(timeElapsed);
-        if(cameraLever->getState() != lastLeverState){
-            lastLeverState = cameraLever->getState();
-            camera->changeState(cameraLever->getState());
+    camera_switch->update(timeElapsed);
+    if(camera_lever != NULL){
+     camera_lever->update(timeElapsed);
+        if(camera_lever->getState() != lastLeverState){
+            lastLeverState = camera_lever->getState();
+            camera->changeState(camera_lever->getState());
         }
     }
-    if(!cameraSwitch->isWorking() && camera->isTurnedOn()){
+    if(!camera_switch->isWorking() && camera->isTurnedOn()){
          camera->turnOff();
     }
 }
 void CameraSystem::draw(){
     camera->draw();
-    cameraSwitch->draw();
-    if(cameraLever != NULL){
-        cameraLever->draw();
+    camera_switch->draw();
+    if(camera_lever != NULL){
+        camera_lever->draw();
     }
 }
 Camera* CameraSystem::getCamera(){
@@ -41,9 +41,9 @@ Camera* CameraSystem::getCamera(){
 }
 
 CameraSwitch* CameraSystem::getCameraSwitch(){
-    return cameraSwitch;
+    return camera_switch;
 }
 
 CameraLever* CameraSystem::getCameraLever(){
-    return cameraLever;
+    return camera_lever;
 }

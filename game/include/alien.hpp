@@ -27,7 +27,7 @@ protected:
     void walkInX(double & inc_x);
     void walkInY(double & inc_y, double inc_x);
     Animation* animator;
-    int idleAnimationNumber;
+    int idle_animation_number;
     std::string alienName;
     bool block_movement;
     bool is_selected;

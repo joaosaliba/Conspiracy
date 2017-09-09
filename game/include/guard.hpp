@@ -40,7 +40,7 @@ private:
     void verifyDeadLockVertical();
     void stop(double &incX, double &incY);
     void nextWay();
-    int idleAnimationNumber;
+    int idle_animation_number;
     int wayActual;
     bool wayActive;
     bool talking;
