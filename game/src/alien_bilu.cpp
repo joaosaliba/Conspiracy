@@ -46,10 +46,10 @@ void Bilu::update(double time_elapsed) {
     special_action();
 
     if(CollisionManager::instance.verify_collision_with_guards(this) || 
-        CollisionManager::instance.verify_collision_with_cameras(this)) {
+    CollisionManager::instance.verify_collision_with_cameras(this)) {
         set_enabled(false);
 }
-    finish_point* finish_point = (finish_point*)
+    FinishPoint* finish_point = (FinishPoint*)
     CollisionManager::instance.verify_collision_with_finish_points(this);
     if(finish_point != NULL) {
         if(finish_point->get_alien_names().find("B") != std::string::npos) {
