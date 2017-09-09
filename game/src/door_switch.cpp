@@ -8,7 +8,7 @@ DoorSwitch::DoorSwitch(std::string object_name, double position_x, double positi
                                      int width, int height) : GameObject(object_name,
                                                                          position_x,
                                                                          position_y,
-                                                                         width, height){
+                                                                         width, height) {
     animator = new Animation(object_name, 1, 6, 0.5);
 
     hacking_effect = new Audio("assets/sounds/PCNOISE.wav", "EFFECT", 60);
@@ -21,57 +21,57 @@ DoorSwitch::DoorSwitch(std::string object_name, double position_x, double positi
 
 DoorSwitch::~DoorSwitch(){}
 
-void DoorSwitch::update(double time_elapsed){
+void DoorSwitch::update(double time_elapsed) {
     time_elapsed = time_elapsed;
     animator->update();
-    if(is_pressed())){
+    if(is_pressed())) {
         hacking_bar->update(time_elapsed);
     }
 }
 
-void DoorSwitch::draw(){
+void DoorSwitch::draw() {
     INFO("DoorSwitch DRAW");
-    if(is_pressed()){
+    if(is_pressed()) {
         animator->set_interval("beingHacked");
         AnimationManager::instance.addProgressBar(hacking_bar);
-        if(hacking_bar->get_percent() <= 0.0){
+        if(hacking_bar->get_percent() <= 0.0) {
             pressed = false;
             set_enabled(false);
         }
-    }else{
+    }else {
         animator->set_interval("idle");
     }
     animator->draw(get_position_x(), get_position_y());
 }
 
-Animation * DoorSwitch::getAnimation(){
+Animation * DoorSwitch::getAnimation() {
   return animator;
 }
 
-void DoorSwitch::animate(){
+void DoorSwitch::animate() {
     pressed = true;
 }
 
-void DoorSwitch::stop_animation(){
+void DoorSwitch::stop_animation() {
     pressed = false;
 }
 
-bool DoorSwitch::is_pressed(){
+bool DoorSwitch::is_pressed() {
     return pressed;
 }
 
-void DoorSwitch::play_effect()
+void DoorSwitch::play_effect() {
     hacking_effect->play(2);
 }
 
-void DoorSwitch::stop_effect(){
+void DoorSwitch::stop_effect() {
     hacking_effect->stop();
 }
 
-double DoorSwitch::get_hacking_bar_percent(){
+double DoorSwitch::get_hacking_bar_percent() {
     return hacking_bar->get_percent();
 }
 
-void DoorSwitch::reset_hacking_progress(){
+void DoorSwitch::reset_hacking_progress() {
     hacking_bar->reset_percent();
 }
