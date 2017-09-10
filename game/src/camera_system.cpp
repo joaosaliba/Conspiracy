@@ -1,12 +1,16 @@
 #include "camera_system.hpp"
 
+/**Class responsable to the camera object system,
+*where you can find some values and meth to the same
+*/
+
 using namespace engine;
 
 CameraSystem::CameraSystem(Camera* p_camera, CameraSwitch* p_camera_switch){
     camera = p_camera;
     camera_switch = p_camera_switch;
     camera_lever = NULL;
-    lastLeverState = 1;
+    last_lever_state = 1;
 }
 
 CameraSystem::CameraSystem(Camera* p_camera, CameraSwitch* p_camera_switch, CameraLever* p_camera_lever){
@@ -20,8 +24,8 @@ void CameraSystem::update(double timeElapsed){
     camera_switch->update(timeElapsed);
     if(camera_lever != NULL){
      camera_lever->update(timeElapsed);
-        if(camera_lever->getState() != lastLeverState){
-            lastLeverState = camera_lever->getState();
+        if(camera_lever->getState() != last_lever_state){
+            last_lever_state = camera_lever->getState();
             camera->changeState(camera_lever->getState());
         }
     }

@@ -6,6 +6,9 @@
 #include "camera_lever.hpp"
 
 using namespace engine;
+/**Class responsable to the camera object system,
+*where you can find some values and meth to the same
+*/
 
 class CameraSystem: public GameObject{
 public:
@@ -21,7 +24,7 @@ private:
     Camera* camera;
     CameraSwitch* camera_switch;
     CameraLever* camera_lever;
-    int lastLeverState;
+    int last_lever_state;
 };
 
 #endif
