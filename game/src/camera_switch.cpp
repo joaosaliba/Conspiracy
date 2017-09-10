@@ -1,6 +1,9 @@
 #include "camera_switch.hpp"
 
 using namespace engine;
+/**the class camera switch recives  the methes 
+* that control the camera switch
+*/
 
 #define FILENAME "assets/sprites/cenary/switch_cameras(14X16).png"
 #define WIDTH 14
