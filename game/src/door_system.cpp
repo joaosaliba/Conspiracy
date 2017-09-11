@@ -2,6 +2,9 @@
 #include "door_system.hpp"
 
 using namespace engine;
+/**
+*objective: this classe is responsable to the door system
+*/
 
 DoorSystem::DoorSystem(std::pair<int,int> doorPosition,
                        std::pair<int,int> switchPosition, std::string doorSide){
