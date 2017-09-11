@@ -8,11 +8,11 @@ Date:27/08/2017
 using namespace engine;
 
 AnimationManager AnimationManager::instance;
-void AnimationManager::add_animation_quad(Animation_quad* new_quad){
+void AnimationManager::addAnimationQuad(Animation_quad* new_quad){
     animationQuads.push_back(new_quad);
 }
 
-void AnimationManager::add_collider(SDL_Rect* new_quad){
+void AnimationManager::addCollider(SDL_Rect* new_quad){
     colliderRects.push_back(new_quad);
 }
 void AnimationManager::addFieldOfVision(FieldOfVision* field){
@@ -43,7 +43,7 @@ void AnimationManager::clearAnimationQuads(){
 
 }
 
-void AnimationManager::draw_quads() {
+void AnimationManager::drawQuads() {
     if(InputManager::instance.isKeyTriggered(InputManager::KEY_PRESS_L)) {
         if(is_active) {
             is_active = false;
@@ -62,7 +62,7 @@ void AnimationManager::draw_quads() {
     }
 
     if(isActive) {
-        draw_colliders();
+        drawColliders();
     }
 
     drawProgressBars();
@@ -131,7 +131,7 @@ void AnimationManager::drawLine(Line* line) {
                        line->getPoint2().second);
 }
 
-void AnimationManager::draw_colliders() {
+void AnimationManager::drawColliders() {
     for(SDL_Rect * quad : colliderRects) {
         SDL_RenderDrawRect(WindowManager::getGameCanvas(), quad);
     }

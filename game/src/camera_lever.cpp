@@ -30,8 +30,8 @@ void CameraLever::draw() {
     animator->draw_collider(getPositionX(), getPositionY(), getWidth(), getHeight());
 }
 
-void CameraLever::update(double timeElapsed) {
-    timeElapsed = timeElapsed;
+void CameraLever::update(double time_elapsed) {
+    time_elapsed = time_elapsed;
     animator->update();
 }
 

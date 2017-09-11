@@ -69,7 +69,7 @@ void Animation::update(){
     DEBUG("Axis in X:" << X*width_frame << " Axis in Y:" << Y*height_frame << " Position:"
           << current_position_frame);
 }
-void Animation::set_draw_size(int width, int height){
+void Animation::setDrawSize(int width, int height){
     draw_width = width;
     draw_height = height;
 }
@@ -84,12 +84,12 @@ void Animation::draw(int x, int y){
     AnimationManager::instance.add_animation_quad(newQuad);
 }
 
-void Animation::draw_collider(int x, int y, int width, int height) {
+void Animation::drawCollider(int x, int y, int width, int height) {
     SDL_Rect* quad = new SDL_Rect();
     *quad = {x,y,width,height};
     AnimationManager::instance.add_collider(quad);
 }
-void Animation::draw_instant(int x, int y){
+void Animation::drawInstant(int x, int y){
     INFO("ANIMATOR DRAW");
     // Rendering in screen
     render_quad = {x, y, clip_rect.w, clip_rect.h };
@@ -107,14 +107,14 @@ void Animation::next(){
     }
 }
 
-void Animation::set_current_position_frame(int position_frame){
+void Animation::setCurrentPositionFrame(int position_frame){
     current_position_frame = position_frame;
 }
-int Animation::get_current_position_frame(){
+int Animation::getCurrentPositionFrame(){
     return current_position_frame;
 }
 
-void Animation::set_interval(std::string action){
+void Animation::setInterval(std::string action){
     current_action = action;
 
     if(action != interval.first) {
@@ -126,7 +126,7 @@ void Animation::set_interval(std::string action){
         INFO("ACTION: " << action << current_position_frame);
     }
 }
-void Animation::set_total_time(double new_total_time){
+void Animation::setTotalTime(double new_total_time){
     total_time = new_total_time;
 }
 
@@ -140,10 +140,10 @@ std::pair<std::string, std::pair<int, int>> Animation::get_interval(){
     return interval;
 }
 
-void Animation::add_action(std::string name_action, int initial, int last){
+void Animation::addAction(std::string name_action, int initial, int last){
   list_actions[name_action] = std::pair<int, int>(initial, last);
 }
 
-std::string Animation::get_current_action(){
+std::string Animation::getCurrentAction(){
     return current_action;
 }

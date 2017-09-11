@@ -1,15 +1,15 @@
 #include "choice.hpp"
 
-Choice::Choice(std::string objectName, double positionX, double positionY, int width, int height,
-               std::string title, int sizeTitle) : GameObject(objectName,
-                                                              positionX,
-                                                              positionY,
+Choice::Choice(std::string object_name, double position_x, double position_y, int width, int height,
+               std::string title, int size_title) : GameObject(object_name,
+                                                              position_x,
+                                                              position_y,
                                                               width, height) {
 
-    button = new Button("assets/fonts/font.ttf", positionX + (width/2)*0.4,
-                        positionY + height, 200, 150, title, sizeTitle);
+    button = new Button("assets/fonts/font.ttf", position_x + (width/2)*0.4,
+                        position_y + height, 200, 150, title, size_title);
 
-    sprite = new Sprite(objectName);
+    sprite = new Sprite(object_name);
     sprite->setDrawSize(200,150);
 
     padlock = new Sprite("assets/sprites/padlock.png");
@@ -23,13 +23,13 @@ Choice::Choice(std::string objectName, double positionX, double positionY, int w
 
 Choice::~Choice(){}
 
-void Choice::update(double timeElapsed) {
+void Choice::update(double time_elapsed) {
     if(chosen && unlock) {
         rectangle->setEnabled(false);
     }else {
         rectangle->setEnabled(true);
     }
-    rectangle->update(timeElapsed);
+    rectangle->update(time_elapsed);
 
 }
 
@@ -57,12 +57,12 @@ Text * Choice::getText() {
     return button->getText();
 }
 
-void Choice::setChosen(bool isChosen) {
-  chosen = isChosen;
+void Choice::setChosen(bool is_chosen) {
+  chosen = is_chosen;
 }
 
-void Choice::setUnlock(bool isUnlock) {
-    unlock = isUnlock;
+void Choice::setUnlock(bool is_unlock) {
+    unlock = is_unlock;
 }
 
 bool Choice::getUnlock() {

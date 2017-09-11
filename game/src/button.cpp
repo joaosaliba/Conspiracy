@@ -15,9 +15,9 @@ Button::Button(std::string object_name, double position_x, double position_X, in
 
 Button::~Button(){}
 
-void Button::update(double timeElapsed){
-    timeElapsed = timeElapsed;
-    INFO(timeElapsed);
+void Button::update(double time_elapsed){
+    time_elapsed = time_elapsed;
+    INFO(time_elapsed);
 
 }
 

@@ -9,7 +9,8 @@
 using namespace engine;
 
 class Button: public GameObject{
-    public: Button(std::string object_name, double position_x, double position_y,
+    public:
+      Button(std::string object_name, double position_x, double position_y,
                    int width, int height, std::string title, int size_title);
 
     ~Button();
@@ -22,7 +23,8 @@ class Button: public GameObject{
 
     Text * getText();
 
-    protected: Text * text;
+    protected:
+      Text * text;
 };
 
 #endif

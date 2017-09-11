@@ -19,8 +19,8 @@ Arrow::~Arrow(){
 
 }
 
-void Arrow::update(double timeElapsed) {
-    timeElapsed = timeElapsed;
+void Arrow::update(double time_elapsed) {
+    time_elapsed = time_elapsed;
 
     if(isEnabled()) {
         animator->update();

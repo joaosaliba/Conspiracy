@@ -18,9 +18,9 @@ class FieldOfVision;
 class AnimationManager {
 public:
     static AnimationManager instance;
-    void add_animation_quad(AnimationQuad* new_quad);
-    void draw_quads();
-    void add_collider(SDL_Rect* render_quad);
+    void addAnimationQuad(AnimationQuad* new_quad);
+    void drawQuads();
+    void addCollider(SDL_Rect* render_quad);
     void addProgressBar(ProgressBar* new_progress_bar);
     void addFieldOfVision(FieldOfVision* field);
     void addGuardVision(FieldOfVision* field);
@@ -40,7 +40,7 @@ private:
     std::vector<FieldOfVision*> guards_vision;
 
     void clearAnimationQuads();
-    void draw_colliders();
+    void drawColliders();
     void drawLinesOfVision();
     void drawProgressBars();
     void drawLine(Line* line);
