@@ -1,22 +1,26 @@
+/**class to object of field_of_vision, where you can find some variables, files, others objects
+ *and meths to the same.
+ */
+
 #include "field_of_vision.hpp"
 
 using namespace engine;
 
 FieldOfVision::FieldOfVision(double x, double y, int size, double angle){
     range = size;
-    totalAngle = angle;
+    total_angle = angle;
 
-    catchEffect = new Audio("assets/sounds/GUARDAVIU.wav", "EFFECT", 128);
+    catch_effect = new Audio("assets/sounds/GUARDAVIU.wav", "EFFECT", 128);
     active = true;
-    //not including centerLine
-    numberOfLines = 10;
-    createLines(x,y,range);
+    //not including center_line
+    number_of_lines = 10;
+    create_lines(x,y,range);
 }
-int FieldOfVision::getAngle(){
-    return centerLine->getAngle();
+int FieldOfVision::get_angle(){
+    return center_line->get_angle();
 }
-void FieldOfVision::resetLines(){
-    //free(centerLine);
+void FieldOfVision::reset_lines(){
+    //free(center_line);
     for(auto line: lines){
         free(line);
     }
@@ -26,30 +30,30 @@ void FieldOfVision::resetLines(){
 void FieldOfVision::deactivate(){
     active = false;
 }
-bool FieldOfVision::isActive(){
+bool FieldOfVision::is_active(){
     return active;
 }
 
-void FieldOfVision::createLines(double x, double y, int size){
-    resetLines();
-    centerLine = new Line(x,y,size, 0);
+void FieldOfVision::create_lines(double x, double y, int size){
+    reset_lines();
+    center_line = new Line(x,y,size, 0);
 
-    double angleInc = ((double)totalAngle/2.0)/((double)numberOfLines/2.0);
-    for(double i = 0, lineAngle = angleInc; i<numberOfLines/2; i+=1, lineAngle += angleInc){
-        Line* newUpperLine = new Line(centerLine);
-        newUpperLine->rotateLine(lineAngle);
-        lines.push_back(newUpperLine);
+    double angle_inc = ((double)total_angle/2.0)/((double)number_of_lines/2.0);
+    for(double i = 0, line_angle = angle_inc; i<number_of_lines/2; i+=1, line_angle += angle_inc){
+        Line* new_upper_line = new Line(center_line);
+        new_upper_line->rotate_line(line_angle);
+        lines.push_back(new_upper_line);
 
-        Line* newLowerLine = new Line(centerLine);
-        newLowerLine->rotateLine(-lineAngle);
-        lines.push_back(newLowerLine);
+        Line* new_lower_line = new Line(center_line);
+        new_lower_line->rotate_line(-line_angle);
+        lines.push_back(new_lower_line);
     }
 }
-void FieldOfVision::updateCenter(double incX, double incY){
-    centerLine->updatePosition(incX,incY);
+void FieldOfVision::update_center(double inc_x, double inc_y){
+    center_line->update_position(inc_x,inc_y);
     for(auto line: lines){
-        line->updatePosition(incX,incY);
-    }
+        line->update_position(inc_x,inc_y);
+    }fiel
 }
 
 void FieldOfVision::draw(){
@@ -58,45 +62,45 @@ void FieldOfVision::draw(){
     }
 }
 
-void FieldOfVision::incrementAngle(double angle){
-    centerLine->rotateLine(angle);
+void FieldOfVision::increment_angle(double angle){
+    center_line->rotate_line(angle);
     for(auto line:lines){
-        line->rotateLine(angle);
+        line->rotate_line(angle);
     }
 }
 
-void FieldOfVision::setAngle(double angle){
-    centerLine->changeAngleTo(angle);
-    double angleInc = ((double)totalAngle/2.0)/((double)numberOfLines/2.0);
+void FieldOfVision::set_angle(double angle){
+    center_line->change_angle_to(angle);
+    double angle_inc = ((double)total_angle/2.0)/((double)number_of_lines/2.0);
 
-    double lineAngle = angle;
+    double line_angle = angle;
     int i = 0;
     bool inverteu = false;
     for(auto line:lines){
-        if(i >= numberOfLines/2 && !inverteu){
-            lineAngle = angle;
-            angleInc *= (-1);
+        if(i >= number_of_lines/2 && !inverteu){
+            line_angle = angle;
+            angle_inc *= (-1);
             inverteu = true;
         }
-        lineAngle -= angleInc;
-        line->changeAngleTo(lineAngle);
+        line_angle -= angle_inc;
+        line->change_angle_to(line_angle);
         i++;
     }
 }
 
-std::vector<Line*> FieldOfVision::getLines(){
-    std::vector<Line*> linesReturn;
-    linesReturn.push_back(centerLine);
+std::vector<Line*> FieldOfVision::get_lines(){
+    std::vector<Line*> lines_return;
+    lines_return.push_back(center_line);
     for(auto line:lines){
-        linesReturn.push_back(line);
+        lines_return.push_back(line);
     }
-    return linesReturn;
+    return lines_return;
 }
 
-int FieldOfVision::getRange(){
+int FieldOfVision::get_range(){
     return range;
 }
 
-void FieldOfVision::playEffect(){
-    catchEffect->play(0);
+void FieldOfVision::play_effect(){
+    catch_effect->play(0);
 }
