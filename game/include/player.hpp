@@ -1,3 +1,7 @@
+/**class to object of player, where you can find some objects, files, variables and meths
+ *used to the same.
+ */
+
 #ifndef PLAYER_HPP
 #define PLAYER_HPP
 
@@ -12,25 +16,25 @@
 
 using namespace engine;
 
-class Player: public GameObject{
+class Player: public GameObject {
 public:
-    Player(std::pair<int, int> biluPosition, std::pair<int, int> etemerPosition,
-          std::pair<int,int> varginhaPosition, int paperQuantity, int stageNumber);
+    Player(std::pair<int, int> bilu_position, std::pair<int, int> etemer_position,
+          std::pair<int,int> varginha_position, int paper_quantity, int stage_number);
     ~Player();
-    void update(double timeElapsed);
+    void update(double time_elapsed);
     void draw();
-    bool isDead();
-    Alien * getBilu();
-    Alien * getVarginha();
-    Alien * getEtemer();
-    void updatePaperQuantity(int newValue);
+    bool is_dead();
+    Alien * get_bilu();
+    Alien * get_varginha();
+    Alien * get_etemer();
+    void update_paper_quantity(int new_value);
 private:
-    Animation* exclamationAnimation;
+    Animation* exclamation_animation;
     Alien *bilu, *varginha, *etemer;
     Audio *varginha_sound_effect, *etemer_sound_effect, *bilu_sound_effect;
     Header * header;
-    int selectedAlien;
-    void idleAnimation(Alien * alien);
-    void waitAnimation(int beforeAlien);
+    int selected_alien;
+    void idle_animation(Alien * alien);
+    void wait_animation(int before_alien);
 };
 #endif
