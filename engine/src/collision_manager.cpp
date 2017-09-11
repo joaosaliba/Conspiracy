@@ -139,14 +139,14 @@ bool CollisionManager::verifyCollisionWithFieldsOfVision(GameObject* g1, std::ve
             for(Line* line : field->getLines()) {
                     if(verifyRectangleCollisionWithLine(g1,line->getPoint1(),line->getPoint2())) {
                             std::pair<double,double> playerCenter = g1->getCenter();
-                            int distanceBetweenPlayer = calculateDistance(playerCenter,line->getPoint1());
+                            int distanceBetweenPlayer = calculateDistance(playerCenter,line->getPoint1()); // declareting varible distance betwen players
                             // Margin between player and line
                             // Or else just touching a line would make you lose
                             if(distanceBetweenPlayer < field->getRange()*0.85) {
                                     for(auto wall : wallList) {
                                             if(verifyRectangleCollisionWithLine(wall,line->getPoint1(),line->getPoint2())) {
                                                     std::pair<double,double> wallCenter = wall->getCenter();
-                                                    int distanceBetweenWall = calculateDistance(wallCenter,line->getPoint1());
+                                                    int distanceBetweenWall = calculateDistance(wallCenter,line->getPoint1());// declareting varible distance betwen wall
                                                     //Wall in front of player
                                                     if(distanceBetweenWall < distanceBetweenPlayer) {
                                                             isVisible = false;
@@ -232,8 +232,8 @@ void CollisionManager::resetLists(){
 
 bool CollisionManager::verifyCollision( GameObject* g1, GameObject* g2){
         //The sides of the rectangles
-        int leftA, rightA, topA, bottomA;
-        int leftB, rightB, topB, bottomB;
+        int leftA, rightA, topA, bottomA; //declarating variables
+        int leftB, rightB, topB, bottomB; //declarating variables
 
         //Calculate the sides of rect A
         leftA = g1->getPositionX();
@@ -306,8 +306,8 @@ double CollisionManager::CCW(std::pair<int, int> a, std::pair<int, int> b, std::
 
 std::string CollisionManager::verifyCollisionChair(GameObject* g1, GameObject* g2){
         //The sides of the rectangles
-        int leftA, rightA, topA, bottomA;
-        int leftB, rightB, topB, bottomB;
+        int leftA, rightA, topA, bottomA; // declareting varibles
+        int leftB, rightB, topB, bottomB;// declareting varibles
 
         //Calculate the sides of rect A
         leftA = g1->getPositionX();
