@@ -1,3 +1,7 @@
+/**class to object of Timer, where you can find some variables, files, others objects
+ *and meths to the same.
+ */
+
 #ifndef TIMER_HPP
 #define TIMER_HPP
 

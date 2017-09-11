@@ -1,24 +1,28 @@
+/**class to object of Timer, where you can find some variables, files, others objects
+ *and meths to the same, here the user can control the flux of the game, he can pause and start.
+ */
+
 #include "timer.hpp"
 
 using namespace engine;
 
-void Timer::start(){
+void Timer::start() {
     ticks = step_ticks = SDL_GetTicks();
 }
 
-void Timer::stop(){
+void Timer::stop() {
     ticks = 0;
     step_ticks = 0;
 }
 
-void Timer::step(){
+void Timer::step() {
     step_ticks = SDL_GetTicks();
 }
 
-unsigned int Timer::elapsed_time(){
+unsigned int Timer::elapsed_time() {
     return SDL_GetTicks() - step_ticks;
 }
 
-unsigned int Timer::total_elapsed_time(){
+unsigned int Timer::total_elapsed_time() {
     return SDL_GetTicks() - ticks;
 }
