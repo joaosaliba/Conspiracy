@@ -4,52 +4,58 @@
 #define WIDTH 10
 #define HEIGHT 15
 
-Varginha::Varginha(double position_x, double position_y) : Alien(FILENAME, position_x, position_y, WIDTH, HEIGHT) {
+/** objects included in the alien_varginha.hpp 
+* where the methods will be responsible for the manipulation and organization 
+* of these objects
+*/
 
-   animator->addAction("special_right",12,13);
-   animator->addAction("special_left",10,11);
-   animator->addAction("invisible_right", 13, 13);
-   animator->addAction("invisible_left", 11, 11);
-   animator->addAction("action_right", 17, 19);
-   animator->addAction("action_left", 14, 16);
-   is_invisible = false;
-   is_selected = false;
-   in_position = false;
-   turnOff = false;
+Varginha::Varginha(double position_x, double position_y) : 
+Alien(FILENAME, position_x, position_y, WIDTH, HEIGHT) {
 
-   timerTurn = new Timer();
-   timerTurn->start();
+    animator->add_action("special_right",12,13);
+    animator->add_action("special_left",10,11);
+    animator->add_action("invisible_right", 13, 13);
+    animator->add_action("invisible_left", 11, 11);
+    animator->add_action("action_right", 17, 19);
+    animator->add_action("action_left", 14, 16);
+    is_invisible = false;
+    is_selected = false;
+    in_position = false;
+    turn_off = false;
+
+    timer_turn = new Timer();
+    timer_turn->start();
 }
 
 void Varginha::update(double time_elapsed) {
     in_position = false;
-    animator->setTotalTime(0.3);
+    animator->set_total_time(0.3);
     auto inc_y = 0.15*time_elapsed;
     auto inc_x = 0.15*time_elapsed;
 
     if(!block_movement && is_selected) {
-        walkInX(inc_x);
-        walkInY(inc_y, inc_x);
+        walk_in_x(inc_x);
+        walk_in_y(inc_y, inc_x);
     }
 
-
-    if((inc_x == 0 && inc_y == 0) || (!turnOff && !is_selected)) {
-        if(idleAnimationNumber) {
-          animator->setInterval("idle_right");
+    if((inc_x == 0 && inc_y == 0) || (!turn_off && !is_selected)) {
+        if(idle_animation_number) {
+            animator->set_interval("idle_right");
         }else { 
-          animator->setInterval("idle_left");
+            animator->set_interval("idle_left");
         }
     }
-    specialAction();
-    verifyTurn();
+    special_action();
+    verify_turn();
 
-    if(CollisionManager::instance.verifyCollisionWithGuards(this)) {
-        setEnabled(false);
+    if(CollisionManager::instance.verify_collision_with_guards(this)) {
+        set_enabled(false);
     }
 
-    FinishPoint* finishPoint = (FinishPoint*)CollisionManager::instance.verifyCollisionWithFinishPoints(this);
-    if(finishPoint != NULL) {
-        if(finishPoint->getAlienNames().find("V") != std::string::npos) {
+    FinishPoint* finish_point = (FinishPoint*)CollisionManager::
+    instance.verify_collision_with_finish_points(this);
+    if(finish_point != NULL) {
+        if(finish_point->get_alien_names().find("V") != std::string::npos) {
             in_position = true;
         }
     }
@@ -57,74 +63,77 @@ void Varginha::update(double time_elapsed) {
     animator->update();
 }
 
-void Varginha::specialAction() {
+void Varginha::special_action() {
     std::pair<int, int> interval;
 
     if(is_invisible) {
-        if(idleAnimationNumber == 5) {
-            animator->setInterval("invisible_right");
+        if(idle_animation_number == 5) {
+            animator->set_interval("invisible_right");
         }else {
-            animator->setInterval("invisible_left");
+            animator->set_interval("invisible_left");
         }
     }else if(is_selected) {
-            CameraSwitch* cameraSwitch = NULL;
-            CameraLever* cameraLever = NULL;
-            cameraSwitch = (CameraSwitch*)CollisionManager::instance.verifyCollisionWithCameraSwitches(this);
-            cameraLever = (CameraLever*)CollisionManager::instance.verifyCollisionWithCameraLevers(this);
+        CameraSwitch* camera_switch = NULL;
+        CameraLever* camera_lever = NULL;
+        camera_switch = (CameraSwitch*)CollisionManager::
+        instance.verify_collision_with_camera_switches(this);
+        camera_lever = (CameraLever*)CollisionManager::
+        instance.verify_collision_with_camera_levers(this);
 
-            if((cameraSwitch != NULL) || (cameraLever != NULL)) {
-                   if(InputManager::instance.isKeyTriggered(InputManager::KEY_PRESS_SPACE)) {
-                       int x = 0;
-                       if(cameraSwitch!= NULL) {
-                           cameraSwitch->turnOff();
-                           x = cameraSwitch->getPositionX();
-                       }else if(cameraLever != NULL) {
-                           cameraLever->nextState();
-                           x = cameraLever->getPositionX();
-                       }
+        if((camera_switch != NULL) || (camera_lever != NULL)) {
+            if(InputManager::instance.is_key_tfriggered(InputManager::KEY_PRESS_SPACE)) {
+                int x = 0;
+                if(camera_switch!= NULL) {
+                    camera_switch->turn_off();
+                    x = camera_switch->get_position_x();
+                }else if(camera_lever != NULL) {
+                    camera_lever->next_state();
+                    x = camera_lever->get_position_x();
+                }
 
-                       if(x > getPositionX()) {
-                           animator->setInterval("action_right");
-                           idleAnimationNumber = 5;
-                       }else {
-                           animator->setInterval("action_left");
-                           idleAnimationNumber = 0;
-                       }
-                       block_movement = true;
-                       turnOff = true;
-                       timerTurn->step();
-                   }
-           }else if(InputManager::instance.isKeyPressed(InputManager::KEY_PRESS_SPACE)){
-               block_movement = true;
-               is_invisible = true;
-               setVisible(false);
-               if(idleAnimationNumber == 5) {
-                   animator->setInterval("special_right");
+                if(x > get_position_x()) {
+                    animator->set_interval("action_right");
+                    idle_animation_number = 5;
+                    }else {
+                        animator->set_interval("action_left");
+                        idle_animation_number = 0;
+                    }
+                    block_movement = true;
+                    turn_off = true;
+                    timer_turn->step();
+        }
+    }else if(InputManager::instance.is_key_pressed(InputManager::KEY_PRESS_SPACE)) {
+        block_movement = true;
+        is_invisible = true;
+        set_visible(false);
+            if(idle_animation_number == 5) {
+                animator->set_interval("special_right");
                }else {
-                   animator->setInterval("special_left");
+                   animator->set_interval("special_left");
                }
-           }
+    }
    }
-   if(InputManager::instance.isKeyReleased(InputManager::KEY_PRESS_SPACE) && is_selected && !turnOff) {
-        setDefault();
+   if(InputManager::instance.is_key_released(InputManager::KEY_PRESS_SPACE) && 
+   is_selected && !turn_off) {
+        set_default();
    }
 }
 
-void Varginha::setDefault() {
+void Varginha::set_default() {
     is_invisible = false;
-    setVisible(true);
+    set_visible(true);
     block_movement = false;
 }
  
 void Varginha::draw() {
     INFO("Varginha DRAW");
-    animator->draw(getPositionX()-15, getPositionY()-25);
-    animator->draw_collider(getPositionX(), getPositionY(), getWidth(), getHeight());
+    animator->draw(get_position_x()-15, get_position_y()-25);
+    animator->draw_collider(get_position_x(), get_position_y(), get_width(), get_height());
 }
 
-void Varginha::verifyTurn() {
-    if((timerTurn->elapsed_time()/1000.0) > 0.3 && turnOff) {
+void Varginha::verify_turn() {
+    if((timer_turn->elapsed_time()/1000.0) > 0.3 && turn_off) {
       block_movement = false;
-      turnOff = false;
+      turn_off = false;
     }
 }

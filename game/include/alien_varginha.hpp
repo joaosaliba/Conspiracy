@@ -6,19 +6,24 @@
 #include "camera_lever.hpp"
 #include "timer.hpp"
 
-class Varginha: public Alien{
+/** the class Varginha receives an Alien public class where the parameters to be defined
+*received, such as position, type, and methods. The attributes that will be defined
+*public and private
+*/
+
+class Varginha: public Alien {
 public:
-    Varginha(double positionX, double positionY);
-    void update(double timeElapsed);
+    Varginha(double position_x, double position_y);
+    void update(double time_elapsed);
     void draw();
-    void setDefault();
+    void set_default();
 protected:
-    void specialAction();
+    void special_action();
 private:
-    void verifyTurn();
+    void verify_turn();
     bool is_invisible;
-    bool turnOff;
-    Timer * timerTurn;
+    bool turn_off;
+    Timer * timer_turn;
 };
 
 #endif
