@@ -59,7 +59,7 @@ void FinishScene::load() {
 }
 
 void FinishScene::select_action() {
-    if(InputManager::instance.isKeyTriggered(InputManager::KeyPress::KEY_PRESS_ENTER)) {
+    if(InputManager::instance.is_key_triggered(InputManager::KeyPress::KEY_PRESS_ENTER)) {
         switch(select_button) {
         case 1:
             get_scene_manager()->load_scene(0);

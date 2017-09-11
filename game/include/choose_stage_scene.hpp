@@ -1,3 +1,7 @@
+/**class to object of choose_stage_scene, where you can find some values, files,
+ *objects and meths to the same.
+ */
+
 #ifndef CHOOSE_STAGE_SCENE_HPP
 #define CHOOSE_STAGE_SCENE_HPP
 
@@ -19,16 +23,16 @@ public:
     ~ChooseStageScene();
     void load();
     void draw();
-    void update(double timeElapsed);
+    void update(double time_elapsed);
     void unload();
 private:
-    void selectAction();
-    int selectButton;
-    std::vector<std::pair<int, GameObject*>> gameObjectsList;
+    void select_action();
+    int select_button;
+    std::vector<std::pair<int, GameObject*>> game_objects_list;
     Sprite * background;
     Color * select;
-    Color * notSelect;
-    Audio * soundEffect;
+    Color * not_select;
+    Audio * sound_effect;
 };
 
 #endif
