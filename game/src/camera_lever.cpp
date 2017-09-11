@@ -20,21 +20,21 @@ CameraLever::CameraLever(double positionX, double positionY, std::string directi
     stateInc = 1;
     state = 1;
 }
-
+//Class responsable to draw where  pass lines  and set theirs positions
 void CameraLever::draw(){
     animator->draw(getPositionX(), getPositionY());
     animator->draw_collider(getPositionX(), getPositionY(), getWidth(), getHeight());
 }
-
+//update camera 
 void CameraLever::update(double timeElapsed){
     timeElapsed = timeElapsed;
     animator->update();
 }
-
+//check if the cameras are working
 int CameraLever::getState(){
     return state;
 }
-
+// class responsable to set  off the camera and personages pass
 void CameraLever::nextState(){
     if(state >= 2 || state <= 0){
         stateInc *= -1;
