@@ -12,10 +12,10 @@ class CameraLever: public GameObject{
 public:
     CameraLever(double positionX, double positionY, std::string direction);
     ~CameraLever();
-    void update(double timeElapsed);
-    void draw();
+    void update(double timeElapsed);// update the camera lever durign time
+    void draw();// draw the lever of camerar
     int getState();
-    void nextState();
+    void nextState(); //  references for the camera lever state
 private:
     Animation* animator;
     int state;
