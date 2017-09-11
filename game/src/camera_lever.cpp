@@ -5,6 +5,9 @@ using namespace engine;
 #define FILENAME "assets/sprites/cenary/alavanca_sheet(17X20).png"
 #define WIDTH 20
 #define HEIGHT 20
+/** objective : this class is responsble to create
+* a lever for the camera object in the game
+*/
 
 CameraLever::CameraLever(double positionX, double positionY, std::string direction) : GameObject(FILENAME,positionX,positionY,
                                                                      WIDTH, HEIGHT){
