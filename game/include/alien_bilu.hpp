@@ -2,7 +2,7 @@
 #define ALIEN_BILU_HPP
 #include "alien.hpp"
 
-/** the class Bilu receives an Alien public class where the parameters to be defined
+/** The class Bilu receives an Alien public class where the parameters to be defined
 *received, such as position, type, and methods. The attributes that will be defined
 *public and private
 */

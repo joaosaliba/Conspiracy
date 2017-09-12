@@ -1,6 +1,6 @@
 #include "alien.hpp"
 
-/** objects included in the alien.hpp 
+/** Objects included in the alien.hpp 
 * where the methods will be responsible for the manipulation and organization 
 * of these objects
 */

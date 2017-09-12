@@ -4,7 +4,7 @@
 #define WIDTH 10
 #define HEIGHT 15
 
-/** objects included in the alien_varginha.hpp 
+/** Objects included in the alien_varginha.hpp 
 * where the methods will be responsible for the manipulation and organization 
 * of these objects
 */

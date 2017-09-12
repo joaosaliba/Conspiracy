@@ -7,8 +7,7 @@
 #define WIDTH 19
 #define HEIGHT 22
 
-/** 
-objects included in the alien_bilu.hpp, door_switch.hpp classes found on lines 1 to
+/** Objects included in the alien_bilu.hpp, door_switch.hpp classes found on lines 1 to
 * line 4, where the methods will be responsible for the manipulation and organization 
 * of these objects
 */
@@ -24,6 +23,11 @@ Alien(FILENAME, position_x, position_y, WIDTH, HEIGHT) {
     is_selected = false;
     in_position = false;
 }
+
+/** 
+*   movement and special actions of the character, in addition to checking the finishi point
+*   @return void
+*/
 
 void Bilu::update(double time_elapsed) {
     in_position = false;
@@ -59,6 +63,11 @@ void Bilu::update(double time_elapsed) {
 
     animator->update();
 }
+
+/** 
+*   verifies the interaction of both paper and pc
+*   @return void
+*/
 
 void Bilu::special_action() {
     std::pair<int, int> interval;
@@ -125,17 +134,27 @@ void Bilu::special_action() {
     last_action = hacking;
 }
 
+/** 
+*   draws the animation of the character according to its position
+*   @return void
+*/
+
 void Bilu::draw() {
     INFO("Bilu DRAW");
     animator->draw(get_position_x()-11, get_position_y()-20);
     animator->draw_collider(get_position_x(), get_position_y(), get_width(), get_height());
 }
 
-void Bilu::setspecial_action_animator() {
+/** 
+*   special character animation
+*   @return void
+*/
+
+void Bilu::set_special_action_animator() {
     if(idle_animation_number == 5) {
         animator->set_interval("special_right");
     }else {
         animator->set_interval("special_left");
     }
-        animator->setTotalTime(0.6);
+        animator->set_total_time(0.6);
 }
