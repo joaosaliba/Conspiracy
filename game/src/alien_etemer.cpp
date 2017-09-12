@@ -21,6 +21,11 @@ Alien(FILENAME, position_x, position_y, WIDTH, HEIGHT) {
     in_position = false;
 }
 
+/** 
+*   movement and special actions of the character, in addition to checking the finishi point
+*   @return void
+*/
+
 void Etemer::update(double time_elapsed) {
     in_position = false;
     if (block_movement) {
@@ -59,6 +64,13 @@ void Etemer::update(double time_elapsed) {
 }
     animator->update();
 }
+
+/** 
+*   movement and special actions of the character, in addition to verify collisions and 
+*   attributes of movement of the character
+*   @return void
+*/
+
 void Etemer::special_action(GameObject * guard, double distance) {
     if(InputManager::instance.is_key_pressed(InputManager::KEY_PRESS_SPACE) &&
     guard != NULL && is_selected) {
@@ -95,11 +107,21 @@ void Etemer::special_action(GameObject * guard, double distance) {
     }
 }
 
+/** 
+*   draws the animation of the character according to its position
+*   @return void
+*/
+
 void Etemer::draw() {
     INFO("Etemer DRAW");
     animator->draw(get_position_x()-15, get_position_y()-20);
     animator->draw_collider(get_position_x(), get_position_y(), get_width(), get_heigth());
 }
+
+/** 
+*   character move
+*   @return void
+*/
 
 void Etemer::move_chair() {
     std::pair<std::string, GameObject *> chair = CollisionManager::
@@ -114,8 +136,12 @@ void Etemer::move_chair() {
     }
 }
 
+/** 
+*   Creates animations of movement and collision in X in the game
+*   @return void
+*/
 
-void Etemer::walkInX(double & inc_x) {
+void Etemer::walk_in_x(double & inc_x) {
     if(InputManager::instance.is_key_pressed(InputManager::KeyPress::KEY_PRESS_RIGHT)) {
         inc_x = inc_x;
         idle_animation_number = 5;
@@ -136,6 +162,11 @@ void Etemer::walkInX(double & inc_x) {
         set_position_x(get_position_x()+(inc_x*(0-1)));
     }
 }
+
+/** 
+*   Creates animations of movement and collision in Y in the game
+*   @return void
+*/
 
 void Etemer::walk_in_y(double & inc_y, double inc_x) {
     if(InputManager::instance.is_key_pressed(InputManager::KeyPress::KEY_PRESS_UP)) {
@@ -162,6 +193,11 @@ void Etemer::walk_in_y(double & inc_y, double inc_x) {
         set_position_y(get_position_y()+(inc_y*(0-1)));
     }
 }
+
+/** 
+*   check the guards' distance
+*   @return void
+*/
 
 void Etemer::verify_distance(GameObject* guard) {
     double distance = sqrt((pow(get_position_x() - guard->get_position_x(), 2.0)) +  
