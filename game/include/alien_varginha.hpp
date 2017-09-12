@@ -6,7 +6,7 @@
 #include "camera_lever.hpp"
 #include "timer.hpp"
 
-/** the class Varginha receives an Alien public class where the parameters to be defined
+/** The class Varginha receives an Alien public class where the parameters to be defined
 *received, such as position, type, and methods. The attributes that will be defined
 *public and private
 */

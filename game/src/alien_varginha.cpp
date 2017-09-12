@@ -27,6 +27,11 @@ Alien(FILENAME, position_x, position_y, WIDTH, HEIGHT) {
     timer_turn->start();
 }
 
+/** 
+*   movement and special actions of the character, in addition to checking the finishi point
+*   @return void
+*/
+
 void Varginha::update(double time_elapsed) {
     in_position = false;
     animator->set_total_time(0.3);
@@ -62,6 +67,12 @@ void Varginha::update(double time_elapsed) {
 
     animator->update();
 }
+
+/** 
+*   movement and special actions of the character, in addition to verify collisions and 
+*   attributes of movement of the character
+*   @return void
+*/
 
 void Varginha::special_action() {
     std::pair<int, int> interval;
@@ -119,17 +130,32 @@ void Varginha::special_action() {
    }
 }
 
+/** 
+*   standard of play 
+*   @return void
+*/
+
 void Varginha::set_default() {
     is_invisible = false;
     set_visible(true);
     block_movement = false;
 }
+
+/** 
+*   draws the animation of the character according to its position
+*   @return void
+*/
  
 void Varginha::draw() {
     INFO("Varginha DRAW");
     animator->draw(get_position_x()-15, get_position_y()-25);
     animator->draw_collider(get_position_x(), get_position_y(), get_width(), get_height());
 }
+
+/** 
+*   checking remaining game time
+*   @return void
+*/
 
 void Varginha::verify_turn() {
     if((timer_turn->elapsed_time()/1000.0) > 0.3 && turn_off) {
