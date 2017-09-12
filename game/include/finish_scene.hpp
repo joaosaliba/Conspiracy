@@ -18,6 +18,15 @@
 using namespace engine;
 
 class FinishScene: public Scene{
+
+/**
+* Método construtor
+* <p>Esse método executa a ação de iniciar as funções e passar as variáreis
+*utilizadas na classe finish_scene.hpp</p>
+* @param int-id
+* @param double-time_elapsed
+*/
+
 public:
     FinishScene(int id);
     ~FinishScene();

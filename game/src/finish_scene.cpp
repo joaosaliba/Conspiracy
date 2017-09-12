@@ -25,6 +25,12 @@ FinishScene::FinishScene(int id) : Scene(id) {
 FinishScene::~FinishScene() {
 }
 
+/**
+* Método draw
+* <p>Esse método executa a função de desenhar ao fundo da fase,
+* utilizando o método draw</p>
+*/
+
 void FinishScene::draw() {
     background->draw_instant(80, 20);
 
@@ -32,6 +38,12 @@ void FinishScene::draw() {
         (*gameObject.second).draw();
     }
 }
+
+/**
+* Método update
+* <p>Esse método utiliza o time_elapsed para saber quando tem que atualizar a interface da fase,
+*  e usa um array para saber o que mostrar para o user.</p>
+*/
 
 void FinishScene::update(double time_elapsed) {
     select_action();
@@ -51,6 +63,10 @@ void FinishScene::update(double time_elapsed) {
     }
 }
 
+/**
+* Método load
+* <p>Esse método carrega todo o style padrão aplicado na fase.</p>
+*/
 void FinishScene::load() {
     game_objects_list.push_back(std::pair<int, GameObject*>(1,new Button("assets/fonts/font.ttf", 420, 500, 500, 500, "Menu", 50)));
     AnimationManager::instance.set_background_color(new Color(158,228,159, 125));
@@ -58,6 +74,10 @@ void FinishScene::load() {
 
 }
 
+/**
+* Método select_action
+* <p>Esse método utiliza o select_action para carregar a próxima cena do jogo.</p>
+*/
 void FinishScene::select_action() {
     if(InputManager::instance.is_key_triggered(InputManager::KeyPress::KEY_PRESS_ENTER)) {
         switch(select_button) {
