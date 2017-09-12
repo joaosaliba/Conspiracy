@@ -1,3 +1,9 @@
+/**
+    @file engine.cpp
+    @brief Manage the engine of the game.
+    @copyright MIT License.
+*/
+
 #include "engine.hpp"
 
 namespace engine{
@@ -16,6 +22,11 @@ namespace engine{
     SceneManager* getSceneManager(){
         return sceneManager;
     }
+
+    /**
+      @brief It loads the game engine.
+    */
+
     void loadEngine(){
         sceneManager = new SceneManager();
         windowManager = new WindowManager();
@@ -32,6 +43,10 @@ namespace engine{
             exit(-1);
         }
     }
+
+    /**
+      @brief It starts the game engine
+    */
 
     void run(){
         bool isRunning = true;

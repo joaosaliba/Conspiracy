@@ -1,3 +1,4 @@
+/**Class for loading and starting the game engine.*/
 #ifndef ENGINE_HPP
 #define ENGINE_HPP
 
