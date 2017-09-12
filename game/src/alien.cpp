@@ -34,6 +34,11 @@ GameObject(objectName,position_x,position_y,width, height) {
 Alien::~Alien() {  
 }
 
+/** 
+*   Creates animations of movement and collision in X in the game
+*   @return void
+*/
+
 void Alien::walk_in_x(double & inc_x) {
 
     if(InputManager::instance.is_key_pressed(InputManager::KeyPress::KEY_PRESS_RIGHT)) {
@@ -55,6 +60,11 @@ void Alien::walk_in_x(double & inc_x) {
         set_position_x(get_position_x()+(inc_x*(0-1)));
     }
 }
+
+/** 
+*   Creates animations of movement and collision in Y in the game
+*   @return void
+*/
 
 void Alien::walk_in_y(double & inc_y, double inc_x) {
 
@@ -82,6 +92,11 @@ void Alien::walk_in_y(double & inc_y, double inc_x) {
     }
 }
 
+/** 
+*   draws the animation of the character according to its position
+*   @return void
+*/
+
 void Alien::draw() {
     INFO("ALIEN DRAW");
     animator->draw(get_position_x(), get_position_y());
@@ -91,13 +106,28 @@ Animation * Alien::get_animation() {
   return animator;
 }
 
+/** 
+*   selected character
+*   @return void
+*/
+
 void Alien::set_alien_selected() {
     is_selected = true;
 }
 
+/** 
+*   unselected character
+*   @return void
+*/
+
 void Alien::set_alien_deselect() {
     is_selected = false;
 }
+
+/** 
+*   character position
+*   @return bool
+*/
 
 bool Alien::is_in_position() {
     return in_position;

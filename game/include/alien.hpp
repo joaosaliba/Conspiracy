@@ -9,9 +9,9 @@
 #include "audio.hpp"
 #include "finish_point.hpp"
 
-/** the class Alien receives an GameObject public class where the parameters to be defined
-*received, such as position, type, and methods. The attributes that will be defined
-*public and private
+/** The class Alien receives an GameObject public class where the parameters to be defined
+* received, such as position, type, and methods. The attributes that will be defined
+* public and private
 */
 
 using namespace engine;
