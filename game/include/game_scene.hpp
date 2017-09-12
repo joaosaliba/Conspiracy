@@ -1,3 +1,7 @@
+/**Class to create, destroy and
+*manipulate the scenes of the game.
+*/
+
 #ifndef GAME_SCENE_HPP
 #define GAME_SCENE_HPP
 
