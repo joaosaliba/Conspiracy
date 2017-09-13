@@ -1,14 +1,25 @@
+/**
+ *   @file camera_lever.cpp
+ *    @brief Manage the camera lever in the game.
+ *    @copyright  GNU GENERAL PUBLIC LICENSE.
+ */
+
 #include "camera_lever.hpp"
 
 using namespace engine;
 
 #define FILENAME "assets/sprites/cenary/alavanca_sheet(17X20).png"
-#define WIDTH 20
-#define HEIGHT 20
-/** objective : this class is responsble to create
-* a lever for the camera object in the game
-*/
-
+#define WIDTH 20 // define the valor of the width like 20
+#define HEIGHT 20// define the valor of the height like 20
++/**
+ *    @brief Camemera lever object constructor.
+ *    @param[in] positionX it sets the x coordinate of the object.
+ *    @param[in] positionY it sets the y coordinate of the object.
+ *    @param[in] width it sets the width dimension of the object.
+ *    @param[in] height it sets the height dimension of the object.
+ *    @param[in] direction set the new direct of the camera lever
+ *    
+ */
 CameraLever::CameraLever(double positionX, double positionY, std::string direction) : GameObject(FILENAME,positionX,positionY,
                                                                      WIDTH, HEIGHT){
     animator = new Animation(FILENAME, 1, 3, 0.1);
@@ -20,21 +31,33 @@ CameraLever::CameraLever(double positionX, double positionY, std::string directi
     stateInc = 1;
     state = 1;
 }
-//Class responsable to draw where  pass lines  and set theirs positions
+/** 
+ *   @brief draws the animation of the button according to its position
+ *   @return void
+ */
 void CameraLever::draw(){
     animator->draw(getPositionX(), getPositionY());
     animator->draw_collider(getPositionX(), getPositionY(), getWidth(), getHeight());
 }
-//update camera 
+/**
+*    @brief update the camera lever  decoring the time.
+*    @param[in] timeElapsed its about the time
+*/
 void CameraLever::update(double timeElapsed){
     timeElapsed = timeElapsed;
     animator->update();
 }
-//check if the cameras are working
+/** 
+ *   @brief check the atual state of the camera lever
+ *   @return [int] state
+ */
 int CameraLever::getState(){
     return state;
 }
-// class responsable to set  off the camera and personages pass
+/** 
+ *   @brief set the next possible state of the camera lever
+ *   @return void
+ */
 void CameraLever::nextState(){
     if(state >= 2 || state <= 0){
         stateInc *= -1;
