@@ -2,9 +2,18 @@
 #include "log.h"
 #include "engine.hpp"
 #include "text_manager.hpp"
-
+/** text class responable for  rendering text in display */
 using namespace engine;
 
+/** construtor method of  text
+ *@param text text itself
+ *@paramfontpath  path for the font 
+ * @param size  size of text 
+ * @param high quality of text 
+ * @param background background color. 
+ * @param  text_color  color of the text 
+ * @return text object
+*/ 
 Text::Text( std::string  newText, std::string new_font_path, int new_size, bool is_high_quality, Color *new_back_ground, Color *new_text_color){
     text = new_text;
     fontPath = new_font_path;
@@ -16,6 +25,9 @@ Text::Text( std::string  newText, std::string new_font_path, int new_size, bool 
     init();
 }
 
+/** set text texture 
+*@param  text object wich store text informations  
+*/
 
 void Text::init(){
 
@@ -67,6 +79,11 @@ void Text::init(){
     SDL_FreeSurface(surface);
 }
 
+/** render the text 
+* @param text object which store text infomration. 
+* @param text object.
+*/
+
 void Text::shutdown(){
     INFO("Shutdown Text");
 
@@ -76,7 +93,9 @@ void Text::shutdown(){
     font = NULL;
 
 }
-
+/** render text 
+* @param x , y which is  the position in  x axis and y axis. 
+*/
 void Text::draw(int x, int y){
     SDL_Rect render_quad = {
         x,  y, width, height
@@ -85,12 +104,14 @@ void Text::draw(int x, int y){
     SDL_RenderCopy(WindowManager::getGameCanvas(), texture, NULL, &render_quad);
 }
 
-
+/** set atibute background*/ 
 void Text::setBackground(Color * newBackground){
     background = newBackground;
     init();
 }
-
+/** set textcolor  atribute 
+* @param Newtextcolor whihc is the text color. 
+*/
 void Text::setTextColor(Color * newTextColor){
     textColor = newTextColor;
     init();
