@@ -23,7 +23,7 @@ protected:
     Timer* audioTimer;
     Audio* chairEffect;
     Animation* animator;
-    bool isMoving;
+    bool isMoving; // bool variable that check if the chair are movening or not
     std::string direction;
     void moveInX(double incX);
     void moveInY(double incY);
