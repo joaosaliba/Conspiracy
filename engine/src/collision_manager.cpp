@@ -1,16 +1,29 @@
+/**
+ *   @file door_system.cpp
+ *    @brief Manage the chair in the game.
+ *    @copyright  GNU GENERAL PUBLIC LICENSE.
+ */
 #include "collision_manager.hpp"
 #include "log.h"
 
 using namespace engine;
 
 CollisionManager CollisionManager::instance;
-
+/**
+ *    @brief collision manager  add guard vision
+ */
 void CollisionManager::addGuardFieldOfVision(FieldOfVision* f){
         guardsVision.push_back(f);
 }
+/**
+ *    @brief collision manager  add camera field
+ */
 void CollisionManager::addCameraFieldOfVision(FieldOfVision* f){
         camerasVision.push_back(f);
 }
+/**
+ *    @brief collision manager  add wall
+ */
 void CollisionManager::addWall(GameObject* g){
         wallList.push_back(g);
 }
@@ -18,37 +31,54 @@ void CollisionManager::addWall(GameObject* g){
 void CollisionManager::addCameraSwitch(GameObject* g){
     cameraSwitchList.push_back(g);
 }
-
+/**
+ *    @brief collision manager  add camera lever
+ */
 void CollisionManager::addCameraLever(GameObject* g){
     if(g != NULL){
         cameraLeverList.push_back(g);
     }
 }
-
+/**
+ *    @brief collision manager  add guard 
+ */
 void CollisionManager::addGuard(GameObject* g){
         guardList.push_back(g);
 }
-
+/**
+ *    @brief collision manager  add paper ( object to be change in the game)
+ */
 void CollisionManager::addPaper(GameObject* g){
         paperList.push_back(g);
 }
-
+/**
+ *    @brief collision manager  add door ( object to be opened when hakc computer)
+ */
 void CollisionManager::addDoor(GameObject* g){
         doorList.push_back(g);
 }
-
+/**
+ *    @brief collision manager  add switch
+ */
 void CollisionManager::addSwitch(GameObject* g){
         switchList.push_back(g);
 }
-
+/**
+ *    @brief collision manager  add chair
+ */
 void CollisionManager::addChair(GameObject* g){
         chairList.push_back(g);
 }
-
+/**
+ *    @brief collision manager  add a finish point for the phase
+ */
 void CollisionManager::addFinishPoint(GameObject* g){
         finishPointList.push_back(g);
 }
-
+/**
+ *    @brief collision manager  and verify if the personage have a collision with the walls
+ *    @return bool
+ */
 bool CollisionManager::verifyCollisionWithWalls(GameObject* g1){
         for(GameObject * wall : wallList) {
                 if(verifyCollision(wall, g1)) {
@@ -62,7 +92,10 @@ bool CollisionManager::verifyCollisionWithWalls(GameObject* g1){
         }
         return false;
 }
-
+/**
+ *    @brief collision manager  and verify if the personage have a collision with the walls and chairs
+ *    @return bool
+ */
 bool CollisionManager::verifyCollisionWithWallsAndChairs(GameObject* g1){
         for(GameObject * wall : wallList) {
                 if(verifyCollision(wall, g1)) {
@@ -81,7 +114,10 @@ bool CollisionManager::verifyCollisionWithWallsAndChairs(GameObject* g1){
         }
         return false;
 }
-
+/**
+ *    @brief collision manager  verify the collisions with chairs
+ *    @return ?
+ */
 std::pair<std::string, GameObject *> CollisionManager::verifyCollisionWithChairs(GameObject* g1){
         std::string collision = "";
         for(GameObject * chair : chairList) {
@@ -91,7 +127,10 @@ std::pair<std::string, GameObject *> CollisionManager::verifyCollisionWithChairs
         }
         return std::pair<std::string, GameObject*>(collision, NULL);
 }
-
+/**
+ *    @brief collision manager  verify the collisions with  other chairs
+ *    @return boll
+ */
 bool CollisionManager::verifyCollisionWithOtherChairs(GameObject* g){
   for(GameObject * chair : chairList) {
       if(chair != g){
@@ -103,7 +142,10 @@ bool CollisionManager::verifyCollisionWithOtherChairs(GameObject* g){
   return false;
 }
 
-
+/**
+ *    @brief collision manager  verify the collisions wth guards body
+ *    @return bool
+ */
 bool CollisionManager::verifyCollisionWithGuardsBody(GameObject* g){
         for(GameObject * enemy : guardList) {
                 if(verifyCollision(enemy, g)) {
@@ -112,7 +154,10 @@ bool CollisionManager::verifyCollisionWithGuardsBody(GameObject* g){
         }
         return false;
 }
-
+/**
+ *    @brief collision manager  verify the collisions wth guards 
+ *    @return bool
+ */
 
 bool CollisionManager::verifyCollisionWithGuards(GameObject* g1){
     bool status = false;
@@ -125,13 +170,19 @@ bool CollisionManager::verifyCollisionWithGuards(GameObject* g1){
             return status;
         }
 }
-
+/**
+ *    @brief collision manager  verify the collisions wth cameras( if personage were caught)
+ *    @return bool
+ */
 bool CollisionManager::verifyCollisionWithCameras(GameObject* g1){
     bool status = false;
     status = verifyCollisionWithFieldsOfVision(g1, camerasVision);
     return status;
 }
-
+/**
+ *    @brief collision manager  verify if the personage where in the plane vision of the guards or cameras
+ *    @return bool
+ */
 bool CollisionManager::verifyCollisionWithFieldsOfVision(GameObject* g1, std::vector<FieldOfVision*> fields){
     bool isVisible = true;
     for(FieldOfVision* field : fields) {
@@ -164,6 +215,10 @@ bool CollisionManager::verifyCollisionWithFieldsOfVision(GameObject* g1, std::ve
     }
     return false;
 }
+/**
+ *    @brief collision manager  and verify the interection with the switches
+ *    @return null
+ */
 GameObject* CollisionManager::verifyCollisionWithSwitches(GameObject* g1){
         for(GameObject * doorSwitch : switchList) {
                 if(verifyCollision(doorSwitch, g1)) {
@@ -172,7 +227,10 @@ GameObject* CollisionManager::verifyCollisionWithSwitches(GameObject* g1){
         }
         return NULL;
 }
-
+/**
+ *    @brief collision manager  and verify the interection with the camera switches
+ *    @return null
+ */
 GameObject* CollisionManager::verifyCollisionWithCameraSwitches(GameObject* g){
     for(GameObject * cameraSwitch : cameraSwitchList) {
             if(verifyCollision(cameraSwitch, g)) {
@@ -182,7 +240,10 @@ GameObject* CollisionManager::verifyCollisionWithCameraSwitches(GameObject* g){
     return NULL;
 
 }
-
+/**
+ *    @brief collision manager  and verify the interection with the cameras levers
+ *    @return null
+ */
 GameObject* CollisionManager::verifyCollisionWithCameraLevers(GameObject* g){
     for(GameObject * lever : cameraLeverList) {
             if(verifyCollision(lever, g)) {
@@ -191,7 +252,10 @@ GameObject* CollisionManager::verifyCollisionWithCameraLevers(GameObject* g){
     }
     return NULL;
 }
-
+/**
+ *    @brief collision manager  and verify the interection with the papers
+ *    @return null
+ */
 GameObject* CollisionManager::verifyCollisionWithPapers(GameObject* g1){
         for(GameObject * paper : paperList) {
                 if(verifyCollision(paper, g1)) {
@@ -200,7 +264,10 @@ GameObject* CollisionManager::verifyCollisionWithPapers(GameObject* g1){
         }
         return NULL;
 }
-
+/**
+ *    @brief collision manager  and verify the finishs points
+ *    @return null
+ */
 GameObject* CollisionManager::verifyCollisionWithFinishPoints(GameObject* g1){
     for(GameObject * finishPoint : finishPointList) {
             if(verifyCollision(finishPoint, g1)) {
@@ -209,7 +276,10 @@ GameObject* CollisionManager::verifyCollisionWithFinishPoints(GameObject* g1){
     }
     return NULL;
 }
-
+/**
+ *    @brief collision manager  calculate the distance between the things
+ *    @return double sqrt
+ */
 
 double CollisionManager::calculateDistance(std::pair<double,double> center, std::pair<double,double> lineCenter){
         return sqrt(((center.first-lineCenter.first)*
@@ -217,6 +287,10 @@ double CollisionManager::calculateDistance(std::pair<double,double> center, std:
                     ((center.second-lineCenter.second)*
                      (center.second-lineCenter.second)));
 }
+/**
+ *    @brief reset: walllist,guard,list,paperlist,doorlist,swithclist,chairlist,
+ *                  guardsvision,camerasvision,cameralerverlist,and cameraswitchlever
+ */
 void CollisionManager::resetLists(){
         wallList.clear();
         guardList.clear();
@@ -229,7 +303,10 @@ void CollisionManager::resetLists(){
         cameraLeverList.clear();
         cameraSwitchList.clear();
 }
-
+/**
+ *    @brief collision manager  and verify if the personage have a collision 
+ *    @return bool
+ */
 bool CollisionManager::verifyCollision( GameObject* g1, GameObject* g2){
         //The sides of the rectangles
         int leftA, rightA, topA, bottomA; //declarating variables
@@ -262,6 +339,10 @@ bool CollisionManager::verifyCollision( GameObject* g1, GameObject* g2){
         //If none of the sides from A are outside B
         return true;
 }
+/**
+ *    @brief collision manager  and verify if the rectangle game have a collision with the reference line
+ *    @return bool
+ */
 bool CollisionManager::verifyRectangleCollisionWithLine(GameObject* g, std::pair<int, int> a, std::pair<int, int> b){
         std::pair<std::pair<int, int>, std::pair<int, int> > top;
         std::pair<std::pair<int, int>, std::pair<int, int> > right;
@@ -294,20 +375,29 @@ bool CollisionManager::verifyRectangleCollisionWithLine(GameObject* g, std::pair
         if(verifyLineCollisionWithLine(bottom.first,bottom.second,a,b)) {return true; }
         return false;
 }
-
+/**
+ *    @brief collision manager  and verify  the collisions lines
+ *    @return int
+ */
 bool CollisionManager::verifyLineCollisionWithLine(std::pair<int, int> a, std::pair<int, int> b, std::pair<int, int> c, std::pair<int, int> d){
         return (CCW(a,b,c)*CCW(a,b,d)<0 && CCW(c,d,b)*CCW(c,d,a)<0);
 }
-
+/**
+ *    @brief collision manager  and verify the time when happens the collision
+ *    @return int
+ */
 double CollisionManager::CCW(std::pair<int, int> a, std::pair<int, int> b, std::pair<int, int> c){
         return (b.first-a.first)*(c.second-a.second) - (b.second-a.second)*(c.first-a.first);
 }
 
-
+/**
+ *    @brief collision manager  and verify if the personage have a collision with the chairs
+ *    @return string
+ */
 std::string CollisionManager::verifyCollisionChair(GameObject* g1, GameObject* g2){
         //The sides of the rectangles
-        int leftA, rightA, topA, bottomA; // declareting varibles
-        int leftB, rightB, topB, bottomB;// declareting varibles
+        int leftA, rightA, topA, bottomA;  // declareting varibles
+        int leftB, rightB, topB, bottomB; // declareting varibles
 
         //Calculate the sides of rect A
         leftA = g1->getPositionX();
