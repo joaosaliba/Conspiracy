@@ -1,4 +1,18 @@
+/**
+ *   @file choice.cpp
+ *    @brief Manage the chair in the game.
+ *    @copyright  GNU GENERAL PUBLIC LICENSE.
+ */
 #include "choice.hpp"
+/**
+ *    @brief Choice object constructor.
+ *    @param[in] positionX it sets the x coordinate of the object.
+ *    @param[in] positionY it sets the y coordinate of the object.
+ *    @param[in] width it sets the width dimension of the object.
+ *    @param[in] height it sets the height dimension of the object.
+ *    @param[in] objectName set the name of the object
+ *    
+ */
 
 Choice::Choice(std::string objectName, double positionX, double positionY,
                                      int width, int height, std::string title, int sizeTitle) : GameObject(objectName,
@@ -16,8 +30,16 @@ Choice::Choice(std::string objectName, double positionX, double positionY,
     rectangle = new Rectangle("Rectangle", positionX, positionY, width, height, true, color);
 }
 
-Choice::~Choice(){}
+/**
+ *    @brief Choice object destructor.
+ */
+Choice::~Choice() {
 
+}
+/**
+*    @brief update the choice  during the time.
+*    @param[in] timeElapsed its about the time
+*/
 void Choice::update(double timeElapsed){
     if(chosen && unlock){
         rectangle->setEnabled(false);
@@ -27,7 +49,10 @@ void Choice::update(double timeElapsed){
     rectangle->update(timeElapsed);
 
 }
-
+/** 
+ *   @brief draws the animation of the chair according to its position
+ *   @return void
+ */
 void Choice::draw(){
     INFO("TEXT DRAW");
     sprite->draw(getPositionX(), getPositionY());
@@ -38,26 +63,41 @@ void Choice::draw(){
     rectangle->draw();
 }
 
+/** 
+ *   @brief Set a color for the text button
+ */
 void Choice::setTextColor(Color * newTextColor){
     button->setTextColor(newTextColor);
 }
-
+/** 
+ *   @brief Set a back ground color for the button
+ */
 void Choice::setBackgroundColor(Color * newBackgroundColor){
     button->setTextColor(newBackgroundColor);
 }
-
+/** 
+ *   @brief Set a text for the choice button
+ *   @return button->getText();
+ */
 Text * Choice::getText(){
     return button->getText();
 }
-
+/** 
+ *   @brief Set a chosen for the choice
+ */
 void Choice::setChosen(bool isChosen){
   chosen = isChosen;
 }
-
+/** 
+ *   @brief Set if the choice are unlock
+ */
 void Choice::setUnlock(bool isUnlock){
     unlock = isUnlock;
 }
-
+/** 
+ *   @brief get the actual situation for the choice
+ *   @return unlock
+ */
 bool Choice::getUnlock(){
     return unlock;
 }
