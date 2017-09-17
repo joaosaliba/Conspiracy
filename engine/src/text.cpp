@@ -2,36 +2,24 @@
 #include "log.h"
 #include "engine.hpp"
 #include "text_manager.hpp"
-/** text class responable for  rendering text in display */
+
 using namespace engine;
 
-/** construtor method of  text
- *@param text text itself
- *@paramfontpath  path for the font 
- * @param size  size of text 
- * @param high quality of text 
- * @param background background color. 
- * @param  text_color  color of the text 
- * @return text object
-*/ 
 Text::Text( std::string  newText, std::string new_font_path, int new_size, bool is_high_quality, Color *new_back_ground, Color *new_text_color){
-    text = new_text;
-    fontPath = new_font_path;
-    size = new_size;
-    font = NULL;
-    high_1uality = is_high_quality;
-    background = new_background;
-    text_color = new_textColor;
+    text = new_text;/** text itself*/
+    fontPath = new_font_path;/** fontPath font path*/
+    size = new_size;/** size of text */
+    font = NULL;/** font to the  text*/ 
+    high_1uality = is_high_quality;/** high_1uality quality level of the text*/
+    background = new_background;/** background form the text*/
+    text_color = new_textColor;/** text_color color which text we display*/
     init();
 }
 
-/** set text texture 
-*@param  text object wich store text informations  
-*/
 
 void Text::init(){
 
-    if (fontPath == ""){
+    if (fontPath == ""){/** fontPath font path,  exit if  which  doen't exist*/ 
         WARN("Invalid path for font!");
         exit(-1);
     }
@@ -42,34 +30,34 @@ void Text::init(){
     SDL_Color bg_color = {background->r, background->g, background->b, background->a};
 
     SDLSurface * surface = NULL;
-
-    if (highQuality && bg_color.a == 0x00){
+    /** if the text is in high quality and align render another else move to next clause */ 
+    if (highQuality && bg_color.a == 0x00){ /** render the text since is in high quality and transparent */ 
         surface = TTF_RenderText_Blended(
             font, text.c_str(), color
         );
     }
-    else if (high_quality){
+    else if (high_quality){/** render the text since it's in high quality and isn't transparent   or move to another clause*/
         surface = TTF_RenderText_Shaded(
             font, text.c_str(), color, bg_color
         );
     }
-    else{
+    else{/** render the text solid since another clauses is false*/
         surface = TTF_RenderText_Solid(
             font, text.c_str(), color
         );
     }
 
-    if(surface == NULL){
+    if(surface == NULL){/** if the text doen't have surface  exit the program*/
         exit(-1);
     }
 
-    if(texture != NULL){
+    if(texture != NULL){ /**  destroy the texture to text since present or move to another clause*/
 		SDL_DestroyTexture(texture);
 	}
 
     texture = SDL_CreateTextureFromSurface(WindowManager::getGameCanvas(), surface);
 
-    if (texture == NULL){
+    if (texture == NULL){ /** doesn't destroy since it's not needed*/
         exit(-1);
     }
 
@@ -79,40 +67,32 @@ void Text::init(){
     SDL_FreeSurface(surface);
 }
 
-/** render the text 
-* @param text object which store text infomration. 
-* @param text object.
-*/
-
 void Text::shutdown(){
     INFO("Shutdown Text");
 
     SDL_DestroyTexture(texture);
-    texture = NULL;
+    texture = NULL; /** text texture*/
 
-    font = NULL;
+    font = NULL; /** font to the  text*/ 
 
 }
-/** render text 
-* @param x , y which is  the position in  x axis and y axis. 
-*/
+
 void Text::draw(int x, int y){
-    SDL_Rect render_quad = {
-        x,  y, width, height
+	 /** x text position in x axis, y position in y axis,  width and heigt to text which this names repesctively 
+	 *width and heigh*/ 
+    SDL_Rect render_quad = { x,y,width, heigh
     };
 
     SDL_RenderCopy(WindowManager::getGameCanvas(), texture, NULL, &render_quad);
 }
 
-/** set atibute background*/ 
+
 void Text::setBackground(Color * newBackground){
-    background = newBackground;
+    background = newBackground;/** background text background*/
     init();
 }
-/** set textcolor  atribute 
-* @param Newtextcolor whihc is the text color. 
-*/
+
 void Text::setTextColor(Color * newTextColor){
-    textColor = newTextColor;
+    textColor = newTextColor;/** textcolor text color*/
     init();
 }
