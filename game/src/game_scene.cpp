@@ -1,3 +1,8 @@
+/**
+    @file game_scene.cpp
+    @brief Manages the game scenes.
+    @copyright MIT License.
+*/
 #include "game_scene.hpp"
 #include "player.hpp"
 #include "scene.hpp"
@@ -21,12 +26,25 @@
 
 using namespace engine;
 
+/**
+    @brief Game scene constructor.
+    @param[in] id is the scene identificator.
+    @param[in] newTiledFile file that manages the game scene according to the game level.
+*/
+
 GameScene::GameScene(int id, std::string newTiledFile) : Scene(id){
     tiledFile = newTiledFile;
     skipTimer = new Timer();
     stageTimer = new Timer();
     actualPapers = 0;
 }
+
+/**
+    @brief Game scene constructor.
+    @param[in] id is the scene identificator.
+    @param[in] newTiledFile file that manages the game scene according to the game level.
+    @param[in] audioFile file whith the game music.
+*/
 
 GameScene::GameScene(int id, std::string newTiledFile, std::string audioFile) : Scene(id){
     if(audioFile == "assets/sounds/TEMA3.wav"){
@@ -39,11 +57,20 @@ GameScene::GameScene(int id, std::string newTiledFile, std::string audioFile) : 
     stageTimer = new Timer();
     actualPapers = 0;
 }
+
+/**
+    @brief It will renderize the game object.
+*/
+
 void GameScene::draw(){
         for(auto gameObject : gameObjectsList) {
                 (*gameObject).draw();
         }
 }
+
+/**
+    @brief Dismantle player game object.
+*/
 
 void GameScene::update(double timeElapsed){
     if(!player->isDead()){
@@ -55,6 +82,10 @@ void GameScene::update(double timeElapsed){
     }
     verifyWinOrLose();
 }
+
+/**
+    @brief It vefifies if the player has won or lost the game.
+*/
 
 void GameScene::verifyWinOrLose(){
         bool allPapersEdited = true;
@@ -103,6 +134,10 @@ void GameScene::verifyWinOrLose(){
     }
 }
 
+/**
+    @brief It starts the game collider.
+*/
+
 void GameScene::initializeColliders(){
     for(auto gameObject: gameObjectsList){
         if(typeid(*gameObject) == typeid(Wall)){
@@ -131,6 +166,10 @@ void GameScene::initializeColliders(){
     }
 }
 
+/**
+    @brief Loads the game scene.
+*/
+
 void GameScene::load(){
     background_music->play(-1);
     aliensInPosition = false;
@@ -154,6 +193,10 @@ void GameScene::load(){
 
 }
 
+/**
+    @brief It empties the game scene.
+*/
+
 void GameScene::unload(){
     CollisionManager::instance.resetLists();
     actualPapers = 0;
@@ -163,9 +206,21 @@ void GameScene::unload(){
     gameObjectsList.clear();
 }
 
+/**
+    @brief Creates tables.
+*/
+
 void GameScene::createTables(){}
 
+/**
+    @brief Creates chairs.
+*/
+
 void GameScene::createChairs(){}
+
+/**
+    @brief It defines the game borders.
+*/
 
 void GameScene::createGameBorders(){
         for(int i=0; i<=960; i+=5) {
@@ -178,6 +233,10 @@ void GameScene::createGameBorders(){
         }
 }
 
+/**
+    @brief Loads ground image.
+*/
+
 void GameScene::createGround(){
         for(int i=0; i<=960; i+=20) {
                 for(int j=0; j<=600; j+=20) {
@@ -185,6 +244,10 @@ void GameScene::createGround(){
                 }
         }
 }
+
+/**
+    @brief Builds the game scene according to the game level.
+*/
 
 void GameScene::createCenary(){
     std::ifstream tile_file;

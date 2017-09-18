@@ -36,7 +36,7 @@ void Varginha::update(double time_elapsed) {
     if((inc_x == 0 && inc_y == 0) || (!turnOff && !is_selected)) {
         if(idleAnimationNumber) {
           animator->setInterval("idle_right");
-        }else { 
+        }else {
           animator->setInterval("idle_left");
         }
     }
@@ -115,7 +115,7 @@ void Varginha::setDefault() {
     setVisible(true);
     block_movement = false;
 }
- 
+
 void Varginha::draw() {
     INFO("Varginha DRAW");
     animator->draw(getPositionX()-15, getPositionY()-25);
