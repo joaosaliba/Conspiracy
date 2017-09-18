@@ -115,7 +115,7 @@ void Varginha::setDefault() {
     setVisible(true);
     block_movement = false;
 }
- 
+
 void Varginha::draw() {
     INFO("Varginha DRAW");
     animator->draw(getPositionX()-15, getPositionY()-25);

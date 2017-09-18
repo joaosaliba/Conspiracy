@@ -8,7 +8,9 @@ Alien::Alien(std::string objectName, double position_x, double position_y,
     if(objectName.compare("assets/sprites/bilu_sheet.png") == 0) {
         alienName = "Bilu";
     }else if(objectName.compare("assets/sprites/varginha_sheet.png") == 0) {
-        alienName = "Varginha"; 
+      
+        alienName = "Varginha";
+
     }else if(objectName.compare("assets/sprites/etemer_sheet.png") == 0) {
         alienName = "Etemer";
     }
