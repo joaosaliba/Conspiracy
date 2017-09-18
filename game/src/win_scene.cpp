@@ -72,12 +72,12 @@ void WinScene::selectAction(){
         if(InputManager::instance.isKeyTriggered(InputManager::KeyPress::KEY_PRESS_ENTER)) {
                 switch(selectButton) {
                 case 1:
-                        if(getSceneManager()->getBeforeSceneId() == 1){
+                        if(getSceneManager()->get_before_scene_id() == 1){
                             getSceneManager()->loadScene(25);
-                        }else if(getSceneManager()->getBeforeSceneId() == 2){
+                        }else if(getSceneManager()->get_before_scene_id() == 2){
                             getSceneManager()->loadScene(23);
                         }else{
-                            getSceneManager()->loadScene(getSceneManager()->getBeforeSceneId()+1);
+                            getSceneManager()->loadScene(getSceneManager()->get_before_scene_id()+1);
                         }
 
                         break;

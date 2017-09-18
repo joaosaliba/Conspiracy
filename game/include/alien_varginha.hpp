@@ -16,7 +16,7 @@ protected:
     void specialAction();
 private:
     void verifyTurn();
-    bool isInvisible;
+    bool is_invisible;
     bool turnOff;
     Timer * timerTurn;
 };

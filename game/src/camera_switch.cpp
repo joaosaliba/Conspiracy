@@ -2,13 +2,13 @@
 
 using namespace engine;
 
-#define file_name "assets/sprites/cenary/switch_cameras(14X16).png"
-#define  width 14
-#define  heigh 16
-#define adjustx 10
-CameraSwitch::CameraSwitch(double position_x, double position_y, std::string direction) : GameObject(filename,position_x - adjust_x,position_y - adjust_x,
-                                                                     width+adjust_x*2, heigh+adjust_x*2){
-    animator = new Animation(file_name, 1, 2, 0.1);
+#define FILENAME "assets/sprites/cenary/switch_cameras(14X16).png"
+#define WIDTH 14
+#define HEIGHT 16
+#define ADJUSTX 10
+CameraSwitch::CameraSwitch(double positionX, double positionY, std::string direction) : GameObject(FILENAME,positionX - ADJUSTX,positionY - ADJUSTX,
+                                                                     WIDTH+ADJUSTX*2, HEIGHT+ADJUSTX*2){
+    animator = new Animation(FILENAME, 1, 2, 0.1);
     switchEfffect = new Audio("assets/sounds/TURNOFFCAMERA.wav", "EFFECT", 128);
 
     animator->addAction("on", 0,0);
@@ -19,12 +19,12 @@ CameraSwitch::CameraSwitch(double position_x, double position_y, std::string dir
 }
 
 void CameraSwitch::draw(){
-    animator->draw_instant(getPositionX()+adjust_x, getPositionY()+adjust_x);
+    animator->draw_instant(getPositionX()+ADJUSTX, getPositionY()+ADJUSTX);
     animator->draw_collider(getPositionX(), getPositionY(), getWidth(), getHeight());
 }
 
-void CameraSwitch::update(double time_elapsed){
-    time_elapsed = time_elapsed;
+void CameraSwitch::update(double timeElapsed){
+    timeElapsed = timeElapsed;
     animator->update();
 }
 

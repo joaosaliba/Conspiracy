@@ -75,7 +75,7 @@ void LoseScene::selectAction(){
         if(InputManager::instance.isKeyTriggered(InputManager::KeyPress::KEY_PRESS_ENTER)) {
                 switch(selectButton) {
                 case 1:
-                        getSceneManager()->loadScene(getSceneManager()->getBeforeSceneId());
+                        getSceneManager()->loadScene(getSceneManager()->get_before_scene_id());
                         break;
                 case 2:
                         getSceneManager()->loadScene(0);

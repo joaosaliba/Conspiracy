@@ -13,9 +13,9 @@ using namespace engine;
 
 class Alien: public GameObject{
 public:
-    Alien(std::string objectName, double positionX, double positionY, int width, int height);
+    Alien(std::string objectName, double position_x, double position_y, int width, int height);
     ~Alien();
-    virtual void update(double timeElapsed) = 0;
+    virtual void update(double time_elapsed) = 0;
     void draw();
     void init();
     Animation * getAnimation();
@@ -24,14 +24,14 @@ public:
     bool isInPosition();
 
 protected:
-    void walkInX(double & incX);
-    void walkInY(double & incY, double incX);
+    void walkInX(double & inc_x);
+    void walkInY(double & inc_y, double inc_x);
     Animation* animator;
     int idleAnimationNumber;
     std::string alienName;
-    bool blockMovement;
-    bool isSelected;
-    bool inPosition;
+    bool block_movement;
+    bool is_selected;
+    bool in_position;
     Audio *movement_sound_effect;
 };
 

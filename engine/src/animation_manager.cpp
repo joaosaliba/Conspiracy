@@ -3,12 +3,12 @@
 using namespace engine;
 
 AnimationManager AnimationManager::instance;
-void AnimationManager::add_animation_quad(Animation_quad* new_quad){
-    animationQuads.push_back(new_quad);
+void AnimationManager::add_animation_quad(AnimationQuad* newQuad){
+    animationQuads.push_back(newQuad);
 }
 
-void AnimationManager::add_collider(SDL_Rect* new_quad){
-    colliderRects.push_back(new_quad);
+void AnimationManager::add_collider(SDL_Rect* newQuad){
+    colliderRects.push_back(newQuad);
 }
 void AnimationManager::addFieldOfVision(FieldOfVision* field){
     fields.push_back(field);
@@ -17,13 +17,13 @@ void AnimationManager::addFieldOfVision(FieldOfVision* field){
 void AnimationManager::addGuardVision(FieldOfVision* field){
     guardsVision.push_back(field);
 }
-void AnimationManager::addProgressBar(ProgressBar* new_progress_bar){
-    progressBars.push_back(new ProgressBar);
+void AnimationManager::addProgressBar(ProgressBar* newProgressBar){
+    progressBars.push_back(newProgressBar);
 }
 
 void AnimationManager::clearAnimationQuads(){
-    for(auto AnimationQuad: animation_quads){
-        free(AnimationQuad);
+    for(auto animationQuad: animationQuads){
+        free(animationQuad);
     }
     for(auto collider: colliderRects){
         free(collider);
@@ -39,14 +39,14 @@ void AnimationManager::clearAnimationQuads(){
 
 void AnimationManager::draw_quads(){
     if(InputManager::instance.isKeyTriggered(InputManager::KEY_PRESS_L)){
-        if(is_active){
-            is_active = false;
+        if(isActive){
+            isActive = false;
         }else{
-            is_active = true;
+            isActive = true;
         }
     }
-    std::sort(animation_quads.begin(), animation_quads.end(),[](const AnimationQuad* lhs, const AnimationQuad* rhs){ return lhs->y < rhs->y; });
-    for(AnimationQuad * quad : animation_quads) {
+    std::sort(animationQuads.begin(), animationQuads.end(),[](const AnimationQuad* lhs, const AnimationQuad* rhs){ return lhs->y < rhs->y; });
+    for(AnimationQuad * quad : animationQuads) {
         SDL_RenderCopy(WindowManager::getGameCanvas(), quad->getTexture(), quad->getClipRect(), quad->getRenderQuad());
     }
     if(isActive){

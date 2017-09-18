@@ -23,7 +23,7 @@ TTF_Font* TextManager::loadFont(std::string path, int size){
 
 void TextManager::unload(){
   WARN("Dealocate fonts.");
-  for(auto font: list_font){
+  for(auto font: listFont){
          TTF_CloseFont(font.second);
   }
 

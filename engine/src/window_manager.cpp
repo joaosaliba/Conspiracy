@@ -1,24 +1,24 @@
 #include "window_manager.hpp"
 using namespace engine;
 
-SDL_Window *gameWindow;
-SDL_Renderer *gameCanvas;
+SDL_Window *game_window;
+SDL_Renderer *game_canvas;
 
-bool WindowManager::createWindow(std::string windowTitle, std::pair<int, int> windowSize){
+bool WindowManager::createWindow(std::string window_title, std::pair<int, int> window_size) {
     INFO("Create window");
-    gameWindow = SDL_CreateWindow(windowTitle.c_str(), SDL_WINDOWPOS_CENTERED,
-    SDL_WINDOWPOS_CENTERED, windowSize.first,
-    windowSize.second, SDL_WINDOW_SHOWN);
+    game_window = SDL_CreateWindow(window_title.c_str(), SDL_WINDOWPOS_CENTERED,
+    SDL_WINDOWPOS_CENTERED, window_size.first,
+    window_size.second, SDL_WINDOW_SHOWN);
 
-    if(gameWindow == NULL){
+    if(game_window == NULL) {
         return false;
     }
 
     INFO("Create canvas");
-    game_canvas = SDL_CreateRenderer(gameWindow, -1,
+    game_canvas = SDL_CreateRenderer(game_window, -1,
         SDL_RENDERER_ACCELERATED);
 
-        if(game_canvas == NULL){
+        if(game_canvas == NULL) {
             return false;
         }
 
@@ -30,10 +30,10 @@ bool WindowManager::createWindow(std::string windowTitle, std::pair<int, int> wi
     }
 
 
-    bool WindowManager::destroyWindow(){
+    bool WindowManager::destroyWindow() {
         INFO("Destroying canvas");
         SDL_DestroyRenderer(game_canvas);
-        gameCanvas = NULL;
+        game_canvas = NULL;
 
         INFO("Destroying window");
         SDL_DestroyWindow(game_window);
@@ -42,25 +42,25 @@ bool WindowManager::createWindow(std::string windowTitle, std::pair<int, int> wi
         return true;
     }
 
-    SDL_Window* WindowManager::GetGameWindow(){
+    SDL_Window* WindowManager::GetGameWindow() {
         return game_window;
     }
 
 
-    SDL_Renderer* WindowManager::getGameCanvas(){
+    SDL_Renderer* WindowManager::getGameCanvas() {
         return game_canvas;
     }
-    
-    void WindowManager::setImageIcon(){
+
+    void WindowManager::setImageIcon() {
       // TODO Change image icon.
       SDL_Surface * image = NULL;
       image = IMG_Load(std::string("assets/sprites/alien.png").c_str());
 
-      if(image == NULL){
+      if(image == NULL) {
             exit(-1);
       }
 
       SDL_SetWindowIcon(game_window, image);
       SDL_FreeSurface(image);
 
-    }
+}

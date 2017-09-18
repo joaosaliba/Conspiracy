@@ -7,24 +7,24 @@
 #define WIDTH 19
 #define HEIGHT 22
 
-Bilu::Bilu(double position_x, double position_y) : Alien(FILENAME, position_x, position_y, WIDTH, HEIGHT){
+Bilu::Bilu(double position_x, double position_y) : Alien(FILENAME, position_x, position_y, WIDTH, HEIGHT) {
         animator->addAction("special_right",14,17);
         animator->addAction("special_left",10,13);
 
         hacking = false;
         editing = false;
-        lastAction = false;
-        isSelected = false;
-        inPosition = false;
+        last_action = false;
+        is_selected = false;
+        in_position = false;
 }
 
-void Bilu::update(double timeElapsed){
-        inPosition = false;
+void Bilu::update(double time_elapsed) {
+        in_position = false;
         animator->setTotalTime(0.3);
         auto inc_y = 0.15*time_elapsed;
         auto inc_x = 0.15*time_elapsed;
 
-        if(!blockMovement && isSelected) {
+        if(!block_movement && is_selected) {
                 walkInX(inc_x);
                 walkInY(inc_y, inc_x);
         }
@@ -32,7 +32,7 @@ void Bilu::update(double timeElapsed){
         if(inc_x == 0 && inc_y == 0) {
                 if(idleAnimationNumber) {
                         animator->setInterval("idle_right");
-                }else{
+                }else {
                         animator->setInterval("idle_left");
                 }
         }
@@ -42,27 +42,27 @@ void Bilu::update(double timeElapsed){
                 setEnabled(false);
         }
         FinishPoint* finishPoint = (FinishPoint*)CollisionManager::instance.verifyCollisionWithFinishPoints(this);
-        if(finishPoint != NULL){
+        if(finishPoint != NULL) {
             if(finishPoint->getAlienNames().find("B") != std::string::npos){
-                inPosition = true;
+                in_position = true;
             }
         }
 
         animator->update();
 }
 
-void Bilu::specialAction(){
+void Bilu::specialAction() {
         std::pair<int, int> interval;
 
         GameObject* paper = CollisionManager::instance.verifyCollisionWithPapers(this);
         GameObject* doorSwitch = CollisionManager::instance.verifyCollisionWithSwitches(this);
 
-        if(InputManager::instance.isKeyPressed(InputManager::KEY_PRESS_SPACE) && isSelected) {
+        if(InputManager::instance.isKeyPressed(InputManager::KEY_PRESS_SPACE) && is_selected) {
                 // Paper interaction
                 if(paper != NULL) {
                         if(! editing) {
                                 editing = true;
-                                blockMovement = true;
+                                block_movement = true;
                                 ((Paper*)(paper))->playEffect();
                         }
                 }
@@ -71,21 +71,21 @@ void Bilu::specialAction(){
                 if(doorSwitch != NULL) {
                         if(!hacking) {
                                 hacking = true;
-                                blockMovement = true;
+                                block_movement = true;
                                 ((DoorSwitch*)(doorSwitch))->playEffect();
                         }
                 }
 
-        }else if(InputManager::instance.isKeyPressed(InputManager::KEY_PRESS_ESC) && isSelected) {
+        }else if(InputManager::instance.isKeyPressed(InputManager::KEY_PRESS_ESC) && is_selected) {
                 if(hacking) {
                         hacking = false;
-                        blockMovement = false;
+                        block_movement = false;
                         ((DoorSwitch*)(doorSwitch))->stopEffect();
                         ((DoorSwitch*)(doorSwitch))->stopAnimation();
                         ((DoorSwitch*)(doorSwitch))->resetHackingProgress();
                 }else if(editing) {
                         editing = false;
-                        blockMovement = false;
+                        block_movement = false;
                         ((Paper*)(paper))->stopEffect();
                         ((Paper*)(paper))->stopAnimation();
                         ((Paper*)(paper))->resetEditingProgress();
@@ -101,7 +101,7 @@ void Bilu::specialAction(){
                         ((DoorSwitch*)(doorSwitch))->stopEffect();
                         ((DoorSwitch*)(doorSwitch))->resetHackingProgress();
                         Alien::animator->setInterval("idle");
-                        blockMovement = false;
+                        block_movement = false;
                 }
         }else if(editing) {
                 ((Paper*)(paper))->animate();
@@ -112,22 +112,22 @@ void Bilu::specialAction(){
                         //((Paper*)(paper))->stopEffect();
                         ((Paper*)(paper))->resetEditingProgress();
                         Alien::animator->setInterval("idle");
-                        blockMovement = false;
+                        block_movement = false;
                 }
         }
-        lastAction = hacking;
+        last_action = hacking;
 }
 
-void Bilu::draw(){
+void Bilu::draw() {
         INFO("Bilu DRAW");
         animator->draw(getPositionX()-11, getPositionY()-20);
         animator->draw_collider(getPositionX(), getPositionY(), getWidth(), getHeight());
 }
 
-void Bilu::setSpecialActionAnimator(){
+void Bilu::setSpecialActionAnimator() {
         if(idleAnimationNumber == 5) {
                 animator->setInterval("special_right");
-        }else{
+        }else {
                 animator->setInterval("special_left");
         }
         animator->setTotalTime(0.6);

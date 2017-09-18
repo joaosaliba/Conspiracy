@@ -11,7 +11,7 @@ using namespace engine;
 
     void Sprite::init(){
         INFO("Init sprite.");
-        SDLSurface * image = NULL;
+        SDL_Surface * image = NULL;
         image = IMG_Load(directory.c_str());
 
         if(image == NULL){
@@ -51,4 +51,4 @@ using namespace engine;
         renderQuad = {axis.first, axis.second, drawWidth, drawHeight };
 
         SDL_RenderCopy(WindowManager::getGameCanvas(), texture, &clipRect, &renderQuad);
-    }
+}

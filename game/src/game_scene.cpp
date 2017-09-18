@@ -1,9 +1,3 @@
-/**
-    @file game_scene.cpp
-    @brief Manages the game scenes.
-    @copyright MIT License.
-*/
-
 #include "game_scene.hpp"
 #include "player.hpp"
 #include "scene.hpp"
@@ -27,28 +21,14 @@
 
 using namespace engine;
 
-
-/**
-    @brief Game scene constructor.
-    @param[in] id is the scene identificator.
-    @param[in] newTiledFile file that manages the game scene according to the game level.
-*/
-
-GameScene::GameScene(int id, std::string newTiledFile) : Scene(id) {
+GameScene::GameScene(int id, std::string newTiledFile) : Scene(id){
     tiledFile = newTiledFile;
     skipTimer = new Timer();
     stageTimer = new Timer();
     actualPapers = 0;
 }
 
-/**
-    @brief Game scene constructor.
-    @param[in] id is the scene identificator.
-    @param[in] newTiledFile file that manages the game scene according to the game level.
-    @param[in] audioFile file whith the game music.
-*/
-
-GameScene::GameScene(int id, std::string newTiledFile, std::string audioFile) : Scene(id) {
+GameScene::GameScene(int id, std::string newTiledFile, std::string audioFile) : Scene(id){
     if(audioFile == "assets/sounds/TEMA3.wav"){
         background_music = new Audio(audioFile, "MUSIC", 55);
     }else{
@@ -59,25 +39,16 @@ GameScene::GameScene(int id, std::string newTiledFile, std::string audioFile) : 
     stageTimer = new Timer();
     actualPapers = 0;
 }
-
-/**
-    @brief It will renderize the game object.
-*/
-
-void GameScene::draw() {
+void GameScene::draw(){
         for(auto gameObject : gameObjectsList) {
                 (*gameObject).draw();
         }
 }
 
-/**
-    @brief Dismantle player game object.
-*/
-
-void GameScene::update(double timeElapsed) {
-    if(!player->isDead()) {
+void GameScene::update(double timeElapsed){
+    if(!player->isDead()){
         for(auto gameObject : gameObjectsList) {
-                if(typeid(gameObject) != typeid(Player)) {
+                if(typeid(gameObject) != typeid(Player)){
                     (*gameObject).update(timeElapsed);
                 }
         }
@@ -85,11 +56,7 @@ void GameScene::update(double timeElapsed) {
     verifyWinOrLose();
 }
 
-/**
-    @brief It vefifies if the player has won or lost the game.
-*/
-
-void GameScene::verifyWinOrLose() {
+void GameScene::verifyWinOrLose(){
         bool allPapersEdited = true;
         std::vector<Guard *> guards;
         int countPapers = 0;
@@ -104,7 +71,7 @@ void GameScene::verifyWinOrLose() {
                         }
                 }
         }
-        if(countPapers >= actualPapers) {
+        if(countPapers >= actualPapers){
             player->updatePaperQuantity(countPapers);
             actualPapers = countPapers;
         }
@@ -119,16 +86,16 @@ void GameScene::verifyWinOrLose() {
           aliensInPosition = true;
       }
 
-    if(!player->isDead()) {
+    if(!player->isDead()){
         stageTimer->step();
     }
-    if(player->isDead()) {
-        if(stageTimer->elapsed_time() >= 2500) {
+    if(player->isDead()){
+        if(stageTimer->elapsed_time() >= 2500){
             getSceneManager()->loadScene(6);
         }
 
     }else if((allPapersEdited && aliensInPosition) || (InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_K) && skipTimer->total_elapsed_time() >= 500)){
-        if(getSceneManager()->getCurrentSceneId() == 5) {
+        if(getSceneManager()->get_current_scene_id() == 5){
             getSceneManager()->loadScene(9);
         }else{
             getSceneManager()->loadScene(7);
@@ -136,43 +103,35 @@ void GameScene::verifyWinOrLose() {
     }
 }
 
-/**
-    @brief It starts the game collider.
-*/
-
-void GameScene::initializeColliders() {
-    for(auto gameObject: gameObjectsList) {
-        if(typeid(*gameObject) == typeid(Wall)) {
+void GameScene::initializeColliders(){
+    for(auto gameObject: gameObjectsList){
+        if(typeid(*gameObject) == typeid(Wall)){
             CollisionManager::instance.addWall(gameObject);
-        }else if(typeid(*gameObject) == typeid(Guard)) {
+        }else if(typeid(*gameObject) == typeid(Guard)){
             CollisionManager::instance.addGuard(gameObject);
             CollisionManager::instance.addGuardFieldOfVision(((Guard*)gameObject)->getFieldOfVision());
-        }else if(typeid(*gameObject) == typeid(CameraSystem)) {
+        }else if(typeid(*gameObject) == typeid(CameraSystem)){
             CollisionManager::instance.addCameraFieldOfVision(((CameraSystem*)gameObject)->getCamera()->getFieldOfVision());
             CollisionManager::instance.addCameraSwitch(((CameraSystem*)gameObject)->getCameraSwitch());
             CollisionManager::instance.addCameraLever(((CameraSystem*)gameObject)->getCameraLever());
-        }else if(typeid(*gameObject) == typeid(PaperTable)) {
+        }else if(typeid(*gameObject) == typeid(PaperTable)){
             CollisionManager::instance.addPaper(((PaperTable*)(gameObject))->getPaper());
             CollisionManager::instance.addWall(((PaperTable*)(gameObject))->getTable());
-        }else if(typeid(*gameObject) == typeid(DoorSystem)) {
+        }else if(typeid(*gameObject) == typeid(DoorSystem)){
             CollisionManager::instance.addDoor(((DoorSystem*)(gameObject))->getDoor());
             CollisionManager::instance.addSwitch(((DoorSystem*)(gameObject))->getSwitch());
             CollisionManager::instance.addWall(((DoorSystem*)(gameObject))->getTable());
-        }else if(typeid(*gameObject) == typeid(Table)) {
+        }else if(typeid(*gameObject) == typeid(Table)){
             CollisionManager::instance.addWall(((Table*)(gameObject)));
         }else if(typeid(*gameObject) == typeid(Chair)) {
             CollisionManager::instance.addChair(gameObject);
-        }else if(typeid(*gameObject) == typeid(FinishPoint)) {
+        }else if(typeid(*gameObject) == typeid(FinishPoint)){
             CollisionManager::instance.addFinishPoint(gameObject);
         }
     }
 }
 
-/**
-    @brief Loads the game scene.
-*/
-
-void GameScene::load() {
+void GameScene::load(){
     background_music->play(-1);
     aliensInPosition = false;
     stageTimer->start();
@@ -195,11 +154,7 @@ void GameScene::load() {
 
 }
 
-/**
-    @brief It empties the game scene.
-*/
-
-void GameScene::unload() {
+void GameScene::unload(){
     CollisionManager::instance.resetLists();
     actualPapers = 0;
     for(GameObject* object: gameObjectsList){
@@ -208,25 +163,11 @@ void GameScene::unload() {
     gameObjectsList.clear();
 }
 
-/**
-    @brief Creates tables.
-*/
+void GameScene::createTables(){}
 
-void GameScene::createTables() {
-}
+void GameScene::createChairs(){}
 
-/**
-    @brief Creates chairs.
-*/
-
-void GameScene::createChairs() {
-}
-
-/**
-    @brief It defines the game borders.
-*/
-
-void GameScene::createGameBorders() {
+void GameScene::createGameBorders(){
         for(int i=0; i<=960; i+=5) {
                 gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", i, HEADER_SIZE + 0, 5, 20));
                 gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", i, HEADER_SIZE + 595, 5, 5));
@@ -237,11 +178,7 @@ void GameScene::createGameBorders() {
         }
 }
 
-/**
-    @brief Loads ground image.
-*/
-
-void GameScene::createGround() {
+void GameScene::createGround(){
         for(int i=0; i<=960; i+=20) {
                 for(int j=0; j<=600; j+=20) {
                         gameObjectsList.push_back(new Ground("assets/sprites/cenary/chao.png", i, HEADER_SIZE + j, 20, 20));
@@ -249,11 +186,7 @@ void GameScene::createGround() {
         }
 }
 
-/**
-    @brief Builds the game scene according to the game level.
-*/
-
-void GameScene::createCenary() {
+void GameScene::createCenary(){
     std::ifstream tile_file;
     tile_file.open(tiledFile);
     if(tile_file.is_open()) {
