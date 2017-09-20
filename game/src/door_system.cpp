@@ -5,6 +5,7 @@
  */
 #include "log.h"
 #include "door_system.hpp"
+#include <assert.h>
 
 /**
  *    @brief door_system object constructor.
@@ -13,7 +14,7 @@
  *    @param[in] width it sets the width dimension of the object.
  *    @param[in] height it sets the height dimension of the object.
  *    @param[in] objectName set the name of the object
- *    
+ *
  */
 
 DoorSystem::DoorSystem(std::pair<int,int> doorPosition,
@@ -38,6 +39,7 @@ DoorSystem::~DoorSystem() {
 *    @param[in] timeElapsed its about the time
 */
 void DoorSystem::update(double timeElapsed){
+    assert(timeElapsed !=NULL);
     door->update(timeElapsed);
     computerTable->update(timeElapsed);
     if(!computerTable->getDoorSwitch()->isEnabled() && !door->isOpen()){
@@ -50,7 +52,7 @@ void DoorSystem::update(double timeElapsed){
         }
     }
 }
-/** 
+/**
  *   @brief draws the animation of the chair according to its position
  *   @return void
  */
@@ -58,21 +60,21 @@ void DoorSystem::draw(){
     door->draw();
     computerTable->draw();
 }
-/** 
+/**
  *   @brief get the way that the door be
  *   @return door
  */
 GameObject* DoorSystem::getDoor(){
     return door;
 }
-/** 
+/**
  *   @brief get the actual way that the switch are
  *   @return computerTable->getDoorSwitch();
  */
 GameObject* DoorSystem::getSwitch(){
     return computerTable->getDoorSwitch();
 }
-/** 
+/**
  *   @brief get the actual way that the table are
  *   @return computerTable->getTable();
  */
