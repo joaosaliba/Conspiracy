@@ -11,7 +11,7 @@ using namespace engine;
 #define FILENAME "assets/sprites/cenary/alavanca_sheet(17X20).png"
 #define WIDTH 20 // define the valor of the width like 20
 #define HEIGHT 20// define the valor of the height like 20
-+/**
+/**
  *    @brief Camemera lever object constructor.
  *    @param[in] positionX it sets the x coordinate of the object.
  *    @param[in] positionY it sets the y coordinate of the object.

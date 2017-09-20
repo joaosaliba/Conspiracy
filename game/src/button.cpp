@@ -4,7 +4,7 @@
  *    @copyright  GNU GENERAL PUBLIC LICENSE.
  */
 #include "button.hpp"
-+/**
+/**
  *    @brief Button object constructor.
  *    @param[in] objectName name Key of the targeted object.
  *    @param[in] positionX it sets the x coordinate of the object.
