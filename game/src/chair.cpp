@@ -6,6 +6,7 @@
 #include "collision_manager.hpp"
 #include "chair.hpp"
 #include "log.h"
+#include <assert.h>
 /**
  *    @brief Chair object constructor.
  *    @param[in] positionX it sets the x coordinate of the object.
@@ -13,7 +14,7 @@
  *    @param[in] width it sets the width dimension of the object.
  *    @param[in] height it sets the height dimension of the object.
  *    @param[in] objectName set the name of the object
- *    
+ *
  */
 Chair::Chair(std::string objectName, double positionX, double positionY,
              int width, int height) : GameObject(objectName,
@@ -26,6 +27,10 @@ Chair::Chair(std::string objectName, double positionX, double positionY,
         animator->addAction("idle",0,0);
         animator->setInterval("idle");
         isMoving = false;
+        assert ( positionX != NULL);
+        assert ( positionY != NULL);
+        assert ( width != NULL);
+        assert ( height != NULL);
 }
 
 /**
@@ -41,6 +46,7 @@ Chair::~Chair(){
 */
 
 void Chair::update(double timeElapsed){
+        assert ( timeElapsed != NULL);
         auto incX = 0.15*timeElapsed;
         auto incY = 0.15*timeElapsed;
 
@@ -55,7 +61,7 @@ void Chair::update(double timeElapsed){
         setMoving(false);
 }
 
-/** 
+/**
  *   @brief draws the animation of the chair according to its position
  *   @return void
  */
@@ -64,13 +70,13 @@ void Chair::draw(){
         animator->draw_collider(getPositionX(), getPositionY(), getWidth(), getHeight());
 }
 
-/** 
+/**
  *   @brief set a  new position for the chair in the x plan
  *   @return void
  */
 
 void Chair::moveInX(double incX){
-
+        assert ( incX != NULL);
         if(direction == "right") {
                 incX = incX;
                 animator->setInterval("move");
@@ -89,11 +95,12 @@ void Chair::moveInX(double incX){
 
 }
 
-/** 
+/**
  *   @brief set a  new position for the chair in the y plan
  *   @return void
  */
 void Chair::moveInY(double incY){
+        assert ( incY != NULL);
 
         if(direction == "down") {
                 incY = incY;
@@ -112,14 +119,15 @@ void Chair::moveInY(double incY){
         }
 
 }
-/** 
+/**
  *   @brief if player are move the chair call this function
  *   @return void
  */
 void Chair::setMoving(bool move){
+        assert ( move != NULL);
         isMoving = move;
 }
-/** 
+/**
  *   @brief when move the chair set the correct direction that it was moved
  *   @return void
  */

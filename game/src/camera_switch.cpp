@@ -4,12 +4,13 @@
  *    @copyright  GNU GENERAL PUBLIC LICENSE.
  */
 #include "camera_switch.hpp"
+#include <assert.h>
 
 using namespace engine;
 #define FILENAME "assets/sprites/cenary/switch_cameras(14X16).png"
 #define WIDTH 14 //  define the width to 14
 #define HEIGHT 16 //  define the height to 16
-#define ADJUSTX 10 // deine the variable adjustx to 10 
+#define ADJUSTX 10 // deine the variable adjustx to 10
 /**
  *    @brief Camemera switch object constructor.
  *    @param[in] positionX it sets the x coordinate of the object.
@@ -17,10 +18,12 @@ using namespace engine;
  *    @param[in] width it sets the width dimension of the object.
  *    @param[in] height it sets the height dimension of the object.
  *    @param[in] direction set the new direct of the camera lever
- *    
+ *
  */
 CameraSwitch::CameraSwitch(double positionX, double positionY, std::string direction) : GameObject(FILENAME,positionX - ADJUSTX,positionY - ADJUSTX,
                                                                      WIDTH+ADJUSTX*2, HEIGHT+ADJUSTX*2){
+    assert ( positionX != NULL);
+    assert ( positionY != NULL);
     animator = new Animation(FILENAME, 1, 2, 0.1);
     switchEfffect = new Audio("assets/sounds/TURNOFFCAMERA.wav", "EFFECT", 128);
 
@@ -30,7 +33,7 @@ CameraSwitch::CameraSwitch(double positionX, double positionY, std::string direc
     direction = direction;
     working = true;
 }
-/** 
+/**
  *   @brief draws the animation of the button according to its position
  *   @return void
  */
@@ -43,6 +46,7 @@ void CameraSwitch::draw(){
 *    @param[in] timeElapsed its about the time
 */
 void CameraSwitch::update(double timeElapsed){
+    assert ( timeElapsed != NULL);
     timeElapsed = timeElapsed;
     animator->update();
 }

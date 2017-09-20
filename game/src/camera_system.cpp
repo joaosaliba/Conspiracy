@@ -1,16 +1,18 @@
-#include "camera_system.hpp"
+
 /**
  *   @file camera_system.cpp
  *    @brief Manage the camera system in the game and creat the relationship between camera lever and came switch.
  *    @copyright  GNU GENERAL PUBLIC LICENSE.
  */
+ #include "camera_system.hpp"
+ #include <assert.h>
 
 using namespace engine;
 /**
  *    @brief Camemera system object constructor.
  *    @param[in] p_camera it sets camera pointer.
  *    @param[in] p_camera_switch it sets the camera switch pointer.
- *    
+ *
  */
 
 CameraSystem::CameraSystem(Camera* p_camera, CameraSwitch* p_camera_switch){
@@ -50,33 +52,34 @@ void CameraSystem::update(double timeElapsed){
          camera->turnOff();
     }
 }
-/** 
+/**
  *   @brief draws the animation of the Camera System according to its position
  *   @return void
  */
 void CameraSystem::draw(){
+    assert ( timeElapsed != NULL);
     camera->draw();
     camera_switch->draw();
     if(camera_lever != NULL){
         camera_lever->draw();
     }
 }
-/** 
+/**
  *   @brief   get the actual camera system
  *   @return camera
  */
 Camera* CameraSystem::getCamera(){
     return camera;
 }
-/** 
- *   @brief get the actual camera system 
+/**
+ *   @brief get the actual camera system
  *   @return camera switch
  */
 
 CameraSwitch* CameraSystem::getCameraSwitch(){
     return camera_switch;
 }
-/** 
+/**
  *   @brief  get the actual camera lever
  *   @return camera
  */
