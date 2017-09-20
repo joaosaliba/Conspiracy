@@ -6,6 +6,7 @@
 
 #include "arrow.hpp"
 #include "log.h"
+#include <assert.h>
 
 /**
  *    @brief Arrow object constructor.
@@ -24,10 +25,14 @@ Arrow::Arrow(std::string objectName, double positionX, double positionY,
         animator = new Animation(objectName, 1, 17, 2.0);
         animator->addAction("select",0,16);
         animator->setInterval("select");
+        assert ( positionX != NULL);
+        assert ( positionY != NULL);
+        assert ( width != NULL);
+        assert ( height != NULL);
 }
 
 /**
-*    @brief Arrow object constructor.
+*    @brief Arrow object destryctor.
 */
 Arrow::~Arrow(){
 
@@ -37,13 +42,15 @@ Arrow::~Arrow(){
 *    @param[in] timeElapsed its about the time
 */
 void Arrow::update(double timeElapsed){
+        assert ( timeElapsed != NULL);
         timeElapsed = timeElapsed;
         if(isEnabled()){
                 animator->update();
         }
+
 }
 
-/** 
+/**
  *   @brief draws the animation of the arrow according to its position
  *   @return void
  */

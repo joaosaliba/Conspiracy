@@ -5,6 +5,7 @@
  */
 
 #include "camera_lever.hpp"
+#include <assert.h>
 
 using namespace engine;
 
@@ -18,10 +19,12 @@ using namespace engine;
  *    @param[in] width it sets the width dimension of the object.
  *    @param[in] height it sets the height dimension of the object.
  *    @param[in] direction set the new direct of the camera lever
- *    
+ *
  */
 CameraLever::CameraLever(double positionX, double positionY, std::string direction) : GameObject(FILENAME,positionX,positionY,
                                                                      WIDTH, HEIGHT){
+    assert ( positionX != NULL);
+    assert ( positionY != NULL);
     animator = new Animation(FILENAME, 1, 3, 0.1);
     animator->addAction("up", 2,2);
     animator->addAction("mid",1,1);
@@ -31,7 +34,7 @@ CameraLever::CameraLever(double positionX, double positionY, std::string directi
     stateInc = 1;
     state = 1;
 }
-/** 
+/**
  *   @brief draws the animation of the button according to its position
  *   @return void
  */
@@ -44,17 +47,18 @@ void CameraLever::draw(){
 *    @param[in] timeElapsed its about the time
 */
 void CameraLever::update(double timeElapsed){
+    assert ( timeElapsed != NULL);  
     timeElapsed = timeElapsed;
     animator->update();
 }
-/** 
+/**
  *   @brief check the atual state of the camera lever
  *   @return [int] state
  */
 int CameraLever::getState(){
     return state;
 }
-/** 
+/**
  *   @brief set the next possible state of the camera lever
  *   @return void
  */
