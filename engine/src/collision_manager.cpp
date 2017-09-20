@@ -5,6 +5,7 @@
  */
 #include "collision_manager.hpp"
 #include "log.h"
+#include <assert.h>
 
 using namespace engine;
 
@@ -169,6 +170,7 @@ bool CollisionManager::verifyCollisionWithGuards(GameObject* g1){
             status = verifyCollisionWithFieldsOfVision(g1, guardsVision);
             return status;
         }
+        assert (status != NULL);
 }
 /**
  *    @brief collision manager  verify the collisions wth cameras( if personage were caught)
@@ -177,6 +179,7 @@ bool CollisionManager::verifyCollisionWithGuards(GameObject* g1){
 bool CollisionManager::verifyCollisionWithCameras(GameObject* g1){
     bool status = false;
     status = verifyCollisionWithFieldsOfVision(g1, camerasVision);
+    assert (status != NULL);
     return status;
 }
 /**
@@ -214,6 +217,7 @@ bool CollisionManager::verifyCollisionWithFieldsOfVision(GameObject* g1, std::ve
         }
     }
     return false;
+    assert( isVisible != NULL);
 }
 /**
  *    @brief collision manager  and verify the interection with the switches
@@ -312,6 +316,14 @@ bool CollisionManager::verifyCollision( GameObject* g1, GameObject* g2){
         int leftA, rightA, topA, bottomA; //declarating variables
         int leftB, rightB, topB, bottomB; //declarating variables
 
+        assert (leftA != NULL);
+        assert (rightA != NULL);
+        assert (topA != NULL);
+        assert (buttonA != NULL);
+        assert (leftB != NULL);
+        assert (rightB != NULL);
+        assert (topB != NULL);
+        assert (buttonB != NULL);
         //Calculate the sides of rect A
         leftA = g1->getPositionX();
         rightA = leftA + g1->getWidth();
