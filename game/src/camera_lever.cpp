@@ -14,23 +14,23 @@ using namespace engine;
 #define HEIGHT 20// define the valor of the height like 20
 /**
  *    @brief Camemera lever object constructor.
- *    @param[in] positionX it sets the x coordinate of the object.
- *    @param[in] positionY it sets the y coordinate of the object.
+ *    @param[in] camera_lever_position_x it sets the x coordinate of the object.
+ *    @param[in] camera_lever_position_y it sets the y coordinate of the object.
  *    @param[in] width it sets the width dimension of the object.
  *    @param[in] height it sets the height dimension of the object.
- *    @param[in] direction set the new direct of the camera lever
+ *    @param[in] camera_lever_direction set the new direct of the camera lever
  *
  */
-CameraLever::CameraLever(double positionX, double positionY, std::string direction) : GameObject(FILENAME,positionX,positionY,
+CameraLever::CameraLever(double camera_lever_position_x, double camera_lever_position_y, std::string camera_lever_direction) : GameObject(FILENAME,camera_lever_position_x,camera_lever_position_y,
                                                                      WIDTH, HEIGHT){
-    assert ( positionX != NULL);
-    assert ( positionY != NULL);
+    assert ( camera_lever_position_x != NULL);
+    assert ( camera_lever_position_y != NULL);
     animator = new Animation(FILENAME, 1, 3, 0.1);
     animator->addAction("up", 2,2);
     animator->addAction("mid",1,1);
     animator->addAction("down", 0,0);
     animator->setInterval("mid");
-    direction = direction;
+    camera_lever_direction = camera_lever_direction;
     stateInc = 1;
     state = 1;
 }

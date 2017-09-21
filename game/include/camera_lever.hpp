@@ -10,7 +10,7 @@ using namespace engine;
 */
 class CameraLever: public GameObject{
 public:
-    CameraLever(double positionX, double positionY, std::string direction);
+    CameraLever(double camera_lever_position_x, double camera_lever_position_y, std::string camera_lever_direction);
     ~CameraLever();
     void update(double timeElapsed);// update the camera lever durign time
     void draw();// draw the lever of camerar
