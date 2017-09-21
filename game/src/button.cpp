@@ -7,27 +7,27 @@
 #include <assert.h>
 /**
  *    @brief Button object constructor.
- *    @param[in] objectName name Key of the targeted object.
- *    @param[in] positionX it sets the x coordinate of the object.
- *    @param[in] positionY it sets the y coordinate of the object.
- *    @param[in] width it sets the width dimension of the object.
- *    @param[in] height it sets the height dimension of the object.
+ *    @param[in] button_name name Key of the targeted object.
+ *    @param[in] button_position_x it sets the x coordinate of the object.
+ *    @param[in] button_position_y it sets the y coordinate of the object.
+ *    @param[in] button_width it sets the button_width dimension of the object.
+ *    @param[in] button_height it sets the button_height dimension of the object.
  *    @param[in] title it sets the title for the  button
  *    @param[in] sizeTitle it sets the size of the title button
  *
  */
 
-Button::Button(std::string objectName, double positionX, double positionY,
-                                     int width, int height, std::string title, int sizeTitle) : GameObject(objectName,
-                                                                         positionX,
-                                                                         positionY,
-                                                                         width, height) {
+Button::Button(std::string button_name, double button_position_x, double button_position_y,
+                                     int button_width, int button_height, std::string title, int sizeTitle) : GameObject(button_name,
+                                                                         button_position_x,
+                                                                         button_position_y,
+                                                                         button_width, button_height) {
 
-    text = new Text(title, objectName, sizeTitle, true, new Color(0,0,0,0), new Color(0,0,0,0));
-    assert ( positionX != NULL);
-    assert ( positionY != NULL);
-    assert ( width != NULL);
-    assert ( height != NULL);
+    text = new Text(title, button_name, sizeTitle, true, new Color(0,0,0,0), new Color(0,0,0,0));
+    assert ( button_position_x != NULL);
+    assert ( button_position_y != NULL);
+    assert ( button_width != NULL);
+    assert ( button_height != NULL);
 }
 /**
  *    @brief Button object destructor.
