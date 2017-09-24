@@ -3,8 +3,9 @@
     @brief Manage the engine of the game.
     @copyright MIT License.
 */
-
+//#define NDEBUG *uncomment to disable assertions
 #include "engine.hpp"
+#include <assert.h>
 
 namespace engine{
 
@@ -15,13 +16,14 @@ namespace engine{
     WindowManager* window_manager;
     SDLManager* sdl_manager;
 
-    double start_time;
-    double step_time;
-    double time_elapsed;
+    double engine_start_time;
+    double engine_step_time;
+    double engine_time_elapsed;
     double frame_time;
     double frame_rate = 60.0;
 
     SceneManager* getSceneManager() {
+        assert(scene_manager != NULL);
         return scene_manager;
 }
 
@@ -30,12 +32,15 @@ namespace engine{
     */
 
     void loadEngine() {
+         assert(engine_start_time != NULL);
+         assert(engine_step_time != NULL);
+         assert(engine_time_elapsed != NULL);
          scene_manager = new SceneManager();
          window_manager = new WindowManager();
          sdl_manager = new SDLManager();
 
-         start_time = SDL_GetTicks();
-         step_time = start_time;
+         engine_start_time = SDL_GetTicks();
+         engine_step_time = engine_start_time;
          frame_time = 1000.0/frame_rate;
 
          if(!sdl_manager->initSDL()) {
@@ -53,40 +58,47 @@ namespace engine{
     */
 
     void run() {
-
-         bool is_running = true;
+         assert(engine_start_time != NULL);
+         assert(engine_step_time != NULL);
+         assert(engine_time_elapsed != NULL);
+         bool engine_is_running = true;
+         assert(engine_is_running != NULL);
          SDL_Event event;
 
-         while(is_running){
-             step_time = SDL_GetTicks();
-
+         while(engine_is_running){
+             engine_step_time = SDL_GetTicks();
+             assert(engine_step_time != NULL);
              engine::InputManager::instance.update(event);
              SDL_RenderClear(WindowManager::getGameCanvas());
 
              if(engine::InputManager::instance.getQuitRequest()) {
-                 is_running = false;
+                 engine_is_running = false;
+                 assert(engine_is_running != NULL);
                  sdl_manager->finalizeSDL();
                  window_manager->destroyWindow();
                  continue;
              }
 
 
-             time_elapsed = SDL_GetTicks() - step_time;
+             engine_time_elapsed = SDL_GetTicks() - engine_step_time;
              DEBUG("TICKS:" + std::to_string(SDL_GetTicks()));
              DEBUG("frameTime:" + std::to_string(frame_time));
-             DEBUG("timeElapsed: " + std::to_string(time_elapsed));
-             if(frame_time > time_elapsed) {
+             DEBUG("timeElapsed: " + std::to_string(engine_time_elapsed));
+             assert(frame_time != NULL);
+             assert(engine_time_elapsed != NULL);
+             if(frame_time > engine_time_elapsed) {
 
-                 DEBUG("SDL_DELAY: " + std::to_string(frame_time - time_elapsed));
-                 SDL_Delay(frame_time - time_elapsed);
-                 time_elapsed = SDL_GetTicks() - step_time;
+                 DEBUG("SDL_DELAY: " + std::to_string(frame_time - engine_time_elapsed));
+                 SDL_Delay(frame_time - engine_time_elapsed);
+                 engine_time_elapsed = SDL_GetTicks() - engine_step_time;
              }
 
              if(scene_manager->get_current_scene() != NULL) {
-               scene_manager->get_current_scene()->update(time_elapsed);
+               scene_manager->get_current_scene()->update(engine_time_elapsed);
                scene_manager->get_current_scene()->draw();
 
              }
+             assert(get_current_scene() != NULL);
              AnimationManager::instance.draw_quads();
              SDL_RenderPresent(WindowManager::getGameCanvas());
          }

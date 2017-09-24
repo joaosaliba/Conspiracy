@@ -13,8 +13,8 @@
 namespace engine{
     class GameObject{
     public:
-        GameObject(std::string object_name, double position_x, double position_y,int width, int height);
-        GameObject(double position_x, double position_y,int width, int height);
+        GameObject(std::string object_name, double object_position_x, double object_position_y, int object_width, int object_height);
+        GameObject(double object_position_x, double object_position_y,int object_width, int object_height);
         GameObject();
         ~GameObject();
 
@@ -30,11 +30,11 @@ namespace engine{
         bool isEnabled();
         bool isVisible();
 
-        void setName(std::string new_name);
-        void setPositionX(double new_position);
-        void setPositionY(double new_position);
-        void setWidth(int new_width);
-        void setHeight(int new_height);
+        void setName(std::string object_new_name);
+        void setPositionX(double object_new_position);
+        void setPositionY(double object_new_position);
+        void setWidth(int object_new_width);
+        void setHeight(int object_new_height);
         void setEnabled(bool param_enabled);
         void setVisible(bool param_visible);
 
