@@ -1,4 +1,5 @@
 #include "alien.hpp"
+#include <assert.h>
 
 /** Objects included in the alien.hpp 
 * where the methods will be responsible for the manipulation and organization 
@@ -8,6 +9,11 @@
 Alien::Alien(std::string objectName, double alien_position_x, double alien_position_y,int width, 
 int height) : 
 GameObject(objectName,alien_position_x,alien_position_y,width, height) {
+    assert (alien_position_x !=NULL);
+    assert (alien_position_x !=NULL);
+    assert (width !=NULL);
+    assert (height !=NULL);
+
     if(objectName.compare("assets/sprites/bilu_sheet.png") == 0) {
         alienName = "Bilu";
     }else if(objectName.compare("assets/sprites/varginha_sheet.png") == 0) {
@@ -41,6 +47,7 @@ Alien::~Alien() {
 */
 
 void Alien::walk_in_x(double & alien_in_x) {
+    assert (alien_in_x !=NULL);
 
     if(InputManager::instance.is_key_pressed(InputManager::KeyPress::KEY_PRESS_RIGHT)) {
         alien_in_x = alien_in_x;
@@ -68,6 +75,8 @@ void Alien::walk_in_x(double & alien_in_x) {
 */
 
 void Alien::walk_in_y(double & alien_in_y, double alien_in_x) {
+    assert (alien_in_y !=NULL);
+    assert (alien_in_x !=NULL);
 
     if(InputManager::instance.is_key_pressed(InputManager::KeyPress::KEY_PRESS_UP)) {
         alien_in_y = alien_in_y * (0-1);
