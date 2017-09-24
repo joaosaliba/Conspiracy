@@ -12,14 +12,14 @@ namespace engine{
 
     class Text{
     public:
-        Text( std::string  newText, std::string newFont_path, int newSize, bool isHigh_quality, Color* newBackground, Color* new_text_color);
+        Text( std::string  newText, std::string new_font_path, int new_size, bool is_high_quality, Color* new_back_ground, Color* new_text_color);
          ~Text(){}
 
         void init();
         void draw(int x, int y);
         void shutdown();
         void loadFont();
-        void setBackground(Color * newBackground);
+        void setBackground(Color * new_back_ground);
         void setTextColor(Color * new_text_color);
     protected:
         SDL_Texture * texture;

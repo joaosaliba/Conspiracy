@@ -13,9 +13,9 @@ protected:
     void specialAction();
 
 private:
-    bool hacking;
-    bool editing;
-    bool last_action;
+    bool hacking; //declaring variable hacking "computers
+    bool editing; // declaring variable editing "documents
+    bool last_action; // declaring variablre last action 
     void setSpecialActionAnimator();
 };
 

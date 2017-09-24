@@ -32,7 +32,7 @@ void Etemer::update(double time_elapsed) {
         }
 
         if(inc_x == 0.0 && inc_y == 0.0 && !block_movement) {
-                if(idleAnimationNumber) {
+                if(idle_animation_number) {
                         animator->setInterval("idle_right");
                 }else {
                         animator->setInterval("idle_left");
@@ -72,15 +72,15 @@ void Etemer::specialAction(GameObject * guard, double distance) {
         if(talking) {
                 if(((Guard *) (guard))->getPositionX() >= getPositionX()) {
                         animator->setInterval("special_right");
-                        idleAnimationNumber = 5;
+                        idle_animation_number = 5;
                 }else {
                         animator->setInterval("special_left");
-                        idleAnimationNumber = 0;
+                        idle_animation_number = 0;
                 }
                 if(((Guard *) (guard))->getTalkingBarPercent() <= 0.0) {
                         talking = false;
                         block_movement = false;
-                        if(idleAnimationNumber) {
+                        if(idle_animation_number) {
                                 animator->setInterval("idle_right");
                         }else{
                                 animator->setInterval("idle_left");
@@ -112,13 +112,13 @@ void Etemer::walkInX(double & inc_x) {
 
         if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_RIGHT)) {
                 inc_x = inc_x;
-                idleAnimationNumber = 5;
+                idle_animation_number = 5;
                 animator->setInterval("right");
         }
         else if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_LEFT)) {
                 //movement_sound_effect->play(-1);
                 inc_x = inc_x * (0-1);
-                idleAnimationNumber = 0;
+                idle_animation_number = 0;
                 animator->setInterval("left");
         }
         else {
@@ -135,14 +135,14 @@ void Etemer::walkInY(double & inc_y, double inc_x) {
 
         if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_UP)) {
                 inc_y = inc_y * (0-1);
-                idleAnimationNumber = 5;
+                idle_animation_number = 5;
                 if(inc_x == 0) {
                         animator->setInterval("up");
                 }
         }
         else if(engine::InputManager::instance.isKeyPressed(engine::InputManager::KeyPress::KEY_PRESS_DOWN)) {
                 inc_y = inc_y;
-                idleAnimationNumber = 0;
+                idle_animation_number = 0;
                 if(inc_x == 0) {
                         animator->setInterval("down");
                 }
