@@ -28,23 +28,23 @@ using namespace engine;
 
 class GameScene: public Scene{
 public:
-    GameScene(int id, std::string newTiledFile);
-    GameScene(int id, std::string newTiledFile, std::string music);
+    GameScene(int id, std::string new_tiled_file);
+    GameScene(int id, std::string new_tiled_file, std::string music);
     ~GameScene();
     void load();
     void draw();
-    void update(double timeElapsed);
+    void update(double time_elapsed);
     void unload();
     void verifyWinOrLose();
 protected:
     Player* player;
     Audio* background_music;
     std::vector<GameObject*> gameObjectsList;
-    std::string tiledFile;
-    Timer* stageTimer;
-    Timer* skipTimer;
-    int actualPapers;
-    bool aliensInPosition;
+    std::string tiled_file;
+    Timer* stage_timer;
+    Timer* skip_timer;
+    int actual_papers;
+    bool aliens_in_position;
     void initializeColliders();
     virtual void createGuards() = 0;
     virtual void createAliens() = 0;
