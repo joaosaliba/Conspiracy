@@ -13,7 +13,7 @@
 
 class Varginha: public Alien {
 public:
-    Varginha(double position_x, double position_y);
+    Varginha(double varginha_position_x, double varginha_position_y);
     void update(double time_elapsed);
     void draw();
     void set_default();

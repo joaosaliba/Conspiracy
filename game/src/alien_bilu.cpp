@@ -13,7 +13,7 @@
 */
 
 Bilu::Bilu(double bilu_position_x, double bilu_position_y) : 
-Alien(FILENAME, bilu_position_x, bilu_position_y, bilu_width, bilu_heigt) {
+Alien(FILENAME, bilu_position_x, bilu_position_y, WIDTH, HEIGHT) {
     animator->add_action("special_right",14,17);
     animator->add_action("special_left",10,13);
     

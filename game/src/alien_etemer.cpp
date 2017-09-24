@@ -12,7 +12,7 @@
 */
 
 Etemer::Etemer(double etemer_position_x, double etemer_position_y) : 
-Alien(FILENAME, etemer_position_x, etemer_position_y, etemer_width, etemer_height) {
+Alien(FILENAME, etemer_position_x, etemer_position_y, WIDTH, HEIGHT) {
     animator->add_action("special_right",14,17);
     animator->add_action("special_left",10,13);
 

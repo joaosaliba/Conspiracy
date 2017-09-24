@@ -9,8 +9,8 @@
 * of these objects
 */
 
-Varginha::Varginha(double position_x, double position_y) : 
-Alien(FILENAME, position_x, position_y, WIDTH, HEIGHT) {
+Varginha::Varginha(double varginha_position_x, double varginha_position_y) : 
+Alien(FILENAME, varginha_position_x, varginha_position_y, WIDTH, HEIGHT) {
 
     animator->add_action("special_right",12,13);
     animator->add_action("special_left",10,11);
@@ -35,15 +35,15 @@ Alien(FILENAME, position_x, position_y, WIDTH, HEIGHT) {
 void Varginha::update(double time_elapsed) {
     in_position = false;
     animator->set_total_time(0.3);
-    auto inc_y = 0.15*time_elapsed;
-    auto inc_x = 0.15*time_elapsed;
+    auto varginha_in_y = 0.15*time_elapsed;
+    auto varginha_in_x = 0.15*time_elapsed;
 
     if(!block_movement && is_selected) {
-        walk_in_x(inc_x);
-        walk_in_y(inc_y, inc_x);
+        walk_in_x(varginha_in_x);
+        walk_in_y(varginha_in_y, varginha_in_x);
     }
 
-    if((inc_x == 0 && inc_y == 0) || (!turn_off && !is_selected)) {
+    if((varginha_in_x == 0 && varginha_in_y == 0) || (!turn_off && !is_selected)) {
         if(idle_animation_number) {
             animator->set_interval("idle_right");
         }else { 
@@ -96,13 +96,13 @@ void Varginha::special_action() {
                 int x = 0;
                 if(camera_switch!= NULL) {
                     camera_switch->turn_off();
-                    x = camera_switch->get_position_x();
+                    x = camera_switch->get_varginha_position_x();
                 }else if(camera_lever != NULL) {
                     camera_lever->next_state();
-                    x = camera_lever->get_position_x();
+                    x = camera_lever->get_varginha_position_x();
                 }
 
-                if(x > get_position_x()) {
+                if(x > get_varginha_position_x()) {
                     animator->set_interval("action_right");
                     idle_animation_number = 5;
                     }else {
@@ -148,8 +148,9 @@ void Varginha::set_default() {
  
 void Varginha::draw() {
     INFO("Varginha DRAW");
-    animator->draw(get_position_x()-15, get_position_y()-25);
-    animator->draw_collider(get_position_x(), get_position_y(), get_width(), get_height());
+    animator->draw(get_varginha_position_x()-15, get_varginha_position_y()-25);
+    animator->draw_collider(get_varginha_position_x(), get_varginha_position_y(), 
+    get_width(), get_height());
 }
 
 /** 
