@@ -9,8 +9,8 @@
 class Bilu: public Alien {
 public:
     Bilu(double bilu_position_x, double bilu_position_y);
-    void draw();// draw the lever of camerar
-    void update(double time_elapsed);// update the camera lever durign time
+    void draw();// draw the lever of bilu
+    void update(double time_elapsed);// update the bilu lever durign time
 
 protected:
     void special_action();

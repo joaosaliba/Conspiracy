@@ -11,8 +11,8 @@
 * of these objects
 */
 
-Etemer::Etemer(double position_x, double position_y) : 
-Alien(FILENAME, position_x, position_y, WIDTH, HEIGHT) {
+Etemer::Etemer(double etemer_position_x, double etemer_position_y) : 
+Alien(FILENAME, etemer_position_x, etemer_position_y, etemer_width, etemer_height) {
     animator->add_action("special_right",14,17);
     animator->add_action("special_left",10,13);
 
@@ -34,15 +34,15 @@ void Etemer::update(double time_elapsed) {
     animator->set_total_time(0.3);
 }
 
-    auto inc_y = 0.15*time_elapsed;
-    auto inc_x = 0.15*time_elapsed;
+    auto etemer_in_y = 0.15*time_elapsed;
+    auto etemer_in_x = 0.15*time_elapsed;
 
     if(!block_movement && is_selected) {
-        walk_in_x(inc_x);
-        walk_in_y(inc_y, inc_x);
+        walk_in_x(etemer_in_x);
+        walk_in_y(etemer_in_y, etemer_in_x);
 }
 
-    if(inc_x == 0.0 && inc_y == 0.0 && !block_movement) {
+    if(etemer_in_x == 0.0 && etemer_in_y == 0.0 && !block_movement) {
         if(idle_animation_number) {
             animator->set_interval("idle_right");
 }else {
@@ -71,12 +71,12 @@ void Etemer::update(double time_elapsed) {
 *   @return void
 */
 
-void Etemer::special_action(GameObject * guard, double distance) {
+void Etemer::special_action(GameObject * guard, double etemer_distance) {
     if(InputManager::instance.is_key_pressed(InputManager::KEY_PRESS_SPACE) &&
     guard != NULL && is_selected) {
         animator->set_total_time(1.0);
-        //TODO Change distance.
-        if(!talking && distance < 60) {
+        //TODO Change etemer_distance.
+        if(!talking && etemer_distance < 60) {
             talking = true;
             block_movement = true;
         if(((Guard *) (guard))->get_position_x() > get_position_x()) {
@@ -141,25 +141,25 @@ void Etemer::move_chair() {
 *   @return void
 */
 
-void Etemer::walk_in_x(double & inc_x) {
+void Etemer::walk_in_x(double & etemer_in_x) {
     if(InputManager::instance.is_key_pressed(InputManager::KeyPress::KEY_PRESS_RIGHT)) {
-        inc_x = inc_x;
+        etemer_in_x = etemer_in_x;
         idle_animation_number = 5;
         animator->set_interval("right");
 }
     else if(InputManager::instance.is_key_pressed(InputManager::KeyPress::KEY_PRESS_LEFT)) {
         //movement_sound_effect->play(-1);
-        inc_x = inc_x * (0-1);
+        etemer_in_x = etemer_in_x * (0-1);
         idle_animation_number = 0;
         animator->set_interval("left");
 }
     else {
-        inc_x = 0;
+        etemer_in_x = 0;
 }
-    set_position_x(get_position_x()+inc_x);
+    set_position_x(get_position_x()+etemer_in_x);
 
     if(CollisionManager::instance.verify_collision_with_walls_and_chairs(this)) {
-        set_position_x(get_position_x()+(inc_x*(0-1)));
+        set_position_x(get_position_x()+(etemer_in_x*(0-1)));
     }
 }
 
@@ -168,42 +168,42 @@ void Etemer::walk_in_x(double & inc_x) {
 *   @return void
 */
 
-void Etemer::walk_in_y(double & inc_y, double inc_x) {
+void Etemer::walk_in_y(double & etemer_in_y, double etemer_in_x) {
     if(InputManager::instance.is_key_pressed(InputManager::KeyPress::KEY_PRESS_UP)) {
-        inc_y = inc_y * (0-1);
+        etemer_in_y = etemer_in_y * (0-1);
         idle_animation_number = 5;
-            if(inc_x == 0) {
+            if(etemer_in_x == 0) {
                 animator->set_interval("up");
     }
 }
     else if(engine::InputManager::instance.is_key_pressed(engine::InputManager::KeyPress::
     KEY_PRESS_DOWN)) {
-        inc_y = inc_y;
+        etemer_in_y = etemer_in_y;
         idle_animation_number = 0;
-            if(inc_x == 0) {
+            if(etemer_in_x == 0) {
                 animator->set_interval("down");
     }
 }
     else {
-        inc_y = 0;
+        etemer_in_y = 0;
 }
-    set_position_y(get_position_y()+inc_y);
+    set_position_y(get_position_y()+etemer_in_y);
 
     if(CollisionManager::instance.verify_collision_with_walls_and_chairs(this)) {
-        set_position_y(get_position_y()+(inc_y*(0-1)));
+        set_position_y(get_position_y()+(etemer_in_y*(0-1)));
     }
 }
 
 /** 
-*   check the guards' distance
+*   check the guards' etemer_distance
 *   @return void
 */
 
-void Etemer::verify_distance(GameObject* guard) {
-    double distance = sqrt((pow(get_position_x() - guard->get_position_x(), 2.0)) +  
+void Etemer::verify_etemer_distance(GameObject* guard) {
+    double etemer_distance = sqrt((pow(get_position_x() - guard->get_position_x(), 2.0)) +  
     (pow(get_position_y() - guard->get_position_y(), 2.0)));
 
-    if(distance < 60){
-        special_action(guard, distance);
+    if(etemer_distance < 60){
+        special_action(guard, etemer_distance);
     }
 }

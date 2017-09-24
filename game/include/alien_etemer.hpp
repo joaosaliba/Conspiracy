@@ -11,14 +11,14 @@
 
 class Etemer: public Alien {
 public:
-    Etemer(double position_x, double position_y);
-    void update(double time_elapsed);
-    void draw();
+    Etemer(double etemer_position_x, double etemer_position_y);
+    void update(double time_elapsed);// update the Etermer lever durign time
+    void draw();// draw the lever of Etemer
     void verify_distance(GameObject* guard);
 protected:
-    void special_action(GameObject* guard, double distance);
-    void walk_in_X(double & inc_x);
-    void walk_in_Y(double & inc_y, double );
+    void special_action(GameObject* guard, double etemer_distance);
+    void walk_in_X(double & etemer_in_x);
+    void walk_in_Y(double & etemer_in_y, double );
 
 private:
     bool talking;
