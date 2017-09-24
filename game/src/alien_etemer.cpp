@@ -1,6 +1,7 @@
 #include "alien_etemer.hpp"
 #include "chair.hpp"
 #include "guard.hpp"
+#include <assert.h>
 
 #define FILENAME "assets/sprites/etemer_sheet.png"
 #define WIDTH 10
@@ -13,6 +14,11 @@
 
 Etemer::Etemer(double etemer_position_x, double etemer_position_y) : 
 Alien(FILENAME, etemer_position_x, etemer_position_y, WIDTH, HEIGHT) {
+    assert (etemer_position_x !=NULL);
+    assert (etemer_position_y !=NULL);
+    assert (WIDTH !=NULL);
+    assert (HEIGHT !=NULL);
+    
     animator->add_action("special_right",14,17);
     animator->add_action("special_left",10,13);
 
@@ -27,6 +33,8 @@ Alien(FILENAME, etemer_position_x, etemer_position_y, WIDTH, HEIGHT) {
 */
 
 void Etemer::update(double time_elapsed) {
+    assert (time_elapsed !=NULL);
+
     in_position = false;
     if (block_movement) {
         animator->set_total_time(1.0);
@@ -72,6 +80,8 @@ void Etemer::update(double time_elapsed) {
 */
 
 void Etemer::special_action(GameObject * guard, double etemer_distance) {
+    assert (etemer_distance !=NULL);
+
     if(InputManager::instance.is_key_pressed(InputManager::KEY_PRESS_SPACE) &&
     guard != NULL && is_selected) {
         animator->set_total_time(1.0);
@@ -142,6 +152,8 @@ void Etemer::move_chair() {
 */
 
 void Etemer::walk_in_x(double & etemer_in_x) {
+    assert (etemer_in_x !=NULL);
+
     if(InputManager::instance.is_key_pressed(InputManager::KeyPress::KEY_PRESS_RIGHT)) {
         etemer_in_x = etemer_in_x;
         idle_animation_number = 5;
@@ -169,6 +181,9 @@ void Etemer::walk_in_x(double & etemer_in_x) {
 */
 
 void Etemer::walk_in_y(double & etemer_in_y, double etemer_in_x) {
+    assert (etemer_in_y !=NULL);
+    assert (etemer_in_x !=NULL);
+
     if(InputManager::instance.is_key_pressed(InputManager::KeyPress::KEY_PRESS_UP)) {
         etemer_in_y = etemer_in_y * (0-1);
         idle_animation_number = 5;
