@@ -12,8 +12,8 @@
 * of these objects
 */
 
-Bilu::Bilu(double position_x, double position_y) : 
-Alien(FILENAME, position_x, position_y, WIDTH, HEIGHT) {
+Bilu::Bilu(double bilu_position_x, double bilu_position_y) : 
+Alien(FILENAME, bilu_position_x, bilu_position_y, bilu_width, bilu_heigt) {
     animator->add_action("special_right",14,17);
     animator->add_action("special_left",10,13);
     
@@ -32,15 +32,15 @@ Alien(FILENAME, position_x, position_y, WIDTH, HEIGHT) {
 void Bilu::update(double time_elapsed) {
     in_position = false;
     animator->set_total_time(0.3);
-    auto inc_y = 0.15*time_elapsed;
-    auto inc_x = 0.15*time_elapsed;
+    auto move_bilu_in_y = 0.15*time_elapsed;
+    auto move_bilu_in_x = 0.15*time_elapsed;
 
     if(!block_movement && is_selected) {
-        walk_in_x(inc_x);
-        walk_in_y(inc_y, inc_x);
+        walk_in_x(move_bilu_in_x);
+        walk_in_y(move_bilu_in_y, move_bilu_in_x);
 }
 
-    if(inc_x == 0 && inc_y == 0) {
+    if(move_bilu_in_x == 0 && move_bilu_in_y == 0) {
         if(idle_animation_number) {
             animator->set_interval("idle_right");
         }else {
