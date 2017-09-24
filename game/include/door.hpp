@@ -6,21 +6,26 @@
 #include "game_object.hpp"
 #include "audio.hpp"
 
+/** The class Door receives an GameObject public class where the parameters to be defined
+*received, such as position, type, and methods. The attributes that will be defined
+*public and private
+*/
+
 using namespace engine;
 
-class Door: public GameObject{
+class Door: public GameObject {
 public:
-    Door(std::string objectName, double positionX, double positionY,
+    Door(std::string objectName, double door_position_x, double door_position_y,
          int width, int height, std::string doorSide);
     ~Door();
-    void update(double timeElapsed);
-    void draw();
+    void update(double time_elapsed);// update the door lever durign time
+    void draw();// draw the lever of door
     void init();
-    Animation * getAnimation();
-    bool isOpen();
-    void setOpen(bool status);
-    void playEffect();
-    std::string getDoorSide();
+    Animation * get_animation();
+    bool is_open();
+    void set_open(bool door_status);
+    void play_effect();
+    std::string get_door_side();
 protected:
     Animation* animator;
 private:
