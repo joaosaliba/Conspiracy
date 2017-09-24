@@ -2,6 +2,7 @@
 #include "collision_manager.hpp"
 #include "paper.hpp"
 #include "door_switch.hpp"
+#include <assert.h>
 
 #define FILENAME "assets/sprites/bilu_sheet.png"
 #define WIDTH 19
@@ -14,6 +15,11 @@
 
 Bilu::Bilu(double bilu_position_x, double bilu_position_y) : 
 Alien(FILENAME, bilu_position_x, bilu_position_y, WIDTH, HEIGHT) {
+    assert (bilu_position_x !=NULL);
+    assert (bilu_position_y !=NULL);
+    assert (WIDTH !=NULL);
+    assert (HEIGHT !=NULL);
+
     animator->add_action("special_right",14,17);
     animator->add_action("special_left",10,13);
     
@@ -30,6 +36,8 @@ Alien(FILENAME, bilu_position_x, bilu_position_y, WIDTH, HEIGHT) {
 */
 
 void Bilu::update(double time_elapsed) {
+    assert ( time_elapsed != NULL);
+    
     in_position = false;
     animator->set_total_time(0.3);
     auto move_bilu_in_y = 0.15*time_elapsed;
