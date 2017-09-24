@@ -18,7 +18,8 @@ using namespace engine;
 
 class Alien: public GameObject {
 public:
-    Alien(std::string objectName, double position_x, double position_y, int width, int height);
+    Alien(std::string objectName, double alien_position_x, double alien_position_y,
+    int width, int height);
     ~Alien();
     virtual void update(double time_elapsed) = 0;
     void draw();
@@ -29,8 +30,8 @@ public:
     bool is_in_position();
 
 protected:
-    void walk_in_x(double & inc_x);
-    void walk_in_y(double & inc_y, double inc_x);
+    void walk_in_x(double & alien_in_x);
+    void walk_in_y(double & alien_in_y, double alien_in_x);
     Animation* animator;
     int idle_animation_number;
     std::string alienName;

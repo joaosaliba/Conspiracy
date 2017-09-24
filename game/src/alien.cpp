@@ -5,8 +5,9 @@
 * of these objects
 */
 
-Alien::Alien(std::string objectName, double position_x, double position_y,int width, int height) : 
-GameObject(objectName,position_x,position_y,width, height) {
+Alien::Alien(std::string objectName, double alien_position_x, double alien_position_y,int width, 
+int height) : 
+GameObject(objectName,alien_position_x,alien_position_y,width, height) {
     if(objectName.compare("assets/sprites/bilu_sheet.png") == 0) {
         alienName = "Bilu";
     }else if(objectName.compare("assets/sprites/varginha_sheet.png") == 0) {
@@ -39,25 +40,25 @@ Alien::~Alien() {
 *   @return void
 */
 
-void Alien::walk_in_x(double & inc_x) {
+void Alien::walk_in_x(double & alien_in_x) {
 
     if(InputManager::instance.is_key_pressed(InputManager::KeyPress::KEY_PRESS_RIGHT)) {
-        inc_x = inc_x;
+        alien_in_x = alien_in_x;
         idle_animation_number = 5;
         animator->set_interval("right");
     }
     else if(InputManager::instance.is_key_pressed(InputManager::KeyPress::KEY_PRESS_LEFT)) {
         //movement_sound_effect->play(-1);
-        inc_x = inc_x * (0-1);
+        alien_in_x = alien_in_x * (0-1);
         idle_animation_number = 0;
         animator->set_interval("left");
     }
     else {
-        inc_x = 0;
+        alien_in_x = 0;
     }
-    set_position_x(get_position_x()+inc_x);
+    set_alien_position_x(get_alien_position_x()+alien_in_x);
     if(CollisionManager::instance.verify_collision_with_walls_and_chairs(this)) {
-        set_position_x(get_position_x()+(inc_x*(0-1)));
+        set_alien_position_x(get_alien_position_x()+(alien_in_x*(0-1)));
     }
 }
 
@@ -66,29 +67,29 @@ void Alien::walk_in_x(double & inc_x) {
 *   @return void
 */
 
-void Alien::walk_in_y(double & inc_y, double inc_x) {
+void Alien::walk_in_y(double & alien_in_y, double alien_in_x) {
 
     if(InputManager::instance.is_key_pressed(InputManager::KeyPress::KEY_PRESS_UP)) {
-        inc_y = inc_y * (0-1);
+        alien_in_y = alien_in_y * (0-1);
         idle_animation_number = 5;
-        if(inc_x == 0){
+        if(alien_in_x == 0){
             animator->set_interval("up");
         }
     }
     else if(engine::InputManager::
     instance.is_key_pressed(engine::InputManager::KeyPress::KEY_PRESS_DOWN)) {
-        inc_y = inc_y;
+        alien_in_y = alien_in_y;
         idle_animation_number = 0;
-        if(inc_x == 0){
+        if(alien_in_x == 0){
             animator->set_interval("down");
         }
     }
     else {
-        inc_y = 0;
+        alien_in_y = 0;
     }
-    set_position_y(get_position_y()+inc_y);
+    set_alien_position_y(get_alien_position_y()+alien_in_y);
     if(CollisionManager::instance.verify_collision_with_walls_and_chairs(this)) {
-        set_position_y(get_position_y()+(inc_y*(0-1)));
+        set_alien_position_y(get_alien_position_y()+(alien_in_y*(0-1)));
     }
 }
 
@@ -99,7 +100,7 @@ void Alien::walk_in_y(double & inc_y, double inc_x) {
 
 void Alien::draw() {
     INFO("ALIEN DRAW");
-    animator->draw(get_position_x(), get_position_y());
+    animator->draw(get_alien_position_x(), get_alien_position_y());
 }
 
 Animation * Alien::get_animation() {
