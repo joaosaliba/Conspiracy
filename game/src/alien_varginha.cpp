@@ -1,4 +1,5 @@
 #include "alien_varginha.hpp"
+#include <assert.h>
 
 #define FILENAME "assets/sprites/varginha_sheet.png"
 #define WIDTH 10
@@ -11,6 +12,10 @@
 
 Varginha::Varginha(double varginha_position_x, double varginha_position_y) : 
 Alien(FILENAME, varginha_position_x, varginha_position_y, WIDTH, HEIGHT) {
+    assert (varginha_position_x !=NULL);
+    assert (etemer_position_y !=NULL);
+    assert (WIDTH !=NULL);
+    assert (HEIGHT !=NULL);
 
     animator->add_action("special_right",12,13);
     animator->add_action("special_left",10,11);
@@ -33,6 +38,8 @@ Alien(FILENAME, varginha_position_x, varginha_position_y, WIDTH, HEIGHT) {
 */
 
 void Varginha::update(double time_elapsed) {
+    assert (time_elapsed !=NULL);
+
     in_position = false;
     animator->set_total_time(0.3);
     auto varginha_in_y = 0.15*time_elapsed;
