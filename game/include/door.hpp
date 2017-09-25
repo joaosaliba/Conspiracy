@@ -1,3 +1,10 @@
+/**
+ * @file door.hpp
+ * @brief class to object of door, where you can find some values, files,
+ * others objects used in this class and methods to the same.
+ * @copyright  GNU GENERAL PUBLIC LICENSE.
+ */
+
 #ifndef DOOR_HPP
 #define DOOR_HPP
 
