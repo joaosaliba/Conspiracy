@@ -1,24 +1,29 @@
-/**@description class to object of audio, where you can find some variables, files, others objects
- *and meths to the same.
- * @param string-audio_path
- * @param string-audio_type
- * @param int-volume
+/**
+ * @file audio.cpp
+ * @brief class to object of audio, where you can find some values, files, others objects
+ * and methods to the same.
+ * @copyright  GNU GENERAL PUBLIC LICENSE.
  */
 
 #include "audio.hpp"
 #include "log.h"
 #include "string"
+#include <assert.h>
 
 using namespace engine;
 
-Audio::Audio(std::string audio_path, std::string audio_type, int volume){
+Audio::Audio(std::string audio_path, std::string audio_type, int volume) {
+
+    assert ( volume != NULL);
+
   /**
-  * Método feito para carregar o audio do game
-  * <p>Esse método executa as ações de carregar o audio do jogo e tratar os erros do mesmo
-  *utilizadas na classe audio</p>
+  * @brief Method did to load the audio of the game
+  * <p>This method execute actions to load the audio of the game and treat the erros
+  * of the class "audio"</p>
   * @return string-audio_type
   * @return string-audio_effect
   */
+
     if(audio_type.compare("MUSIC") == 0) {
         audio_music = Mix_LoadMUS(audio_path.c_str());
         Mix_VolumeMusic(volume);
@@ -31,20 +36,26 @@ Audio::Audio(std::string audio_path, std::string audio_type, int volume){
         if(audio_effect == NULL) {
             ERROR("Audio file could not be loaded");
         }
-    }else{
+    }else {
         ERROR("Audio type is not correct");
     }
 }
 
+/**
+  *    @brief Audio object destructor.
+ */
 Audio::~Audio(){}
 
 /**
-* Método play
-* <p>Esse método executa a função de começar o audio do game</p>
-*@param const int-times_to_play
+* @brief Method play
+* <p>This method execute the action to start the audio of the game</p>
+* @param const int-times_to_play
+* @return void
 */
 
 void Audio::play(const int times_to_play) {
+    assert ( times_to_play != NULL);
+
     if(audio_music != NULL) {
         if(Mix_PlayMusic(audio_music, times_to_play) == -1) {
             ERROR("Audio could not be played");
@@ -57,8 +68,9 @@ void Audio::play(const int times_to_play) {
 }
 
 /**
-* Método pause
-* <p>Esse método executa a função de parar a música do game</p>
+* @brief Method pause
+* <p>This method execute the function of stopping the music of the game</p>
+* @return void
 */
 
 void Audio::pause() {
@@ -74,9 +86,11 @@ void Audio::pause() {
 }
 
 /**
-* Método resume
-* <p>Esse método executa a função de recomeçar a música do game</p>
+* @brief Method resume
+* <p>This method restart the music of the game</p>
+* @return void
 */
+
 void Audio::resume() {
     if(audio_music != NULL) {
         if(Mix_PausedMusic() == 1) {
@@ -90,8 +104,9 @@ void Audio::resume() {
 }
 
 /**
-* Método stop
-* <p>Esse método executa a função de parar todos os efeitos de audio do game</p>
+* @brief Method stop
+* <p>This method stop all the audio effects of the game</p>
+* @return void
 */
 
 void Audio::stop() {
