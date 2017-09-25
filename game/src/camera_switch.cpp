@@ -65,4 +65,7 @@ void CameraSwitch::turnOff(){
         animator->setInterval("off");
         switchEfffect->play(0);
     }
+    else{
+        //nothing to do
+    }
 }

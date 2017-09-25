@@ -46,10 +46,14 @@ void CameraSystem::update(double timeElapsed){
         if(camera_lever->getState() != last_lever_state){
             last_lever_state = camera_lever->getState();
             camera->changeState(camera_lever->getState());
+        } else{
+            //nothing to do
         }
     }
     if(!camera_switch->isWorking() && camera->isTurnedOn()){
          camera->turnOff();
+    } else{
+        //nothing to do
     }
 }
 /**
@@ -62,6 +66,9 @@ void CameraSystem::draw(){
     camera_switch->draw();
     if(camera_lever != NULL){
         camera_lever->draw();
+    }
+    else{
+        //nothing to do
     }
 }
 /**

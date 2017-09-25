@@ -66,6 +66,9 @@ void CameraLever::nextState(){
     if(state >= 2 || state <= 0){
         stateInc *= -1;
     }
+    else{
+        //nothing to do
+    }
     state += stateInc;
     switch(state){
         case 0: animator->setInterval("up"); break;
