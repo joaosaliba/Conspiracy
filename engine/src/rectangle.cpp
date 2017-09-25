@@ -25,7 +25,7 @@ void Rectangle::init() {
     if (surface == NULL) {
         ERROR("Create surface failed.");
         exit(-1);
-    }
+    }else {
     assert(surface != NULL);
     setWidth((int)(surface->w));
     setHeight((int)(surface->h));
@@ -33,12 +33,15 @@ void Rectangle::init() {
     texture = SDL_CreateTextureFromSurface(WindowManager::getGameCanvas(), surface);
     assert(texture != NULL);
     SDL_FreeSurface(surface);
+  }
 }
 
 void Rectangle::update(double time_elapsed){
     time_elapsed = time_elapsed;
     if(isEnabled()) {
         verifyAlpha();
+    }else {
+        ERROR("Rectangle is not enabled");
     }
 }
 
@@ -47,6 +50,8 @@ void Rectangle::draw() {
       SDL_Rect clipRect = {0, 0, getWidth(), getHeight()};
       SDL_Rect renderQuad = {(int)getPositionX(), (int)getPositionY(), clipRect.w, clipRect.h};
       SDL_RenderCopy(WindowManager::getGameCanvas(), texture, &clipRect, &renderQuad);
+    }else {
+      ERROR("Rectangle is not enabled");
     }
 }
 
@@ -55,6 +60,8 @@ void Rectangle::verifyAlpha() {
         SDL_SetTextureColorMod(texture, rectangle_color->r, rectangle_color->g, rectangle_color->b);
         SDL_SetTextureAlphaMod(texture, rectangle_color->a);
         SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
+    }else {
+        ERROR("Rectangle alpha is not active");
     }
 }
 

@@ -49,6 +49,8 @@ namespace engine{
          }else if(!window_manager->createWindow(GAME_NAME, WINDOW_SIZE)) {
              ERROR("ERRO AO CRIAR JANELA");
              exit(-1);
+         }else {
+             ERROR("ERRO AO CARREGAR ENGINE");
          }
      }
 
@@ -77,6 +79,10 @@ namespace engine{
                  sdl_manager->finalizeSDL();
                  window_manager->destroyWindow();
                  continue;
+             }else {
+                 engine_step_time = SDL_GetTicks();
+                 engine::InputManager::instance.update(event);
+                 SDL_RenderClear(WindowManager::getGameCanvas());
              }
 
 
@@ -86,18 +92,23 @@ namespace engine{
              DEBUG("timeElapsed: " + std::to_string(engine_time_elapsed));
              assert(frame_time != NULL);
              assert(engine_time_elapsed != NULL);
-             if(frame_time > engine_time_elapsed) {
 
+             if(frame_time > engine_time_elapsed) {
                  DEBUG("SDL_DELAY: " + std::to_string(frame_time - engine_time_elapsed));
                  SDL_Delay(frame_time - engine_time_elapsed);
                  engine_time_elapsed = SDL_GetTicks() - engine_step_time;
+             }else {
+                 ERROR("NO DELAY");
              }
 
              if(scene_manager->get_current_scene() != NULL) {
                scene_manager->get_current_scene()->update(engine_time_elapsed);
                scene_manager->get_current_scene()->draw();
 
+             }else {
+               scene_manager->get_current_scene()->draw();
              }
+
              assert(get_current_scene() != NULL);
              AnimationManager::instance.draw_quads();
              SDL_RenderPresent(WindowManager::getGameCanvas());

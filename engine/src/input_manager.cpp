@@ -5,22 +5,24 @@ using namespace engine;
 
 InputManager InputManager::instance;
 
-    void InputManager::update(SDL_Event event){
+    void InputManager::update(SDL_Event event) {
         int keyAction = 0, previousAction = 0;
 
-        while(SDL_PollEvent(&event)){
+        while(SDL_PollEvent(&event)) {
             switch (event.type) {
                 case SDL_QUIT:
                 quitRequest = true;
                 break;
                 case SDL_KEYDOWN:
                     keyAction = event.key.keysym.sym;
-                    if(!event.key.repeat){
+                    if(!event.key.repeat) {
                         keyActive[keyAction] = true;
                         keyPrevious[keyAction] = false;
                         INFO("PUSH");
-                    }else if(event.key.repeat){
+                    }else if(event.key.repeat) {
                         keyPrevious[keyAction] = true;
+                    }else {
+                        ERROR("No key event");
                     }
                 break;
                 case SDL_KEYUP:
@@ -50,8 +52,9 @@ InputManager InputManager::instance;
         if(keyActive[iKeyCode] && !keyPrevious[iKeyCode]){
             keyPrevious[iKeyCode] = true;
             return true;
+        } else{
+            return false;
         }
-        return false;
     }
 
     void InputManager::setQuitRequest(bool isRequest){
