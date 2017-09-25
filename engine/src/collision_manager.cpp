@@ -246,9 +246,6 @@ bool CollisionManager::verifyCollisionWithFieldsOfVision(GameObject* game_object
                         //nothing to do
                       }
             }
-            else{
-                //nothing to do
-            }
         }
         else{
                 //nothing to do
