@@ -1,49 +1,88 @@
-#include "camera_system.hpp"
+
+/**
+ *   @file camera_system.cpp
+ *    @brief Manage the camera system in the game and creat the relationship between camera lever and came switch.
+ *    @copyright  GNU GENERAL PUBLIC LICENSE.
+ */
+ #include "camera_system.hpp"
+ #include <assert.h>
 
 using namespace engine;
+/**
+ *    @brief Camemera system object constructor.
+ *    @param[in] p_camera it sets camera pointer.
+ *    @param[in] p_camera_switch it sets the camera switch pointer.
+ *
+ */
 
-CameraSystem::CameraSystem(Camera* p_camera, CameraSwitch* p_cameraSwitch){
+CameraSystem::CameraSystem(Camera* p_camera, CameraSwitch* p_camera_switch){
     camera = p_camera;
-    cameraSwitch = p_cameraSwitch;
-    cameraLever = NULL;
-    lastLeverState = 1;
+    camera_switch = p_camera_switch;
+    camera_lever = NULL;
+    last_lever_state = 1;
 }
 
-CameraSystem::CameraSystem(Camera* p_camera, CameraSwitch* p_cameraSwitch, CameraLever* p_cameraLever){
-    camera = p_camera;
-    cameraSwitch = p_cameraSwitch;
-    cameraLever = p_cameraLever;
-}
+/**
+ *    @brief Camemera system object constructor.
+ *    @param[in] p_camera it sets camera pointer.
+ *    @param[in] p_camera_switch it sets the camera switch pointer.
+ *     @param[in] p_camera_lever it sets the camera lever pointer
+ */
 
+CameraSystem::CameraSystem(Camera* p_camera, CameraSwitch* p_camera_switch, CameraLever* p_camera_lever){
+    camera = p_camera;
+    camera_switch = p_camera_switch;
+    camera_lever = p_camera_lever;
+}
+/**
+*    @brief update the camera system  decoring the time.
+*    @param[in] timeElapsed its about the time
+*/
 void CameraSystem::update(double timeElapsed){
     camera->update(timeElapsed);
-    cameraSwitch->update(timeElapsed);
-    if(cameraLever != NULL){
-     cameraLever->update(timeElapsed);
-        if(cameraLever->getState() != lastLeverState){
-            lastLeverState = cameraLever->getState();
-            camera->changeState(cameraLever->getState());
+    camera_switch->update(timeElapsed);
+    if(camera_lever != NULL){
+     camera_lever->update(timeElapsed);
+        if(camera_lever->getState() != last_lever_state){
+            last_lever_state = camera_lever->getState();
+            camera->changeState(camera_lever->getState());
         }
     }
-    if(!cameraSwitch->isWorking() && camera->isTurnedOn()){
+    if(!camera_switch->isWorking() && camera->isTurnedOn()){
          camera->turnOff();
     }
 }
+/**
+ *   @brief draws the animation of the Camera System according to its position
+ *   @return void
+ */
 void CameraSystem::draw(){
+    assert ( timeElapsed != NULL);
     camera->draw();
-    cameraSwitch->draw();
-    if(cameraLever != NULL){
-        cameraLever->draw();
+    camera_switch->draw();
+    if(camera_lever != NULL){
+        camera_lever->draw();
     }
 }
+/**
+ *   @brief   get the actual camera system
+ *   @return camera
+ */
 Camera* CameraSystem::getCamera(){
     return camera;
 }
+/**
+ *   @brief get the actual camera system
+ *   @return camera switch
+ */
 
 CameraSwitch* CameraSystem::getCameraSwitch(){
-    return cameraSwitch;
+    return camera_switch;
 }
-
+/**
+ *   @brief  get the actual camera lever
+ *   @return camera
+ */
 CameraLever* CameraSystem::getCameraLever(){
-    return cameraLever;
+    return camera_lever;
 }
