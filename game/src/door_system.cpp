@@ -51,6 +51,9 @@ void DoorSystem::update(double timeElapsed){
             door->setHeight(25);
         }
     }
+    else{
+        //nothing to do
+    }
 }
 /**
  *   @brief draws the animation of the chair according to its position

@@ -92,6 +92,9 @@ void Chair::moveInX(double move_chair_in_x){
         if(CollisionManager::instance.verifyCollisionWithOtherChairs(this) || CollisionManager::instance.verifyCollisionWithWalls(this) || CollisionManager::instance.verifyCollisionWithGuardsBody(this)) {
                 setPositionX(getPositionX()+(move_chair_in_x*(0-1)));
         }
+        else{
+                //nothing to do
+        }
 
 }
 
@@ -116,6 +119,9 @@ void Chair::moveInY(double move_chair_in_y){
         setPositionY(getPositionY()+move_chair_in_y);
         if(CollisionManager::instance.verifyCollisionWithOtherChairs(this) || CollisionManager::instance.verifyCollisionWithWalls(this) || CollisionManager::instance.verifyCollisionWithGuardsBody(this)) {
                 setPositionY(getPositionY()+(move_chair_in_y*(0-1)));
+        }
+        else{
+                //nothing to do
         }
 
 }

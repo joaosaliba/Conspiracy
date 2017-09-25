@@ -47,6 +47,9 @@ void Arrow::update(double timeElapsed){
         if(isEnabled()){
                 animator->update();
         }
+        else{
+                //nothing to do
+        }
 
 }
 
@@ -58,5 +61,8 @@ void Arrow::update(double timeElapsed){
 void Arrow::draw(){
         if(isEnabled()) {
                 animator->draw(getPositionX(), getPositionY());
+        }
+        else{
+                //nothing to do
         }
 }
