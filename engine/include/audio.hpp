@@ -1,5 +1,5 @@
 /**
- * @file audio.cpp
+ * @file audio.hpp
  * @brief class to object of audio, where you can find some values, files, others objects
  * and methods to the same.
  * @copyright  GNU GENERAL PUBLIC LICENSE.

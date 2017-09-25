@@ -1,3 +1,10 @@
+/**
+ * @file camera.hpp
+ * @brief class to object of camera, where you can find some values, files,
+ * others objects used in this class and methods to the same.
+ * @copyright  GNU GENERAL PUBLIC LICENSE.
+ */
+
 #ifndef CAMERA_HPP
 #define CAMERA_HPP
 
@@ -9,9 +16,7 @@
 
 using namespace engine;
 
-/**class to object of camera, where you can find some values and meths to the same..
- *
- */
+
 
 class Camera: public Enemy{
 public:

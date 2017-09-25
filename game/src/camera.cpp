@@ -1,16 +1,34 @@
+/**
+ * @file camera.cpp
+ * @brief class to object of camera, where you can find some values, files,
+ * others objects used in this class and methods to the same.
+ * @copyright  GNU GENERAL PUBLIC LICENSE.
+ */
 #include "camera.hpp"
-
+#include <assert.h>
 
 #define FILENAME "assets/sprites/camera(11X8).png"
 #define WIDTH 11
 #define HEIGHT 8
 
-/**class to object of camera, where you can find some values and meths to the same.
+
+/**
+ * @brief Camera object constructor.
+ * @param[in] double-position_x it sets the x coordinate of the object.
+ * @param[in] double-position_y it sets the y coordinate of the object.
+ * @param[in] width it sets the width dimension of the object.
+ * @param[in] height it sets the height dimension of the object.
+ * @param[in] direction set the new direct of the camera lever
  *
  */
 
-Camera::Camera(double position_x, double position_y, std::string direction) : Enemy(FILENAME,position_x,position_y,
+Camera::Camera(double position_x, double position_y, std::string direction) : Enemy(FILENAME,position_x,
+                                                                 position_y,
                                                                  WIDTH, HEIGHT){
+
+    assert ( position_x != NULL);
+    assert ( position_y != NULL);
+
     initialize_animator(FILENAME);
     animator->set_interval(direction);
     turned_on = true;
@@ -20,43 +38,90 @@ Camera::Camera(double position_x, double position_y, std::string direction) : En
     initialize_vision(default_range, default_angle_of_vision, direction);
 }
 
+/**
+ * @brief Camera object constructor.
+ * @param[in] double-position_x it sets the x coordinate of the object.
+ * @param[in] double-position_y it sets the y coordinate of the object.
+ * @param[in] width it sets the width dimension of the object.
+ * @param[in] height it sets the height dimension of the object.
+ * @param[in] direction set the new direct of the camera lever
+ * @param[in] int-p_angle_of_vision
+ * @param[in] int-p_range
+ * @param[in] int-p_initial_angle
+ */
+
 Camera::Camera(double position_x, double position_y, std::string direction,
                int p_angle_of_vision, int p_range, int p_initial_angle): Enemy(FILENAME,position_x,
                                                                      position_y,
                                                                      WIDTH, HEIGHT){
+    assert ( position_x != NULL);
+    assert ( position_y != NULL);
+
     initialize_animator(FILENAME);
     animator->set_interval(direction);
     turned_on = true;
 
     initialize_vision(p_range, p_angle_of_vision, direction);
-    if(p_initial_angle != -1){
+    if(p_initial_angle != -1) {
         initial_angle = p_initial_angle;
         fieldOfVision->set_angle(initial_angle);
     }
 }
 
+/**
+  *    @brief Camera object destructor.
+ */
+
 Camera::~Camera() {
 }
 
+/**
+* @brief Method turned_off
+* <p>This method verify if camera is turned_on</p>
+* @return void
+*/
 void Camera::turn_off() {
     turned_on = false;
     fieldOfVision->deactivate();
 }
 
+/**
+* @brief Method turned_on
+* <p>This method turn on the camera</p>
+* @return bool-turned_on
+*/
 bool Camera::is_turned_on() {
     return turned_on;
 }
 
+/**
+* @brief Method update
+* <p>This method update the animator position</p>
+* @return void
+*/
+
 void Camera::update(double time_elapsed) {
+    assert (time_elapsed != NULL);
     time_elapsed = time_elapsed;
     animator->update();
 }
+
+/**
+* @brief Method draw
+* @return void
+*/
 
 void Camera::draw() {
     animator->draw(get_position_x(), get_position_y());
     animator->draw_collider(get_position_x(), get_position_y(), get_width(), get_height());
     fieldOfVision->draw();
 }
+
+/**
+* @brief Method initialize_animator
+* <p>This method put the initial position of the animator</p>
+* @return void
+*/
 
 void Camera::initialize_animator(std::string filename) {
     state = 1;
@@ -67,7 +132,17 @@ void Camera::initialize_animator(std::string filename) {
     animator->add_animation("upleft",6,6);
 }
 
+/**
+* @brief Method initialize_vision
+* <p>This method initialize the first algle of the camera</p>
+* @return void
+*/
+
 void Camera::initialize_vision(int p_range, int p_angle_of_vision, std::string direction) {
+
+    assert (p_range != NULL);
+    assert (p_angle_of_vision != NULL);
+
     range = p_range;
     angle_of_vision = p_angle_of_vision;
 
@@ -86,20 +161,47 @@ void Camera::initialize_vision(int p_range, int p_angle_of_vision, std::string d
     }
     fieldOfVision->set_angle(initial_angle);
 }
+
+/**
+* @brief Method set_states
+* @return void
+*/
+
 void Camera::set_states(int angle2, int angle3) {
+    assert (angle2 != NULL);
+    assert (angle3 != NULL);
     angles.push_back(angle2);
     angles.push_back(initial_angle);
     angles.push_back(angle3);
 }
 
-void Camera::change_state(int p_state){
+/**
+* @brief Method change_state
+* <p>This method change the angle of the camera</p>
+* @return void
+*/
+
+void Camera::change_state(int p_state) {
+    assert (p_state != NULL);
     fieldOfVision->set_angle(angles[p_state]);
 }
 
-int Camera::get_range(){
+/**
+* @brief Method get_range
+* <p>This return the range value of the camera</p>
+* @return int-range
+*/
+
+int Camera::get_range() {
     return range;
 }
 
-fieldOfVision* Camera::get_fieldOfVision(){
+/**
+* @brief Method get_fieldOfVision
+* <p>This method take the value of fieldOfVision</p>
+* @return void
+*/
+
+fieldOfVision* Camera::get_fieldOfVision() {
     return fieldOfVision;
 }
