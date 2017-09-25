@@ -85,10 +85,16 @@ bool CollisionManager::verifyCollisionWithWalls(GameObject* game_object_collisio
                 if(verifyCollision(wall, game_object_collision)) {
                         return true;
                 }
+                else{
+                        //nothing to do
+                }
         }
         for(GameObject* door : doorList) {
                 if(door->isEnabled() && verifyCollision(door,game_object_collision)) {
                         return true;
+                }
+                else{
+                        //nothing to do
                 }
         }
         return false;
@@ -102,15 +108,24 @@ bool CollisionManager::verifyCollisionWithWallsAndChairs(GameObject* game_object
                 if(verifyCollision(wall, game_object_collision)) {
                         return true;
                 }
+                else{
+                        //nothing to do
+                }
         }
         for(GameObject * chair : chairList) {
                 if(verifyCollision(chair, game_object_collision)) {
                         return true;
                 }
+                else{
+                        //nothing to do
+                }
         }
         for(GameObject* door : doorList) {
                 if(door->isEnabled() && verifyCollision(door,game_object_collision)) {
                         return true;
+                }
+                else{
+                        //nothing to do
                 }
         }
         return false;
@@ -125,6 +140,9 @@ std::pair<std::string, GameObject *> CollisionManager::verifyCollisionWithChairs
                 if((collision = verifyCollisionChair(chair, game_object_collision))!="none") {
                         return std::pair<std::string, GameObject*>(collision, chair);
                 }
+                else{
+                        //nothing to do
+                }
         }
         return std::pair<std::string, GameObject*>(collision, NULL);
 }
@@ -137,6 +155,9 @@ bool CollisionManager::verifyCollisionWithOtherChairs(GameObject* game_object){
       if(chair != game_object){
             if(verifyCollision(chair, game_object)) {
                     return true;
+            }
+            else{
+                //nothing to do
             }
       }
   }
@@ -151,6 +172,9 @@ bool CollisionManager::verifyCollisionWithGuardsBody(GameObject* game_object){
         for(GameObject * enemy : guardList) {
                 if(verifyCollision(enemy, game_object)) {
                         return true;
+                }
+                else{
+                        //nothing to do
                 }
         }
         return false;
@@ -211,9 +235,23 @@ bool CollisionManager::verifyCollisionWithFieldsOfVision(GameObject* game_object
                                             field->playEffect();
                                             return true;
                                     }
+                                    else{
+                                        //nothing to do
+                                    }
                             }
-                    }
+                            else{
+                                //nothing to do
+                            }
+                    } else{
+                        //nothing to do
+                      }
             }
+            else{
+                //nothing to do
+            }
+        }
+        else{
+                //nothing to do
         }
     }
     return false;
@@ -228,6 +266,9 @@ GameObject* CollisionManager::verifyCollisionWithSwitches(GameObject* game_objec
                 if(verifyCollision(doorSwitch, game_object_collision)) {
                         return doorSwitch;
                 }
+                else{
+                        //nothing to do
+                }
         }
         return NULL;
 }
@@ -240,6 +281,9 @@ GameObject* CollisionManager::verifyCollisionWithCameraSwitches(GameObject* game
             if(verifyCollision(cameraSwitch, game_object)) {
                     return cameraSwitch;
             }
+            else{
+                //nothing to do
+           }
     }
     return NULL;
 
@@ -253,6 +297,9 @@ GameObject* CollisionManager::verifyCollisionWithCameraLevers(GameObject* game_o
             if(verifyCollision(lever, game_object)) {
                     return lever;
             }
+            else{
+                //nothing to do
+        }
     }
     return NULL;
 }
@@ -265,6 +312,9 @@ GameObject* CollisionManager::verifyCollisionWithPapers(GameObject* game_object_
                 if(verifyCollision(paper, game_object_collision)) {
                         return paper;
                 }
+                else{
+                        //nothing to do
+                }
         }
         return NULL;
 }
@@ -276,6 +326,8 @@ GameObject* CollisionManager::verifyCollisionWithFinishPoints(GameObject* game_o
     for(GameObject * finishPoint : finishPointList) {
             if(verifyCollision(finishPoint, game_object_collision)) {
                     return finishPoint;
+            }else{
+                //nothing to do
             }
     }
     return NULL;
@@ -339,15 +391,41 @@ bool CollisionManager::verifyCollision( GameObject* game_object_collision, GameO
         if(game_object_collision2->getWidth() == 0 || game_object_collision2->getHeight() == 0) {
                 return false;
         }
+        else{
+                //nothing to do
+        }
         if(game_object_collision->getWidth() == 0 || game_object_collision->getHeight() == 0) {
                 return false;
         }
+        else{
+                //nothing to do
+        }
 
         //If any of the sides from A are outside of B
-        if( bottomA <= topB ) { return false; }
-        if( topA >= bottomB ) { return false; }
-        if( rightA <= leftB ) { return false; }
-        if( leftA >= rightB ) { return false; }
+        if( bottomA <= topB ) { 
+                return false; 
+        }
+        else{
+                //nothing to do
+        }
+        if( topA >= bottomB ) {
+                 return false; 
+        }
+        else{
+                //nothing to do
+        }
+        if( rightA <= leftB ) {
+                 return false; 
+        }
+        else{
+                //nothing to do
+        }
+        if( leftA >= rightB ) { 
+                return false;
+        }
+        else{
+                //nothing to do
+        }
         //If none of the sides from A are outside B
         return true;
 }
@@ -381,10 +459,29 @@ bool CollisionManager::verifyRectangleCollisionWithLine(GameObject* game_object,
         bottom.second.first = game_object->getPositionX()+game_object->getWidth();
         bottom.second.second= game_object->getPositionY()+game_object->getHeight();
 
-        if(verifyLineCollisionWithLine(top.first,top.second,a,b)) {return true; }
-        if(verifyLineCollisionWithLine(right.first,right.second,a,b)) {return true; }
-        if(verifyLineCollisionWithLine(left.first,left.second,a,b)) {return true; }
-        if(verifyLineCollisionWithLine(bottom.first,bottom.second,a,b)) {return true; }
+        if(verifyLineCollisionWithLine(top.first,top.second,a,b)) {
+                return true; 
+        } else{
+                //nothing to do
+        }
+        if(verifyLineCollisionWithLine(right.first,right.second,a,b)) {
+                return true; 
+        }
+        else{
+                //nothing to do
+        }
+        if(verifyLineCollisionWithLine(left.first,left.second,a,b)) {
+                return true;
+        }
+        else{
+                //nothing to do
+        }
+        if(verifyLineCollisionWithLine(bottom.first,bottom.second,a,b)) {
+                return true;
+        }
+        else{
+                //nothing to do
+        }
         return false;
 }
 /**
@@ -426,44 +523,84 @@ std::string CollisionManager::verifyCollisionChair(GameObject* game_object_colli
         if(game_object_collision2->getWidth() == 0 || game_object_collision2->getHeight() == 0) {
                 return "none";
         }
+        else{
+                //nothing to do
+        }
         if(game_object_collision->getWidth() == 0 || game_object_collision->getHeight() == 0) {
                 return "none";
+        }
+        else{
+                //nothing to do
         }
 
         if(rightB > (leftA - 3) && rightA > (rightB)) {
                 if((bottomB < (bottomA) && bottomB > (topA)) || (topB < bottomA && topB > topA)) {
                         return "right";
                 }
+                else{
+                        //nothing to do
+                }
                 if((bottomA < bottomB && bottomA > topB) || (topA < bottomB && topA > topB)) {
                         return "right";
                 }
+                else{
+                        //nothing to do
+                }
+        }
+        else{
+                //nothing to do
         }
 
         if(leftB < (rightA + 3) && leftA < (leftB)) {
                 if((bottomB < bottomA && bottomB > topA) ||(topB < bottomA && topB > topA)) {
                         return "left";
                 }
+                else{
+                        //nothing to do
+                }
                 if((bottomA < bottomB && bottomA > topB) || (topA < bottomB && topA > topB)) {
                         return "left";
                 }
+                else{
+                        //nothing to do
+                }
+        }
+        else{
+                //nothing to do
         }
 
         if(topB <= (bottomA + 3) && (topB) > topA) {
                 if((leftB >= leftA && leftB <= rightA) || (rightB <= rightA && rightB >= leftA)) {
                         return "up";
+                } else{
+                        //nothing to do
                 }
                 if((leftA >= leftB && leftA <= rightB) || (rightA <= rightB && rightA >= leftB)) {
                         return "up";
+                } else{
+                        //nothing to do
                 }
+        }
+        else{
+                //nothing to do
         }
 
         if(bottomB >= (topA - 3) && bottomA > (bottomB)) {
                 if((leftB >= leftA && leftB <= rightA) || (rightB <= rightA && rightB >= leftA)) {
                         return "down";
+                } 
+                else{
+                        //nothing to do
                 }
                 if((leftA >= leftB && leftA <= rightB) || (rightA <= rightB && rightA >= leftB)) {
                         return "down";
                 }
+                else{
+                        //nothing to do
+                }
+        }
+        else{
+                //nothing to do
         }
 
         return "none";
