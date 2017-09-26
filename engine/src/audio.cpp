@@ -12,9 +12,9 @@
 
 using namespace engine;
 
-Audio::Audio(std::string audio_path, std::string audio_type, int volume) {
+Audio::Audio(std::string audio_path, std::string audio_type, int audio_volume) {
 
-    assert ( volume != NULL);
+    assert ( audio_volume != NULL);
 
   /**
   * @brief Method did to load the audio of the game
@@ -26,13 +26,13 @@ Audio::Audio(std::string audio_path, std::string audio_type, int volume) {
 
     if(audio_type.compare("MUSIC") == 0) {
         audio_music = Mix_LoadMUS(audio_path.c_str());
-        Mix_VolumeMusic(volume);
+        Mix_VolumeMusic(audio_volume);
         if(audio_music == NULL) {
             ERROR("Audio file could not be loaded");
         }
     }else if(audio_type.compare("EFFECT") == 0) {
         audio_effect = Mix_LoadWAV(audio_path.c_str());
-        Mix_VolumeChunk(audio_effect, volume);
+        Mix_VolumeChunk(audio_effect, audio_volume);
         if(audio_effect == NULL) {
             ERROR("Audio file could not be loaded");
         }

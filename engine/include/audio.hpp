@@ -23,7 +23,7 @@ namespace engine{
 * @param int-volume
 */
     public:
-        Audio(std::string audio_path, std::string audio_type, int volume);
+        Audio(std::string audio_path, std::string audio_type, int audio_volume);
         ~Audio();
         void play(const int times_to_play);
         void pause();

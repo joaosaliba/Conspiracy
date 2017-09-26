@@ -10,15 +10,7 @@
 
 namespace engine {
     class Timer {
-/**
-* Método construtor
-* <p>Esse método executa a ação de construir os métodos e passar as variáreis
-*utilizadas na classe timer.hpp</p>
-* @param unsigned int-elapsed_time
-* @param unsigned int-total_elapsed_time
-* @param unsigned int-ticks
-* @param unsigned int-step_ticks
-*/
+      
 
     public:
         Timer() : ticks(0), step_ticks(0) {}
