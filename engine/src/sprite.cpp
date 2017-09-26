@@ -1,7 +1,7 @@
 #include "sprite.hpp"
 #include "engine.hpp"
 #include "log.h"
-
+#include <assert.h>
 using namespace engine;
 
     Sprite::Sprite(std::string newDirectory){
@@ -41,14 +41,16 @@ using namespace engine;
         drawWidth = w;
         drawHeight = h;
     }
-    void Sprite::draw(int x, int y){
-        axis.first = x;
-        axis.second = y;
+    void Sprite::draw(int x, int y){// procurar o arquivo onde axis esta definido.
+        assert(x>0);
+        assert(y>0); 
+        axis.horizontal = x;
+        axis.vertical = y;
          //Crop image
         clipRect = {0, 0, lenght.first, lenght.second};
 
         // Rendering in screen
-        renderQuad = {axis.first, axis.second, drawWidth, drawHeight };
+        renderQuad = {axis.horizontal, axis.vertical, drawWidth, drawHeight };
 
         SDL_RenderCopy(WindowManager::getGameCanvas(), texture, &clipRect, &renderQuad);
     }
