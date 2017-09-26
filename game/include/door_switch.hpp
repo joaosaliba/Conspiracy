@@ -1,3 +1,10 @@
+/**
+ * @file door_switch.hpp
+ * @brief class to object of door_switch, where you can find some values, files,
+ * others objects used in this class and methods to the same.
+ * @copyright  GNU GENERAL PUBLIC LICENSE.
+ */
+ 
 #ifndef DOOR_SWITCH_HPP
 #define DOOR_SWITCH_HPP
 
@@ -9,13 +16,11 @@
 
 using namespace engine;
 
-/**class to object of door_switch, where you can find some values and meths to the same.
- *
- */
+
 
 class DoorSwitch: public GameObject{
 public:
-    DoorSwitch(std::string object_name, double position_x, double position_y, int width, int height);
+    DoorSwitch(std::string object_name, double door_switch_position_x, double door_switch_position_y, int door_switch_width, int door_switch_height);
     ~DoorSwitch();
     void update(double time_elapsed);
     void draw();

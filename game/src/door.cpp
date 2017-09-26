@@ -5,6 +5,8 @@
  * @copyright  GNU GENERAL PUBLIC LICENSE.
  */
 
+//#define NDEBUG *uncomment to disable assertions
+
 #include "door.hpp"
 #include <assert.h>
 

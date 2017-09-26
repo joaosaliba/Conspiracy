@@ -4,6 +4,9 @@
  * others objects used in this class and methods to the same.
  * @copyright  GNU GENERAL PUBLIC LICENSE.
  */
+
+ //#define NDEBUG *uncomment to disable assertions
+ 
 #include "camera.hpp"
 #include <assert.h>
 
@@ -87,7 +90,7 @@ void Camera::turn_off() {
 
 /**
 * @brief Method turned_on
-* <p>This method turn on the camera</p>
+* <p>This method return the state turned_on of the camera</p>
 * @return bool-turned_on
 */
 bool Camera::is_turned_on() {
