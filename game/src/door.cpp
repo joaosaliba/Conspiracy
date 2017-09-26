@@ -12,25 +12,25 @@
 
 /**
  * @brief Door object constructor.
- * @param[in] double-position_x it sets the x coordinate of the object.
- * @param[in] double-position_y it sets the y coordinate of the object.
- * @param[in] int-width it sets the width dimension of the object.
- * @param[in] int-height it sets the height dimension of the object.
+ * @param[in] double-door_position_x it sets the x coordinate of the object.
+ * @param[in] double-door_position_y it sets the y coordinate of the object.
+ * @param[in] int-door_width it sets the door_width dimension of the object.
+ * @param[in] int-door_height it sets the door_height dimension of the object.
  * @param[in] direction set the new direct of the camera lever
  *
  */
 
-Door::Door(std::string object_name, double position_x, double position_y,
-           int width, int height, std::string door_side) : GameObject(object_name,
-                                                                     position_x,
-                                                                     position_y,
-                                                                     width,
-                                                                     height){
+Door::Door(std::string object_name, double door_position_x, double door_position_y,
+           int door_width, int door_height, std::string door_side) : GameObject(object_name,
+                  door_width                                                   door_position_x,
+                                                                     door_position_y,
+                                                                     door_width,
+                                                                     door_height){
 
-    assert (position_x != NULL);
-    assert (position_y != NULL);
-    assert (width != NULL);
-    assert (height != NULL);
+    assert (door_position_x != NULL);
+    assert (door_position_y != NULL);
+    assert (door_width != NULL);
+    assert (door_height != NULL);
 
     if(door_side.compare("DOWN") == 0) {
         animator = new animation(object_name, 1, 4, 0.5);
@@ -49,7 +49,7 @@ Door::Door(std::string object_name, double position_x, double position_y,
     side = door_side;
     door_effect = new Audio("assets/sounds/DOOR.wav", "EFFECT", 90);
 
-    animator->set_draw_size(width,height);
+    animator->set_draw_size(door_width,door_height);
     open = false;
 }
 
@@ -86,8 +86,8 @@ void Door::update(double time_elapsed) {
 
 void Door::draw() {
     INFO("Door DRAW");
-    animator->draw(get_position_x(), get_position_y());
-    animator->draw_collider(get_position_x(), get_position_y(), get_width(), get_height());
+    animator->draw(get_door_position_x(), get_door_position_y());
+    animator->draw_collider(get_door_position_x(), get_door_position_y(), get_door_width(), get_door_height());
 }
 
 /**
