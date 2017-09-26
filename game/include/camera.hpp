@@ -20,8 +20,8 @@ using namespace engine;
 
 class Camera: public Enemy{
 public:
-    Camera(double position_x, double position_y, std::string direction);
-    Camera(double position_x, double position_y, std::string direction, int angle_of_vision, int range, int initial_angle);
+    Camera(double camera_position_x, double camera_position_y, std::string direction);
+    Camera(double camera_position_x, double camera_position_y, std::string direction, int angle_of_vision, int range, int initial_angle);
     ~Camera();
     void update(double time_elapsed);
     void draw();

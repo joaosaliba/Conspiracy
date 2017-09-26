@@ -6,7 +6,7 @@
  */
 
  //#define NDEBUG *uncomment to disable assertions
- 
+
 #include "camera.hpp"
 #include <assert.h>
 
@@ -17,20 +17,20 @@
 
 /**
  * @brief Camera object constructor.
- * @param[in] double-position_x it sets the x coordinate of the object.
- * @param[in] double-position_y it sets the y coordinate of the object.
+ * @param[in] double-camera_position_x it sets the x coordinate of the object.
+ * @param[in] double-camera_position_y it sets the y coordinate of the object.
  * @param[in] width it sets the width dimension of the object.
  * @param[in] height it sets the height dimension of the object.
  * @param[in] direction set the new direct of the camera lever
  *
  */
 
-Camera::Camera(double position_x, double position_y, std::string direction) : Enemy(FILENAME,position_x,
-                                                                 position_y,
+Camera::Camera(double camera_position_x, double camera_position_y, std::string direction) : Enemy(FILENAME,camera_position_x,
+                                                                 camera_position_y,
                                                                  WIDTH, HEIGHT){
 
-    assert ( position_x != NULL);
-    assert ( position_y != NULL);
+    assert ( camera_position_x != NULL);
+    assert ( camera_position_y != NULL);
 
     initialize_animator(FILENAME);
     animator->set_interval(direction);
@@ -43,8 +43,8 @@ Camera::Camera(double position_x, double position_y, std::string direction) : En
 
 /**
  * @brief Camera object constructor.
- * @param[in] double-position_x it sets the x coordinate of the object.
- * @param[in] double-position_y it sets the y coordinate of the object.
+ * @param[in] double-camera_position_x it sets the x coordinate of the object.
+ * @param[in] double-camera_position_y it sets the y coordinate of the object.
  * @param[in] width it sets the width dimension of the object.
  * @param[in] height it sets the height dimension of the object.
  * @param[in] direction set the new direct of the camera lever
@@ -53,12 +53,12 @@ Camera::Camera(double position_x, double position_y, std::string direction) : En
  * @param[in] int-p_initial_angle
  */
 
-Camera::Camera(double position_x, double position_y, std::string direction,
-               int p_angle_of_vision, int p_range, int p_initial_angle): Enemy(FILENAME,position_x,
-                                                                     position_y,
+Camera::Camera(double camera_position_x, double camera_position_y, std::string direction,
+               int p_angle_of_vision, int p_range, int p_initial_angle): Enemy(FILENAME,camera_position_x,
+                                                                     camera_position_y,
                                                                      WIDTH, HEIGHT){
-    assert ( position_x != NULL);
-    assert ( position_y != NULL);
+    assert ( camera_position_x != NULL);
+    assert ( camera_position_y != NULL);
 
     initialize_animator(FILENAME);
     animator->set_interval(direction);
@@ -115,8 +115,8 @@ void Camera::update(double time_elapsed) {
 */
 
 void Camera::draw() {
-    animator->draw(get_position_x(), get_position_y());
-    animator->draw_collider(get_position_x(), get_position_y(), get_width(), get_height());
+    animator->draw(get_camera_position_x(), get_camera_position_y());
+    animator->draw_collider(get_camera_position_x(), get_camera_position_y(), get_width(), get_height());
     fieldOfVision->draw();
 }
 
@@ -150,16 +150,16 @@ void Camera::initialize_vision(int p_range, int p_angle_of_vision, std::string d
     angle_of_vision = p_angle_of_vision;
 
     if(direction == "right") {
-        fieldOfVision = new fieldOfVision(get_position_x()+4+get_width()/2,get_position_y()+7, range, angle_of_vision);
+        fieldOfVision = new fieldOfVision(get_camera_position_x()+4+get_width()/2,get_camera_position_y()+7, range, angle_of_vision);
         initial_angle = 305;
     }else if(direction  == "left") {
-        fieldOfVision = new fieldOfVision(get_position_x()-4+get_width()/2,get_position_y()+7, range, angle_of_vision);
+        fieldOfVision = new fieldOfVision(get_camera_position_x()-4+get_width()/2,get_camera_position_y()+7, range, angle_of_vision);
         initial_angle = 220;
     }else if(direction == "upleft") {
-        fieldOfVision = new fieldOfVision(get_position_x()-6+get_width()/2,get_position_y(), range, angle_of_vision);
+        fieldOfVision = new fieldOfVision(get_camera_position_x()-6+get_width()/2,get_camera_position_y(), range, angle_of_vision);
         initial_angle = 140;
     }else {
-        fieldOfVision = new fieldOfVision(get_position_x()+5+get_width()/2,get_position_y(), range, angle_of_vision);
+        fieldOfVision = new fieldOfVision(get_camera_position_x()+5+get_width()/2,get_camera_position_y(), range, angle_of_vision);
         initial_angle = 45;
     }
     fieldOfVision->set_angle(initial_angle);
