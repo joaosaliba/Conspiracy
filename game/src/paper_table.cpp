@@ -1,20 +1,23 @@
 #include "paper_table.hpp"
 #include "log.h"
-
-PaperTable::PaperTable(std::string objectName, double positionX, double positionY,
+#include <assert.h>
+ 
+PaperTable::PaperTable(std::string objectName, double PositionAxisX, double PositionAxisY,
                                      int width, int height) : GameObject(objectName,
                                                                          positionX,
                                                                          positionY,
                                                                          width, height){
-table = new Table("assets/sprites/mesa.png", positionX, positionY, width, height);
-paper = new Paper("assets/sprites/papeis(19X21).png", positionX + 20, positionY - 2, 10, 40);
+assert(x>0);
+assert(y>0);                                                                         
+table = new Table("assets/sprites/mesa.png", PositionAxisX, PositionAxisY, width, height);
+paper = new Paper("assets/sprites/papeis(19X21).png", PositionAxisX + 20, PositionAxisY - 2, 10, 40);
 }
 
 PaperTable::~PaperTable(){
 
 }
 
-void PaperTable::update(double timeElapsed){
+void PaperTable::update(double timeElapsed){\\ assert para verificar se timeelapsed e positivo. 
    table->update(timeElapsed);
    paper->update(timeElapsed);
 }
