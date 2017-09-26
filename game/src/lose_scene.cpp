@@ -1,110 +1,77 @@
-include "lose_scene.hpp"
-#include "button.hpp"
-
-#include <typeinfo>
-#include <iostream>
-/* set lose scene.
- *@return background 
-*/ 
-
+#include "log.h"
+#include "player.hpp"
 using namespace engine;
+# include<assert.h>
+Player::Player(std::pair<int, int> biluPosition, std::pair<int, int> etemerPosition,
+               std::pair<int,int> varginhaPosition, int paperQuantity, int stageNumber){
 
-LoseScene::LoseScene(int id) : Scene(id){
-    selectButton = 1;/** select button*/
-    select = new Color(255, 255, 255, 0);/** change color*/
-    notSelect = new Color(0, 0, 0, 0);/** color of notselect*/
-    soundEffect = new Audio("assets/sounds/SELECT6.wav", "EFFECT", 100);/** set the sound */
-    backgroundMusic = new Audio("assets/sounds/GAMEOVER.wav", "MUSIC", 50);/** set the backgroud music*/
-    background = new Animation("assets/sprites/lose.png", 1, 4, 0.8);/** set position */
-    background->addAction("lose", 0,3);/** adction of scene in  sort action*/
-    background->setInterval("lose");/** define the interval ind display*/
+        exclamationAnimation = new Animation("assets/sprites/exclamation2.png",1, 1, 0.5);
+
+        bilu = new Bilu(biluPosition.first, biluPosition.second);
+        varginha = new Varginha(varginhaPosition.first, varginhaPosition.second);
+        etemer = new Etemer(etemerPosition.first, etemerPosition.second);
+        header = new Header(0,0, paperQuantity, stageNumber);
+
+        selectedAlien = 1;
+
+        etemer->update(0);
+        bilu->update(0);
+        varginha->update(0);
+        header->update(0);
+
+        bilu->setAlienDeselect();
+        varginha->setAlienDeselect();
+        etemer->setAlienSelected();
+
+        bilu_sound_effect = new Audio("assets/sounds/TROCABILU.wav", "EFFECT", 100);
+        varginha_sound_effect = new Audio("assets/sounds/TROCAVARGINHA.wav", "EFFECT", 25);
+        etemer_sound_effect = new Audio("assets/sounds/TROCATEMER.wav", "EFFECT", 75);
 }
 
-LoseScene::~LoseScene(){
+Player::~Player(){
 }
-/* drawing  lose scene.
- *@return game object 
-*/ 
 
-void LoseScene::draw(){
-        background->draw_instant(80, 20);
+void Player::update(double time_elapsed){
+        assert(time_elapsed>0);
+        int beforeAlien = selectedAlien;
 
-        for(auto gameObject : gameObjectsList) {
-                (*gameObject.second).draw();
+        if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_ONE)) {
+                selectedAlien = 1;
+        } else if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_TWO)) {
+                selectedAlien = 2;
+        } else if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_THREE)) {
+                selectedAlien = 3;
+                ((Varginha *)(varginha))->setDefault();
         }
-}
-/* update  gameObject.
- *@return gameObject.
-*/ 
-void LoseScene::update(double timeElapsed){
-        selectAction();
 
-        background->update();
+        if(beforeAlien != selectedAlien) {
+                header->setAlienSelect(selectedAlien);
+                etemer->setAlienDeselect();
+                bilu->setAlienDeselect();
+                varginha->setAlienDeselect();
 
-        for(auto gameObject : gameObjectsList) {
-        /** if button is diferent will  make another clause*/
-                if(typeid(*gameObject.second) == typeid(Button)) {  
-                /** if user select an diferrent oibject   will  change  to select color if don't set cpçpr tp disselect color*/  
-                        if(gameObject.first == selectButton) {
-                                ((Button *)(gameObject.second))->setTextColor(select);
-                        }else{
-                                ((Button *)(gameObject.second))->setTextColor(notSelect);
-                        }
-                }
-
-                (*gameObject.second).update(timeElapsed);
-        }
-}
-/* lose the scene.
- *@param gameObject.
-*/ 
-
-void LoseScene::load(){
-        gameObjectsList.push_back(std::pair<int, GameObject*>(1,new Button("assets/fonts/font.ttf", 700, 500, 500, 500, "Continue", 50)));
-        gameObjectsList.push_back(std::pair<int, GameObject*>(2,new Button("assets/fonts/font.ttf", 50, 500, 500, 500, "Menu", 50)));
-        AnimationManager::instance.setBackgroundColor(new Color(255,160,156, 125));
-        backgroundMusic->play(0);
-
-}
-/* change sound effect and select button  or scene acording to the pressed  button.
- *@param  InputManager.
-*/ 
-void LoseScene::selectAction(){
-        /** change the sound effect and button if user press left , if don't move to another     
-        * clause
-        */  
-        if(InputManager::instance.isKeyTriggered(InputManager::KeyPress::KEY_PRESS_LEFT)) {
-                soundEffect->pause();
-                soundEffect->play(0);
-                selectButton--;
-                if(selectButton <= 0) {
-                        selectButton = 2;
+                waitAnimation(beforeAlien);
+                switch(selectedAlien) {
+                case 1: etemer->setAlienSelected(); etemer_sound_effect->play(0); break;
+                case 2: bilu->setAlienSelected(); bilu_sound_effect->play(0); break;
+                case 3: varginha->setAlienSelected(); varginha_sound_effect->play(0);break;
                 }
         }
-        /** change the sound effect and button if user press right*/  
-        else if(InputManager::instance.isKeyTriggered(InputManager::KeyPress::KEY_PRESS_RIGHT)) {
-                soundEffect->pause();
-                soundEffect->play(0);
-                selectButton++;
-                if(selectButton > 2) {
-                        selectButton = 1;
-                }
-        }
-        /**  if enter and another button is pressed together  go to next scene or to previous */     
-        if(InputManager::instance.isKeyTriggered(InputManager::KeyPress::KEY_PRESS_ENTER)) {
-                switch(selectButton) {
-                case 1:
-                        getSceneManager()->loadScene(getSceneManager()->getBeforeSceneId());
-                        break;
-                case 2:
-                        getSceneManager()->loadScene(0);
-                        break;
-                default:
-                        break;
-                }
 
-        }
+        exclamationAnimation->update();
+
+        etemer->update(time_elapsed);
+        bilu->update(time_elapsed);
+        varginha->update(time_elapsed);
+        header->update(time_elapsed);
 }
 
-void LoseScene::unload(){
+void Player::draw(){
+        INFO("PLAYER DRAW");
+        bilu->draw();
+        varginha->draw();
+        etemer->draw();
+        header->draw();
 }
+
+void Player::updatePaperQuantity(int newValue){
