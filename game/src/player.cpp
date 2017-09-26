@@ -1,7 +1,7 @@
 #include "log.h"
 #include "player.hpp"
 using namespace engine;
-
+# include<assert.h>
 Player::Player(std::pair<int, int> biluPosition, std::pair<int, int> etemerPosition,
                std::pair<int,int> varginhaPosition, int paperQuantity, int stageNumber){
 
@@ -31,7 +31,8 @@ Player::Player(std::pair<int, int> biluPosition, std::pair<int, int> etemerPosit
 Player::~Player(){
 }
 
-void Player::update(double timeElapsed){
+void Player::update(double time_elapsed){
+        assert(time_elapsed>0);
         int beforeAlien = selectedAlien;
 
         if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_ONE)) {
@@ -59,10 +60,10 @@ void Player::update(double timeElapsed){
 
         exclamationAnimation->update();
 
-        etemer->update(timeElapsed);
-        bilu->update(timeElapsed);
-        varginha->update(timeElapsed);
-        header->update(timeElapsed);
+        etemer->update(time_elapsed);
+        bilu->update(time_elapsed);
+        varginha->update(time_elapsed);
+        header->update(time_elapsed);
 }
 
 void Player::draw(){
