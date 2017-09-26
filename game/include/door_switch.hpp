@@ -4,7 +4,7 @@
  * others objects used in this class and methods to the same.
  * @copyright  GNU GENERAL PUBLIC LICENSE.
  */
- 
+
 #ifndef DOOR_SWITCH_HPP
 #define DOOR_SWITCH_HPP
 
@@ -21,6 +21,9 @@ using namespace engine;
 class DoorSwitch: public GameObject{
 public:
     DoorSwitch(std::string object_name, double door_switch_position_x, double door_switch_position_y, int door_switch_width, int door_switch_height);
+    /**
+      *    @brief door_switch object destructor.
+     */
     ~DoorSwitch();
     void update(double time_elapsed);
     void draw();
