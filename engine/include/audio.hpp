@@ -11,7 +11,6 @@
 #include "sdl2includes.hpp"
 #include <string>
 
-
 namespace engine{
 
     class Audio{

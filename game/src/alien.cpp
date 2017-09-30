@@ -8,7 +8,8 @@ Alien::Alien(std::string objectName, double position_x, double position_y,
     if(objectName.compare("assets/sprites/bilu_sheet.png") == 0) {
         alienName = "Bilu";
     }else if(objectName.compare("assets/sprites/varginha_sheet.png") == 0) {
-        alienName = "Varginha"; 
+        alienName = "Varginha";
+
     }else if(objectName.compare("assets/sprites/etemer_sheet.png") == 0) {
         alienName = "Etemer";
     }
@@ -23,7 +24,7 @@ Alien::Alien(std::string objectName, double position_x, double position_y,
     animator->addAction("idle_up",5,5);
     animator->addAction("idle_down",0,0);
 
-    idleAnimationNumber = 5;
+    idle_animation_number = 5;
     block_movement = false;
     in_position = false;
     movement_sound_effect = new Audio("assets/sounds/FOOTSTEP.wav", "EFFECT", 128);
@@ -35,13 +36,13 @@ void Alien::walkInX(double & inc_x) {
 
     if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_RIGHT)) {
         inc_x = inc_x;
-        idleAnimationNumber = 5;
+        idle_animation_number = 5;
         animator->setInterval("right");
     }
     else if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_LEFT)) {
         //movement_sound_effect->play(-1);
         inc_x = inc_x * (0-1);
-        idleAnimationNumber = 0;
+        idle_animation_number = 0;
         animator->setInterval("left");
     }
     else {
@@ -57,14 +58,14 @@ void Alien::walkInY(double & inc_y, double inc_x) {
 
     if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_UP)) {
         inc_y = inc_y * (0-1);
-        idleAnimationNumber = 5;
+        idle_animation_number = 5;
         if(inc_x == 0){
             animator->setInterval("up");
         }
     }
     else if(engine::InputManager::instance.isKeyPressed(engine::InputManager::KeyPress::KEY_PRESS_DOWN)) {
         inc_y = inc_y;
-        idleAnimationNumber = 0;
+        idle_animation_number = 0;
         if(inc_x == 0){
             animator->setInterval("down");
         }

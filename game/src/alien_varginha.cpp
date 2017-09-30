@@ -34,9 +34,9 @@ void Varginha::update(double time_elapsed) {
 
 
     if((inc_x == 0 && inc_y == 0) || (!turnOff && !is_selected)) {
-        if(idleAnimationNumber) {
+        if(idle_animation_number) {
           animator->setInterval("idle_right");
-        }else { 
+        }else {
           animator->setInterval("idle_left");
         }
     }
@@ -61,34 +61,34 @@ void Varginha::specialAction() {
     std::pair<int, int> interval;
 
     if(is_invisible) {
-        if(idleAnimationNumber == 5) {
+        if(idle_animation_number == 5) {
             animator->setInterval("invisible_right");
         }else {
             animator->setInterval("invisible_left");
         }
     }else if(is_selected) {
-            CameraSwitch* cameraSwitch = NULL;
-            CameraLever* cameraLever = NULL;
-            cameraSwitch = (CameraSwitch*)CollisionManager::instance.verifyCollisionWithCameraSwitches(this);
-            cameraLever = (CameraLever*)CollisionManager::instance.verifyCollisionWithCameraLevers(this);
+            CameraSwitch* camera_switch = NULL;
+            CameraLever* camera_lever = NULL;
+            camera_switch = (CameraSwitch*)CollisionManager::instance.verifyCollisionWithCameraSwitches(this);
+            camera_lever = (CameraLever*)CollisionManager::instance.verifyCollisionWithCameraLevers(this);
 
-            if((cameraSwitch != NULL) || (cameraLever != NULL)) {
+            if((camera_switch != NULL) || (camera_lever != NULL)) {
                    if(InputManager::instance.isKeyTriggered(InputManager::KEY_PRESS_SPACE)) {
                        int x = 0;
-                       if(cameraSwitch!= NULL) {
-                           cameraSwitch->turnOff();
-                           x = cameraSwitch->getPositionX();
-                       }else if(cameraLever != NULL) {
-                           cameraLever->nextState();
-                           x = cameraLever->getPositionX();
+                       if(camera_switch!= NULL) {
+                           camera_switch->turnOff();
+                           x = camera_switch->getPositionX();
+                       }else if(camera_lever != NULL) {
+                           camera_lever->nextState();
+                           x = camera_lever->getPositionX();
                        }
 
                        if(x > getPositionX()) {
                            animator->setInterval("action_right");
-                           idleAnimationNumber = 5;
+                           idle_animation_number = 5;
                        }else {
                            animator->setInterval("action_left");
-                           idleAnimationNumber = 0;
+                           idle_animation_number = 0;
                        }
                        block_movement = true;
                        turnOff = true;
@@ -98,7 +98,7 @@ void Varginha::specialAction() {
                block_movement = true;
                is_invisible = true;
                setVisible(false);
-               if(idleAnimationNumber == 5) {
+               if(idle_animation_number == 5) {
                    animator->setInterval("special_right");
                }else {
                    animator->setInterval("special_left");
@@ -115,7 +115,7 @@ void Varginha::setDefault() {
     setVisible(true);
     block_movement = false;
 }
- 
+
 void Varginha::draw() {
     INFO("Varginha DRAW");
     animator->draw(getPositionX()-15, getPositionY()-25);

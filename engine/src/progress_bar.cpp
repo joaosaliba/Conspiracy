@@ -1,112 +1,124 @@
+/**
+ * @file progress_bar.cpp
+ * @brief class to object of progress_bar, where you can find some values, files,
+ * others objects used in this class and methods to the same.
+ * @copyright  GNU GENERAL PUBLIC LICENSE.
+ */
+
+ //#define NDEBUG *uncomment to disable assertions
+
 #include "progress_bar.hpp"
+#include <assert.h>
 
 using namespace engine;
 
-ProgressBar::ProgressBar(double positionX, double positionY, int width,
+ProgressBar::ProgressBar(double position_x, double position_y, int width,
                                                              int height,
                                                              double increment):
                                                                       GameObject(
-                                                                          positionX,
-                                                                          positionY,
+                                                                          position_x,
+                                                                          position_y,
                                                                           width,
                                                                           height){
+
     percent = 1.0;
-    progressIncrement = increment;
+    progress_increment = increment;
 
     backRect = new SDL_Rect();
-    backRect->x = positionX;
-    backRect->y = positionY;
+    backRect->x = position_x;
+    backRect->y = position_y;
     backRect->w =  width;
     backRect->h =  height;
 
     frontRect = new SDL_Rect();
-    frontRect->x = positionX;
-    frontRect->y = positionY;
+    frontRect->x = position_x;
+    frontRect->y = position_y;
     frontRect->w =  width;
     frontRect->h =  height;
 
     //backColor = {0, 255, 0, 255};
-    backColor = {31, 65, 158, 1};
-    frontColor = {161, 181, 236, 50};
+    back_color = {31, 65, 158, 1};
+    front_color = {161, 181, 236, 50};
     SDL_GetRenderDrawColor(WindowManager::getGameCanvas(),
-                                 &oldColor.r, &oldColor.g,
-                                 &oldColor.g, &oldColor.a);
+                                 &old_color.r, &old_color.g,
+                                 &old_color.g, &old_color.a);
 }
 
-ProgressBar::ProgressBar(double positionX, double positionY, int width,
+ProgressBar::ProgressBar(double position_x, double position_y, int width,
                                                              int height,
                                                              double increment,
                                                              std::vector<unsigned int> newBackColor,
                                                              std::vector<unsigned int> newFrontColor):
                                                                       GameObject(
-                                                                          positionX,
-                                                                          positionY,
+                                                                          position_x,
+                                                                          position_y,
                                                                           width,
                                                                           height){
+
     percent = 1.0;
-    progressIncrement = increment;
+    progress_increment = increment;
 
     backRect = new SDL_Rect();
-    backRect->x = positionX;
-    backRect->y = positionY;
+    backRect->x = position_x;
+    backRect->y = position_y;
     backRect->w =  width;
     backRect->h =  height;
 
     frontRect = new SDL_Rect();
-    frontRect->x = positionX;
-    frontRect->y = positionY;
+    frontRect->x = position_x;
+    frontRect->y = position_y;
     frontRect->w =  width;
     frontRect->h =  height;
 
     //backColor = {0, 255, 0, 255};
-    backColor = {(uint8_t)newBackColor[0], (uint8_t)newBackColor[1], (uint8_t)newBackColor[2], (uint8_t)newBackColor[3]};
-    frontColor = {(uint8_t)newFrontColor[0], (uint8_t)newFrontColor[1], (uint8_t)newFrontColor[2], (uint8_t)newFrontColor[3]};
+    back_color = {(uint8_t)new_back_color[0], (uint8_t)new_back_color[1], (uint8_t)new_back_color[2], (uint8_t)new_back_color[3]};
+    front_color = {(uint8_t)new_front_color[0], (uint8_t)new_front_color[1], (uint8_t)new_front_color[2], (uint8_t)new_front_color[3]};
     SDL_GetRenderDrawColor(WindowManager::getGameCanvas(),
-                                 &oldColor.r, &oldColor.g,
-                                 &oldColor.g, &oldColor.a);
+                                 &old_color.r, &old_color.g,
+                                 &old_color.g, &old_color.a);
 }
 
-ProgressBar::~ProgressBar(){}
+ProgressBar::~ProgressBar() {}
 
-void ProgressBar::update(double timeElapsed){
-    timeElapsed = timeElapsed;
+void ProgressBar::update(double time_elapsed){
+    time_elapsed = time_elapsed;
     if(percent > 1.0){
         percent = 1.0;
     }else if(percent < 0.0){
         percent = 0.0;
     }
 
-    backRect->x = getPositionX();
-    backRect->y = getPositionY();
+    back_rect->x = getPositionX();
+    back_rect->y = getPositionY();
 
     pw = (int)((double)getWidth() * percent);
     px = getPositionX() + (getWidth() - pw);
 
-    frontRect->x = px;
-    frontRect->y = getPositionY();
-    frontRect->w = pw;
-    frontRect->h = getHeight();
-    percent -= progressIncrement;
+    front_rect->x = px;
+    front_rect->y = getPositionY();
+    front_rect->w = pw;
+    front_rect->h = getHeight();
+    percent -= progress_increment;
 }
 
-void ProgressBar::draw(){
-    SDL_SetRenderDrawColor(WindowManager::getGameCanvas(), backColor.r,
-                                                           backColor.g,
-                                                           backColor.b,
-                                                           backColor.a);
+void ProgressBar::draw() {
+    SDL_SetRenderDrawColor(WindowManager::getGameCanvas(), back_color.r,
+                                                           back_color.g,
+                                                           back_color.b,
+                                                           back_color.a);
 
-    SDL_RenderFillRect(WindowManager::getGameCanvas(), backRect);
+    SDL_RenderFillRect(WindowManager::getGameCanvas(), back_rect);
 
     SDL_SetRenderDrawColor(WindowManager::getGameCanvas(),
-                               frontColor.r, frontColor.g,
-                               frontColor.b, frontColor.a);
+                               front_color.r, front_color.g,
+                               front_color.b, front_color.a);
 
-    SDL_RenderFillRect(WindowManager::getGameCanvas(), frontRect);
+    SDL_RenderFillRect(WindowManager::getGameCanvas(), front_rect);
 
-    SDL_SetRenderDrawColor(WindowManager::getGameCanvas(), oldColor.r,
-                                                           oldColor.g,
-                                                           oldColor.b,
-                                                           oldColor.a);
+    SDL_SetRenderDrawColor(WindowManager::getGameCanvas(), old_color.r,
+                                                           old_color.g,
+                                                           old_color.b,
+                                                           old_color.a);
 }
 
 double ProgressBar::getPercent(){

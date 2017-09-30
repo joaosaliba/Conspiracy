@@ -30,7 +30,7 @@ void Bilu::update(double time_elapsed) {
         }
 
         if(inc_x == 0 && inc_y == 0) {
-                if(idleAnimationNumber) {
+                if(idle_animation_number) {
                         animator->setInterval("idle_right");
                 }else {
                         animator->setInterval("idle_left");
@@ -125,7 +125,7 @@ void Bilu::draw() {
 }
 
 void Bilu::setSpecialActionAnimator() {
-        if(idleAnimationNumber == 5) {
+        if(idle_animation_number == 5) {
                 animator->setInterval("special_right");
         }else {
                 animator->setInterval("special_left");

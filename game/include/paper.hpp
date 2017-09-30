@@ -25,10 +25,10 @@ public:
     void play_effect();
     void stop_effect();
 protected:
-    animation* animator;
-    progress_bar *editing_bar;
-    bool edited;
-    bool is_being_edited;
+    Animation* animator;
+    ProgressBar *paper_editing_bar;
+    bool paper_edited;
+    bool paper_is_being_edited;
     Audio* paper_editing_sound;
 };
 

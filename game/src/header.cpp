@@ -7,15 +7,15 @@
 
 #define MARGIN 5
 
-Header::Header(double positionX, double positionY, int maxPapers, int stageNumber) : GameObject(FILENAME, positionX, positionY, WIDTH, HEIGHT){
+Header::Header(double position_x, double position_y, int max_papers, int stage_number) : GameObject(FILENAME, position_x, position_y, WIDTH, HEIGHT) {
 
-        stageText = new Text("Stage "+std::to_string(stageNumber),"assets/fonts/font.ttf", 40, true, new Color(100,100,100,1), new Color(0,0,0,0));
-        paperIcon = new Animation("assets/sprites/papeis(19X21).png", 1, 4, 0.5);
-        paperIcon->setDrawSize(40,50);
-        paperIcon->addAction("static", 0,0);
-        paperIcon->setInterval("static");
+        stage_text = new Text("Stage "+std::to_string(stage_number),"assets/fonts/font.ttf", 40, true, new Color(100,100,100,1), new Color(0,0,0,0));
+        paper_icon = new Animation("assets/sprites/papeis(19X21).png", 1, 4, 0.5);
+        paper_icon->setDrawSize(40,50);
+        paper_icon->addAction("static", 0,0);
+        paper_icon->setInterval("static");
 
-        totalPapers = maxPapers;
+        total_papers = max_papers;
 
         updatePaperQuantity(0);
 
@@ -25,35 +25,36 @@ Header::Header(double positionX, double positionY, int maxPapers, int stageNumbe
         animator->addAction("Etbilu", 2,2);
         animator->addAction("Etvarginha", 3,3);
 
-        alienSelect = 1;
+        alien_select = 1;
 }
 
-Header::~Header(){
+Header::~Header() {
+
 }
 
-void Header::update(double timeElapsed){
+void Header::update(double timeElapsed) {
         timeElapsed = timeElapsed;
         verifySelect();
         animator->update();
-        paperIcon->update();
+        paper_icon->update();
 }
 
-void Header::draw(){
+void Header::draw() {
         animator->draw(getPositionX()+MARGIN, getPositionY()+MARGIN);
-        paperIcon->draw(getPositionX()+800, getPositionY()- MARGIN);
-        paperText->draw(getPositionX()+840, getPositionY()+MARGIN);
-        stageText->draw(getPositionX()+400, getPositionY()+MARGIN);
+        paper_icon->draw(getPositionX()+800, getPositionY()- MARGIN);
+        paper_text->draw(getPositionX()+840, getPositionY()+MARGIN);
+        stage_text->draw(getPositionX()+400, getPositionY()+MARGIN);
 }
 
-void Header::updatePaperQuantity(int newValue){
-    paperText = convertToText(newValue);
+void Header::updatePaperQuantity(int new_value) {
+    paper_text = convertToText(new_value);
 }
 
-Text* Header::convertToText(int newValue){
-    return new Text(std::to_string(newValue)+"/"+std::to_string(totalPapers),"assets/fonts/font.ttf", 40, true, new Color(100,100,100,1), new Color(0,0,0,0));
+Text* Header::convertToText(int new_value) {
+    return new Text(std::to_string(new_value)+"/"+std::to_string(total_papers),"assets/fonts/font.ttf", 40, true, new Color(100,100,100,1), new Color(0,0,0,0));
 }
-void Header::verifySelect(){
-        switch(alienSelect) {
+void Header::verifySelect() {
+        switch(alien_select) {
         case 0:
                 animator->setInterval("none");
                 break;
@@ -72,6 +73,6 @@ void Header::verifySelect(){
         }
 }
 
-void Header::setAlienSelect(int select){
-        alienSelect = select;
+void Header::setAlienSelect(int select) {
+        alien_select = select;
 }

@@ -1,7 +1,21 @@
+/**
+ *   @file door_system.cpp
+ *    @brief Manage the chair in the game.
+ *    @copyright  GNU GENERAL PUBLIC LICENSE.
+ */
 #include "log.h"
 #include "door_system.hpp"
+#include <assert.h>
 
-using namespace engine;
+/**
+ *    @brief door_system object constructor.
+ *    @param[in] positionX it sets the x coordinate of the object.
+ *    @param[in] positionY it sets the y coordinate of the object.
+ *    @param[in] width it sets the width dimension of the object.
+ *    @param[in] height it sets the height dimension of the object.
+ *    @param[in] objectName set the name of the object
+ *
+ */
 
 DoorSystem::DoorSystem(std::pair<int,int> doorPosition,
                        std::pair<int,int> switchPosition, std::string doorSide){
@@ -14,9 +28,18 @@ DoorSystem::DoorSystem(std::pair<int,int> doorPosition,
 
     computerTable = new ComputerTable("assets/sprites/PC_sprites(34X20).png", switchPosition.first,switchPosition.second, 60, 24);
 }
-DoorSystem::~DoorSystem(){}
+/**
+ *    @brief DoorSystem object destructor.
+ */
+DoorSystem::~DoorSystem() {
 
+}
+/**
+*    @brief update the DoorSystem  during the time.
+*    @param[in] timeElapsed its about the time
+*/
 void DoorSystem::update(double timeElapsed){
+    assert(timeElapsed !=NULL);
     door->update(timeElapsed);
     computerTable->update(timeElapsed);
     if(!computerTable->getDoorSwitch()->isEnabled() && !door->isOpen()){
@@ -28,21 +51,36 @@ void DoorSystem::update(double timeElapsed){
             door->setHeight(25);
         }
     }
+    else{
+        //nothing to do
+    }
 }
-
+/**
+ *   @brief draws the animation of the chair according to its position
+ *   @return void
+ */
 void DoorSystem::draw(){
     door->draw();
     computerTable->draw();
 }
-
+/**
+ *   @brief get the way that the door be
+ *   @return door
+ */
 GameObject* DoorSystem::getDoor(){
     return door;
 }
-
+/**
+ *   @brief get the actual way that the switch are
+ *   @return computerTable->getDoorSwitch();
+ */
 GameObject* DoorSystem::getSwitch(){
     return computerTable->getDoorSwitch();
 }
-
+/**
+ *   @brief get the actual way that the table are
+ *   @return computerTable->getTable();
+ */
 GameObject* DoorSystem::getTable(){
     return computerTable->getTable();
 }

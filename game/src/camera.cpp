@@ -29,8 +29,8 @@ Camera::Camera(double camera_position_x, double camera_position_y, std::string d
                                                                  camera_position_y,
                                                                  WIDTH, HEIGHT){
 
-    assert ( camera_position_x != NULL);
-    assert ( camera_position_y != NULL);
+    assert (camera_position_x != NULL);
+    assert (camera_position_y != NULL);
 
     initialize_animator(FILENAME);
     animator->set_interval(direction);
@@ -57,8 +57,8 @@ Camera::Camera(double camera_position_x, double camera_position_y, std::string d
                int p_angle_of_vision, int p_range, int p_initial_angle): Enemy(FILENAME,camera_position_x,
                                                                      camera_position_y,
                                                                      WIDTH, HEIGHT){
-    assert ( camera_position_x != NULL);
-    assert ( camera_position_y != NULL);
+    assert (camera_position_x != NULL);
+    assert (camera_position_y != NULL);
 
     initialize_animator(FILENAME);
     animator->set_interval(direction);
@@ -68,6 +68,7 @@ Camera::Camera(double camera_position_x, double camera_position_y, std::string d
     if(p_initial_angle != -1) {
         initial_angle = p_initial_angle;
         fieldOfVision->set_angle(initial_angle);
+
     }
 }
 
@@ -79,8 +80,8 @@ Camera::~Camera() {
 }
 
 /**
-* @brief Method turned_off
-* <p>This method verify if camera is turned_on</p>
+* @brief Method turn_off
+* <p>This method turn off the camera</p>
 * @return void
 */
 void Camera::turn_off() {

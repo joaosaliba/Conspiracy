@@ -4,49 +4,49 @@
 
 using namespace engine;
 
-SceneManager::SceneManager(){
-    beforeSceneId = 0;
-    currentSceneId = 0;  
+SceneManager::SceneManager() {
+    before_scene_id = 0;
+    current_scene_id = 0;
 }
 
-void SceneManager::addScene(Scene* scene){
-    if(scenes.find(scene->getId()) != scenes.end()){
+void SceneManager::addScene(Scene* scene) {
+    if(scenes.find(scene->get_id()) != scenes.end()) {
         INFO("Failed to load scene");
     }else{
-        scenes[scene->getId()] = scene;
+        scenes[scene->get_id()] = scene;
     }
 }
 
-void SceneManager::loadScene(int id){
+void SceneManager::loadScene(int id) {
     if(scenes.find(id) == scenes.end()){
         INFO("Invalid Scene ID to Load");
     }else{
-        Scene* scene = currentScene;
-        if(scene != NULL){
+        Scene* scene = current_scene;
+        if(scene != NULL) {
             scene->unload();
         }
-        currentScene = scenes[id];
-        currentScene->load();
-        beforeSceneId = currentSceneId;
-        currentSceneId = currentScene->getId();
-        if (beforeSceneId >= SaveManager::instance.getStageNumberUnlock() && beforeSceneId < 6 && currentSceneId != 6){
-              SaveManager::instance.saveActualSituation(beforeSceneId + 1);
+        current_scene = scenes[id];
+        current_scene->load();
+        before_scene_id = current_scene_id;
+        current_scene_id = current_scene->get_id();
+        if (before_scene_id >= SaveManager::instance.getStageNumberUnlock() && before_scene_id < 6 && current_scene_id != 6) {
+              SaveManager::instance.saveActualSituation(before_scene_id + 1);
         }
     }
 }
 
-Scene* SceneManager::getCurrentScene(){
-    return currentScene;
+Scene* SceneManager::get_current_scene() {
+    return current_scene;
 }
 
-int SceneManager::getCurrentSceneId(){
-    return currentSceneId;
+int SceneManager::get_current_scene_id() {
+    return current_scene_id;
 }
 
-int SceneManager::getBeforeSceneId(){
-    return beforeSceneId;
+int SceneManager::get_before_scene_id() {
+    return before_scene_id;
 }
 
-void SceneManager::setCurrentSceneId(int id){
-    currentSceneId = id;
+void SceneManager::set_current_scene_id(int id){
+    current_scene_id = id;
 }

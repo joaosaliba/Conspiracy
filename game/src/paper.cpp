@@ -1,4 +1,6 @@
+//#define NDEBUG *uncomment to disable assertions
 #include "paper.hpp"
+#include <assert.h>
 
 Paper::Paper(std::string object_name, double position_x, double position_y,
                                      int width, int height) : GameObject(object_name,
@@ -18,6 +20,8 @@ Paper::Paper(std::string object_name, double position_x, double position_y,
     animator->add_action("being_edited",1,3);
     edited = false;
     is_being_edited = false;
+    assert(paper_edited != NULL);
+    assert(paper_is_being_edited != NULL);
 }
 
 Paper::~Paper() {}
@@ -30,6 +34,8 @@ void Paper::update(double time_elapsed) {
         if(editing_bar->get_percent() <= 0.0) {
             is_being_edited = false;
             edited = true;
+            assert(paper_edited != NULL);
+            assert(paper_is_being_edited != NULL);
         }
     }else{
         animator->set_interval("idle");
@@ -39,10 +45,12 @@ void Paper::update(double time_elapsed) {
 
 void Paper::animate() {
     is_being_edited = true;
+     assert(paper_is_being_edited != NULL);
 }
 
 void Paper::stop_animation() {
     is_being_edited = false;
+    assert(paper_is_being_edited != NULL);
 }
 
 bool Paper::is_edited() {
@@ -60,6 +68,7 @@ void Paper::draw() {
 
 animation * Paper::get_animation() {
   return animator;
+  assert(animator != NULL);
 }
 
 double Paper::get_editing_bar_percent() {

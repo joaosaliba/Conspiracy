@@ -51,4 +51,4 @@ using namespace engine;
         renderQuad = {axis.first, axis.second, drawWidth, drawHeight };
 
         SDL_RenderCopy(WindowManager::getGameCanvas(), texture, &clipRect, &renderQuad);
-    }
+}

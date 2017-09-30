@@ -19,11 +19,11 @@ public:
     void updatePaperQuantity(int newValue);
 private:
     Animation* animator;
-    Animation* paperIcon;
-    Text* paperText;
-    Text* stageText;
-    int totalPapers;
-    int alienSelect;
+    Animation* paper_icon;
+    Text* paper_text;
+    Text* stage_text;
+    int total_papers; //declareting variables total papers
+    int alien_select; // declareting variables alien selection
     Text* convertToText(int newValue);
     void verifySelect();
 

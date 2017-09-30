@@ -27,11 +27,11 @@ protected:
     void walkInX(double & inc_x);
     void walkInY(double & inc_y, double inc_x);
     Animation* animator;
-    int idleAnimationNumber;
+    int idle_animation_number; // delcaring variable idle animation number
     std::string alienName;
-    bool block_movement;
-    bool is_selected;
-    bool in_position;
+    bool block_movement; // delclarion  variable block movement
+    bool is_selected; // delcaring  varible  that reference if the personage is selected
+    bool in_position;// declaring variable in position
     Audio *movement_sound_effect;
 };
 
