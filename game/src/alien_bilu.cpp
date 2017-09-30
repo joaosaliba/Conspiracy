@@ -48,11 +48,20 @@ void Bilu::update(double time_elapsed) {
         walk_in_y(move_bilu_in_y, move_bilu_in_x);
 }
 
+<<<<<<< HEAD
     if(move_bilu_in_x == 0 && move_bilu_in_y == 0) {
         if(idle_animation_number) {
             animator->set_interval("idle_right");
         }else {
             animator->set_interval("idle_left");
+=======
+        if(inc_x == 0 && inc_y == 0) {
+                if(idle_animation_number) {
+                        animator->setInterval("idle_right");
+                }else {
+                        animator->setInterval("idle_left");
+                }
+>>>>>>> origin/Development
         }
 }
     special_action();
@@ -153,6 +162,7 @@ void Bilu::draw() {
     animator->draw_collider(get_position_x(), get_position_y(), get_width(), get_height());
 }
 
+<<<<<<< HEAD
 /** 
 *   special character animation
 *   @return void
@@ -165,4 +175,13 @@ void Bilu::set_special_action_animator() {
         animator->set_interval("special_left");
     }
         animator->set_total_time(0.6);
+=======
+void Bilu::setSpecialActionAnimator() {
+        if(idle_animation_number == 5) {
+                animator->setInterval("special_right");
+        }else {
+                animator->setInterval("special_left");
+        }
+        animator->setTotalTime(0.6);
+>>>>>>> origin/Development
 }

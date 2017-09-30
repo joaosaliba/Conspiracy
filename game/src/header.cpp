@@ -7,9 +7,9 @@
 
 #define MARGIN 5
 
-Header::Header(double position_x, double position_y, int max_papers, int stage_nmber) : GameObject(FILENAME, position_x, position_y, WIDTH, HEIGHT) {
+Header::Header(double position_x, double position_y, int max_papers, int stage_number) : GameObject(FILENAME, position_x, position_y, WIDTH, HEIGHT) {
 
-        stage_text = new Text("Stage "+std::to_string(stage_nmber),"assets/fonts/font.ttf", 40, true, new Color(100,100,100,1), new Color(0,0,0,0));
+        stage_text = new Text("Stage "+std::to_string(stage_number),"assets/fonts/font.ttf", 40, true, new Color(100,100,100,1), new Color(0,0,0,0));
         paper_icon = new Animation("assets/sprites/papeis(19X21).png", 1, 4, 0.5);
         paper_icon->setDrawSize(40,50);
         paper_icon->addAction("static", 0,0);

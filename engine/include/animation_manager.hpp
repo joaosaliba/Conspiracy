@@ -12,7 +12,7 @@
 #include <vector>
 #include "log.h"
 
-namespace engine{
+namespace engine {
 class fiels_of_vision;
 
 class animation_manager {

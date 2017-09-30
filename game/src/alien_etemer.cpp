@@ -42,8 +42,18 @@ void Etemer::update(double time_elapsed) {
     animator->set_total_time(0.3);
 }
 
+<<<<<<< HEAD
     auto etemer_in_y = 0.15*time_elapsed;
     auto etemer_in_x = 0.15*time_elapsed;
+=======
+        if(inc_x == 0.0 && inc_y == 0.0 && !block_movement) {
+                if(idle_animation_number) {
+                        animator->setInterval("idle_right");
+                }else {
+                        animator->setInterval("idle_left");
+                }
+        }
+>>>>>>> origin/Development
 
     if(!block_movement && is_selected) {
         walk_in_x(etemer_in_x);
@@ -97,6 +107,7 @@ void Etemer::special_action(GameObject * guard, double etemer_distance) {
     }
 }
 
+<<<<<<< HEAD
     if(talking) {
         if(((Guard *) (guard))->get_position_x() >= get_position_x()) {
             animator->set_interval("special_right");
@@ -113,6 +124,25 @@ void Etemer::special_action(GameObject * guard, double etemer_distance) {
 }else{
     animator->set_interval("idle_left");
 }
+=======
+        if(talking) {
+                if(((Guard *) (guard))->getPositionX() >= getPositionX()) {
+                        animator->setInterval("special_right");
+                        idle_animation_number = 5;
+                }else {
+                        animator->setInterval("special_left");
+                        idle_animation_number = 0;
+                }
+                if(((Guard *) (guard))->getTalkingBarPercent() <= 0.0) {
+                        talking = false;
+                        block_movement = false;
+                        if(idle_animation_number) {
+                                animator->setInterval("idle_right");
+                        }else{
+                                animator->setInterval("idle_left");
+                        }
+                }
+>>>>>>> origin/Development
         }
     }
 }
@@ -151,8 +181,26 @@ void Etemer::move_chair() {
 *   @return void
 */
 
+<<<<<<< HEAD
 void Etemer::walk_in_x(double & etemer_in_x) {
     assert (etemer_in_x !=NULL);
+=======
+        if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_RIGHT)) {
+                inc_x = inc_x;
+                idle_animation_number = 5;
+                animator->setInterval("right");
+        }
+        else if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_LEFT)) {
+                //movement_sound_effect->play(-1);
+                inc_x = inc_x * (0-1);
+                idle_animation_number = 0;
+                animator->setInterval("left");
+        }
+        else {
+                inc_x = 0;
+        }
+        setPositionX(getPositionX()+inc_x);
+>>>>>>> origin/Development
 
     if(InputManager::instance.is_key_pressed(InputManager::KeyPress::KEY_PRESS_RIGHT)) {
         etemer_in_x = etemer_in_x;
@@ -175,6 +223,7 @@ void Etemer::walk_in_x(double & etemer_in_x) {
     }
 }
 
+<<<<<<< HEAD
 /** 
 *   Creates animations of movement and collision in Y in the game
 *   @return void
@@ -203,6 +252,26 @@ void Etemer::walk_in_y(double & etemer_in_y, double etemer_in_x) {
         etemer_in_y = 0;
 }
     set_position_y(get_position_y()+etemer_in_y);
+=======
+        if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_UP)) {
+                inc_y = inc_y * (0-1);
+                idle_animation_number = 5;
+                if(inc_x == 0) {
+                        animator->setInterval("up");
+                }
+        }
+        else if(engine::InputManager::instance.isKeyPressed(engine::InputManager::KeyPress::KEY_PRESS_DOWN)) {
+                inc_y = inc_y;
+                idle_animation_number = 0;
+                if(inc_x == 0) {
+                        animator->setInterval("down");
+                }
+        }
+        else {
+                inc_y = 0;
+        }
+        setPositionY(getPositionY()+inc_y);
+>>>>>>> origin/Development
 
     if(CollisionManager::instance.verify_collision_with_walls_and_chairs(this)) {
         set_position_y(get_position_y()+(etemer_in_y*(0-1)));

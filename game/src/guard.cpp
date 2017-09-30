@@ -30,7 +30,7 @@ Guard::Guard(std::string objectName, double positionX, double positionY,
         std::vector<unsigned int> frontColor = {0, 0, 0, 255};
         detectionBar = new ProgressBar(positionX, positionY, 30, 5, 0.01, backColor, frontColor);
 
-        idleAnimationNumber = 0;
+        idle_animation_number = 0;
         waitingTime = newWaitingTime;
         wayActive = false;
         talking = false;
@@ -70,7 +70,7 @@ void Guard::update(double timeElapsed){
                 fieldOfVision->updateCenter(incX,incY);
         }
         if(incX == 0.0 && incY == 0.0) {
-                if(idleAnimationNumber) {
+                if(idle_animation_number) {
                         animator->setInterval("idle_right");
                 }else{
                         animator->setInterval("idle_left");
@@ -101,11 +101,11 @@ void Guard::walkInX(double & incX){
         }else{
                 if(direction == "right") {
                         incX = incX * (1);
-                        idleAnimationNumber = 5;
+                        idle_animation_number = 5;
                         animator->setInterval(direction);
                 }else if(direction == "left") {
                         incX = incX * (-1);
-                        idleAnimationNumber = 0;
+                        idle_animation_number = 0;
                         animator->setInterval(direction);
                 }else {
                         incX = 0;
@@ -140,11 +140,11 @@ void Guard::walkInY(double & incY){
         }else{
                 if(direction == "down") {
                         incY = incY * (1);
-                        idleAnimationNumber = 5;
+                        idle_animation_number = 5;
                         animator->setInterval(direction);
                 }else if(direction == "up") {
                         incY = incY * (-1);
-                        idleAnimationNumber = 0;
+                        idle_animation_number = 0;
                         animator->setInterval(direction);
                 }else {
                         incY = 0;
@@ -174,7 +174,7 @@ void Guard::walkInY(double & incY){
 void Guard::walkInXSpecial(double & incX){
         if(ways[wayActual].first == "right") {
                 incX = incX * (1);
-                idleAnimationNumber = 5;
+                idle_animation_number = 5;
                 animator->setInterval("right");
                 direction = "right";
                 if(getPositionX()+incX > ways[wayActual].second) {
@@ -183,7 +183,7 @@ void Guard::walkInXSpecial(double & incX){
                 }
         }else if(ways[wayActual].first == "left") {
                 incX = incX * (-1);
-                idleAnimationNumber = 0;
+                idle_animation_number = 0;
                 animator->setInterval("left");
                 direction = "left";
                 if(getPositionX()+incX < ways[wayActual].second) {
@@ -198,7 +198,7 @@ void Guard::walkInXSpecial(double & incX){
 void Guard::walkInYSpecial(double & incY){
         if(ways[wayActual].first == "down") {
                 incY = incY * (1);
-                idleAnimationNumber = 5;
+                idle_animation_number = 5;
                 animator->setInterval("down");
                 direction = "down";
                 if(getPositionY()+incY > ways[wayActual].second) {
@@ -207,7 +207,7 @@ void Guard::walkInYSpecial(double & incY){
                 }
         }else if(ways[wayActual].first == "up") {
                 incY = incY * (-1);
-                idleAnimationNumber = 0;
+                idle_animation_number = 0;
                 animator->setInterval("up");
                 direction = "up";
                 if(getPositionY()+incY < ways[wayActual].second) {
@@ -287,9 +287,9 @@ FieldOfVision* Guard::getFieldOfVision(){
 void Guard::talkingToETemer(std::string status){
         talking = true;
         if(status == "right") {
-                idleAnimationNumber = 5;
+                idle_animation_number = 5;
         }else{
-                idleAnimationNumber = 0;
+                idle_animation_number = 0;
         }
         talkingBar->resetPercent();
         talkingBar->setPositionX(getPositionX() - 10);

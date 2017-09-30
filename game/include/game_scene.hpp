@@ -1,3 +1,7 @@
+/**Class to create, destroy and
+*manipulate the scenes of the game.
+*/
+
 #ifndef GAME_SCENE_HPP
 #define GAME_SCENE_HPP
 
@@ -23,9 +27,15 @@ using namespace engine;
 
 class game_scene: public scene {
 public:
+<<<<<<< HEAD
     game_scene(int id, std::string new_tiled_file);
     game_scene(int id, std::string new_tiled_file, std::string music);
     ~game_scene();
+=======
+    GameScene(int id, std::string new_tiled_file);
+    GameScene(int id, std::string new_tiled_file, std::string music);
+    ~GameScene();
+>>>>>>> origin/Development
     void load();
     void draw();
     void update(double time_elapsed);
@@ -33,6 +43,7 @@ public:
     void verify_win_or_lose();
 protected:
     Player* player;
+<<<<<<< HEAD
     audio* background_music;
     std::vector<game_object*> game_objects_list;
     std::string tiled_file;
@@ -51,6 +62,26 @@ protected:
     void create_game_borders();
     void create_ground();
     virtual void create_chairs();
+=======
+    Audio* background_music;
+    std::vector<GameObject*> gameObjectsList;
+    std::string tiled_file;
+    Timer* stage_timer;
+    Timer* skip_timer;
+    int actual_papers;
+    bool aliens_in_position;
+    void initializeColliders();
+    virtual void createGuards() = 0;
+    virtual void createAliens() = 0;
+    void createCenary();
+    virtual void createDoorSystems() = 0;
+    virtual void createPapers() = 0;
+    virtual void createFinishPoints() = 0;
+    virtual void createTables();
+    void createGameBorders();
+    void createGround();
+    virtual void createChairs();
+>>>>>>> origin/Development
 };
 
 #endif

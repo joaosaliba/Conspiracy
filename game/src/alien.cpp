@@ -17,7 +17,8 @@ GameObject(objectName,alien_position_x,alien_position_y,width, height) {
     if(objectName.compare("assets/sprites/bilu_sheet.png") == 0) {
         alienName = "Bilu";
     }else if(objectName.compare("assets/sprites/varginha_sheet.png") == 0) {
-        alienName = "Varginha"; 
+        alienName = "Varginha";
+
     }else if(objectName.compare("assets/sprites/etemer_sheet.png") == 0) {
         alienName = "Etemer";
     }
@@ -46,6 +47,7 @@ Alien::~Alien() {
 *   @return void
 */
 
+<<<<<<< HEAD
 void Alien::walk_in_x(double & alien_in_x) {
     assert (alien_in_x !=NULL);
 
@@ -53,12 +55,24 @@ void Alien::walk_in_x(double & alien_in_x) {
         alien_in_x = alien_in_x;
         idle_animation_number = 5;
         animator->set_interval("right");
+=======
+    if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_RIGHT)) {
+        inc_x = inc_x;
+        idle_animation_number = 5;
+        animator->setInterval("right");
+>>>>>>> origin/Development
     }
     else if(InputManager::instance.is_key_pressed(InputManager::KeyPress::KEY_PRESS_LEFT)) {
         //movement_sound_effect->play(-1);
+<<<<<<< HEAD
         alien_in_x = alien_in_x * (0-1);
         idle_animation_number = 0;
         animator->set_interval("left");
+=======
+        inc_x = inc_x * (0-1);
+        idle_animation_number = 0;
+        animator->setInterval("left");
+>>>>>>> origin/Development
     }
     else {
         alien_in_x = 0;
@@ -78,6 +92,7 @@ void Alien::walk_in_y(double & alien_in_y, double alien_in_x) {
     assert (alien_in_y !=NULL);
     assert (alien_in_x !=NULL);
 
+<<<<<<< HEAD
     if(InputManager::instance.is_key_pressed(InputManager::KeyPress::KEY_PRESS_UP)) {
         alien_in_y = alien_in_y * (0-1);
         idle_animation_number = 5;
@@ -91,6 +106,20 @@ void Alien::walk_in_y(double & alien_in_y, double alien_in_x) {
         idle_animation_number = 0;
         if(alien_in_x == 0){
             animator->set_interval("down");
+=======
+    if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_UP)) {
+        inc_y = inc_y * (0-1);
+        idle_animation_number = 5;
+        if(inc_x == 0){
+            animator->setInterval("up");
+        }
+    }
+    else if(engine::InputManager::instance.isKeyPressed(engine::InputManager::KeyPress::KEY_PRESS_DOWN)) {
+        inc_y = inc_y;
+        idle_animation_number = 0;
+        if(inc_x == 0){
+            animator->setInterval("down");
+>>>>>>> origin/Development
         }
     }
     else {
