@@ -36,13 +36,32 @@ GameScene::GameScene(int id, std::string new_tiled_file) : Scene(id){
     assert(new_tiled_file != NULL);
     assert(id != NULL);
     tiled_file = new_tiled_file;
+
     skip_timer = new Timer();
+    if(skip_timer == NULL) {
+      ERROR("Skip timer is null");
+      exit(-1);
+    }else {
+      //nothing to do
+    }
+
     stage_timer = new Timer();
+    if(stage_timer == NULL) {
+      ERROR("Stage timer is null");
+      exit(-1);
+    }else {
+      //nothing to do
+    }
+
     actual_papers = 0;
     assert(tiled_file != NULL);
-    assert(skip_timer != NULL);
-    assert(stage_timer != NULL);
     assert(actual_papers != NULL);
+    if(id > 100) {
+      ERROR("Id is not normal");
+      exit(-1);
+    }else {
+      //nothing to do
+    }
 }
 
 /**
@@ -64,13 +83,33 @@ GameScene::GameScene(int id, std::string new_tiled_file, std::string audio_file)
         assert(background_music != NULL);
     }
     tiled_file = new_tiled_file;
+
     skip_timer = new Timer();
+    if(skip_timer == NULL) {
+      ERROR("Skip timer is null");
+      exit(-1);
+    }else {
+      //nothing to do
+    }
+
     stage_timer = new Timer();
+    if(stage_timer == NULL) {
+      ERROR("Stage timer is null");
+      exit(-1);
+    }else {
+      //nothing to do
+    }
+
     actual_papers = 0;
     assert(tiled_file != NULL);
-    assert(skip_timer != NULL);
-    assert(stage_timer != NULL);
     assert(actual_papers != NULL);
+
+    if(id > 100) {
+      ERROR("Id is not normal");
+      exit(-1);
+    }else {
+      //nothing to do
+    }
 }
 
 /**
@@ -89,6 +128,13 @@ void GameScene::draw(){
 
 void GameScene::update(double time_elapsed){
     assert(time_elapsed != NULL);
+    if(time_elapsed < 0) {
+        ERROR("Time elapsed is negative");
+        exit(-1);
+    }else {
+      //nothing to do
+    }
+
     if(!player->isDead()){
         for(auto gameObject : gameObjectsList) {
                 if(typeid(gameObject) != typeid(Player)){
@@ -121,13 +167,27 @@ void GameScene::verifyWinOrLose(){
                             all_papers_edited = false;
                         }else{
                             count_papers++;
+                            if(count_papers > 100 || count_papers < 0) {
+                              ERROR("Number of papers is not normal");
+                              exit(-1);
+                            }else {
+                              //nothing to do
+                            }
                         }
                 }else {
                   //nothing to do
                 }
         }
         if(count_papers >= actual_papers) {
+
             player->updatePaperQuantity(count_papers);
+            if(count_papers > 20 || count_papers < 0) {
+              ERROR("Number of papers is not normal");
+              exit(-1);
+            }else {
+              //nothing to do
+            }
+
             actual_papers = count_papers;
         }else {
             actual_papers = count_papers;
@@ -137,6 +197,7 @@ void GameScene::verifyWinOrLose(){
             guard->verifyDistance(player->getBilu());
             ((Etemer *)(player->getEtemer()))->verifyDistance(guard);
         }
+
     if((Etemer *)(player->getEtemer())->isInPosition() &&
       (Bilu*)(player->getBilu())->isInPosition() &&
       (Varginha*)(player->getVarginha())->isInPosition()) {
@@ -301,7 +362,15 @@ void GameScene::createCenary(){
         for(int i=0; i<=600; i+=20) {
             for(int j=0; j<=960; j+=20) {
                 tile_file.get(c);
+
                 compare = c-48;
+                if(compare > 20) {
+                  ERROR("Unusual value");
+                  exit(-1);
+                }else {
+                  //nothing to do
+                }
+
                 switch(compare) {
                     case 1: gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede2.png", j, HEADER_SIZE + i+25, 20, 40)); break;
 
