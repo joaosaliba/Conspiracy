@@ -23,8 +23,8 @@ Arrow::Arrow(std::string arrow_name, double arrow_position_x, double arrow_posit
                                                  arrow_position_y,
                                                  arrow_width, arrow_height){
         animator = new Animation(arrow_name, 1, 17, 2.0);
-        animator->addAction("select",0,16);
-        animator->setInterval("select");
+        animator->add_action("select",0,16);
+        animator->set_interval("select");
         assert ( arrow_position_x != NULL);
         assert ( arrow_position_y != NULL);
         assert ( arrow_width != NULL);

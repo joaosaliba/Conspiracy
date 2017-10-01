@@ -12,35 +12,35 @@
 #include <vector>
 #include "log.h"
 
-namespace engine {
-class fiels_of_vision;
+namespace engine{
+class FieldOfVision;
 
-class animation_manager {
+class AnimationManager{
 public:
-    static animation_manager instance;
-    void add_animation_quad(animation_quad *new_quad);
+    static AnimationManager instance;
+    void add_animation_quad(AnimationQuad *newQuad);
     void draw_quads();
-    void add_collider(SDL_Rect* render_quad);
-    void add_progress_bar(progress_bar* new_progress_bar);
-    void addfiels_of_vision(fiels_of_vision* field);
-    void add_guard_vision(fiels_of_vision* field);
-    void add_line(Line* line);
-    void set_background_color(color* background_color);
+    void add_collider(SDL_Rect* renderQuad);
+    void addProgressBar(ProgressBar* newProgressBar);
+    void addFieldOfVision(FieldOfVision* field);
+    void addGuardVision(FieldOfVision* field);
+    void addLine(Line* line);
+    void setBackgroundColor(Color* backgroundColor);
 private:
-    animation_manager(): color(new color(100,100,100,0)){};
-    bool is_active;
+    AnimationManager(): color(new Color(100,100,100,0)){};
+    bool isActive;
     Color * color;
-    std::vector<animation_quad*> animation_quads;
-    std::vector<SDL_Rect*> collider_rects;
-    std::vector<progress_bar*> progress_bars;
-    std::vector<fiels_of_vision*> fields;
-    std::vector<fiels_of_vision*> guards_vision;
-    void clear_animation_quads();
+    std::vector<AnimationQuad*> animationQuads;
+    std::vector<SDL_Rect*> colliderRects;
+    std::vector<ProgressBar*> progressBars;
+    std::vector<FieldOfVision*> fields;
+    std::vector<FieldOfVision*> guardsVision;
+    void clearAnimationQuads();
     void draw_colliders();
-    void draw_lines_of_vision();
-    void draw_progress_bars();
-    void draw_line(Line* line);
-    void draw_triangle_vision(std::vector<Line*> lines);
+    void drawLinesOfVision();
+    void drawProgressBars();
+    void drawLine(Line* line);
+    void drawTriangleVision(std::vector<Line*> lines);
 };
 
 }

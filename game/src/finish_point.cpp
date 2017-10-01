@@ -30,7 +30,7 @@ void FinishPoint::update(double timeElapsed){
     varginhaAnim->update();
 }
 
-std::string FinishPoint::getAlienNames(){
+std::string FinishPoint::get_alien_names(){
     return aliens;
 }
 

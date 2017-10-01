@@ -1,13 +1,13 @@
 #include "alien.hpp"
 #include <assert.h>
 
-/** Objects included in the alien.hpp 
-* where the methods will be responsible for the manipulation and organization 
+/** Objects included in the alien.hpp
+* where the methods will be responsible for the manipulation and organization
 * of these objects
 */
 
-Alien::Alien(std::string objectName, double alien_position_x, double alien_position_y,int width, 
-int height) : 
+Alien::Alien(std::string objectName, double alien_position_x, double alien_position_y,int width,
+int height) :
 GameObject(objectName,alien_position_x,alien_position_y,width, height) {
     assert (alien_position_x !=NULL);
     assert (alien_position_x !=NULL);
@@ -39,15 +39,15 @@ GameObject(objectName,alien_position_x,alien_position_y,width, height) {
     movement_sound_effect = new Audio("assets/sounds/FOOTSTEP.wav", "EFFECT", 128);
 }
 
-Alien::~Alien() {  
+Alien::~Alien() {
 }
 
-/** 
+/**
 *   Creates animations of movement and collision in X in the game
 *   @return void
 */
 
-<<<<<<< HEAD
+
 void Alien::walk_in_x(double & alien_in_x) {
     assert (alien_in_x !=NULL);
 
@@ -55,24 +55,19 @@ void Alien::walk_in_x(double & alien_in_x) {
         alien_in_x = alien_in_x;
         idle_animation_number = 5;
         animator->set_interval("right");
-=======
     if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_RIGHT)) {
         inc_x = inc_x;
         idle_animation_number = 5;
-        animator->setInterval("right");
->>>>>>> origin/Development
+        animator->set_interval("right");
     }
     else if(InputManager::instance.is_key_pressed(InputManager::KeyPress::KEY_PRESS_LEFT)) {
         //movement_sound_effect->play(-1);
-<<<<<<< HEAD
         alien_in_x = alien_in_x * (0-1);
         idle_animation_number = 0;
         animator->set_interval("left");
-=======
         inc_x = inc_x * (0-1);
         idle_animation_number = 0;
-        animator->setInterval("left");
->>>>>>> origin/Development
+        animator->set_interval("left");
     }
     else {
         alien_in_x = 0;
@@ -83,7 +78,7 @@ void Alien::walk_in_x(double & alien_in_x) {
     }
 }
 
-/** 
+/**
 *   Creates animations of movement and collision in Y in the game
 *   @return void
 */
@@ -92,7 +87,6 @@ void Alien::walk_in_y(double & alien_in_y, double alien_in_x) {
     assert (alien_in_y !=NULL);
     assert (alien_in_x !=NULL);
 
-<<<<<<< HEAD
     if(InputManager::instance.is_key_pressed(InputManager::KeyPress::KEY_PRESS_UP)) {
         alien_in_y = alien_in_y * (0-1);
         idle_animation_number = 5;
@@ -106,20 +100,18 @@ void Alien::walk_in_y(double & alien_in_y, double alien_in_x) {
         idle_animation_number = 0;
         if(alien_in_x == 0){
             animator->set_interval("down");
-=======
     if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_UP)) {
         inc_y = inc_y * (0-1);
         idle_animation_number = 5;
         if(inc_x == 0){
-            animator->setInterval("up");
+            animator->set_interval("up");
         }
     }
     else if(engine::InputManager::instance.isKeyPressed(engine::InputManager::KeyPress::KEY_PRESS_DOWN)) {
         inc_y = inc_y;
         idle_animation_number = 0;
         if(inc_x == 0){
-            animator->setInterval("down");
->>>>>>> origin/Development
+            animator->set_interval("down");
         }
     }
     else {
@@ -131,7 +123,7 @@ void Alien::walk_in_y(double & alien_in_y, double alien_in_x) {
     }
 }
 
-/** 
+/**
 *   draws the animation of the character according to its position
 *   @return void
 */
@@ -145,7 +137,7 @@ Animation * Alien::get_animation() {
   return animator;
 }
 
-/** 
+/**
 *   selected character
 *   @return void
 */
@@ -154,7 +146,7 @@ void Alien::set_alien_selected() {
     is_selected = true;
 }
 
-/** 
+/**
 *   unselected character
 *   @return void
 */
@@ -163,7 +155,7 @@ void Alien::set_alien_deselect() {
     is_selected = false;
 }
 
-/** 
+/**
 *   character position
 *   @return bool
 */

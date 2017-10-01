@@ -13,7 +13,7 @@ Header::Header(double position_x, double position_y, int max_papers, int stage_n
         paper_icon = new Animation("assets/sprites/papeis(19X21).png", 1, 4, 0.5);
         paper_icon->setDrawSize(40,50);
         paper_icon->addAction("static", 0,0);
-        paper_icon->setInterval("static");
+        paper_icon->set_interval("static");
 
         total_papers = max_papers;
 
@@ -56,16 +56,16 @@ Text* Header::convertToText(int new_value) {
 void Header::verifySelect() {
         switch(alien_select) {
         case 0:
-                animator->setInterval("none");
+                animator->set_interval("none");
                 break;
         case 1:
-                animator->setInterval("Etemer");
+                animator->set_interval("Etemer");
                 break;
         case 2:
-                animator->setInterval("Etbilu");
+                animator->set_interval("Etbilu");
                 break;
         case 3:
-                animator->setInterval("Etvarginha");
+                animator->set_interval("Etvarginha");
                 break;
         default:
                 // Nothing to do.

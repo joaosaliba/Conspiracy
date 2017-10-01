@@ -60,9 +60,9 @@ void Varginha::update(double time_elapsed) {
 
     if((inc_x == 0 && inc_y == 0) || (!turnOff && !is_selected)) {
         if(idle_animation_number) {
-          animator->setInterval("idle_right");
+          animator->set_interval("idle_right");
         }else {
-          animator->setInterval("idle_left");
+          animator->set_interval("idle_left");
 >>>>>>> origin/Development
         }
     }
@@ -98,7 +98,7 @@ void Varginha::special_action() {
 <<<<<<< HEAD
             animator->set_interval("invisible_right");
 =======
-            animator->setInterval("invisible_right");
+            animator->set_interval("invisible_right");
 >>>>>>> origin/Development
         }else {
             animator->set_interval("invisible_left");
@@ -143,7 +143,7 @@ void Varginha::special_action() {
 =======
             CameraSwitch* camera_switch = NULL;
             CameraLever* camera_lever = NULL;
-            camera_switch = (CameraSwitch*)CollisionManager::instance.verifyCollisionWithCameraSwitches(this);
+            camera_switch = (CameraSwitch*)CollisionManager::instance.verify_collision_with_cameraswitches(this);
             camera_lever = (CameraLever*)CollisionManager::instance.verifyCollisionWithCameraLevers(this);
 
             if((camera_switch != NULL) || (camera_lever != NULL)) {
@@ -158,10 +158,10 @@ void Varginha::special_action() {
                        }
 
                        if(x > getPositionX()) {
-                           animator->setInterval("action_right");
+                           animator->set_interval("action_right");
                            idle_animation_number = 5;
                        }else {
-                           animator->setInterval("action_left");
+                           animator->set_interval("action_left");
                            idle_animation_number = 0;
                        }
                        block_movement = true;
@@ -173,7 +173,7 @@ void Varginha::special_action() {
                is_invisible = true;
                setVisible(false);
                if(idle_animation_number == 5) {
-                   animator->setInterval("special_right");
+                   animator->set_interval("special_right");
 >>>>>>> origin/Development
                }else {
                    animator->set_interval("special_left");

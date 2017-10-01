@@ -33,11 +33,7 @@ protected:
     void walk_in_x(double & alien_in_x);
     void walk_in_y(double & alien_in_y, double alien_in_x);
     Animation* animator;
-<<<<<<< HEAD
-    int idle_animation_number;
-=======
     int idle_animation_number; // delcaring variable idle animation number
->>>>>>> origin/Development
     std::string alienName;
     bool block_movement; // delclarion  variable block movement
     bool is_selected; // delcaring  varible  that reference if the personage is selected

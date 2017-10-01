@@ -8,7 +8,7 @@
 Camera::Camera(double positionX, double positionY, std::string direction) : Enemy(FILENAME,positionX,positionY,
                                                                      WIDTH, HEIGHT){
     initializeAnimator(FILENAME);
-    animator->setInterval(direction);
+    animator->set_interval(direction);
     turnedOn = true;
     int default_range = 180;
     int default_angleOfVision = 80;
@@ -20,7 +20,7 @@ Camera::Camera(double positionX, double positionY, std::string direction,
                int p_angleOfVision, int p_range, int p_initialAngle): Enemy(FILENAME,positionX,positionY,
                                                                      WIDTH, HEIGHT){
     initializeAnimator(FILENAME);
-    animator->setInterval(direction);
+    animator->set_interval(direction);
     turnedOn = true;
 
     initializeVision(p_range, p_angleOfVision, direction);

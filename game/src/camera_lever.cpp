@@ -29,7 +29,7 @@ CameraLever::CameraLever(double camera_lever_position_x, double camera_lever_pos
     animator->addAction("up", 2,2);
     animator->addAction("mid",1,1);
     animator->addAction("down", 0,0);
-    animator->setInterval("mid");
+    animator->set_interval("mid");
     camera_lever_direction = camera_lever_direction;
     stateInc = 1;
     state = 1;
@@ -71,8 +71,8 @@ void CameraLever::nextState(){
     }
     state += stateInc;
     switch(state){
-        case 0: animator->setInterval("up"); break;
-        case 1: animator->setInterval("mid"); break;
-        case 2: animator->setInterval("down"); break;
+        case 0: animator->set_interval("up"); break;
+        case 1: animator->set_interval("mid"); break;
+        case 2: animator->set_interval("down"); break;
     }
 }

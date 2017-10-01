@@ -9,11 +9,11 @@
 #define HEIGHT 22
 
 /** Objects included in the alien_bilu.hpp, door_switch.hpp classes found on lines 1 to
-* line 4, where the methods will be responsible for the manipulation and organization 
+* line 4, where the methods will be responsible for the manipulation and organization
 * of these objects
 */
 
-Bilu::Bilu(double bilu_position_x, double bilu_position_y) : 
+Bilu::Bilu(double bilu_position_x, double bilu_position_y) :
 Alien(FILENAME, bilu_position_x, bilu_position_y, WIDTH, HEIGHT) {
     assert (bilu_position_x !=NULL);
     assert (bilu_position_y !=NULL);
@@ -22,7 +22,7 @@ Alien(FILENAME, bilu_position_x, bilu_position_y, WIDTH, HEIGHT) {
 
     animator->add_action("special_right",14,17);
     animator->add_action("special_left",10,13);
-    
+
     hacking = false;
     editing = false;
     last_action = false;
@@ -30,14 +30,14 @@ Alien(FILENAME, bilu_position_x, bilu_position_y, WIDTH, HEIGHT) {
     in_position = false;
 }
 
-/** 
+/**
 *   movement and special actions of the character, in addition to checking the finishi point
 *   @return void
 */
 
 void Bilu::update(double time_elapsed) {
     assert ( time_elapsed != NULL);
-    
+
     in_position = false;
     animator->set_total_time(0.3);
     auto move_bilu_in_y = 0.15*time_elapsed;
@@ -48,27 +48,26 @@ void Bilu::update(double time_elapsed) {
         walk_in_y(move_bilu_in_y, move_bilu_in_x);
 }
 
-<<<<<<< HEAD
     if(move_bilu_in_x == 0 && move_bilu_in_y == 0) {
         if(idle_animation_number) {
             animator->set_interval("idle_right");
         }else {
             animator->set_interval("idle_left");
-=======
-        if(inc_x == 0 && inc_y == 0) {
+
+        if(move_bilu_in_x == 0 && move_bilu_in_y == 0) {
                 if(idle_animation_number) {
-                        animator->setInterval("idle_right");
+                        animator->set_interval("idle_right");
                 }else {
-                        animator->setInterval("idle_left");
+                        animator->set_interval("idle_left");
                 }
->>>>>>> origin/Development
+
         }
 }
     special_action();
 
-    if(CollisionManager::instance.verify_collision_with_guards(this) || 
+    if(CollisionManager::instance.verify_collision_with_guards(this) ||
     CollisionManager::instance.verify_collision_with_cameras(this)) {
-        set_enabled(false);
+        setEnabled(false);
 }
     FinishPoint* finish_point = (FinishPoint*)
     CollisionManager::instance.verify_collision_with_finish_points(this);
@@ -81,11 +80,10 @@ void Bilu::update(double time_elapsed) {
     animator->update();
 }
 
-/** 
+/**
 *   verifies the interaction of both paper and pc
 *   @return void
 */
-
 void Bilu::special_action() {
     std::pair<int, int> interval;
 
@@ -138,7 +136,7 @@ void Bilu::special_action() {
             }
 }else if(editing) {
     ((Paper*)(paper))->animate();
-    setspecial_action_animator();
+    set_special_action_animator();
         if(((Paper*)(paper))->get_editing_bar_percent() <= 0.0) {
             editing = false;
             ((Paper*)(paper))->stop_animation();
@@ -151,7 +149,7 @@ void Bilu::special_action() {
     last_action = hacking;
 }
 
-/** 
+/**
 *   draws the animation of the character according to its position
 *   @return void
 */
@@ -162,8 +160,7 @@ void Bilu::draw() {
     animator->draw_collider(get_position_x(), get_position_y(), get_width(), get_height());
 }
 
-<<<<<<< HEAD
-/** 
+/**
 *   special character animation
 *   @return void
 */
@@ -175,13 +172,4 @@ void Bilu::set_special_action_animator() {
         animator->set_interval("special_left");
     }
         animator->set_total_time(0.6);
-=======
-void Bilu::setSpecialActionAnimator() {
-        if(idle_animation_number == 5) {
-                animator->setInterval("special_right");
-        }else {
-                animator->setInterval("special_left");
-        }
-        animator->setTotalTime(0.6);
->>>>>>> origin/Development
 }

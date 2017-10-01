@@ -28,14 +28,14 @@ void DoorSwitch::update(double timeElapsed){
 void DoorSwitch::draw(){
     INFO("DoorSwitch DRAW");
     if(isPressed()){
-        animator->setInterval("beingHacked");
+        animator->set_interval("beingHacked");
         AnimationManager::instance.addProgressBar(hacking_bar);
         if(hacking_bar->getPercent() <= 0.0){
             pressed = false;
             setEnabled(false);
         }
     }else{
-        animator->setInterval("idle");
+        animator->set_interval("idle");
     }
     animator->draw(getPositionX(), getPositionY());
 }

@@ -22,11 +22,11 @@ namespace engine{
         void draw_collider(int x, int y, int width, int height);
         void next();
         void shutdown();
-        void setTotalTime(double newTotalTime);
+        void set_total_time(double newTotalTime);
         void setCurrentPositionFrame(int positionFrame);
         int getCurrentPositionFrame();
-        void setInterval(std::string action);
-        void addAction(std::string name_action, int initial, int last);
+        void set_interval(std::string action);
+        void add_action(std::string name_action, int initial, int last);
         std::pair<std::string, std::pair<int, int>> getInterval();
         void setDrawSize(int width, int height);
         std::string getCurrentAction();

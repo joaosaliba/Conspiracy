@@ -19,9 +19,9 @@ Player::Player(std::pair<int, int> biluPosition, std::pair<int, int> etemerPosit
         varginha->update(0);
         header->update(0);
 
-        bilu->setAlienDeselect();
-        varginha->setAlienDeselect();
-        etemer->setAlienSelected();
+        bilu->set_alien_deselect();
+        varginha->set_alien_deselect();
+        etemer->set_alien_selected();
 
         bilu_sound_effect = new Audio("assets/sounds/TROCABILU.wav", "EFFECT", 100);
         varginha_sound_effect = new Audio("assets/sounds/TROCAVARGINHA.wav", "EFFECT", 25);
@@ -40,20 +40,20 @@ void Player::update(double timeElapsed){
                 selectedAlien = 2;
         } else if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_THREE)) {
                 selectedAlien = 3;
-                ((Varginha *)(varginha))->setDefault();
+                ((Varginha *)(varginha))->set_default();
         }
 
         if(beforeAlien != selectedAlien) {
                 header->setAlienSelect(selectedAlien);
-                etemer->setAlienDeselect();
-                bilu->setAlienDeselect();
-                varginha->setAlienDeselect();
+                etemer->set_alien_deselect();
+                bilu->set_alien_deselect();
+                varginha->set_alien_deselect();
 
                 waitAnimation(beforeAlien);
                 switch(selectedAlien) {
-                case 1: etemer->setAlienSelected(); etemer_sound_effect->play(0); break;
-                case 2: bilu->setAlienSelected(); bilu_sound_effect->play(0); break;
-                case 3: varginha->setAlienSelected(); varginha_sound_effect->play(0);break;
+                case 1: etemer->set_alien_selected(); etemer_sound_effect->play(0); break;
+                case 2: bilu->set_alien_selected(); bilu_sound_effect->play(0); break;
+                case 3: varginha->set_alien_selected(); varginha_sound_effect->play(0);break;
                 }
         }
 
@@ -91,14 +91,14 @@ void Player::waitAnimation(int beforeAlien){
 }
 
 void Player::idleAnimation(Alien * alien){
-        if(alien->getAnimation()->getInterval().first == "right") {
-                alien->getAnimation()->setInterval("idle_right");
-        } else if(alien->getAnimation()->getInterval().first == "left") {
-                alien->getAnimation()->setInterval("idle_left");
-        } else if(alien->getAnimation()->getInterval().first == "up") {
-                alien->getAnimation()->setInterval("idle_up");
-        }else if(alien->getAnimation()->getInterval().first == "down") {
-                alien->getAnimation()->setInterval("idle_down");
+        if(alien->get_animation()->getInterval().first == "right") {
+                alien->get_animation()->set_interval("idle_right");
+        } else if(alien->get_animation()->getInterval().first == "left") {
+                alien->get_animation()->set_interval("idle_left");
+        } else if(alien->get_animation()->getInterval().first == "up") {
+                alien->get_animation()->set_interval("idle_up");
+        }else if(alien->get_animation()->getInterval().first == "down") {
+                alien->get_animation()->set_interval("idle_down");
         }
 }
 bool Player::isDead(){

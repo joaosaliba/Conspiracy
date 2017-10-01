@@ -1,63 +1,63 @@
 #include "finish_scene.hpp"
 #include "button.hpp"
+
 #include <typeinfo>
 #include <iostream>
 
 using namespace engine;
 
-finish_scene::finish_scene(int id) : Scene(id) {
-    select_button = 1;
-    select = new color(255, 255, 255, 0);
-    not_select = new color(0, 0, 0, 0);
-    sound_effect = new audio("assets/sounds/SELECT6.wav", "EFFECT", 100);
-    background_sound = new audio("assets/sounds/FINAL.wav", "MUSIC", 50);
-    background = new animation("assets/sprites/finish.png", 1, 1, 0.8);
+FinishScene::FinishScene(int id) : Scene(id){
+    selectButton = 1;
+    select = new Color(255, 255, 255, 0);
+    notSelect = new Color(0, 0, 0, 0);
+    soundEffect = new Audio("assets/sounds/SELECT6.wav", "EFFECT", 100);
+    backgroundSound = new Audio("assets/sounds/FINAL.wav", "MUSIC", 50);
+    background = new Animation("assets/sprites/finish.png", 1, 1, 0.8);
     background->add_action("finish", 0,0);
     background->set_interval("finish");
 }
 
-finish_scene::~finish_scene() {
+FinishScene::~FinishScene(){
 }
 
-void finish_scene::draw() {
+void FinishScene::draw(){
         background->draw_instant(80, 20);
 
-        for(auto game_object : game_object_list) {
-                (*game_object.second).draw();
+        for(auto gameObject : gameObjectsList) {
+                (*gameObject.second).draw();
         }
 }
 
-void finish_scene::update(double time_elapsed) {
-        select_action();
+void FinishScene::update(double timeElapsed){
+        selectAction();
 
         background->update();
 
-        for(auto game_object : game_object_list) {
-                if(typeid(*game_object.second) == typeid(button)) {
-                        if(game_object.first == select_button) {
-                                ((button *)(game_object.second))->set_text_color(select);
+        for(auto gameObject : gameObjectsList) {
+                if(typeid(*gameObject.second) == typeid(Button)) {
+                        if(gameObject.first == selectButton) {
+                                ((Button *)(gameObject.second))->setTextColor(select);
                         }else{
-                                ((button *)(game_object.second))->set_text_color(not_select);
+                                ((Button *)(gameObject.second))->setTextColor(notSelect);
                         }
                 }
 
-                (*game_object.second).update(time_elapsed);
+                (*gameObject.second).update(timeElapsed);
         }
 }
 
-void finish_scene::load() {
-        game_object_list.push_back(std::pair<int, game_object*>(1,new button(
-                "assets/fonts/font.ttf", 420, 500, 500, 500, "Menu", 50)));
-        animation_manager::instance.set_background_color(new color(158,228,159, 125));
-        background_sound->play(-1);
+void FinishScene::load(){
+        gameObjectsList.push_back(std::pair<int, GameObject*>(1,new Button("assets/fonts/font.ttf", 420, 500, 500, 500, "Menu", 50)));
+        AnimationManager::instance.setBackgroundColor(new Color(158,228,159, 125));
+        backgroundSound->play(-1);
 
 }
 
-void finish_scene::select_action() {
-        if(input_manager::instance.isKeyTriggered(input_manager::KeyPress::KEY_PRESS_ENTER)) {
-                switch(select_button) {
+void FinishScene::selectAction(){
+        if(InputManager::instance.isKeyTriggered(InputManager::KeyPress::KEY_PRESS_ENTER)) {
+                switch(selectButton) {
                 case 1:
-                        get_scene_manager()->load_scene(0);
+                        getSceneManager()->loadScene(0);
                         break;
                 default:
                         break;
@@ -66,5 +66,5 @@ void finish_scene::select_action() {
         }
 }
 
-void finish_scene::unload() {
+void FinishScene::unload(){
 }

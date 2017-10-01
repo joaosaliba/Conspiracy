@@ -168,7 +168,7 @@ bool CollisionManager::verifyCollisionWithOtherChairs(GameObject* game_object){
  *    @brief collision manager  verify the collisions wth guards body
  *    @return bool
  */
-bool CollisionManager::verifyCollisionWithGuardsBody(GameObject* game_object){
+bool CollisionManager::verify_collision_with_guardsBody(GameObject* game_object){
         for(GameObject * enemy : guardList) {
                 if(verifyCollision(enemy, game_object)) {
                         return true;
@@ -184,10 +184,10 @@ bool CollisionManager::verifyCollisionWithGuardsBody(GameObject* game_object){
  *    @return bool
  */
 
-bool CollisionManager::verifyCollisionWithGuards(GameObject* game_object_collision){
+bool CollisionManager::verify_collision_with_guards(GameObject* game_object_collision){
     bool status = false;
 
-        status = verifyCollisionWithGuardsBody(game_object_collision);
+        status = verify_collision_with_guardsBody(game_object_collision);
         if(status){
             return status;
         }else{
@@ -200,7 +200,7 @@ bool CollisionManager::verifyCollisionWithGuards(GameObject* game_object_collisi
  *    @brief collision manager  verify the collisions wth cameras( if personage were caught)
  *    @return bool
  */
-bool CollisionManager::verifyCollisionWithCameras(GameObject* game_object_collision){
+bool CollisionManager::verify_collision_with_cameras(GameObject* game_object_collision){
     bool status = false;
     status = verifyCollisionWithFieldsOfVision(game_object_collision, camerasVision);
     assert (status != NULL);
@@ -273,7 +273,7 @@ GameObject* CollisionManager::verifyCollisionWithSwitches(GameObject* game_objec
  *    @brief collision manager  and verify the interection with the camera switches
  *    @return null
  */
-GameObject* CollisionManager::verifyCollisionWithCameraSwitches(GameObject* game_object){
+GameObject* CollisionManager::verify_collision_with_cameraswitches(GameObject* game_object){
     for(GameObject * cameraSwitch : cameraSwitchList) {
             if(verifyCollision(cameraSwitch, game_object)) {
                     return cameraSwitch;
@@ -319,7 +319,7 @@ GameObject* CollisionManager::verifyCollisionWithPapers(GameObject* game_object_
  *    @brief collision manager  and verify the finishs points
  *    @return null
  */
-GameObject* CollisionManager::verifyCollisionWithFinishPoints(GameObject* game_object_collision){
+GameObject* CollisionManager::verify_collision_with_finish_points(GameObject* game_object_collision){
     for(GameObject * finishPoint : finishPointList) {
             if(verifyCollision(finishPoint, game_object_collision)) {
                     return finishPoint;

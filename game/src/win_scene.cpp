@@ -13,7 +13,7 @@ WinScene::WinScene(int id) : Scene(id){
     soundEffect = new Audio("assets/sounds/SELECT6.wav", "EFFECT",100);
     background = new Animation("assets/sprites/win.png", 1, 5, 0.8);
     background->addAction("win", 0, 4);
-    background->setInterval("win");
+    background->set_interval("win");
 }
 
 WinScene::~WinScene(){

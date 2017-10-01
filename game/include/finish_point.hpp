@@ -8,10 +8,10 @@ using namespace engine;
 
 class FinishPoint: public GameObject{
 public:
-    FinishPoint(std::string objectName, double positionX, double positionY,int width, int height, std::string alienNames);
+    FinishPoint(std::string objectName, double positionX, double positionY,int width, int height, std::string alien_names);
     void update(double timeElapsed);
     void draw();
-    std::string getAlienNames();
+    std::string get_alien_names();
 private:
     std::string aliens;
     std::string orientation;

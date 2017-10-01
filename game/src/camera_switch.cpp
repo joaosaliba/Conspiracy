@@ -29,7 +29,7 @@ CameraSwitch::CameraSwitch(double positionX, double positionY, std::string direc
 
     animator->addAction("on", 0,0);
     animator->addAction("off",1,1);
-    animator->setInterval("on");
+    animator->set_interval("on");
     direction = direction;
     working = true;
 }
@@ -62,7 +62,7 @@ bool CameraSwitch::isWorking(){
 void CameraSwitch::turnOff(){
     if(animator->getInterval().first!="off"){
         working = false;
-        animator->setInterval("off");
+        animator->set_interval("off");
         switchEfffect->play(0);
     }
     else{

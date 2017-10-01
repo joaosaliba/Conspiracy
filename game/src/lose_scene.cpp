@@ -14,7 +14,7 @@ LoseScene::LoseScene(int id) : Scene(id){
     backgroundMusic = new Audio("assets/sounds/GAMEOVER.wav", "MUSIC", 50);
     background = new Animation("assets/sprites/lose.png", 1, 4, 0.8);
     background->addAction("lose", 0,3);
-    background->setInterval("lose");
+    background->set_interval("lose");
 }
 
 LoseScene::~LoseScene(){

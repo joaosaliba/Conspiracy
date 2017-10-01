@@ -30,7 +30,7 @@ void Paper::update(double time_elapsed){
     time_elapsed = time_elapsed;
     if(paper_is_being_edited){
         paper_editing_bar->update(time_elapsed);
-        animator->setInterval("beingEdited");
+        animator->set_interval("beingEdited");
         if(paper_editing_bar->getPercent() <= 0.0){
             paper_is_being_edited = false;
             paper_edited = true;
@@ -38,7 +38,7 @@ void Paper::update(double time_elapsed){
             assert(paper_is_being_edited != NULL);
         }
     }else{
-        animator->setInterval("idle");
+        animator->set_interval("idle");
     }
     animator->update();
 }

@@ -35,7 +35,7 @@ private:
     void walkInXSpecial(double & incX);
     void walkInYSpecial(double & incY);
     void selectLine();
-    void specialAction();
+    void special_action();
     void verifyDeadLockHorizontal();
     void verifyDeadLockVertical();
     void stop(double &incX, double &incY);

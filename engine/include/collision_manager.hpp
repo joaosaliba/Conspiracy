@@ -13,14 +13,14 @@ class CollisionManager{
 public:
     bool verifyCollisionWithWalls(GameObject* game_object);
     bool verifyCollisionWithWallsAndChairs(GameObject* game_object);
-    bool verifyCollisionWithGuards(GameObject* game_object);
-    bool verifyCollisionWithCameras(GameObject* game_object);
+    bool verify_collision_with_guards(GameObject* game_object);
+    bool verify_collision_with_cameras(GameObject* game_object);
     bool verifyCollisionWithOtherChairs(GameObject* game_object);
     GameObject* verifyCollisionWithPapers(GameObject* game_object);
     GameObject* verifyCollisionWithSwitches(GameObject* game_object);
-    GameObject* verifyCollisionWithCameraSwitches(GameObject* game_object);
+    GameObject* verify_collision_with_cameraswitches(GameObject* game_object);
     GameObject* verifyCollisionWithCameraLevers(GameObject* game_object);
-    GameObject* verifyCollisionWithFinishPoints(GameObject* game_object);
+    GameObject* verify_collision_with_finish_points(GameObject* game_object);
     bool verifyCollision(GameObject* game_object_collision, GameObject* game_object_collision2);
     std::pair<std::string, GameObject *> verifyCollisionWithChairs(GameObject* game_object_collision);
     std::string verifyCollisionChair(GameObject* game_object_collision, GameObject* game_object_collision2);
@@ -36,7 +36,7 @@ public:
     void addCameraLever(GameObject* game_object);
     void addFinishPoint(GameObject* game_object);
     void resetLists();
-    bool verifyCollisionWithGuardsBody(GameObject* game_object);
+    bool verify_collision_with_guardsBody(GameObject* game_object);
     static CollisionManager instance;
 private:
     double CCW(std::pair<int, int> line_a, std::pair<int, int> line_b, std::pair<int, int> line_c);

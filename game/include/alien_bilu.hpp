@@ -16,17 +16,10 @@ protected:
     void special_action();
 
 private:
-<<<<<<< HEAD
-    bool hacking;
-    bool editing;
-    bool last_action;
-    void set_special_action_animator();
-=======
     bool hacking; //declaring variable hacking "computers
     bool editing; // declaring variable editing "documents
-    bool last_action; // declaring variablre last action 
-    void setSpecialActionAnimator();
->>>>>>> origin/Development
+    bool last_action; // declaring variablre last action
+    void set_special_action_animator();
 };
 
 #endif
