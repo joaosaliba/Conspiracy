@@ -13,6 +13,16 @@
 
 class Varginha: public Alien {
 public:
+/**
+ * Builder method
+ * <p>This method performs the action of constructing the methods and passing the variables
+ *used in class alien_varginha.hpp</p>
+ * @param unsigned double-varginha_position_x
+ * @param unsigned double-varginha_position_y
+ * @param unsigned double-time_elapsed
+ * @param unsigned bool-is_invisible
+ * @param unsigned bool-turn_off
+ */
     Varginha(double varginha_position_x, double varginha_position_y);
     void update(double time_elapsed);
     void draw();

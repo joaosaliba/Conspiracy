@@ -1,9 +1,16 @@
+//#define NDEBUG *uncomment to disable assertions
 #include "alien.hpp"
 #include <assert.h>
 
 /** Objects included in the alien.hpp
 * where the methods will be responsible for the manipulation and organization
 * of these objects
+*@param unsigned double-alien_position_x
+*@param unsigned double-alien_position_y
+*@param unsigned int-width
+*@param unsigned int-height
+*@param unsigned bool-block_movement
+*@param unsigned bool-in_position
 */
 
 Alien::Alien(std::string objectName, double alien_position_x, double alien_position_y,int width,
@@ -43,10 +50,12 @@ Alien::~Alien() {
 }
 
 /**
-*   Creates animations of movement and collision in X in the game
-*   @return void
+* Walk in x method
+* <p>Creates animations of movement and collision in X in the game</p>
+*@param unsigned double-alien_in_x
+*@param unsigned double-alien_position_x
+*@return void
 */
-
 
 void Alien::walk_in_x(double & alien_in_x) {
     assert (alien_in_x !=NULL);
@@ -79,8 +88,13 @@ void Alien::walk_in_x(double & alien_in_x) {
 }
 
 /**
-*   Creates animations of movement and collision in Y in the game
-*   @return void
+* Walk in y method
+* <p>Creates animations of movement and collision in Y in the game</p>
+*@param unsigned double-alien_in_x
+*@param unsigned double-alien_in_y
+*@param unsigned double-alien_position_x
+*@param unsigned double-alien_position_y
+*@return void
 */
 
 void Alien::walk_in_y(double & alien_in_y, double alien_in_x) {
@@ -124,8 +138,11 @@ void Alien::walk_in_y(double & alien_in_y, double alien_in_x) {
 }
 
 /**
-*   draws the animation of the character according to its position
-*   @return void
+* Draw method
+* <p>draws the animation of the character according to its position</p>
+*@param unsigned double-alien_position_x
+*@param unsigned double-alien_position_y
+*@return void
 */
 
 void Alien::draw() {
@@ -138,7 +155,9 @@ Animation * Alien::get_animation() {
 }
 
 /**
-*   selected character
+* Set alien selected
+* <p>selected character</p>
+*@param unsigned bool-is_selected
 *   @return void
 */
 
@@ -147,8 +166,9 @@ void Alien::set_alien_selected() {
 }
 
 /**
-*   unselected character
-*   @return void
+* Set alien deselect
+* <p>unselected character</p>
+*@return void
 */
 
 void Alien::set_alien_deselect() {
@@ -156,8 +176,9 @@ void Alien::set_alien_deselect() {
 }
 
 /**
-*   character position
-*   @return bool
+* Is in position method
+* <p>character position</p>
+*@return bool
 */
 
 bool Alien::is_in_position() {

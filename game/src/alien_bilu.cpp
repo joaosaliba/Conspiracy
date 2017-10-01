@@ -1,3 +1,4 @@
+//#define NDEBUG *uncomment to disable assertions
 #include "alien_bilu.hpp"
 #include "collision_manager.hpp"
 #include "paper.hpp"
@@ -11,6 +12,13 @@
 /** Objects included in the alien_bilu.hpp, door_switch.hpp classes found on lines 1 to
 * line 4, where the methods will be responsible for the manipulation and organization
 * of these objects
+*@param unsigned double-bilu_position_x
+*@param unsigned double-bilu_position_y
+*@param unsigned bool-hacking
+*@param unsigned bool-editing
+*@param unsigned bool-last_action
+*@param unsigned bool-is_selected
+*@param unsigned bool-in_position
 */
 
 Bilu::Bilu(double bilu_position_x, double bilu_position_y) :
@@ -18,7 +26,9 @@ Alien(FILENAME, bilu_position_x, bilu_position_y, WIDTH, HEIGHT) {
     assert (bilu_position_x !=NULL);
     assert (bilu_position_y !=NULL);
     assert (WIDTH !=NULL);
+    assert (WIDTH > 19);
     assert (HEIGHT !=NULL);
+    assert (HEIGHT > 22);
 
     animator->add_action("special_right",14,17);
     animator->add_action("special_left",10,13);
@@ -31,8 +41,11 @@ Alien(FILENAME, bilu_position_x, bilu_position_y, WIDTH, HEIGHT) {
 }
 
 /**
-*   movement and special actions of the character, in addition to checking the finishi point
-*   @return void
+* Update method
+* <p>movement and special actions of the character, in addition to checking the finishi point</p>
+*@param unsigned double-time_elapsed
+*@param unsigned bool-in_position
+*@return void
 */
 
 void Bilu::update(double time_elapsed) {
@@ -46,6 +59,8 @@ void Bilu::update(double time_elapsed) {
     if(!block_movement && is_selected) {
         walk_in_x(move_bilu_in_x);
         walk_in_y(move_bilu_in_y, move_bilu_in_x);
+    }else(block_movement && is_selected) {
+        error("No move Bilu");
 }
 
     if(move_bilu_in_x == 0 && move_bilu_in_y == 0) {
@@ -81,9 +96,13 @@ void Bilu::update(double time_elapsed) {
 }
 
 /**
-*   verifies the interaction of both paper and pc
-*   @return void
+* Special action method
+* <p>verifies the interaction of both paper and pc</p>
+*@param unsigned bool-hacking
+*@param unsigned bool-editing
+*@return void
 */
+
 void Bilu::special_action() {
     std::pair<int, int> interval;
 
@@ -150,8 +169,11 @@ void Bilu::special_action() {
 }
 
 /**
-*   draws the animation of the character according to its position
-*   @return void
+* Draw method
+* <p>draws the animation of the character according to its position</p>
+*@param unsigned double-bilu_position_x
+*@param unsigned double-bilu_position_y
+*@return void
 */
 
 void Bilu::draw() {
@@ -161,8 +183,9 @@ void Bilu::draw() {
 }
 
 /**
-*   special character animation
-*   @return void
+* Special action animator
+* <p>special character animation</p>
+*@return void
 */
 
 void Bilu::set_special_action_animator() {

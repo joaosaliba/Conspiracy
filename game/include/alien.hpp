@@ -18,6 +18,21 @@ using namespace engine;
 
 class Alien: public GameObject {
 public:
+/**
+ * Builder method
+ * <p>This method performs the action of constructing the methods and passing the variables
+ *used in class alien_bilu.hpp</p>
+ * @param unsigned double-alien_position_x
+ * @param unsigned double-alien_position_y
+ * @param unsigned int-width
+ * @param unsigned int-height
+ * @param unsigned double-time_elapsed
+ * @param unsigned double-alien_in_x
+ * @param unsigned double-alien_in_y
+ * @param unsigned bool-block_movement
+ * @param unsigned bool-is_selected
+ * @param unsigned bool-in_position
+ */
     Alien(std::string objectName, double alien_position_x, double alien_position_y,
     int width, int height);
     ~Alien();

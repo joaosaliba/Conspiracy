@@ -1,3 +1,4 @@
+//#define NDEBUG *uncomment to disable assertions
 #include "alien_varginha.hpp"
 #include <assert.h>
 
@@ -8,6 +9,12 @@
 /** Objects included in the alien_varginha.hpp 
 * where the methods will be responsible for the manipulation and organization 
 * of these objects
+*@param unsigned double-varginha_position_x
+*@param unsigned double-varginha_position_y
+*@param unsigned bool-is_invisible
+*@param unsigned bool-is_selected
+*@param unsigned bool-in_position
+*@param unsigned bool-turn_off
 */
 
 Varginha::Varginha(double varginha_position_x, double varginha_position_y) : 
@@ -15,7 +22,9 @@ Alien(FILENAME, varginha_position_x, varginha_position_y, WIDTH, HEIGHT) {
     assert (varginha_position_x !=NULL);
     assert (etemer_position_y !=NULL);
     assert (WIDTH !=NULL);
+    assert (WIDTH > 10);
     assert (HEIGHT !=NULL);
+    assert (HEIGHT > 15);
 
     animator->add_action("special_right",12,13);
     animator->add_action("special_left",10,11);
@@ -32,9 +41,14 @@ Alien(FILENAME, varginha_position_x, varginha_position_y, WIDTH, HEIGHT) {
     timer_turn->start();
 }
 
-/** 
-*   movement and special actions of the character, in addition to checking the finishi point
-*   @return void
+/**
+* Update method 
+* <p>movement and special actions of the character, in addition to checking the finishi point</p>
+*@param unsigned double-time_elapsed
+*@param unsigned bool-in_position
+*@param unsigned double-varginha_in_x
+*@param unsigned double-varginha_in_y
+*@return void
 */
 
 void Varginha::update(double time_elapsed) {
@@ -50,20 +64,11 @@ void Varginha::update(double time_elapsed) {
         walk_in_y(varginha_in_y, varginha_in_x);
     }
 
-<<<<<<< HEAD
     if((varginha_in_x == 0 && varginha_in_y == 0) || (!turn_off && !is_selected)) {
         if(idle_animation_number) {
             animator->set_interval("idle_right");
         }else { 
             animator->set_interval("idle_left");
-=======
-
-    if((inc_x == 0 && inc_y == 0) || (!turnOff && !is_selected)) {
-        if(idle_animation_number) {
-          animator->set_interval("idle_right");
-        }else {
-          animator->set_interval("idle_left");
->>>>>>> origin/Development
         }
     }
     special_action();
@@ -85,26 +90,26 @@ void Varginha::update(double time_elapsed) {
 }
 
 /** 
-*   movement and special actions of the character, in addition to verify collisions and 
-*   attributes of movement of the character
-*   @return void
+* Special action
+* <p>movement and special actions of the character, in addition to verify collisions and 
+*attributes of movement of the character</p>
+*@param unsigned double-varginha_position_x
+*@param unsigned double-varginha_position_y
+*@param unsigned bool-block_movement
+*@param unsigned bool-turn_off
+*@param unsigned bool-is_selected
+*@return void
 */
-
 void Varginha::special_action() {
     std::pair<int, int> interval;
 
     if(is_invisible) {
         if(idle_animation_number == 5) {
-<<<<<<< HEAD
             animator->set_interval("invisible_right");
-=======
-            animator->set_interval("invisible_right");
->>>>>>> origin/Development
         }else {
             animator->set_interval("invisible_left");
         }
     }else if(is_selected) {
-<<<<<<< HEAD
         CameraSwitch* camera_switch = NULL;
         CameraLever* camera_lever = NULL;
         camera_switch = (CameraSwitch*)CollisionManager::
@@ -140,41 +145,6 @@ void Varginha::special_action() {
         set_visible(false);
             if(idle_animation_number == 5) {
                 animator->set_interval("special_right");
-=======
-            CameraSwitch* camera_switch = NULL;
-            CameraLever* camera_lever = NULL;
-            camera_switch = (CameraSwitch*)CollisionManager::instance.verify_collision_with_cameraswitches(this);
-            camera_lever = (CameraLever*)CollisionManager::instance.verifyCollisionWithCameraLevers(this);
-
-            if((camera_switch != NULL) || (camera_lever != NULL)) {
-                   if(InputManager::instance.isKeyTriggered(InputManager::KEY_PRESS_SPACE)) {
-                       int x = 0;
-                       if(camera_switch!= NULL) {
-                           camera_switch->turnOff();
-                           x = camera_switch->getPositionX();
-                       }else if(camera_lever != NULL) {
-                           camera_lever->nextState();
-                           x = camera_lever->getPositionX();
-                       }
-
-                       if(x > getPositionX()) {
-                           animator->set_interval("action_right");
-                           idle_animation_number = 5;
-                       }else {
-                           animator->set_interval("action_left");
-                           idle_animation_number = 0;
-                       }
-                       block_movement = true;
-                       turnOff = true;
-                       timerTurn->step();
-                   }
-           }else if(InputManager::instance.isKeyPressed(InputManager::KEY_PRESS_SPACE)){
-               block_movement = true;
-               is_invisible = true;
-               setVisible(false);
-               if(idle_animation_number == 5) {
-                   animator->set_interval("special_right");
->>>>>>> origin/Development
                }else {
                    animator->set_interval("special_left");
                }
@@ -186,9 +156,12 @@ void Varginha::special_action() {
    }
 }
 
-/** 
-*   standard of play 
-*   @return void
+/**
+* Set default method 
+* <p>standard of play</p>
+*@param unsigned bool-is_invisible
+*@param unsigned bool-block_movement 
+*@return void
 */
 
 void Varginha::set_default() {
@@ -197,14 +170,14 @@ void Varginha::set_default() {
     block_movement = false;
 }
 
-<<<<<<< HEAD
-/** 
-*   draws the animation of the character according to its position
-*   @return void
+/**
+* Draw method 
+* <p>draws the animation of the character according to its position</p>
+*@param unsigned double-varginha_position_x
+*@param unsigned double-varginha_position_y
+*@return void
 */
  
-=======
->>>>>>> origin/Development
 void Varginha::draw() {
     INFO("Varginha DRAW");
     animator->draw(get_varginha_position_x()-15, get_varginha_position_y()-25);
@@ -212,9 +185,12 @@ void Varginha::draw() {
     get_width(), get_height());
 }
 
-/** 
-*   checking remaining game time
-*   @return void
+/**
+* Verify turn method 
+* <p>checking remaining game time</p>
+*@param unsigned bool-block_movement
+*@param unsigned bool-turn_off
+*@return void
 */
 
 void Varginha::verify_turn() {

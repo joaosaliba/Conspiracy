@@ -1,9 +1,17 @@
+//#define NDEBUG *uncomment to disable assertions
 #include "door.hpp"
 #include <assert.h>
 
 /** Objects included in the door.hpp 
 * where the methods will be responsible for the manipulation and organization 
 * of these objects
+*@param unsigned double-door_position_x
+*@param unsigned double-door_position_y
+*@param unsigned int-width
+*@param unsigned int-height
+*@param unsigned double-position_x
+*@param unsigned double-position_y
+*@param unsigned bool-open
 */
 
 Door::Door(std::string objectName, double door_position_x, double door_position_y,
@@ -42,8 +50,12 @@ Door::~Door() {
 }
 
 /** 
-*   movement and special actions of the door, in addition animation
-*   @return void
+* Update method
+* <p>movement and special actions of the door, in addition animation</p>
+*@param unsigned double-time_elapsed
+*@param unsigned bool-open
+*@param unsigned bool-is_open
+*@return void
 */
 
 void Door::update(double time_elapsed) {
@@ -61,8 +73,13 @@ void Door::update(double time_elapsed) {
 }
 
 /** 
-*   draws the animation of the door
-*   @return void
+* Draw method
+* <p>draws the animation of the door</p>
+*@param unsigned double-position_x
+*@param unsigned double-position_y
+*@param unsigned int-width
+*@param unsigned int-height
+*@return void
 */
 
 void Door::draw() {
@@ -75,13 +92,23 @@ Animation * Door::get_animation() {
     return animator;
 }
 
+/** 
+* Is open door method
+* <p>open door method</p>
+*@param unsigned bool-is_open
+*@return bool
+*/
+
 bool Door::is_open() {
     return open;
 }
 
 /** 
-*   draws the animation of the open door
-*   @return void
+* Set open door method
+* <p>draws the animation of the open door</p>
+*@param unsigned bool-door_status
+*@param unsigned bool-open
+*@return void
 */
 
 void Door::set_open(bool door_status) {
@@ -90,8 +117,9 @@ void Door::set_open(bool door_status) {
 }
 
 /** 
-*   draws the play effect of the door
-*   @return void
+* Play effect method
+* <p>draws the play effect of the door</p>
+*@return void
 */
 
 void Door::play_effect() {

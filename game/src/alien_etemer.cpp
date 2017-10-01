@@ -1,3 +1,4 @@
+//#define NDEBUG *uncomment to disable assertions
 #include "alien_etemer.hpp"
 #include "chair.hpp"
 #include "guard.hpp"
@@ -10,6 +11,13 @@
 /** objects included in the alien_etemer.hpp, guard.hpp classes found on lines 1 to
 * line 3, where the methods will be responsible for the manipulation and organization 
 * of these objects
+*@param unsigned double-etemer_position_x
+*@param unsigned double-etemer_position_y
+*@param unsigned bool-hacking
+*@param unsigned bool-editing
+*@param unsigned bool-last_action
+*@param unsigned bool-is_selected
+*@param unsigned bool-in_position
 */
 
 Etemer::Etemer(double etemer_position_x, double etemer_position_y) : 
@@ -17,7 +25,9 @@ Alien(FILENAME, etemer_position_x, etemer_position_y, WIDTH, HEIGHT) {
     assert (etemer_position_x !=NULL);
     assert (etemer_position_y !=NULL);
     assert (WIDTH !=NULL);
+    assert (WIDTH > 10);
     assert (HEIGHT !=NULL);
+    assert (HEIGHT > 22);
     
     animator->add_action("special_right",14,17);
     animator->add_action("special_left",10,13);
@@ -27,9 +37,14 @@ Alien(FILENAME, etemer_position_x, etemer_position_y, WIDTH, HEIGHT) {
     in_position = false;
 }
 
-/** 
-*   movement and special actions of the character, in addition to checking the finishi point
-*   @return void
+/**
+* Update method 
+* <p>movement and special actions of the character, in addition to checking the finishi point</p>
+*@param unsigned double-time_elapsed
+*@param unsigned bool-in_position 
+*@param unsigned double-etemer_in_x
+*@param unsigned double-etemer_in_y
+*@return void
 */
 
 void Etemer::update(double time_elapsed) {
@@ -42,18 +57,8 @@ void Etemer::update(double time_elapsed) {
     animator->set_total_time(0.3);
 }
 
-<<<<<<< HEAD
     auto etemer_in_y = 0.15*time_elapsed;
     auto etemer_in_x = 0.15*time_elapsed;
-=======
-        if(inc_x == 0.0 && inc_y == 0.0 && !block_movement) {
-                if(idle_animation_number) {
-                        animator->setInterval("idle_right");
-                }else {
-                        animator->setInterval("idle_left");
-                }
-        }
->>>>>>> origin/Development
 
     if(!block_movement && is_selected) {
         walk_in_x(etemer_in_x);
@@ -83,10 +88,14 @@ void Etemer::update(double time_elapsed) {
     animator->update();
 }
 
-/** 
-*   movement and special actions of the character, in addition to verify collisions and 
-*   attributes of movement of the character
-*   @return void
+/**
+* Special action method 
+* <p>movement and special actions of the character, in addition to verify collisions and 
+*attributes of movement of the character</p>
+*@param unsigned double-etemer_distance 
+*@param unsigned bool-talking
+*@param unsigned bool-block_movement
+*@return void
 */
 
 void Etemer::special_action(GameObject * guard, double etemer_distance) {
@@ -107,7 +116,6 @@ void Etemer::special_action(GameObject * guard, double etemer_distance) {
     }
 }
 
-<<<<<<< HEAD
     if(talking) {
         if(((Guard *) (guard))->get_position_x() >= get_position_x()) {
             animator->set_interval("special_right");
@@ -124,32 +132,16 @@ void Etemer::special_action(GameObject * guard, double etemer_distance) {
 }else{
     animator->set_interval("idle_left");
 }
-=======
-        if(talking) {
-                if(((Guard *) (guard))->getPositionX() >= getPositionX()) {
-                        animator->setInterval("special_right");
-                        idle_animation_number = 5;
-                }else {
-                        animator->setInterval("special_left");
-                        idle_animation_number = 0;
-                }
-                if(((Guard *) (guard))->getTalkingBarPercent() <= 0.0) {
-                        talking = false;
-                        block_movement = false;
-                        if(idle_animation_number) {
-                                animator->setInterval("idle_right");
-                        }else{
-                                animator->setInterval("idle_left");
-                        }
-                }
->>>>>>> origin/Development
         }
     }
 }
 
-/** 
-*   draws the animation of the character according to its position
-*   @return void
+/**
+* Draw method 
+* <p>draws the animation of the character according to its position</p>
+*@param unsigned double-etemer_position_x
+*@param unsigned double-etemer_position_y
+*@return void
 */
 
 void Etemer::draw() {
@@ -158,9 +150,10 @@ void Etemer::draw() {
     animator->draw_collider(get_position_x(), get_position_y(), get_width(), get_heigth());
 }
 
-/** 
-*   character move
-*   @return void
+/**
+* Move chair method 
+* <p>character move</p>
+*@return void
 */
 
 void Etemer::move_chair() {
@@ -176,31 +169,16 @@ void Etemer::move_chair() {
     }
 }
 
-/** 
-*   Creates animations of movement and collision in X in the game
-*   @return void
+/**
+* Walk in x method 
+* <p>Creates animations of movement and collision in X in the game</p>
+*@param unsigned double-etemer_in_x
+*@param unsigned double-etemer_position_x
+*@return void
 */
 
-<<<<<<< HEAD
 void Etemer::walk_in_x(double & etemer_in_x) {
     assert (etemer_in_x !=NULL);
-=======
-        if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_RIGHT)) {
-                inc_x = inc_x;
-                idle_animation_number = 5;
-                animator->setInterval("right");
-        }
-        else if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_LEFT)) {
-                //movement_sound_effect->play(-1);
-                inc_x = inc_x * (0-1);
-                idle_animation_number = 0;
-                animator->setInterval("left");
-        }
-        else {
-                inc_x = 0;
-        }
-        setPositionX(getPositionX()+inc_x);
->>>>>>> origin/Development
 
     if(InputManager::instance.is_key_pressed(InputManager::KeyPress::KEY_PRESS_RIGHT)) {
         etemer_in_x = etemer_in_x;
@@ -223,10 +201,12 @@ void Etemer::walk_in_x(double & etemer_in_x) {
     }
 }
 
-<<<<<<< HEAD
-/** 
-*   Creates animations of movement and collision in Y in the game
-*   @return void
+/**
+* Walk in y method 
+* <p>Creates animations of movement and collision in Y in the game</p>
+*@param unsigned double-etemer_in_y
+*@param unsigned double-etemer_position_y
+*@return void
 */
 
 void Etemer::walk_in_y(double & etemer_in_y, double etemer_in_x) {
@@ -252,35 +232,19 @@ void Etemer::walk_in_y(double & etemer_in_y, double etemer_in_x) {
         etemer_in_y = 0;
 }
     set_position_y(get_position_y()+etemer_in_y);
-=======
-        if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_UP)) {
-                inc_y = inc_y * (0-1);
-                idle_animation_number = 5;
-                if(inc_x == 0) {
-                        animator->setInterval("up");
-                }
-        }
-        else if(engine::InputManager::instance.isKeyPressed(engine::InputManager::KeyPress::KEY_PRESS_DOWN)) {
-                inc_y = inc_y;
-                idle_animation_number = 0;
-                if(inc_x == 0) {
-                        animator->setInterval("down");
-                }
-        }
-        else {
-                inc_y = 0;
-        }
-        setPositionY(getPositionY()+inc_y);
->>>>>>> origin/Development
 
     if(CollisionManager::instance.verify_collision_with_walls_and_chairs(this)) {
         set_position_y(get_position_y()+(etemer_in_y*(0-1)));
     }
 }
 
-/** 
-*   check the guards' etemer_distance
-*   @return void
+/**
+* Verify Etemer distance method 
+* <p>check the guards' etemer_distance</p>
+*@param unsigned double-etemer_position_x
+*@param unsigned double-etemer_position_y
+*@param unsigned double-etemer_distance
+*@return void
 */
 
 void Etemer::verify_etemer_distance(GameObject* guard) {
