@@ -23,8 +23,12 @@ namespace engine{
     double frame_rate = 60.0;
 
     SceneManager* getSceneManager() {
-        assert(scene_manager != NULL);
-        return scene_manager;
+        if(scene_manager == NULL) {
+          ERROR("Scene manager object is null");
+          exit(-1);
+        }else {
+          return scene_manager;
+        }
 }
 
     /**
@@ -36,10 +40,34 @@ namespace engine{
          assert(engine_step_time != NULL);
          assert(engine_time_elapsed != NULL);
          scene_manager = new SceneManager();
+         if(scene_manager == NULL) {
+           ERROR("Failed to start scene manager");
+           exit(-1);
+         }else {
+           //nothing to do
+         }
          window_manager = new WindowManager();
+         if(window_manager == NULL) {
+           ERROR("Failed to start window manager");
+           exit(-1);
+         }else {
+           //nothing to do
+         }
          sdl_manager = new SDLManager();
+         if(sdl_manager == NULL) {
+           ERROR("Failed to start sdl manager");
+           exit(-1);
+         }else {
+           //nothing to do
+         }
 
          engine_start_time = SDL_GetTicks();
+         if(engine_start_time < 0) {
+           ERROR("Engine start time is negative");
+           exit(-1);
+         }else {
+           //nothing to do
+         }
          engine_step_time = engine_start_time;
          frame_time = 1000.0/frame_rate;
 
@@ -67,9 +95,15 @@ namespace engine{
          assert(engine_is_running != NULL);
          SDL_Event event;
 
-         while(engine_is_running){
+         while(engine_is_running) {
              engine_step_time = SDL_GetTicks();
              assert(engine_step_time != NULL);
+             if(engine_step_time < 0) {
+               ERROR("Engine stop time is negative");
+               exit(-1);
+             }else {
+               //nothing to do
+             }
              engine::InputManager::instance.update(event);
              SDL_RenderClear(WindowManager::getGameCanvas());
 
@@ -78,15 +112,33 @@ namespace engine{
                  assert(engine_is_running != NULL);
                  sdl_manager->finalizeSDL();
                  window_manager->destroyWindow();
+                 if(window_manager == NULL) {
+                   ERROR("Window is NULL");
+                   exit(-1);
+                 }else {
+                   //nothing to do
+                 }
                  continue;
              }else {
                  engine_step_time = SDL_GetTicks();
+                 if(engine_step_time < 0) {
+                   ERROR("Engine stop time is negative");
+                   exit(-1);
+                 }else {
+                   //nothing to do
+                 }
                  engine::InputManager::instance.update(event);
                  SDL_RenderClear(WindowManager::getGameCanvas());
              }
 
 
              engine_time_elapsed = SDL_GetTicks() - engine_step_time;
+             if(engine_time_elapsed <= 0) {
+               ERROR("Engine didn't start");
+               exit(-1);
+             }else {
+               //nothing to do
+             }
              DEBUG("TICKS:" + std::to_string(SDL_GetTicks()));
              DEBUG("frameTime:" + std::to_string(frame_time));
              DEBUG("timeElapsed: " + std::to_string(engine_time_elapsed));
