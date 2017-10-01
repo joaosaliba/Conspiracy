@@ -31,6 +31,10 @@ InputManager InputManager::instance;
                     keyActive[previousAction] = false;
                     INFO("RELEASE");
                 break;
+
+                default:
+                    //nothing to do
+                    break;
             }
         }
     }

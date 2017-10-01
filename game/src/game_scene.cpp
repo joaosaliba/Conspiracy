@@ -93,10 +93,13 @@ void GameScene::update(double time_elapsed){
         for(auto gameObject : gameObjectsList) {
                 if(typeid(gameObject) != typeid(Player)){
                     (*gameObject).update(time_elapsed);
+                }else {
+                    //nothing to do
                 }
         }
-    }
+    }else {
     verifyWinOrLose();
+    }
 }
 
 /**
@@ -119,10 +122,14 @@ void GameScene::verifyWinOrLose(){
                         }else{
                             count_papers++;
                         }
+                }else {
+                  //nothing to do
                 }
         }
-        if(count_papers >= actual_papers){
+        if(count_papers >= actual_papers) {
             player->updatePaperQuantity(count_papers);
+            actual_papers = count_papers;
+        }else {
             actual_papers = count_papers;
         }
         for(Guard * guard : guards) {
@@ -132,16 +139,22 @@ void GameScene::verifyWinOrLose(){
         }
     if((Etemer *)(player->getEtemer())->isInPosition() &&
       (Bilu*)(player->getBilu())->isInPosition() &&
-      (Varginha*)(player->getVarginha())->isInPosition()){
+      (Varginha*)(player->getVarginha())->isInPosition()) {
           aliens_in_position = true;
+      }else {
+          aliens_in_position = false;
       }
 
-    if(!player->isDead()){
+    if(!player->isDead()) {
         stage_timer->step();
+    }else{
+        //nothing to do Player is alive
     }
-    if(player->isDead()){
+    if(player->isDead()) {
         if(stage_timer->elapsed_time() >= 2500){
             getSceneManager()->loadScene(6);
+        }else {
+          //nothing to do
         }
 
     }else if((all_papers_edited && aliens_in_position) || (InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_K) && skip_timer->total_elapsed_time() >= 500)){
@@ -150,6 +163,8 @@ void GameScene::verifyWinOrLose(){
         }else{
             getSceneManager()->loadScene(7);
         }
+    }else {
+        //nothing to do
     }
 }
 
@@ -182,6 +197,8 @@ void GameScene::initializeColliders(){
             CollisionManager::instance.addChair(gameObject);
         }else if(typeid(*gameObject) == typeid(FinishPoint)){
             CollisionManager::instance.addFinishPoint(gameObject);
+        }else {
+          //nothing to do
         }
     }
 }
@@ -312,8 +329,14 @@ void GameScene::createCenary(){
                     case 5: gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_door.png", j+15, HEADER_SIZE + i-20, 5, 60)); break;
 
                     case 6: gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_door.png", j, HEADER_SIZE + i-20, 5, 60));break;
+
+                    default:
+                            //nothing to do
+                            break;
                 }
             }
         }
+    }else {
+      ERROR("Failed to open tiled file");
     }
 }
