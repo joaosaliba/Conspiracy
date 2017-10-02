@@ -47,6 +47,32 @@ GameObject::GameObject(double object_position_x, double object_position_y,int ob
     assert(object_position_y != NULL);
     assert(object_width != NULL);
     assert(object_height != NULL);
+
+    if(object_position_x > 1000 || object_position_x < 0) {
+      ERROR("Strange object position");
+      exit(-1);
+    }else {
+      //nothing to do
+    }
+    if(object_position_y > 1000 || object_position_y < 0) {
+      ERROR("Strange object position");
+      exit(-1);
+    }else {
+      //nothing to do
+    }
+    if(object_width > 100 || object_width < 0) {
+      ERROR("Strange object width");
+      exit(-1);
+    }else {
+      //nothing to do
+    }
+    if(object_height > 100 || object_height < 0) {
+      ERROR("Strange object height");
+      exit(-1);
+    }else {
+      //nothing to do
+    }
+
     setPositionX(object_position_x);
     setPositionY(object_position_y);
     setWidth(object_width);
@@ -76,6 +102,12 @@ GameObject::~GameObject(){}
 std::string GameObject::getName(){
     assert(object_name != NULL);
     return name;
+    if(name == "") {
+      ERROR("Name in blank");
+      exit(-1);
+    }else {
+      //nothing to do
+    }
 }
 
 /**
@@ -86,6 +118,12 @@ std::string GameObject::getName(){
 double GameObject::getPositionX(){
     assert(object_position_x != NULL);
     return position.first;
+    if(position.first > 1000 || position.first < 0) {
+      ERROR("Strange object position");
+      exit(-1);
+    }else {
+      //nothing to do
+    }
 }
 
 /**
@@ -96,6 +134,12 @@ double GameObject::getPositionX(){
 double GameObject::getPositionY(){
     assert(object_position_y != NULL);
     return position.second;
+    if(position.second > 1000 || position.second < 0) {
+      ERROR("Strange object position");
+      exit(-1);
+    }else {
+      //nothing to do
+    }
 }
 
 /**
@@ -106,6 +150,12 @@ double GameObject::getPositionY(){
 int GameObject::getWidth(){
     assert(object_width != NULL);
     return size.first;
+    if(size.first > 100 || size.first < 0) {
+      ERROR("Strange object size");
+      exit(-1);
+    }else {
+      //nothing to do
+    }
 }
 
 /**
@@ -116,6 +166,12 @@ int GameObject::getWidth(){
 int GameObject::getHeight(){
     assert(object_height != NULL);
     return size.second;
+    if(size.second > 100 || size.second < 0) {
+      ERROR("Strange object size");
+      exit(-1);
+    }else {
+      //nothing to do
+    }
 }
 
 /**
@@ -126,6 +182,12 @@ int GameObject::getHeight(){
 void GameObject::setName(std::string object_new_name){
     assert(object_new_name != NULL);
     name = object_new_name;
+    if(name == "") {
+      ERROR("Name in blank");
+      exit(-1);
+    }else {
+      //nothing to do
+    }
 }
 
 /**
@@ -136,6 +198,12 @@ void GameObject::setName(std::string object_new_name){
 void GameObject::setPositionX(double object_new_x){
     assert(object_new_x != NULL);
     position.first = object_new_x;
+    if(position.first > 1000 || position.first < 0) {
+      ERROR("Strange object position");
+      exit(-1);
+    }else {
+      //nothing to do
+    }
 }
 
 /**
@@ -160,6 +228,12 @@ std::pair<double,double> GameObject::getCenter(){
 void GameObject::setPositionY(double object_new_y){
     assert(object_new_y != NULL);
     position.second = object_new_y;
+    if(position.second > 1000 || position.second < 0) {
+      ERROR("Strange object position");
+      exit(-1);
+    }else {
+      //nothing to do
+    }
 }
 
 /**
@@ -170,6 +244,12 @@ void GameObject::setPositionY(double object_new_y){
 void GameObject::setWidth(int object_new_width){
     assert(object_new_width != NULL);
     size.first = object_new_width;
+    if(size.first > 100 || size.first < 0) {
+      ERROR("Strange object size");
+      exit(-1);
+    }else {
+      //nothing to do
+    }
 }
 
 /**
@@ -180,6 +260,12 @@ void GameObject::setWidth(int object_new_width){
 void GameObject::setHeight(int object_new_height){
     assert(object_new_height != NULL);
     size.second = object_new_height;
+    if(size.second > 100 || size.second < 0) {
+      ERROR("Strange object size");
+      exit(-1);
+    }else {
+      //nothing to do
+    }
 }
 
 /**
