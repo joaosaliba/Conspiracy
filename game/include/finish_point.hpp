@@ -1,12 +1,17 @@
+/**
+ * @file finish_point.hpp
+ * @brief class to object of finish_point, where you can find some values, files,
+ * others objects used in this class and methods to the same.
+ * @copyright  GNU GENERAL PUBLIC LICENSE.
+ */
+
 #ifndef FINISH_POINT_HPP
 #define FINISH_POINT_HPP
 
 #include "game_object.hpp"
 #include "animation.hpp"
 
-/**class to object of finish_point, where you can find some values and meths "constructor" and "destructor"
- *to the same.
- */
+
 
 using namespace engine;
 

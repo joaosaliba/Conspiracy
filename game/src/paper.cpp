@@ -2,24 +2,24 @@
 #include "paper.hpp"
 #include <assert.h>
 
-Paper::Paper(std::string object_name, double position_x, double position_y,
-                                     int width, int height) : GameObject(object_name,
-                                                                         position_x,
-                                                                         position_y,
-                                                                         width, height) {
+Paper::Paper(std::string object_name, double paper_position_x, double paper_position_y,
+                                     int paper_width, int paper_height) : GameObject(object_name,
+                                                                         paper_position_x,
+                                                                         paper_position_y,
+                                                                         paper_width, paper_height) {
 
     animator = new animation(object_name, 1, 4, 0.5);
 
     std::vector<unsigned int> back_color = {22, 206, 26, 1};
     std::vector<unsigned int> front_color = {116, 225, 117, 1};
-    editing_bar = new ProgressBar(position_x-3, position_y-8, 22.5, 5, 0.005, back_color, front_color);
+    paper_editing_bar = new ProgressBar(paper_position_x-3, paper_position_y-8, 22.5, 5, 0.005, back_color, front_color);
 
     paper_editing_sound = new Audio("assets/sounds/PAPEROISE.wav", "EFFECT", 100);
 
-    animator->add_action("idle",0,0);
-    animator->add_action("being_edited",1,3);
-    edited = false;
-    is_being_edited = false;
+    animator->addAction("idle",0,0);
+    animator->addAction("being_edited",1,3);
+    paper_edited = false;
+    paper_is_being_edited = false;
     assert(paper_edited != NULL);
     assert(paper_is_being_edited != NULL);
 }
@@ -28,61 +28,66 @@ Paper::~Paper() {}
 
 void Paper::update(double time_elapsed) {
     time_elapsed = time_elapsed;
-    if(is_being_edited) {
-        editing_bar->update(time_elapsed);
-        animator->set_interval("being_edited");
-        if(editing_bar->get_percent() <= 0.0) {
-            is_being_edited = false;
-            edited = true;
+    if(paper_is_being_edited) {
+        paper_editing_bar->update(time_elapsed);
+        animator->setInterval("being_edited");
+        if(paper_editing_bar->getPercent() <= 0.0) {
+            paper_is_being_edited = false;
+            paper_edited = true;
             assert(paper_edited != NULL);
             assert(paper_is_being_edited != NULL);
         }
-    }else{
-        animator->set_interval("idle");
+    }else {
+        animator->setInterval("idle");
     }
     animator->update();
 }
 
 void Paper::animate() {
-    is_being_edited = true;
+    paper_is_being_edited = true;
      assert(paper_is_being_edited != NULL);
 }
 
-void Paper::stop_animation() {
-    is_being_edited = false;
+void Paper::stopAnimation() {
+    paper_is_being_edited = false;
     assert(paper_is_being_edited != NULL);
 }
 
-bool Paper::is_edited() {
-    return edited;
+bool Paper::isEdited() {
+    return paper_edited;
+    assert (paper_edited != NULL);
 }
 
 void Paper::draw() {
     INFO("Paper DRAW");
-    animator->draw(get_position_x(), get_position_y());
-    animator->draw_collider(get_position_x(), get_position_y(), get_width(), get_height());
-    if(is_being_edited) {
-        animation_manager::instance.add_progress_bar(editing_bar);
+    animator->draw(getPositionX(), getPositionY());
+    animator->draw_collider(getPositionX(), getPositionY(), getWidth(), getHeight());
+    if(paper_is_being_edited) {
+        animation_manager::instance.addProgressBar(paper_editing_bar);
     }
 }
 
-animation * Paper::get_animation() {
+animation * Paper::getAnimation() {
   return animator;
   assert(animator != NULL);
 }
 
-double Paper::get_editing_bar_percent() {
-    return editing_bar->get_percent();
+double Paper::getEditingBarPercent() {
+    return paper_editing_bar->getPercent();
+    assert(paper_editing_bar != NULL);
 }
 
-void Paper::reset_editing_progress() {
-    editing_bar->reset_Percent();
+void Paper::resetEditingProgress() {
+    paper_editing_bar->resetPercent();
+    assert(paper_editing_bar != NULL);
 }
 
-void Paper::play_effect() {
+void Paper::playEffect() {
     paper_editing_sound->play(0);
+    assert(paper_editing_sound != NULL);
 }
 
-void Paper::stop_effect() {
+void Paper::stopEffect() {
     paper_editing_sound->stop();
+    assert(paper_editing_sound != NULL);
 }

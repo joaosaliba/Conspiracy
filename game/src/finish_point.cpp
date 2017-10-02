@@ -1,8 +1,14 @@
-#include "finish_point.hpp"
-
-/**class to object of finish_point, where you can find some values and meths to the same.
- *
+/**
+ * @file finish_point.cpp
+ * @brief class to object of finish_point, where you can find some values, files,
+ * others objects used in this class and methods to the same.
+ * @copyright  GNU GENERAL PUBLIC LICENSE.
  */
+
+#include "finish_point.hpp"
+#include <assert.h>
+
+//#define NDEBUG *uncomment to disable assertions
 
 FinishPoint::FinishPoint(std::string object_name, double position_x,
                                                  double position_y,
@@ -82,6 +88,8 @@ void FinishPoint::draw() {
             bilu_anim->draw_instant(get_position_x()+3.5, get_position_y()+12);
         }else if(aliens.compare("V") == 0) {
             varginha_anim->draw_instant(get_position_x()+3.5, get_position_y()+12);
+        }else {
+          //nothing to do
         }
     }
 }

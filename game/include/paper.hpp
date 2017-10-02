@@ -11,19 +11,19 @@ using namespace engine;
 
 class Paper: public GameObject{
 public:
-    Paper(std::string object_name, double position_x, double position_y, int width, int height);
+    Paper(std::string object_name, double paper_position_x, double paper_position_y, int paper_width, int paper_height);
     ~Paper();
     void update(double time_elapsed);
     void draw();
     void init();
-    Animation * get_animation();
+    Animation * getAnimation();
     void animate();
-    void stop_animation();
-    bool is_edited();
-    double get_editing_bar_percent();
-    void reset_editing_progress();
-    void play_effect();
-    void stop_effect();
+    void stopAnimation();
+    bool isEdited();
+    double getEditingBarPercent();
+    void resetEditingProgress();
+    void playEffect();
+    void stopEffect();
 protected:
     Animation* animator;
     ProgressBar *paper_editing_bar;

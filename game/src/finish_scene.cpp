@@ -1,3 +1,10 @@
+/**
+ * @file finish_scene.cpp
+ * @brief class to object of finish_scene, where you can find some values, files,
+ * others objects used in this class and methods to the same.
+ * @copyright  GNU GENERAL PUBLIC LICENSE.
+ */
+
 #include "finish_scene.hpp"
 #include "button.hpp"
 
@@ -6,10 +13,7 @@
 
 using namespace engine;
 
-/**class to object of finish_scene, where you can find some values and meths
- * to the same.
- *
- */
+
 
 FinishScene::FinishScene(int id) : Scene(id) {
     select_button = 1;
@@ -22,13 +26,17 @@ FinishScene::FinishScene(int id) : Scene(id) {
     background->set_interval("finish");
 }
 
+/**
+  *    @brief FinishScene object destructor.
+ */
+
 FinishScene::~FinishScene() {
 }
 
 /**
-* Método draw
-* <p>Esse método executa a função de desenhar ao fundo da fase,
-* utilizando o método draw</p>
+* @brief Method draw
+* <p>This method call the function draw_instant, that draw the background level using two colors</p>
+* @return void
 */
 
 void FinishScene::draw() {
@@ -40,9 +48,10 @@ void FinishScene::draw() {
 }
 
 /**
-* Método update
-* <p>Esse método utiliza o time_elapsed para saber quando tem que atualizar a interface da fase,
-*  e usa um array para saber o que mostrar para o user.</p>
+* @brief Method update
+* <p>This method use the time_elapsed to know when have to update the interface level,
+*  and use teh array to know what have to show to user.</p>
+* @return void
 */
 
 void FinishScene::update(double time_elapsed) {
@@ -54,18 +63,21 @@ void FinishScene::update(double time_elapsed) {
         if(typeid(*gameObject.second) == typeid(Button)) {
             if(gameObject.first == select_button) {
                 ((Button *)(gameObject.second))->set_text_color(select);
-            }else{
+            }else {
                 ((Button *)(gameObject.second))->set_text_color(not_select);
                  }
-            }
+        }else {
+            //nothing to do
+        }
 
     (*gameObject.second).update(time_elapsed);
     }
 }
 
 /**
-* Método load
-* <p>Esse método carrega todo o style padrão aplicado na fase.</p>
+* Method load
+* <p>This method load the pattern style applied in the level.</p>
+* @return void
 */
 void FinishScene::load() {
     game_objects_list.push_back(std::pair<int, GameObject*>(1,new Button("assets/fonts/font.ttf", 420, 500, 500, 500, "Menu", 50)));
@@ -76,7 +88,8 @@ void FinishScene::load() {
 
 /**
 * Método select_action
-* <p>Esse método utiliza o select_action para carregar a próxima cena do jogo.</p>
+* <p>This method create cases to load the next scene of the game.</p>
+* @return void
 */
 void FinishScene::select_action() {
     if(InputManager::instance.is_key_triggered(InputManager::KeyPress::KEY_PRESS_ENTER)) {

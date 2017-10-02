@@ -1,3 +1,10 @@
+/**
+ * @file finish_scene.cpp
+ * @brief class to object of finish_scene, where you can find some values, files,
+ * others objects used in this class and methods to the same.
+ * @copyright  GNU GENERAL PUBLIC LICENSE.
+ */
+
 #ifndef FINISH_SCENE_HPP
 #define FINISH_SCENE_HPP
 
@@ -10,25 +17,19 @@
 
 #include <vector>
 
-/**class to object of finish_scene, where you can find some values and meths "constructor"
- * and "destructor" to the same.
- *
- */
+
 
 using namespace engine;
 
 class FinishScene: public Scene{
 
-/**
-* Método construtor
-* <p>Esse método executa a ação de iniciar as funções e passar as variáreis
-*utilizadas na classe finish_scene.hpp</p>
-* @param int-id
-* @param double-time_elapsed
-*/
+
 
 public:
     FinishScene(int id);
+    /**
+      *    @brief FinishScene object destructor.
+     */
     ~FinishScene();
     void load();
     void draw();

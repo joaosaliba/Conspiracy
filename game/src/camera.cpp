@@ -29,8 +29,11 @@ Camera::Camera(double camera_position_x, double camera_position_y, std::string d
                                                                  camera_position_y,
                                                                  WIDTH, HEIGHT){
 
-    assert (camera_position_x != NULL);
+    assert (camera_position_x > NULL);
     assert (camera_position_y != NULL);
+    assert (WIDTH > 11);
+    assert (HEIGHT > 8);
+
 
     initialize_animator(FILENAME);
     animator->set_interval(direction);
@@ -59,6 +62,8 @@ Camera::Camera(double camera_position_x, double camera_position_y, std::string d
                                                                      WIDTH, HEIGHT){
     assert (camera_position_x != NULL);
     assert (camera_position_y != NULL);
+    assert (WIDTH > 11);
+    assert (HEIGHT > 8);
 
     initialize_animator(FILENAME);
     animator->set_interval(direction);

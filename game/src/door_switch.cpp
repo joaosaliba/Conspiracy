@@ -77,6 +77,9 @@ void DoorSwitch::draw() {
         if(hacking_bar->get_percent() <= 0.0) {
             pressed = false;
             set_enabled(false);
+        }else {
+            pressed = true;
+            set_enabled(true);
         }
     }else {
         animator->set_interval("idle");
@@ -90,7 +93,7 @@ Animation * DoorSwitch::getAnimation() {
 
 /**
 * @brief Method animate
-* <p>This method put pressed equal true</p>
+* <p>This method make the "pressed" equal true</p>
 * @return void
 */
 
