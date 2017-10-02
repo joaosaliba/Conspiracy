@@ -62,6 +62,8 @@ void Varginha::update(double time_elapsed) {
     if(!block_movement && is_selected) {
         walk_in_x(varginha_in_x);
         walk_in_y(varginha_in_y, varginha_in_x);
+    }else {
+        //nothing to do
     }
 
     if((varginha_in_x == 0 && varginha_in_y == 0) || (!turn_off && !is_selected)) {
@@ -76,6 +78,8 @@ void Varginha::update(double time_elapsed) {
 
     if(CollisionManager::instance.verify_collision_with_guards(this)) {
         set_enabled(false);
+    }else{
+        set_enabled(true);
     }
 
     FinishPoint* finish_point = (FinishPoint*)CollisionManager::
@@ -83,7 +87,11 @@ void Varginha::update(double time_elapsed) {
     if(finish_point != NULL) {
         if(finish_point->get_alien_names().find("V") != std::string::npos) {
             in_position = true;
+        }else {
+            in_position = false;
         }
+    }else {
+        //nothing to do
     }
 
     animator->update();
@@ -148,11 +156,16 @@ void Varginha::special_action() {
                }else {
                    animator->set_interval("special_left");
                }
+        }else {
+            block_movement = false;
+            is_invisible = false;
     }
    }
    if(InputManager::instance.is_key_released(InputManager::KEY_PRESS_SPACE) && 
    is_selected && !turn_off) {
         set_default();
+   }else {
+       //nothing to do
    }
 }
 
