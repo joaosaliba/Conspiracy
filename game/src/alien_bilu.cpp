@@ -59,9 +59,9 @@ void Bilu::update(double time_elapsed) {
     if(!block_movement && is_selected) {
         walk_in_x(move_bilu_in_x);
         walk_in_y(move_bilu_in_y, move_bilu_in_x);
-    }else(block_movement && is_selected) {
-        error("No move Bilu");
-}
+    }else {
+        //nothing to do
+    }
 
     if(move_bilu_in_x == 0 && move_bilu_in_y == 0) {
         if(idle_animation_number) {
@@ -75,7 +75,9 @@ void Bilu::update(double time_elapsed) {
                 }else {
                         animator->set_interval("idle_left");
                 }
-
+        else{
+                //nothing to do
+            }    
         }
 }
     special_action();
@@ -83,14 +85,20 @@ void Bilu::update(double time_elapsed) {
     if(CollisionManager::instance.verify_collision_with_guards(this) ||
     CollisionManager::instance.verify_collision_with_cameras(this)) {
         setEnabled(false);
-}
+        }else {
+            setEnabled(true);          
+    }
     FinishPoint* finish_point = (FinishPoint*)
     CollisionManager::instance.verify_collision_with_finish_points(this);
     if(finish_point != NULL) {
         if(finish_point->get_alien_names().find("B") != std::string::npos) {
             in_position = true;
+        }else {
+            in_position(false);
         }
-}
+    }else{
+        //nothing to do
+    }
 
     animator->update();
 }
@@ -116,7 +124,12 @@ void Bilu::special_action() {
                 editing = true;
                 block_movement = true;
                 ((Paper*)(paper))->play_effect();
+            }else {
+                editing = false;
+                block_movement = false;
             }
+        }else {
+            //nothing to do
         }
     // PC interaction
         if(doorSwitch != NULL) {
@@ -124,7 +137,12 @@ void Bilu::special_action() {
                 hacking = true;
                 block_movement = true;
                 ((DoorSwitch*)(doorSwitch))->play_effect();
+            }else {
+                hacking = false;
+                block_movement = false;
             }
+        }else{
+            //nothing to do
         }
 }else if(InputManager::instance.is_key_pressed(InputManager::KEY_PRESS_ESC)&& is_selected) {
     if(hacking) {
@@ -152,6 +170,9 @@ void Bilu::special_action() {
                 ((DoorSwitch*)(doorSwitch))->reset_hacking_progress();
                 Alien::animator->set_interval("idle");
                 block_movement = false;
+            }else {
+                hacking = true;
+                block_movement = true;
             }
 }else if(editing) {
     ((Paper*)(paper))->animate();
@@ -163,6 +184,9 @@ void Bilu::special_action() {
             ((Paper*)(paper))->reset_editing_progress();
             Alien::animator->set_interval("idle");
             block_movement = false;
+        }else {
+            editing = true;
+            block_movement = true;
         }
 }
     last_action = hacking;
