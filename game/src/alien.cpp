@@ -84,8 +84,12 @@ void Alien::walk_in_x(double & alien_in_x) {
     set_alien_position_x(get_alien_position_x()+alien_in_x);
     if(CollisionManager::instance.verify_collision_with_walls_and_chairs(this)) {
         set_alien_position_x(get_alien_position_x()+(alien_in_x*(0-1)));
-    }
-}
+        }else {
+            //nothing to do
+        }
+    }else {
+        //nothing to do
+    }   
 
 /**
 * Walk in y method
@@ -106,6 +110,8 @@ void Alien::walk_in_y(double & alien_in_y, double alien_in_x) {
         idle_animation_number = 5;
         if(alien_in_x == 0){
             animator->set_interval("up");
+        }else {
+            //nothing to do
         }
     }
     else if(engine::InputManager::
@@ -114,26 +120,34 @@ void Alien::walk_in_y(double & alien_in_y, double alien_in_x) {
         idle_animation_number = 0;
         if(alien_in_x == 0){
             animator->set_interval("down");
-    if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_UP)) {
-        inc_y = inc_y * (0-1);
-        idle_animation_number = 5;
-        if(inc_x == 0){
-            animator->set_interval("up");
+            if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_UP)) {
+                inc_y = inc_y * (0-1);
+                idle_animation_number = 5;
+                if(inc_x == 0){
+                animator->set_interval("up");
+                }else {
+                    //nothing to do
+                }
+            }else {
+                //nothing to do
+            }
+        else if(engine::InputManager::instance.isKeyPressed(engine::InputManager::KeyPress::
+        KEY_PRESS_DOWN)) {
+            inc_y = inc_y;
+            idle_animation_number = 0;
+            if(inc_x == 0){
+                animator->set_interval("down");
+            }else {
+                //nothing to do
+            }
+        }else {
+            alien_in_y = 0;
         }
-    }
-    else if(engine::InputManager::instance.isKeyPressed(engine::InputManager::KeyPress::KEY_PRESS_DOWN)) {
-        inc_y = inc_y;
-        idle_animation_number = 0;
-        if(inc_x == 0){
-            animator->set_interval("down");
-        }
-    }
-    else {
-        alien_in_y = 0;
-    }
     set_alien_position_y(get_alien_position_y()+alien_in_y);
     if(CollisionManager::instance.verify_collision_with_walls_and_chairs(this)) {
         set_alien_position_y(get_alien_position_y()+(alien_in_y*(0-1)));
+    }else {
+        //nothing to do
     }
 }
 
