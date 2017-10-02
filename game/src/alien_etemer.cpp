@@ -53,9 +53,9 @@ void Etemer::update(double time_elapsed) {
     in_position = false;
     if (block_movement) {
         animator->set_total_time(1.0);
-}else {
-    animator->set_total_time(0.3);
-}
+    }else {
+            animator->set_total_time(0.3);
+    }
 
     auto etemer_in_y = 0.15*time_elapsed;
     auto etemer_in_x = 0.15*time_elapsed;
@@ -63,28 +63,38 @@ void Etemer::update(double time_elapsed) {
     if(!block_movement && is_selected) {
         walk_in_x(etemer_in_x);
         walk_in_y(etemer_in_y, etemer_in_x);
-}
+    }else {
+        //nothing to do
+    }
 
     if(etemer_in_x == 0.0 && etemer_in_y == 0.0 && !block_movement) {
         if(idle_animation_number) {
             animator->set_interval("idle_right");
-}else {
-    animator->set_interval("idle_left");
-}
-}        
+        }else {
+            animator->set_interval("idle_left");    
+        }   
+    }else {
+        //nothing to do
+    }        
 
    FinishPoint* finish_point = (FinishPoint*)CollisionManager::
    instance.verify_collision_with_finish_points(this);
-       if(finish_point != NULL) {
-           if(finish_point->get_alien_names().find("E") != std::string::npos) {
-               in_position = true;
+    if(finish_point != NULL) {
+        if(finish_point->get_alien_names().find("E") != std::string::npos) {
+            in_position = true;
+        }else {
+            in_position = false;
+        }
+    }else {
+        //nothing to do
     }
-}
     move_chair();
 
     if(CollisionManager::instance.verify_collision_with_cameras(this)) {
         set_enabled(false);
-}
+    }else {
+        set_enabled(true);
+    }
     animator->update();
 }
 
@@ -110,29 +120,39 @@ void Etemer::special_action(GameObject * guard, double etemer_distance) {
             block_movement = true;
         if(((Guard *) (guard))->get_position_x() > get_position_x()) {
                 ((Guard *)(guard))->talking_to_etemer("left");
-}else {
-    ((Guard *)(guard))->talking_to_etemer("right");
+        }else {
+            ((Guard *)(guard))->talking_to_etemer("right");
         }
+        }else {
+            talking = false;
+            block_movement = false;
     }
-}
+    }else{
+        //nothing to do
+    }
 
     if(talking) {
         if(((Guard *) (guard))->get_position_x() >= get_position_x()) {
             animator->set_interval("special_right");
             idle_animation_number = 5;
-}else {
-    animator->set_interval("special_left");
-    idle_animation_number = 0;
-}
-    if(((Guard *) (guard))->get_talking_bar_percent() <= 0.0) {
-        talking = false;
-        block_movement = false;
-        if(idle_animation_number) {
-            animator->set_interval("idle_right");
-}else{
-    animator->set_interval("idle_left");
-}
+        }else {
+            animator->set_interval("special_left");
+            idle_animation_number = 0;
         }
+        if(((Guard *) (guard))->get_talking_bar_percent() <= 0.0) {
+            talking = false;
+            block_movement = false;
+            if(idle_animation_number) {
+                animator->set_interval("idle_right");
+            }else{
+                animator->set_interval("idle_left");
+            }
+        }else {
+            talking = true;
+            block_movement = false;
+        }
+    }else {
+        //nothing to do
     }
 }
 
@@ -163,9 +183,11 @@ void Etemer::move_chair() {
         if(animator->get_interval().first == chair.first) {
             ((Chair *) (chair.second))->set_moving(true);
             ((Chair *) (chair.second))->set_direction(chair.first);
-}else {
-    ((Chair *) (chair.second))->set_moving(false);
-}
+        }else {
+            ((Chair *) (chair.second))->set_moving(false);
+        }
+    }else {
+        //nothing to do
     }
 }
 
@@ -198,6 +220,8 @@ void Etemer::walk_in_x(double & etemer_in_x) {
 
     if(CollisionManager::instance.verify_collision_with_walls_and_chairs(this)) {
         set_position_x(get_position_x()+(etemer_in_x*(0-1)));
+    }else {
+        //nothing to do
     }
 }
 
@@ -216,25 +240,31 @@ void Etemer::walk_in_y(double & etemer_in_y, double etemer_in_x) {
     if(InputManager::instance.is_key_pressed(InputManager::KeyPress::KEY_PRESS_UP)) {
         etemer_in_y = etemer_in_y * (0-1);
         idle_animation_number = 5;
-            if(etemer_in_x == 0) {
+        if(etemer_in_x == 0) {
                 animator->set_interval("up");
+        }else {
+            //nothing to do
+        }
     }
-}
     else if(engine::InputManager::instance.is_key_pressed(engine::InputManager::KeyPress::
     KEY_PRESS_DOWN)) {
         etemer_in_y = etemer_in_y;
         idle_animation_number = 0;
-            if(etemer_in_x == 0) {
-                animator->set_interval("down");
+        if(etemer_in_x == 0) {
+            animator->set_interval("down");
+        }else {
+            //nothing to do
+        }
     }
-}
     else {
         etemer_in_y = 0;
-}
+    }
     set_position_y(get_position_y()+etemer_in_y);
 
     if(CollisionManager::instance.verify_collision_with_walls_and_chairs(this)) {
         set_position_y(get_position_y()+(etemer_in_y*(0-1)));
+    }else {
+        //nothing to do
     }
 }
 
@@ -253,5 +283,7 @@ void Etemer::verify_etemer_distance(GameObject* guard) {
 
     if(etemer_distance < 60){
         special_action(guard, etemer_distance);
+    }else {
+        //nothing to do
     }
 }
