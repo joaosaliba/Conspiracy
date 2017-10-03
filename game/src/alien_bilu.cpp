@@ -29,7 +29,30 @@ Alien(FILENAME, bilu_position_x, bilu_position_y, WIDTH, HEIGHT) {
     assert (WIDTH > 19);
     assert (HEIGHT !=NULL);
     assert (HEIGHT > 22);
-
+    if(bilu_position_x > 1000 || bilu_position_x < 0) {
+        ERROR("Strange Bilu position x");
+        exit(-1);
+    }else {
+       //nothing to do
+    }
+    if(bilu_position_y > 1000 || bilu_position_y < 0) {
+       ERROR("Strange object position y");
+       exit(-1);
+     }else {
+       //nothing to do
+     }
+    if(WIDTH > 19 || WIDTH < 0) {
+       ERROR("Strange width");
+       exit(-1);
+     }else {
+       //nothing to do
+     }
+    if(HEIGHT > 22 || HEIGHT < 0) {
+       ERROR("Strange height");
+       exit(-1);
+     }else {
+       //nothing to do
+     }          
     animator->add_action("special_right",14,17);
     animator->add_action("special_left",10,13);
 
@@ -50,6 +73,13 @@ Alien(FILENAME, bilu_position_x, bilu_position_y, WIDTH, HEIGHT) {
 
 void Bilu::update(double time_elapsed) {
     assert ( time_elapsed != NULL);
+
+    if(time_elapsed == -1) {
+       ERROR("Strange time ");
+       exit(-1);
+     }else {
+       //nothing to do
+     }
 
     in_position = false;
     animator->set_total_time(0.3);
