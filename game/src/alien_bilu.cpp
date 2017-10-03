@@ -36,7 +36,7 @@ Alien(FILENAME, bilu_position_x, bilu_position_y, WIDTH, HEIGHT) {
        //nothing to do
     }
     if(bilu_position_y > 1000 || bilu_position_y < 0) {
-       ERROR("Strange object position y");
+       ERROR("Strange Bilu position y");
        exit(-1);
      }else {
        //nothing to do

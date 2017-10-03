@@ -28,7 +28,30 @@ Alien(FILENAME, etemer_position_x, etemer_position_y, WIDTH, HEIGHT) {
     assert (WIDTH > 10);
     assert (HEIGHT !=NULL);
     assert (HEIGHT > 22);
-    
+    if(etemer_position_x > 1000 || etemer_position_x < 0) {
+        ERROR("Strange Etemer position x");
+        exit(-1);
+    }else {
+       //nothing to do
+    }
+    if(etemer_position_y > 1000 || etemer_position_y < 0) {
+       ERROR("Strange Etemer position y");
+       exit(-1);
+     }else {
+       //nothing to do
+     }
+    if(WIDTH > 10 || WIDTH < 0) {
+       ERROR("Strange width");
+       exit(-1);
+     }else {
+       //nothing to do
+     }
+    if(HEIGHT > 22 || HEIGHT < 0) {
+       ERROR("Strange height");
+       exit(-1);
+     }else {
+       //nothing to do
+     }
     animator->add_action("special_right",14,17);
     animator->add_action("special_left",10,13);
 
@@ -49,6 +72,13 @@ Alien(FILENAME, etemer_position_x, etemer_position_y, WIDTH, HEIGHT) {
 
 void Etemer::update(double time_elapsed) {
     assert (time_elapsed !=NULL);
+
+    if(time_elapsed == -1) {
+       ERROR("Strange time ");
+       exit(-1);
+     }else {
+       //nothing to do
+     }
 
     in_position = false;
     if (block_movement) {
@@ -110,6 +140,13 @@ void Etemer::update(double time_elapsed) {
 
 void Etemer::special_action(GameObject * guard, double etemer_distance) {
     assert (etemer_distance !=NULL);
+
+    if(etemer_distance > 1000) {
+       ERROR("distance greater than allowed");
+       exit(-1);
+     }else {
+       //nothing to do
+     }
 
     if(InputManager::instance.is_key_pressed(InputManager::KEY_PRESS_SPACE) &&
     guard != NULL && is_selected) {
@@ -202,6 +239,13 @@ void Etemer::move_chair() {
 void Etemer::walk_in_x(double & etemer_in_x) {
     assert (etemer_in_x !=NULL);
 
+    if(etemer_in_x > 1000 || etemer_in_x < 0) {
+       ERROR("distance Etemer greater than allowed");
+       exit(-1);
+     }else {
+       //nothing to do
+     }
+
     if(InputManager::instance.is_key_pressed(InputManager::KeyPress::KEY_PRESS_RIGHT)) {
         etemer_in_x = etemer_in_x;
         idle_animation_number = 5;
@@ -236,6 +280,19 @@ void Etemer::walk_in_x(double & etemer_in_x) {
 void Etemer::walk_in_y(double & etemer_in_y, double etemer_in_x) {
     assert (etemer_in_y !=NULL);
     assert (etemer_in_x !=NULL);
+
+    if(etemer_in_x > 1000 || etemer_in_x < 0) {
+       ERROR("distance Etemer X greater than allowed");
+       exit(-1);
+     }else {
+       //nothing to do
+     }
+    if(etemer_in_y > 1000 || etemer_in_y < 0) {
+       ERROR("distance Etemer Y greater than allowed");
+       exit(-1);
+     }else {
+       //nothing to do
+     }
 
     if(InputManager::instance.is_key_pressed(InputManager::KeyPress::KEY_PRESS_UP)) {
         etemer_in_y = etemer_in_y * (0-1);
