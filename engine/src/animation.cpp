@@ -1,140 +1,98 @@
-#include "animation.hpp"
+#include "lose_scene.hpp"
+#include "button.hpp"
+
+#include <typeinfo>
+#include <iostream>
 
 using namespace engine;
 
-Animation::Animation(std::string newDirectory, int rows, int columns, double allTime){
-    directory = newDirectory;
-    matrix.first = rows;
-    matrix.second = columns;
-    totalTime = allTime;
-    currentPositionFrame = 0;
-    init();
+LoseScene::LoseScene(int id) : Scene(id){
+    selectButton = 1;
+    select = new Color(255, 255, 255, 0);
+    notSelect = new Color(0, 0, 0, 0);
+    soundEffect = new Audio("assets/sounds/SELECT6.wav", "EFFECT", 100);
+    backgroundMusic = new Audio("assets/sounds/GAMEOVER.wav", "MUSIC", 50);
+    background = new Animation("assets/sprites/lose.png", 1, 4, 0.8);
+    background->addAction("lose", 0,3);
+    assert(std::get<animator->list_actions[beignEdited][1]>==0);
+    background->setInterval("lose");
+    assert(background->interval.first==lose);
 }
 
-Animation::~Animation(){
-
+LoseScene::~LoseScene(){
 }
 
-void Animation::init(){
-    INFO("Init sprite.");
-    SDL_Surface * image = NULL;
-    image = IMG_Load(directory.c_str());
+void LoseScene::draw(){
+        background->draw_instant(80, 20);
 
-    if(image == NULL){
-        ERROR("INIT SPRITE ERROR.");
-        exit(-1);
-    }
-
-    texture = SDL_CreateTextureFromSurface(WindowManager::getGameCanvas(), image);
-
-    if(texture == NULL){
-        ERROR("CREATE TEXTURE SPRITE ERROR.");
-        exit(-1);
-    }
-
-    lenght.first = image->w;
-    lenght.second = image->h;
-
-    drawWidth = widthFrame = lenght.first/matrix.second;
-    drawHeight = heightFrame = lenght.second/matrix.first;
-
-    quantity = static_cast<int>(lenght.first/matrix.second * lenght.second/matrix.first);
-
-    SDL_FreeSurface(image);
-
+        for(auto gameObject : gameObjectsList) {
+                (*gameObject.second).draw();
+        }
 }
 
-void Animation::update(){
-    double timePerFrame = static_cast<double> (totalTime / (interval.second.second - interval.second.first + 1));
+void LoseScene::update(double timeElapsed){
+        selectAction();
 
-    timeElapsed = (SDL_GetTicks() - stepTime) / 1000.0f;
-    DEBUG("Time Per Frame: " << timePerFrame << "Time elapsed: " << timeElapsed);
+        background->update();
 
-    if(timeElapsed >= timePerFrame){
-        next();
-        stepTime = SDL_GetTicks();
-    }
+        for(auto gameObject : gameObjectsList) {
+                if(typeid(*gameObject.second) == typeid(Button)) {
+                        if(gameObject.first == selectButton) {
+                                ((Button *)(gameObject.second))->setTextColor(select);
+                        }else{
+                                ((Button *)(gameObject.second))->setTextColor(notSelect);
+                        }
+                }
 
-    int Y = (currentPositionFrame / (lenght.first / widthFrame));
-    int X = (currentPositionFrame % (lenght.first  / widthFrame));
-
-    clipRect = {X*widthFrame, Y*heightFrame, widthFrame, heightFrame};
-    DEBUG("Axis in X:" << X*widthFrame << " Axis in Y:" << Y*heightFrame << " Position:" << currentPositionFrame);
-}
-void Animation::setDrawSize(int width, int height){
-    drawWidth = width;
-    drawHeight = height;
-}
-void Animation::draw(int x, int y){
-    INFO("ANIMATOR DRAW");
-    // Rendering in screen
-    renderQuad = {x, y, drawWidth, drawHeight};
-    DEBUG("X: " + std::to_string(axis.first));
-    DEBUG("Y: " + std::to_string(axis.second));
-
-    AnimationQuad* newQuad = new AnimationQuad(x,y,&renderQuad,&clipRect,texture);
-    AnimationManager::instance.add_animation_quad(newQuad);
+                (*gameObject.second).update(timeElapsed);
+        }
 }
 
-void Animation::draw_collider(int x, int y, int width, int height){
-    SDL_Rect* quad = new SDL_Rect();
-    *quad = {x,y,width,height};
-    AnimationManager::instance.add_collider(quad);
-}
-void Animation::draw_instant(int x, int y){
-    INFO("ANIMATOR DRAW");
-    // Rendering in screen
-    renderQuad = {x, y, clipRect.w, clipRect.h };
-    DEBUG("X: " + std::to_string(axis.first));
-    DEBUG("Y: " + std::to_string(axis.second));
-    SDL_RenderCopy(WindowManager::getGameCanvas(), texture, &clipRect, &renderQuad);
+void LoseScene::load(){
+        gameObjectsList.push_back(std::pair<int, GameObject*>(1,new Button("assets/fonts/font.ttf", 700, 500, 500, 500, "Continue", 50)));
+        gameObjectsList.push_back(std::pair<int, GameObject*>(2,new Button("assets/fonts/font.ttf", 50, 500, 500, 500, "Menu", 50)));
+        AnimationManager::instance.setBackgroundColor(new Color(255,160,156, 125));
+        backgroundMusic->play(0);
 
 }
 
-void Animation::next(){
-    currentPositionFrame ++;
+void LoseScene::selectAction(){
+        if(InputManager::instance.isKeyTriggered(InputManager::KeyPress::KEY_PRESS_LEFT)) {
+                soundEffect->pause();
+                soundEffect->play(0);
+                selectButton--;} else{
+                // Do nothing
+                if(selectButton <= 0) {
+                        selectButton = 2;
+                E aquela se,1
+        } else {
+//do nothing
+if(InputManager::instance.isKeyTriggered(InputManager::KeyPress::KEY_PRESS_RIGHT)) {
+                soundEffect->pause();
+                soundEffect->play(0);
+                selectButton++;
+                if(selectButton > 2) {
+                        selectButton = 1;
+                }else{
+              //do nothing.}
+        }else{
+          //do nothing}
 
-    if(currentPositionFrame > interval.second.second){
-       currentPositionFrame = interval.second.first;
-    }
-}
 
-void Animation::setCurrentPositionFrame(int positionFrame){
-    currentPositionFrame = positionFrame;
-}
-int Animation::getCurrentPositionFrame(){
-    return currentPositionFrame;
-}
+        if(InputManager::instance.isKeyTriggered(InputManager::KeyPress::KEY_PRESS_ENTER)) {
+                switch(selectButton) {
+                case 1:
+                        getSceneManager()->loadScene(getSceneManager()->get_before_scene_id());
+                        break;
+                case 2:
+                        getSceneManager()->loadScene(0);
+                        break;
+                default:
+                        break;
+                }
 
-void Animation::setInterval(std::string action){
-    currentAction = action;
-    if(action != interval.first){
-        startTime = SDL_GetTicks();
-        stepTime = startTime;
-        interval.second =  list_actions[action];
-        interval.first = action;
-        currentPositionFrame = interval.second.first;
-        INFO("ACTION: " << action << currentPositionFrame);
-    }
-}
-void Animation::setTotalTime(double newTotalTime){
-    totalTime = newTotalTime;
-}
-
-void Animation::shutdown(){
-    INFO("Destroy sprite.");
-    SDL_DestroyTexture(texture);
-    texture = NULL;
-}
-
-std::pair<std::string, std::pair<int, int>> Animation::getInterval(){
-    return interval;
+        }
 }
 
-void Animation::addAction(std::string name_action, int initial, int last){
-  list_actions[name_action] = std::pair<int, int>(initial, last);
-}
-
-std::string Animation::getCurrentAction(){
-    return currentAction;
+void LoseScene::unload(){
 }
