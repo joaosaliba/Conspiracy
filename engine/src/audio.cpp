@@ -60,13 +60,13 @@ void Audio::play(const int times_to_play) {
         if(Mix_PlayMusic(audio_music, times_to_play) == -1) {
             ERROR("Audio could not be played");
         }else {
-            //nothing to do
+            //if Mix_PlayMusic be different fo -1 it can be played
         }
     }else {
         if(Mix_PlayChannel(-1, audio_effect, times_to_play) == -1) {
             ERROR("Audio could not be played");
         }else {
-            //nothing to do
+            //if Mix_PlayChannel be different of -1 he can be played
         }
     }
 }
