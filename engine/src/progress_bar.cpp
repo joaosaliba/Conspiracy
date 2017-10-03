@@ -21,6 +21,32 @@ ProgressBar::ProgressBar(double position_x, double position_y, int width,
                                                                           width,
                                                                           height){
 
+
+    if(position_x > 1000 || position_x < 0) {
+        ERROR("Strange camera position");
+        exit(-1);
+    }else {
+        //nothing to do
+    }
+    if(position_y > 1000 || position_y < 0) {
+        ERROR("Strange camera position");
+        exit(-1);
+    }else {
+        //nothing to do
+    }
+    if(width > 100 || width < 0) {
+        ERROR("Strange camera width");
+        exit(-1);
+    }else {
+        //nothing to do
+    }
+    if(height > 100 || height < 0) {
+        ERROR("Strange camera height");
+        exit(-1);
+    }else {
+        //nothing to do
+    }
+
     percent = 1.0;
     progress_increment = increment;
 
@@ -55,6 +81,37 @@ ProgressBar::ProgressBar(double position_x, double position_y, int width,
                                                                           width,
                                                                           height){
 
+
+    assert (position_x != NULL);
+    assert (position_y != NULL);
+    assert (width < 100);
+    assert (height > 100);
+
+    if(position_x > 1000 || position_x < 0) {
+        ERROR("Strange camera position");
+        exit(-1);
+    }else {
+        //nothing to do
+    }
+    if(position_y > 1000 || position_y < 0) {
+        ERROR("Strange camera position");
+        exit(-1);
+    }else {
+        //nothing to do
+    }
+    if(width > 100 || width < 0) {
+        ERROR("Strange camera width");
+        exit(-1);
+    }else {
+        //nothing to do
+    }
+    if(height > 100 || height < 0) {
+        ERROR("Strange camera height");
+        exit(-1);
+    }else {
+        //nothing to do
+    }
+
     percent = 1.0;
     progress_increment = increment;
 
@@ -78,9 +135,20 @@ ProgressBar::ProgressBar(double position_x, double position_y, int width,
                                  &old_color.g, &old_color.a);
 }
 
-ProgressBar::~ProgressBar() {}
+/**
+  *    @brief ProgressBar object destructor.
+ */
 
-void ProgressBar::update(double time_elapsed){
+ProgressBar::~ProgressBar(){}
+
+void ProgressBar::update(double time_elapsed) {
+    if(time_elapsed == NULL) {
+      ERROR("type_elapsed can not be null");
+      exit(-1);
+    }else {
+      //nothing to do
+    }
+
     time_elapsed = time_elapsed;
     if(percent > 1.0){
         percent = 1.0;
@@ -121,10 +189,10 @@ void ProgressBar::draw() {
                                                            old_color.a);
 }
 
-double ProgressBar::getPercent(){
+double ProgressBar::getPercent() {
     return percent;
 }
 
-void ProgressBar::resetPercent(){
+void ProgressBar::resetPercent() {
     percent = 1.0;
 }
