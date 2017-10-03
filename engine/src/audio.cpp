@@ -16,6 +16,13 @@ Audio::Audio(std::string audio_path, std::string audio_type, int audio_volume) {
 
     assert ( audio_volume != NULL);
 
+    if(audio_volume == NULL) {
+      ERROR("do not exist the volume");
+      exit(-1);
+    }else {
+      //nothing to do
+    }
+
   /**
   * @brief Method did to load the audio of the game
   * <p>This method execute actions to load the audio of the game and treat the erros

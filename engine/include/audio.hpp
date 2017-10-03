@@ -15,8 +15,9 @@ namespace engine{
 
     class Audio{
 /**
-* @brief here you can find the construct and destructor method, with attributes and
-* methods of the class audio
+* @brief Function of construct and destructor
+* <p>here you can find the construct and destructor method, with attributes and
+* methods of the class audio</p>
 * @param string-audio_path
 * @param string-audio_type
 * @param int-volume

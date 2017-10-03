@@ -51,6 +51,7 @@ void FinishScene::draw() {
 * @brief Method update
 * <p>This method use the time_elapsed to know when have to update the interface level,
 *  and use teh array to know what have to show to user.</p>
+* @param double-time_elapsed
 * @return void
 */
 
