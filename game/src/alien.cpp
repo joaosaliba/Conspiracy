@@ -20,7 +20,31 @@ GameObject(objectName,alien_position_x,alien_position_y,width, height) {
     assert (alien_position_x !=NULL);
     assert (width !=NULL);
     assert (height !=NULL);
-
+    if(alien_position_x > 1000 || alien_position_x < 0) {
+        ERROR("Strange Alien position x");
+        exit(-1);
+    }else {
+       //nothing to do
+    }
+    if(alien_position_y > 1000 || alien_position_y < 0) {
+       ERROR("Strange Alien position y");
+       exit(-1);
+     }else {
+       //nothing to do
+     }
+    if(width > 100 || width < 0) {
+       ERROR("Strange width");
+       exit(-1);
+     }else {
+       //nothing to do
+     }
+    if(height > 100 || height < 0) {
+       ERROR("Strange height");
+       exit(-1);
+     }else {
+       //nothing to do
+     }
+    
     if(objectName.compare("assets/sprites/bilu_sheet.png") == 0) {
         alienName = "Bilu";
     }else if(objectName.compare("assets/sprites/varginha_sheet.png") == 0) {
@@ -59,6 +83,13 @@ Alien::~Alien() {
 
 void Alien::walk_in_x(double & alien_in_x) {
     assert (alien_in_x !=NULL);
+    
+    if(alien_in_x > 1000 || alien_in_x < 0) {
+        ERROR("Strange Alien position x");
+        exit(-1);
+    }else {
+       //nothing to do
+    }
 
     if(InputManager::instance.is_key_pressed(InputManager::KeyPress::KEY_PRESS_RIGHT)) {
         alien_in_x = alien_in_x;
@@ -104,6 +135,19 @@ void Alien::walk_in_x(double & alien_in_x) {
 void Alien::walk_in_y(double & alien_in_y, double alien_in_x) {
     assert (alien_in_y !=NULL);
     assert (alien_in_x !=NULL);
+    
+    if(alien_in_x > 1000 || alien_in_x < 0) {
+        ERROR("Strange Alien position x");
+        exit(-1);
+    }else {
+       //nothing to do
+    }
+    if(alien_in_y > 1000 || alien_in_y < 0) {
+        ERROR("Strange Alien position y");
+        exit(-1);
+    }else {
+       //nothing to do
+    }
 
     if(InputManager::instance.is_key_pressed(InputManager::KeyPress::KEY_PRESS_UP)) {
         alien_in_y = alien_in_y * (0-1);
