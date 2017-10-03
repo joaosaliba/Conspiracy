@@ -25,6 +25,30 @@ Alien(FILENAME, varginha_position_x, varginha_position_y, WIDTH, HEIGHT) {
     assert (WIDTH > 10);
     assert (HEIGHT !=NULL);
     assert (HEIGHT > 15);
+    if(varginha_position_x > 1000 || varginha_position_x < 0) {
+        ERROR("Strange Varginha position x");
+        exit(-1);
+    }else {
+       //nothing to do
+    }
+    if(varginha_position_y > 1000 || varginha_position_y < 0) {
+       ERROR("Strange Varginha position y");
+       exit(-1);
+     }else {
+       //nothing to do
+     }
+    if(WIDTH > 10 || WIDTH < 0) {
+       ERROR("Strange width");
+       exit(-1);
+     }else {
+       //nothing to do
+     }
+    if(HEIGHT > 15 || HEIGHT < 0) {
+       ERROR("Strange height");
+       exit(-1);
+     }else {
+       //nothing to do
+     }
 
     animator->add_action("special_right",12,13);
     animator->add_action("special_left",10,11);
@@ -54,6 +78,12 @@ Alien(FILENAME, varginha_position_x, varginha_position_y, WIDTH, HEIGHT) {
 void Varginha::update(double time_elapsed) {
     assert (time_elapsed !=NULL);
 
+    if(time_elapsed == -1) {
+       ERROR("Strange time ");
+       exit(-1);
+     }else {
+       //nothing to do
+     }
     in_position = false;
     animator->set_total_time(0.3);
     auto varginha_in_y = 0.15*time_elapsed;
