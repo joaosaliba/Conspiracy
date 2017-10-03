@@ -31,6 +31,31 @@ DoorSwitch::DoorSwitch(std::string object_name, double door_switch_position_x, d
     assert (door_switch_width != NULL);
     assert (door_switch_height != NULL);
 
+    if(door_switch_position_x > 1000 || door_switch_position_x < 0) {
+        ERROR("Strange door switch position");
+        exit(-1);
+    }else {
+        //nothing to do
+    }
+    if(door_switch_position_y > 1000 || door_switch_position_y < 0) {
+        ERROR("Strange door switch position");
+        exit(-1);
+    }else {
+        //nothing to do
+    }
+    if(door_switch_width > 500 || door_switch_width < 0) {
+        ERROR("Strange camera width");
+        exit(-1);
+    }else {
+        //nothing to do
+    }
+    if(door_switch_height > 500 || door_switch_height < 0) {
+        ERROR("Strange camera height");
+        exit(-1);
+    }else {
+        //nothing to do
+    }
+
     animator = new Animation(object_name, 1, 6, 0.5);
 
     hacking_effect = new Audio("assets/sounds/PCNOISE.wav", "EFFECT", 60);
@@ -56,6 +81,14 @@ DoorSwitch::~DoorSwitch(){}
 
 void DoorSwitch::update(double time_elapsed) {
     assert (time_elapsed != NULL);
+
+    if(time_elapsed == NULL) {
+        ERROR("we do not find the atrribute time_elapsed");
+        exit(-1);
+    }else {
+      //nothing to do
+    }
+
     time_elapsed = time_elapsed;
     animator->update();
     if(is_pressed())) {
@@ -149,6 +182,7 @@ void DoorSwitch::stop_effect() {
 
 double DoorSwitch::get_hacking_bar_percent() {
     return hacking_bar->get_percent();
+
 }
 
 /**
