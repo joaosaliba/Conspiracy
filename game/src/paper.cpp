@@ -6,7 +6,7 @@ Paper::Paper(std::string object_name, double paper_position_x, double paper_posi
                                      int paper_width, int paper_height) : GameObject(object_name,
                                                                          paper_position_x,
                                                                          paper_position_y,
-                                                                         paper_width, paper_height){
+                                                                         paper_width, paper_height) {
 
     animator = new Animation(object_name, 1, 4, 0.5);
 
@@ -28,19 +28,24 @@ Paper::~Paper(){}
 
 void Paper::update(double time_elapsed){
     time_elapsed = time_elapsed;
-    if(paper_is_being_edited){
+    if(paper_is_being_edited) {
         paper_editing_bar->update(time_elapsed);
         animator->setInterval("beingEdited");
+
         if(paper_editing_bar->getPercent() <= 0.0){
             paper_is_being_edited = false;
             paper_edited = true;
             assert(paper_edited != NULL);
             assert(paper_is_being_edited != NULL);
+
+        }else {
+            animator->setInterval("idle");
+            animator->update();
         }
-    }else{
-        animator->setInterval("idle");
+
+    }else {
+      //nothing to do
     }
-    animator->update();
 }
 
 void Paper::animate(){
@@ -64,6 +69,8 @@ void Paper::draw(){
     animator->draw_collider(getPositionX(), getPositionY(), getWidth(), getHeight());
     if(paper_is_being_edited){
         AnimationManager::instance.addProgressBar(paper_editing_bar);
+    }else {
+      //ProgressBar only apears if paper is being edited
     }
 }
 

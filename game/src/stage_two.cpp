@@ -14,6 +14,13 @@ void StageTwo::createGuards(){
     std::pair <std::string, int> GuardOneWayFour ("down", HEADER_SIZE + 120);
     std::pair <std::string, int> GuardOneWayFive ("right", 300);
 
+    if(HEADER_SIZE > 1000) {
+      ERROR("HEADER_SIZE too big");
+      exit(-1);
+    }else {
+      //nothing to do
+    }
+
     Guard * guard1 = new Guard("assets/sprites/seguranca_sheet.png", 20, HEADER_SIZE + 120, 18, 35, "right", 2, 10);
     guard1->addWay(1, GuardOneWayOne);
     guard1->addWay(2, GuardOneWayTwo);
@@ -29,6 +36,13 @@ void StageTwo::createGuards(){
     std::pair <std::string, int> GuardTwoWayFour ("up", HEADER_SIZE + 200);
     std::pair <std::string, int> GuardTwoWayFive ("left", 750);
     std::pair <std::string, int> GuardTwoWaySix ("up", HEADER_SIZE + 50);
+
+    if(HEADER_SIZE > 1000) {
+      ERROR("HEADER_SIZE too big");
+      exit(-1);
+    }else {
+      //nothing to do
+    }
 
     Guard * guard2 = new Guard("assets/sprites/seguranca_sheet.png", 750, HEADER_SIZE + 50, 18, 35, "down", 2, 10);
     guard2->addWay(1, GuardTwoWayOne);
@@ -93,7 +107,28 @@ void StageTwo::createAliens(){
     std::pair <int, int> etemerPos (900, HEADER_SIZE + 550);
     std::pair <int, int> varginhaPos (920, HEADER_SIZE + 550);
 
+    if(HEADER_SIZE > 1000) {
+      ERROR("HEADER_SIZE too big");
+      exit(-1);
+    }else {
+      //nothing to do
+    }
+
     player = new Player(biluPos, etemerPos, varginhaPos, PAPERQUANTITY, STAGENUMBER);
+
+    if(PAPERQUANTITY > 50 || PAPERQUANTITY < 0) {
+      ERROR("PAPERQUANTITY is not normal");
+      exit(-1);
+    }else {
+      //nothing to do
+    }
+    if(STAGENUMBER < 0) {
+      ERROR("STAGENUMBER is not normal");
+      exit(-1);
+    }else {
+      //nothing to do
+    }
+
     gameObjectsList.push_back(player);
 }
 
@@ -104,6 +139,13 @@ void StageTwo::createDoorSystems(){
     std::pair<int,int> doorTwoPosition (163, HEADER_SIZE + 497);
     std::pair<int,int> switchTwoPosition (800, HEADER_SIZE + 50);
 
+    if(HEADER_SIZE > 1000) {
+      ERROR("HEADER_SIZE too big");
+      exit(-1);
+    }else {
+      //nothing to do
+    }
+
     gameObjectsList.push_back(new DoorSystem(doorOnePosition,switchOnePosition, "RIGHT"));
     gameObjectsList.push_back(new DoorSystem(doorTwoPosition,switchTwoPosition, "RIGHT"));
 }
@@ -112,6 +154,13 @@ void StageTwo::createPapers(){
     gameObjectsList.push_back(new PaperTable("Paper", 30, HEADER_SIZE + 250, 60, 34));
     gameObjectsList.push_back(new PaperTable("Paper", 350, HEADER_SIZE + 170, 60, 34));
     gameObjectsList.push_back(new PaperTable("Paper", 30, HEADER_SIZE + 490, 60, 34));
+
+    if(HEADER_SIZE > 1000) {
+      ERROR("HEADER_SIZE too big");
+      exit(-1);
+    }else {
+      //nothing to do
+    }
 }
 
 void StageTwo::createFinishPoints(){

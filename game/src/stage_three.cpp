@@ -15,6 +15,13 @@ void StageThree::createGuards(){
     std::pair <std::string, int> GuardOneWayFour ("down", HEADER_SIZE + 180);
     std::pair <std::string, int> GuardOneWayFive ("left", 30);
 
+    if(HEADER_SIZE > 1000) {
+      ERROR("HEADER_SIZE too big");
+      exit(-1);
+    }else {
+      //nothing to do
+    }
+
     Guard * guard1 = new Guard("assets/sprites/seguranca_sheet.png", 30, HEADER_SIZE + 180, 18, 35, "right", 2, 10);
     guard1->addWay(1, GuardOneWayOne);
     guard1->addWay(2, GuardOneWayTwo);
@@ -34,6 +41,13 @@ void StageThree::createGuards(){
     std::pair <std::string, int> GuardTwoWayEight ("up", HEADER_SIZE + 50);
     std::pair <std::string, int> GuardTwoWayNine ("left", 770);
 
+    if(HEADER_SIZE > 1000) {
+      ERROR("HEADER_SIZE too big");
+      exit(-1);
+    }else {
+      //nothing to do
+    }
+
     Guard * guard2 = new Guard("assets/sprites/seguranca_sheet.png", 750, HEADER_SIZE + 50, 18, 35, "left", 2, 10);
     guard2->addWay(1, GuardTwoWayOne);
     guard2->addWay(2, GuardTwoWayTwo);
@@ -51,6 +65,14 @@ void StageThree::createGuards(){
     std::pair <std::string, int> GuardThreeWayTwo ("left", 300);
 
     Guard * guard3 = new Guard("assets/sprites/seguranca_sheet.png", 500, HEADER_SIZE + 420, 18, 35, "right", 2, 10);
+
+    if(HEADER_SIZE > 1000) {
+      ERROR("HEADER_SIZE too big");
+      exit(-1);
+    }else {
+      //nothing to do
+    }
+
     guard3->addWay(1, GuardThreeWayOne);
     guard3->addWay(2, GuardThreeWayTwo);
 
@@ -75,7 +97,36 @@ void StageThree::createAliens(){
     std::pair <int, int> etemerPos (300, HEADER_SIZE + 560);
     std::pair <int, int> varginhaPos (575, HEADER_SIZE + 550);
 
+    if(HEADER_SIZE > 1000) {
+      ERROR("HEADER_SIZE too big");
+      exit(-1);
+    }else {
+      //nothing to do
+    }
+
     player = new Player(biluPos, etemerPos, varginhaPos, PAPERQUANTITY, STAGENUMBER);
+
+    if(PAPERQUANTITY > 50 || PAPERQUANTITY < 0) {
+      ERROR("PAPERQUANTITY is not normal");
+      exit(-1);
+    }else {
+      //nothing to do
+    }
+    if(STAGENUMBER < 0) {
+      ERROR("STAGENUMBER is not normal");
+      exit(-1);
+    }else {
+      //nothing to do
+    }
+
+
+    if(HEADER_SIZE > 1000) {
+      ERROR("HEADER_SIZE too big");
+      exit(-1);
+    }else {
+      //nothing to do
+    }
+
     gameObjectsList.push_back(player);
 }
 
@@ -89,6 +140,13 @@ void StageThree::createDoorSystems(){
     std::pair<int,int> doorThreePosition (700, HEADER_SIZE + 339);
     std::pair<int,int> switchThreePosition (150, HEADER_SIZE + 50);
 
+    if(HEADER_SIZE > 1000) {
+      ERROR("HEADER_SIZE too big");
+      exit(-1);
+    }else {
+      //nothing to do
+    }
+
     gameObjectsList.push_back(new DoorSystem(doorOnePosition,switchOnePosition, "LEFT"));
     gameObjectsList.push_back(new DoorSystem(doorTwoPosition,switchTwoPosition, "RIGHT"));
     gameObjectsList.push_back(new DoorSystem(doorThreePosition,switchThreePosition, "DOWN"));
@@ -98,6 +156,13 @@ void StageThree::createPapers(){
     gameObjectsList.push_back(new PaperTable("Paper", 30, HEADER_SIZE + 250, 60, 34));
     gameObjectsList.push_back(new PaperTable("Paper", 475, HEADER_SIZE + 170, 60, 34));
     gameObjectsList.push_back(new PaperTable("Paper", 400, HEADER_SIZE + 290, 60, 34));
+
+    if(HEADER_SIZE > 1000) {
+      ERROR("HEADER_SIZE too big");
+      exit(-1);
+    }else {
+      //nothing to do
+    }
 }
 
 void StageThree::createFinishPoints(){
@@ -107,4 +172,11 @@ void StageThree::createFinishPoints(){
 void StageThree::createChairs(){
     gameObjectsList.push_back(new Chair("assets/sprites/cadeira_sheet(20X27).png", 300, HEADER_SIZE + 480, 20, 16));
     gameObjectsList.push_back(new Chair("assets/sprites/cadeira_sheet(20X27).png", 750, HEADER_SIZE + 120, 20, 16));
+
+    if(HEADER_SIZE > 1000) {
+      ERROR("HEADER_SIZE too big");
+      exit(-1);
+    }else {
+      //nothing to do
+    }
 }
