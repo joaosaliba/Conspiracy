@@ -7,7 +7,7 @@
 
 #define MARGIN 5
 
-Header::Header(double positionAxisX, double positionAxisY, int maxPapers, int stageNumber) : GameObject(FILENAME, positionAxisX, positionAxisY, WIDTH, HEIGHT){
+Header::Header(double positionAxisX, double positionAxisY, int max_papers, int stageNumber) : GameObject(FILENAME, positionAxisX, positionAxisY, WIDTH, HEIGHT){
        assert(positionAxisX>0);
        assert(positionAxisY>0);    
         stageText = new Text("Stage "+std::to_string(stageNumber),"assets/fonts/font.ttf", 40, true, new Color(100,100,100,1), new Color(0,0,0,0));
@@ -15,11 +15,10 @@ Header::Header(double positionAxisX, double positionAxisY, int maxPapers, int st
         paperIcon->setDrawSize(40,50);
         paperIcon->addAction("static", 0,0);
         paperIcon->setInterval("static");
-
-        totalPapers = maxPapers;
-
+        total_papers=0;
+        total_papers = max_papers;
+        assert(total_papers>0);
         updatePaperQuantity(0);
-
         animator = new Animation(FILENAME, 1, 4, 0.5);
         animator->addAction("none", 0,0);
         animator->addAction("Etemer", 1,1);
@@ -43,12 +42,12 @@ void Header::update(double timeElapsed){
 void Header::draw(){//assert para verificar se y e positivo. 
         animator->draw(getPositionX()+MARGIN, getPositionY()+MARGIN);
         paperIcon->draw(getPositionX()+800, getPositionY()- MARGIN);
-        paperText->draw(getPositionX()+840, getPositionY()+MARGIN);
+        paper_text->draw(getPositionX()+840, getPositionY()+MARGIN);
         stageText->draw(getPositionX()+400, getPositionY()+MARGIN);
 }
 
 void Header::updatePaperQuantity(int newValue){// assert para verificar se  newValue apresenta algum valor.
-    paperText = convertToText(newValue);
+    paper_text = convertToText(newValue);
 }
 
 Text* Header::convertToText(int newValue){// assert para verificar se  newValue apresenta algum valor.
