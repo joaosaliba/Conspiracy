@@ -1,6 +1,7 @@
+
 #include "table.hpp"
 #include "log.h"
-
+#include <assert.h>
 Table::Table(std::string objectName, double positionX, double positionY,
                                      int width, int height) : GameObject(objectName,
                                                                          positionX,
@@ -14,7 +15,9 @@ Table::~Table(){
 }
 
 void Table::update(double timeElapsed){
+    timeElapsed=0.0; 
     timeElapsed = timeElapsed;
+    assert(timeElapsed>0.0);
     animator->update();
 }
 
