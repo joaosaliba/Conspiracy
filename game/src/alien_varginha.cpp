@@ -19,6 +19,14 @@
 
 Varginha::Varginha(double varginha_position_x, double varginha_position_y) : 
 Alien(FILENAME, varginha_position_x, varginha_position_y, WIDTH, HEIGHT) {
+    
+    double varginha_position_x = 0.0;
+    double varginha_position_y = 0.0;
+    bool-is_invisible = true;
+    bool-is_selected = true; //conferir com o professor
+    bool in_position = true;
+    bool turn_off = true;
+    
     assert (varginha_position_x !=NULL);
     assert (etemer_position_y !=NULL);
     assert (WIDTH !=NULL);
@@ -76,6 +84,12 @@ Alien(FILENAME, varginha_position_x, varginha_position_y, WIDTH, HEIGHT) {
 */
 
 void Varginha::update(double time_elapsed) {
+
+     double-time_elapsed = 0.0;
+     bool-in_position = true;
+     double-varginha_in_x = 0.0;
+     double-varginha_in_y = 0.0;    
+        
     assert (time_elapsed !=NULL);
 
     if(time_elapsed == -1) {
@@ -139,6 +153,12 @@ void Varginha::update(double time_elapsed) {
 *@return void
 */
 void Varginha::special_action() {
+    double-varginha_position_x = 0.0;
+    double-varginha_position_y = 0.0;
+    bool-block_movement = true;
+    bool-turn_off = true;
+    bool-is_selected = true;
+   
     std::pair<int, int> interval;
 
     if(is_invisible) {
@@ -222,6 +242,9 @@ void Varginha::set_default() {
 */
  
 void Varginha::draw() {
+    double-varginha_position_x = 0.0;
+    double-varginha_position_y = 0.0;
+
     INFO("Varginha DRAW");
     animator->draw(get_varginha_position_x()-15, get_varginha_position_y()-25);
     animator->draw_collider(get_varginha_position_x(), get_varginha_position_y(), 
@@ -237,6 +260,9 @@ void Varginha::draw() {
 */
 
 void Varginha::verify_turn() {
+    bool block_movement = true;
+    bool turn_off = true;
+
     if((timer_turn->elapsed_time()/1000.0) > 0.3 && turn_off) {
       block_movement = false;
       turn_off = false;
