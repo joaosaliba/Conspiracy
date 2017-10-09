@@ -12,14 +12,14 @@ namespace engine{
     const std::string GAME_NAME = "Conspiracy";
     const std::pair <int, int> WINDOW_SIZE (960, 640);
 
-    SceneManager* scene_manager;
-    WindowManager* window_manager;
-    SDLManager* sdl_manager;
+    SceneManager* scene_manager = nullptr;
+    WindowManager* window_manager = nullptr;
+    SDLManager* sdl_manager = nullptr;
 
-    double engine_start_time;
-    double engine_step_time;
-    double engine_time_elapsed;
-    double frame_time;
+    double engine_start_time = 0.0;
+    double engine_step_time = 0.0;
+    double engine_time_elapsed = 0.0;
+    double frame_time = 0.0;
     double frame_rate = 60.0;
 
     SceneManager* getSceneManager() {

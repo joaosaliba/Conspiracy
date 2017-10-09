@@ -19,7 +19,7 @@ Rectangle::~Rectangle() {
 }
 
 void Rectangle::init() {
-    SDL_Surface *surface;
+    SDL_Surface *surface = nullptr;
     surface = SDL_CreateRGBSurface(0, getWidth(),getHeight(), 8, 0, 0, 0,0);
 
     if (surface == NULL) {

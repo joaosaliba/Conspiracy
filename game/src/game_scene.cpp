@@ -297,7 +297,7 @@ void GameScene::createCenary(){
     tile_file.open(tiled_file);
     if(tile_file.is_open()) {
         char c;
-        int compare;
+        int compare = 0;
         for(int i=0; i<=600; i+=20) {
             for(int j=0; j<=960; j+=20) {
                 tile_file.get(c);
