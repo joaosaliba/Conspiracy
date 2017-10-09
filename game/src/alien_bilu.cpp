@@ -23,6 +23,15 @@
 
 Bilu::Bilu(double bilu_position_x, double bilu_position_y) :
 Alien(FILENAME, bilu_position_x, bilu_position_y, WIDTH, HEIGHT) {
+   
+    double bilu_position_x = 0.0;
+    double bilu_position_y = 0.0;
+    bool hacking = true;
+    bool editing = true;
+    bool last_action = true;
+    bool is_selected = true;
+    bool in_position = true;  
+   
     assert (bilu_position_x !=NULL);
     assert (bilu_position_y !=NULL);
     assert (WIDTH !=NULL);
@@ -72,6 +81,10 @@ Alien(FILENAME, bilu_position_x, bilu_position_y, WIDTH, HEIGHT) {
 */
 
 void Bilu::update(double time_elapsed) {
+    
+    double time_elapsed = 0.0;
+    bool in_position = true;
+    
     assert ( time_elapsed != NULL);
 
     if(time_elapsed == -1) {
@@ -142,6 +155,10 @@ void Bilu::update(double time_elapsed) {
 */
 
 void Bilu::special_action() {
+
+    bool hacking = true;
+    bool editing = true;
+
     std::pair<int, int> interval;
 
     GameObject* paper = CollisionManager::instance.verify_collision_with_papers(this);
@@ -231,6 +248,10 @@ void Bilu::special_action() {
 */
 
 void Bilu::draw() {
+
+    double bilu_position_x = 0.0;
+    double bilu_position_y = 0.0;
+
     INFO("Bilu DRAW");
     animator->draw(get_position_x()-11, get_position_y()-20);
     animator->draw_collider(get_position_x(), get_position_y(), get_width(), get_height());
