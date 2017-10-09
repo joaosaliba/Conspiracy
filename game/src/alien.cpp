@@ -16,6 +16,14 @@
 Alien::Alien(std::string objectName, double alien_position_x, double alien_position_y,int width,
 int height) :
 GameObject(objectName,alien_position_x,alien_position_y,width, height) {
+    
+    double alien_position_x = 0.0;
+    double alien_position_y = 0.0
+    int width = 0;
+    int height = 0;
+    bool block_movement = true;
+    bool in_position  = true;  
+    
     assert (alien_position_x !=NULL);
     assert (alien_position_x !=NULL);
     assert (width !=NULL);
@@ -82,6 +90,10 @@ Alien::~Alien() {
 */
 
 void Alien::walk_in_x(double & alien_in_x) {
+    
+    double alien_in_x = 0.0;
+    double alien_position_x = 0.0;
+    
     assert (alien_in_x !=NULL);
     
     if(alien_in_x > 1000 || alien_in_x < 0) {
@@ -133,6 +145,12 @@ void Alien::walk_in_x(double & alien_in_x) {
 */
 
 void Alien::walk_in_y(double & alien_in_y, double alien_in_x) {
+
+    double alien_in_x = 0.0;
+    double alien_in_y = 0.0;
+    double alien_position_x = 0.0;
+    double alien_position_y = 0.0;
+    
     assert (alien_in_y !=NULL);
     assert (alien_in_x !=NULL);
     
@@ -204,6 +222,10 @@ void Alien::walk_in_y(double & alien_in_y, double alien_in_x) {
 */
 
 void Alien::draw() {
+
+    double alien_position_x = 0.0;
+    double alien_position_y = 0.0;    
+
     INFO("ALIEN DRAW");
     animator->draw(get_alien_position_x(), get_alien_position_y());
 }
