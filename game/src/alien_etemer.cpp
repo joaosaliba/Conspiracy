@@ -22,6 +22,15 @@
 
 Etemer::Etemer(double etemer_position_x, double etemer_position_y) : 
 Alien(FILENAME, etemer_position_x, etemer_position_y, WIDTH, HEIGHT) {
+   
+    double etemer_position_x = 0.0;
+    double etemer_position_y = 0.0;
+    bool hacking = true;
+    bool editing = true;
+    bool last_action = true;
+    bool is_selected = true;
+    bool in_position = true;
+
     assert (etemer_position_x !=NULL);
     assert (etemer_position_y !=NULL);
     assert (WIDTH !=NULL);
@@ -71,6 +80,12 @@ Alien(FILENAME, etemer_position_x, etemer_position_y, WIDTH, HEIGHT) {
 */
 
 void Etemer::update(double time_elapsed) {
+    
+    double time_elapsed = 0.0;
+    bool in_position = true;
+    double etemer_in_x = 0.0;
+    double etemer_in_y = 0.0;
+    
     assert (time_elapsed !=NULL);
 
     if(time_elapsed == -1) {
@@ -139,6 +154,11 @@ void Etemer::update(double time_elapsed) {
 */
 
 void Etemer::special_action(GameObject * guard, double etemer_distance) {
+    
+    double etemer_distance = 0.0; 
+    bool talking = true;
+    bool block_movement = true;    
+    
     assert (etemer_distance !=NULL);
 
     if(etemer_distance > 1000) {
@@ -202,6 +222,10 @@ void Etemer::special_action(GameObject * guard, double etemer_distance) {
 */
 
 void Etemer::draw() {
+    
+    double etemer_position_x = 0.0;
+    double etemer_position_y = 0.0;
+
     INFO("Etemer DRAW");
     animator->draw(get_position_x()-15, get_position_y()-20);
     animator->draw_collider(get_position_x(), get_position_y(), get_width(), get_heigth());
@@ -237,6 +261,10 @@ void Etemer::move_chair() {
 */
 
 void Etemer::walk_in_x(double & etemer_in_x) {
+    
+    double etemer_in_x = 0.0;
+    double etemer_position_x = 0.0;
+    
     assert (etemer_in_x !=NULL);
 
     if(etemer_in_x > 1000 || etemer_in_x < 0) {
@@ -278,6 +306,10 @@ void Etemer::walk_in_x(double & etemer_in_x) {
 */
 
 void Etemer::walk_in_y(double & etemer_in_y, double etemer_in_x) {
+   
+    double etemer_in_y = 0.0;
+    double etemer_position_y = 0.0;
+   
     assert (etemer_in_y !=NULL);
     assert (etemer_in_x !=NULL);
 
@@ -335,6 +367,11 @@ void Etemer::walk_in_y(double & etemer_in_y, double etemer_in_x) {
 */
 
 void Etemer::verify_etemer_distance(GameObject* guard) {
+    
+    double etemer_position_x = 0.0;
+    double etemer_position_y = 0.0;
+    double etemer_distance = 0.0;
+    
     double etemer_distance = sqrt((pow(get_position_x() - guard->get_position_x(), 2.0)) +  
     (pow(get_position_y() - guard->get_position_y(), 2.0)));
 
