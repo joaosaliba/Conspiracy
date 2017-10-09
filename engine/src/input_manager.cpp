@@ -8,6 +8,7 @@ InputManager InputManager::instance;
     void InputManager::update(SDL_Event event) {
         int keyAction = 0, previousAction = 0;
 
+        //While SDL is detecting key events
         while(SDL_PollEvent(&event)) {
             switch (event.type) {
                 case SDL_QUIT:
@@ -15,12 +16,17 @@ InputManager InputManager::instance;
                 break;
                 case SDL_KEYDOWN:
                     keyAction = event.key.keysym.sym;
+
+                    //If there is no key event repetition it only answers the current event
                     if(!event.key.repeat) {
                         keyActive[keyAction] = true;
                         keyPrevious[keyAction] = false;
                         INFO("PUSH");
+
+                    //If there is repetition it answers the previous action
                     }else if(event.key.repeat) {
                         keyPrevious[keyAction] = true;
+                    //No key event detected
                     }else {
                         ERROR("No key event");
                     }
@@ -53,9 +59,11 @@ InputManager InputManager::instance;
     }
 
     bool InputManager::isKeyTriggered(int iKeyCode){
+        //It verifies if the key is triggered
         if(keyActive[iKeyCode] && !keyPrevious[iKeyCode]){
             keyPrevious[iKeyCode] = true;
             return true;
+        //No key triggered
         } else{
             return false;
         }

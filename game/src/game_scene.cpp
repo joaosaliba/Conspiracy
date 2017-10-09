@@ -56,9 +56,12 @@ GameScene::GameScene(int id, std::string new_tiled_file, std::string audio_file)
     assert(audio_file != NULL);
     assert(new_tiled_file != NULL);
     assert(id != NULL);
+
+    //Verifies if tha audio file is TEMA3.wav and it assigns a background music
     if(audio_file == "assets/sounds/TEMA3.wav"){
         background_music = new Audio(audio_file, "MUSIC", 55);
         assert(background_music != NULL);
+    //Assigns a default background music
     }else{
         background_music = new Audio(audio_file, "MUSIC", 75);
         assert(background_music != NULL);
@@ -78,6 +81,7 @@ GameScene::GameScene(int id, std::string new_tiled_file, std::string audio_file)
 */
 
 void GameScene::draw(){
+        //For each game object detected it draws
         for(auto gameObject : gameObjectsList) {
                 (*gameObject).draw();
         }
@@ -89,14 +93,18 @@ void GameScene::draw(){
 
 void GameScene::update(double time_elapsed){
     assert(time_elapsed != NULL);
+    //It verifies if the player is dead to update scene
     if(!player->isDead()){
+        //For each game object detected
         for(auto gameObject : gameObjectsList) {
+                //Updates time elapsed
                 if(typeid(gameObject) != typeid(Player)){
                     (*gameObject).update(time_elapsed);
                 }else {
                     //nothing to do
                 }
         }
+    //Verifies conditions of winning
     }else {
     verifyWinOrLose();
     }
@@ -113,12 +121,17 @@ void GameScene::verifyWinOrLose(){
         assert(guards != NULL);
         assert(all_papers_edited != NULL);
         assert(count_papers != NULL);
+        //For each game object detected
         for(auto gameObject : gameObjectsList) {
+                //If verifies if the game object is a guard
                 if(typeid(*gameObject) == typeid(Guard)) {
                         guards.push_back((Guard *)(gameObject));
+                //Verifies if the game object is a paper
                 }else if(typeid(*gameObject) == typeid(PaperTable)) {
+                        //Verifies if all papers are edited
                         if(!(((PaperTable*)(gameObject))->getPaper())->isEdited()) {
                             all_papers_edited = false;
+                        //All papers are edited
                         }else{
                             count_papers++;
                         }
@@ -126,30 +139,43 @@ void GameScene::verifyWinOrLose(){
                   //nothing to do
                 }
         }
+
+        //Verifies if the number of papers edited is equal to the actual number of papers
         if(count_papers >= actual_papers) {
             player->updatePaperQuantity(count_papers);
             actual_papers = count_papers;
+
+        //All papers were edited
         }else {
             actual_papers = count_papers;
         }
+
+        //Verifies if the aliens were detected
         for(Guard * guard : guards) {
             guard->verifyDistance(player->getVarginha());
             guard->verifyDistance(player->getBilu());
             ((Etemer *)(player->getEtemer()))->verifyDistance(guard);
         }
+
+    //Verifies if all aliens are in position at the end of the stage
     if((Etemer *)(player->getEtemer())->isInPosition() &&
       (Bilu*)(player->getBilu())->isInPosition() &&
       (Varginha*)(player->getVarginha())->isInPosition()) {
           aliens_in_position = true;
+
+      //Aliens are not in position
       }else {
           aliens_in_position = false;
       }
 
+    //If the player is dead it stops the stage timer
     if(!player->isDead()) {
         stage_timer->step();
     }else{
         //nothing to do Player is alive
     }
+
+    //If player is dead it reloads stage
     if(player->isDead()) {
         if(stage_timer->elapsed_time() >= 2500){
             getSceneManager()->loadScene(6);
@@ -157,9 +183,12 @@ void GameScene::verifyWinOrLose(){
           //nothing to do
         }
 
+    //Verifies winning conditions
     }else if((all_papers_edited && aliens_in_position) || (InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_K) && skip_timer->total_elapsed_time() >= 500)){
+        //Loads winning scene
         if(getSceneManager()->get_current_scene_id() == 5){
             getSceneManager()->loadScene(9);
+        //Loads losing scene
         }else{
             getSceneManager()->loadScene(7);
         }
@@ -174,27 +203,36 @@ void GameScene::verifyWinOrLose(){
 
 void GameScene::initializeColliders(){
     assert(gameObjectsList != NULL);
+    //For each game object detected
     for(auto gameObject: gameObjectsList){
+        //If obejct id equals to wall id it adds a wall
         if(typeid(*gameObject) == typeid(Wall)){
             CollisionManager::instance.addWall(gameObject);
+        //If object id equals to guard id it add a guard and the respective field of view of this guard
         }else if(typeid(*gameObject) == typeid(Guard)){
             CollisionManager::instance.addGuard(gameObject);
             CollisionManager::instance.addGuardFieldOfVision(((Guard*)gameObject)->getFieldOfVision());
+        //If the object id equals to camera id it adds camera
         }else if(typeid(*gameObject) == typeid(CameraSystem)){
             CollisionManager::instance.addCameraFieldOfVision(((CameraSystem*)gameObject)->getCamera()->getFieldOfVision());
             CollisionManager::instance.addCameraSwitch(((CameraSystem*)gameObject)->getCameraSwitch());
             CollisionManager::instance.addCameraLever(((CameraSystem*)gameObject)->getCameraLever());
+        //If the object id equals to PaperTable id it adds one
         }else if(typeid(*gameObject) == typeid(PaperTable)){
             CollisionManager::instance.addPaper(((PaperTable*)(gameObject))->getPaper());
             CollisionManager::instance.addWall(((PaperTable*)(gameObject))->getTable());
+        //Adds door
         }else if(typeid(*gameObject) == typeid(DoorSystem)){
             CollisionManager::instance.addDoor(((DoorSystem*)(gameObject))->getDoor());
             CollisionManager::instance.addSwitch(((DoorSystem*)(gameObject))->getSwitch());
             CollisionManager::instance.addWall(((DoorSystem*)(gameObject))->getTable());
+        //Adds table
         }else if(typeid(*gameObject) == typeid(Table)){
             CollisionManager::instance.addWall(((Table*)(gameObject)));
+        //Adds chair
         }else if(typeid(*gameObject) == typeid(Chair)) {
             CollisionManager::instance.addChair(gameObject);
+        //Adds finish point
         }else if(typeid(*gameObject) == typeid(FinishPoint)){
             CollisionManager::instance.addFinishPoint(gameObject);
         }else {
@@ -242,6 +280,7 @@ void GameScene::unload(){
     CollisionManager::instance.resetLists();
     actual_papers = 0;
     assert(actual_papers != NULL);
+    //For each game object detected
     for(GameObject* object: gameObjectsList){
         free(object);
     }

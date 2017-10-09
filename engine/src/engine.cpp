@@ -43,10 +43,14 @@ namespace engine{
          engine_step_time = engine_start_time;
          frame_time = 1000.0/frame_rate;
 
+
+         //If there is an error while initializing SDL it exits.
          if(!sdl_manager->initSDL()) {
              ERROR("ERRO AO INICIAR SDL");
              exit(-1);
-         }else if(!window_manager->createWindow(GAME_NAME, WINDOW_SIZE)) {
+         }
+         //If window manager fails in creating window it exits.
+         else if(!window_manager->createWindow(GAME_NAME, WINDOW_SIZE)) {
              ERROR("ERRO AO CRIAR JANELA");
              exit(-1);
          }else {
@@ -67,18 +71,22 @@ namespace engine{
          assert(engine_is_running != NULL);
          SDL_Event event;
 
+
+         //While engine is running
          while(engine_is_running){
              engine_step_time = SDL_GetTicks();
              assert(engine_step_time != NULL);
              engine::InputManager::instance.update(event);
              SDL_RenderClear(WindowManager::getGameCanvas());
 
+             //If while engine is running it gets a quit request, SDL is finalized and Window is destroyed
              if(engine::InputManager::instance.getQuitRequest()) {
                  engine_is_running = false;
                  assert(engine_is_running != NULL);
                  sdl_manager->finalizeSDL();
                  window_manager->destroyWindow();
                  continue;
+             //Else it keeps engine running
              }else {
                  engine_step_time = SDL_GetTicks();
                  engine::InputManager::instance.update(event);
@@ -93,18 +101,21 @@ namespace engine{
              assert(frame_time != NULL);
              assert(engine_time_elapsed != NULL);
 
+             //It detects a delay in the engine
              if(frame_time > engine_time_elapsed) {
                  DEBUG("SDL_DELAY: " + std::to_string(frame_time - engine_time_elapsed));
                  SDL_Delay(frame_time - engine_time_elapsed);
                  engine_time_elapsed = SDL_GetTicks() - engine_step_time;
+             //If no delay is detected
              }else {
                  ERROR("NO DELAY");
              }
 
+             //If the current scene is null it updates and draw the scene
              if(scene_manager->get_current_scene() != NULL) {
                scene_manager->get_current_scene()->update(engine_time_elapsed);
                scene_manager->get_current_scene()->draw();
-
+             //It draws the scene
              }else {
                scene_manager->get_current_scene()->draw();
              }

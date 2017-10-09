@@ -28,16 +28,17 @@ Paper::~Paper(){}
 
 void Paper::update(double time_elapsed){
     time_elapsed = time_elapsed;
+    //If paper is being edited it sets the paper editing bar
     if(paper_is_being_edited) {
         paper_editing_bar->update(time_elapsed);
         animator->setInterval("beingEdited");
-
+        //If paper is being edited it gets the percentage of the edition
         if(paper_editing_bar->getPercent() <= 0.0){
             paper_is_being_edited = false;
             paper_edited = true;
             assert(paper_edited != NULL);
             assert(paper_is_being_edited != NULL);
-
+        //Paper is not being edited
         }else {
             animator->setInterval("idle");
             animator->update();
@@ -67,6 +68,7 @@ void Paper::draw(){
     INFO("Paper DRAW");
     animator->draw(getPositionX(), getPositionY());
     animator->draw_collider(getPositionX(), getPositionY(), getWidth(), getHeight());
+    //It draws editing bar if the paper is being edited
     if(paper_is_being_edited){
         AnimationManager::instance.addProgressBar(paper_editing_bar);
     }else {

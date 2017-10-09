@@ -22,9 +22,11 @@ void Rectangle::init() {
     SDL_Surface *surface = nullptr;
     surface = SDL_CreateRGBSurface(0, getWidth(),getHeight(), 8, 0, 0, 0,0);
 
+    //If the surface is null it fires an error
     if (surface == NULL) {
         ERROR("Create surface failed.");
         exit(-1);
+    //The surface is not null and it aspects are calculated
     }else {
     assert(surface != NULL);
     setWidth((int)(surface->w));
@@ -38,28 +40,34 @@ void Rectangle::init() {
 
 void Rectangle::update(double time_elapsed){
     time_elapsed = time_elapsed;
+    //Verifies if the rectangle is enabled
     if(isEnabled()) {
         verifyAlpha();
+    //Rectangle is not enabled
     }else {
         ERROR("Rectangle is not enabled");
     }
 }
 
 void Rectangle::draw() {
+    //If there is a rectangle object enabled it draws the rectangle
     if(isEnabled()) {
       SDL_Rect clipRect = {0, 0, getWidth(), getHeight()};
       SDL_Rect renderQuad = {(int)getPositionX(), (int)getPositionY(), clipRect.w, clipRect.h};
       SDL_RenderCopy(WindowManager::getGameCanvas(), texture, &clipRect, &renderQuad);
+    //Rectangle is not enabled
     }else {
       ERROR("Rectangle is not enabled");
     }
 }
 
 void Rectangle::verifyAlpha() {
+    //If the rectangle alpha is active it sets the texture
     if(alpha_active){
         SDL_SetTextureColorMod(texture, rectangle_color->r, rectangle_color->g, rectangle_color->b);
         SDL_SetTextureAlphaMod(texture, rectangle_color->a);
         SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
+    //Alpha is not active
     }else {
         ERROR("Rectangle alpha is not active");
     }
