@@ -25,14 +25,17 @@ Door::Door(std::string objectName, double door_position_x, double door_position_
     assert (width !=NULL);
     assert (height !=NULL);                                                                    
 
+    //compare if door down gets 0
     if(doorSide.compare("DOWN") == 0) {
         animator = new Animation(objectName, 1, 4, 0.5);
         animator->add_action("closed", 0,0);
         animator->add_action("open",1,3);
+    //compare if door right gets 0
     }else if(doorSide.compare("RIGHT") == 0) {
         animator = new Animation(objectName, 1, 8, 0.5);
         animator->add_action("closed", 0,0);
         animator->add_action("open",1,3);
+    //compare if door left 0
     }else if(doorSide.compare("LEFT") == 0) {
         animator = new Animation(objectName, 1, 8, 0.5);
         animator->add_action("closed", 4,4);
@@ -62,11 +65,15 @@ void Door::update(double time_elapsed) {
     assert (time_elapsed !=NULL);
 
     time_elapsed = time_elapsed;
+    // get the position frame
     if(animator->get_current_position_frame()!=3 && animator->get_current_position_frame()!=7) {
         animator->update();
     }
+    // Check is_open, if true applies an action
     if(is_open()) {
         animator->set_interval("open");
+    
+    //if no further action is taken
     }else {
         animator->set_interval("closed");
     }
