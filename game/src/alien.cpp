@@ -28,24 +28,29 @@ GameObject(objectName,alien_position_x,alien_position_y,width, height) {
     assert (alien_position_x !=NULL);
     assert (width !=NULL);
     assert (height !=NULL);
+
+    // Verifies the position x of the character
     if(alien_position_x > 1000 || alien_position_x < 0) {
         ERROR("Strange Alien position x");
         exit(-1);
     }else {
        //nothing to do
     }
+    // Verifies the position y of the character
     if(alien_position_y > 1000 || alien_position_y < 0) {
        ERROR("Strange Alien position y");
        exit(-1);
      }else {
        //nothing to do
      }
+    // Verifies the width of the character
     if(width > 100 || width < 0) {
        ERROR("Strange width");
        exit(-1);
      }else {
        //nothing to do
      }
+    // Verifies the height of the character
     if(height > 100 || height < 0) {
        ERROR("Strange height");
        exit(-1);
@@ -53,11 +58,13 @@ GameObject(objectName,alien_position_x,alien_position_y,width, height) {
        //nothing to do
      }
     
+    //compare which character it is, if is Bilu
     if(objectName.compare("assets/sprites/bilu_sheet.png") == 0) {
         alienName = "Bilu";
+    //compare which character it is, if is Varginha    
     }else if(objectName.compare("assets/sprites/varginha_sheet.png") == 0) {
         alienName = "Varginha";
-
+    //compare which character it is, if is Etemer
     }else if(objectName.compare("assets/sprites/etemer_sheet.png") == 0) {
         alienName = "Etemer";
     }
@@ -95,23 +102,25 @@ void Alien::walk_in_x(double & alien_in_x) {
     double alien_position_x = 0.0;
     
     assert (alien_in_x !=NULL);
-    
+    // Verifies the alien_in_x of the character
     if(alien_in_x > 1000 || alien_in_x < 0) {
         ERROR("Strange Alien position x");
         exit(-1);
     }else {
        //nothing to do
     }
-
+    //Chech if instance
     if(InputManager::instance.is_key_pressed(InputManager::KeyPress::KEY_PRESS_RIGHT)) {
         alien_in_x = alien_in_x;
         idle_animation_number = 5;
         animator->set_interval("right");
+    //Chech if instance    
     if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_RIGHT)) {
         inc_x = inc_x;
         idle_animation_number = 5;
         animator->set_interval("right");
     }
+    //Chech if instance 
     else if(InputManager::instance.is_key_pressed(InputManager::KeyPress::KEY_PRESS_LEFT)) {
         //movement_sound_effect->play(-1);
         alien_in_x = alien_in_x * (0-1);
@@ -121,10 +130,12 @@ void Alien::walk_in_x(double & alien_in_x) {
         idle_animation_number = 0;
         animator->set_interval("left");
     }
+    // If you do not receive an action
     else {
         alien_in_x = 0;
     }
     set_alien_position_x(get_alien_position_x()+alien_in_x);
+    //Chech if instance was collision
     if(CollisionManager::instance.verify_collision_with_walls_and_chairs(this)) {
         set_alien_position_x(get_alien_position_x()+(alien_in_x*(0-1)));
         }else {
@@ -153,13 +164,14 @@ void Alien::walk_in_y(double & alien_in_y, double alien_in_x) {
     
     assert (alien_in_y !=NULL);
     assert (alien_in_x !=NULL);
-    
+    // Verifies the alien_in_x of the character
     if(alien_in_x > 1000 || alien_in_x < 0) {
         ERROR("Strange Alien position x");
         exit(-1);
     }else {
        //nothing to do
     }
+    // Verifies the alien_in_y of the character
     if(alien_in_y > 1000 || alien_in_y < 0) {
         ERROR("Strange Alien position y");
         exit(-1);
@@ -170,6 +182,7 @@ void Alien::walk_in_y(double & alien_in_y, double alien_in_x) {
     if(InputManager::instance.is_key_pressed(InputManager::KeyPress::KEY_PRESS_UP)) {
         alien_in_y = alien_in_y * (0-1);
         idle_animation_number = 5;
+        // Check if alien_in_x is equals 0
         if(alien_in_x == 0){
             animator->set_interval("up");
         }else {
@@ -180,11 +193,13 @@ void Alien::walk_in_y(double & alien_in_y, double alien_in_x) {
     instance.is_key_pressed(engine::InputManager::KeyPress::KEY_PRESS_DOWN)) {
         alien_in_y = alien_in_y;
         idle_animation_number = 0;
+        // Check if alien_in_x is equals 0, receives action down
         if(alien_in_x == 0){
             animator->set_interval("down");
             if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_UP)) {
                 inc_y = inc_y * (0-1);
                 idle_animation_number = 5;
+                // Check if inc_x is equals 0, receives action up
                 if(inc_x == 0){
                 animator->set_interval("up");
                 }else {
@@ -197,15 +212,18 @@ void Alien::walk_in_y(double & alien_in_y, double alien_in_x) {
         KEY_PRESS_DOWN)) {
             inc_y = inc_y;
             idle_animation_number = 0;
+            // Check if alien_in_x is equals 0, receives action down
             if(inc_x == 0){
                 animator->set_interval("down");
             }else {
                 //nothing to do
             }
+        //Assigns a default
         }else {
             alien_in_y = 0;
         }
     set_alien_position_y(get_alien_position_y()+alien_in_y);
+    // Instace verify collision
     if(CollisionManager::instance.verify_collision_with_walls_and_chairs(this)) {
         set_alien_position_y(get_alien_position_y()+(alien_in_y*(0-1)));
     }else {
