@@ -33,24 +33,29 @@ Alien(FILENAME, varginha_position_x, varginha_position_y, WIDTH, HEIGHT) {
     assert (WIDTH > 10);
     assert (HEIGHT !=NULL);
     assert (HEIGHT > 15);
+
+    // Verifies the position x of the character Varginha
     if(varginha_position_x > 1000 || varginha_position_x < 0) {
         ERROR("Strange Varginha position x");
         exit(-1);
     }else {
        //nothing to do
     }
+    // Verifies the position y of the character Varginha
     if(varginha_position_y > 1000 || varginha_position_y < 0) {
        ERROR("Strange Varginha position y");
        exit(-1);
      }else {
        //nothing to do
      }
+    // Verifies the width of the character Varginha
     if(WIDTH > 10 || WIDTH < 0) {
        ERROR("Strange width");
        exit(-1);
      }else {
        //nothing to do
      }
+    // Verifies the height of the character Varginha 
     if(HEIGHT > 15 || HEIGHT < 0) {
        ERROR("Strange height");
        exit(-1);
@@ -91,7 +96,8 @@ void Varginha::update(double time_elapsed) {
      double-varginha_in_y = 0.0;    
         
     assert (time_elapsed !=NULL);
-
+    
+    //check the elapsed time
     if(time_elapsed == -1) {
        ERROR("Strange time ");
        exit(-1);
@@ -103,6 +109,7 @@ void Varginha::update(double time_elapsed) {
     auto varginha_in_y = 0.15*time_elapsed;
     auto varginha_in_x = 0.15*time_elapsed;
 
+    //checks conditions to move the player Varginha 
     if(!block_movement && is_selected) {
         walk_in_x(varginha_in_x);
         walk_in_y(varginha_in_y, varginha_in_x);
@@ -110,27 +117,34 @@ void Varginha::update(double time_elapsed) {
         //nothing to do
     }
 
+    //Chech if instance was selected
     if((varginha_in_x == 0 && varginha_in_y == 0) || (!turn_off && !is_selected)) {
+        
+        // If idle_animation_number true, receives actions
         if(idle_animation_number) {
             animator->set_interval("idle_right");
+        //Assigns a default, and animator receives actions
         }else { 
             animator->set_interval("idle_left");
         }
     }
     special_action();
     verify_turn();
-
+    // If collision, receives actions
     if(CollisionManager::instance.verify_collision_with_guards(this)) {
         set_enabled(false);
+    //Assigns a default, and animator receives actions
     }else{
         set_enabled(true);
     }
 
     FinishPoint* finish_point = (FinishPoint*)CollisionManager::
     instance.verify_collision_with_finish_points(this);
+    //Check if the finish point is different from null
     if(finish_point != NULL) {
         if(finish_point->get_alien_names().find("V") != std::string::npos) {
             in_position = true;
+        //Assigns a default in_position true
         }else {
             in_position = false;
         }
@@ -161,12 +175,16 @@ void Varginha::special_action() {
    
     std::pair<int, int> interval;
 
+    // Check is_invisible
     if(is_invisible) {
+        // Check if idle_animation_number is equals 5
         if(idle_animation_number == 5) {
             animator->set_interval("invisible_right");
+        // If you do not receive an action
         }else {
             animator->set_interval("invisible_left");
         }
+    // Check is_invisible
     }else if(is_selected) {
         CameraSwitch* camera_switch = NULL;
         CameraLever* camera_lever = NULL;
@@ -174,21 +192,25 @@ void Varginha::special_action() {
         instance.verify_collision_with_camera_switches(this);
         camera_lever = (CameraLever*)CollisionManager::
         instance.verify_collision_with_camera_levers(this);
-
+        
+        // Check camera_switch is different from null or camera_lever
         if((camera_switch != NULL) || (camera_lever != NULL)) {
             if(InputManager::instance.is_key_tfriggered(InputManager::KEY_PRESS_SPACE)) {
                 int x = 0;
+                // Check camera_switch is different from null
                 if(camera_switch!= NULL) {
                     camera_switch->turn_off();
                     x = camera_switch->get_varginha_position_x();
+                 // Check camera_lever is different from null
                 }else if(camera_lever != NULL) {
                     camera_lever->next_state();
                     x = camera_lever->get_varginha_position_x();
                 }
-
+                 // Check x it's bigger than get_varginha_position_x
                 if(x > get_varginha_position_x()) {
                     animator->set_interval("action_right");
                     idle_animation_number = 5;
+                    // If you do not receive an action
                     }else {
                         animator->set_interval("action_left");
                         idle_animation_number = 0;
@@ -201,11 +223,14 @@ void Varginha::special_action() {
         block_movement = true;
         is_invisible = true;
         set_visible(false);
+            // Check if animation_number is equals 5
             if(idle_animation_number == 5) {
                 animator->set_interval("special_right");
+               // If you do not receive an action
                }else {
                    animator->set_interval("special_left");
                }
+        // If you do not receive an action
         }else {
             block_movement = false;
             is_invisible = false;
@@ -262,7 +287,7 @@ void Varginha::draw() {
 void Varginha::verify_turn() {
     bool block_movement = true;
     bool turn_off = true;
-
+    // Check conditions
     if((timer_turn->elapsed_time()/1000.0) > 0.3 && turn_off) {
       block_movement = false;
       turn_off = false;
