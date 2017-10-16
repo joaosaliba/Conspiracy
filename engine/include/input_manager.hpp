@@ -29,6 +29,8 @@ namespace engine{
         bool getQuitRequest();
         void setQuitRequest(bool isRequest);
         void Update(void);
+        void keyRepetitionDetector(int keyAction, SDL_Event event);
+        void keyUp(int previousAction, SDL_Event event);
 
         bool isKeyTriggered(int iKeyCode);
         bool isKeyPressed(int iKeyCode);

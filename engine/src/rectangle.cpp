@@ -18,24 +18,30 @@ Rectangle::~Rectangle() {
 
 }
 
+void Rectangle::nullSurfaceDetector(SDL_Surface *surface){
+
+  surface = SDL_CreateRGBSurface(0, getWidth(),getHeight(), 8, 0, 0, 0,0);
+  //If the surface is null it fires an error
+  if (surface == NULL) {
+      ERROR("Create surface failed.");
+      exit(-1);
+  //The surface is not null and it aspects are calculated
+  }else {
+  assert(surface != NULL);
+  setWidth((int)(surface->w));
+  setHeight((int)(surface->h));
+
+  texture = SDL_CreateTextureFromSurface(WindowManager::getGameCanvas(), surface);
+  assert(texture != NULL);
+  SDL_FreeSurface(surface);
+  }
+}
+
 void Rectangle::init() {
     SDL_Surface *surface = nullptr;
     surface = SDL_CreateRGBSurface(0, getWidth(),getHeight(), 8, 0, 0, 0,0);
 
-    //If the surface is null it fires an error
-    if (surface == NULL) {
-        ERROR("Create surface failed.");
-        exit(-1);
-    //The surface is not null and it aspects are calculated
-    }else {
-    assert(surface != NULL);
-    setWidth((int)(surface->w));
-    setHeight((int)(surface->h));
-
-    texture = SDL_CreateTextureFromSurface(WindowManager::getGameCanvas(), surface);
-    assert(texture != NULL);
-    SDL_FreeSurface(surface);
-  }
+    nullSurfaceDetector(surface);
 }
 
 void Rectangle::update(double time_elapsed){

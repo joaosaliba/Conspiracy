@@ -3,12 +3,13 @@
     @brief Manage the engine of the game.
     @copyright MIT License.
 */
+
 //#define NDEBUG *uncomment to disable assertions
 #include "engine.hpp"
 #include <assert.h>
 
 namespace engine{
-    
+
     double MILI_SECOND = 1000.0;
     const std::string GAME_NAME = "Conspiracy";
     const std::pair <int, int> WINDOW_SIZE (960, 640);
@@ -61,6 +62,58 @@ namespace engine{
 
 
     /**
+      @brief It detects a delay in the engine
+    */
+
+    void delayDetector(){
+      if(frame_time > engine_time_elapsed) {
+          DEBUG("SDL_DELAY: " + std::to_string(frame_time - engine_time_elapsed));
+          SDL_Delay(frame_time - engine_time_elapsed);
+          engine_time_elapsed = SDL_GetTicks() - engine_step_time;
+      //If no delay is detected
+      }else {
+          //nothing to do
+      }
+    }
+
+    /**
+      @brief It stops the engine if requested
+      @param[in] engine_is_running it tells if the engine is running_engine
+      @param[in] SDL_Event event event object
+    */
+
+    void stopEngine(bool engine_is_running, SDL_Event event){
+        bool running_engine = engine_is_running;
+        //If while engine is running it gets a quit request, SDL is finalized and Window is destroyed
+        if(engine::InputManager::instance.getQuitRequest()) {
+            running_engine = false;
+            assert(engine_is_running != NULL);
+            sdl_manager->finalizeSDL();
+            window_manager->destroyWindow();
+            engine_is_running = running_engine;
+            //Else it keeps engine running
+        }else {
+            engine_step_time = SDL_GetTicks();
+            engine::InputManager::instance.update(event);
+            SDL_RenderClear(WindowManager::getGameCanvas());
+        }
+    }
+
+    /**
+      @brief If the scene is null it draws the scene
+    */
+
+    void nullSceneCorrection(){
+        //If the current scene is null it updates and draw the scene
+        if(scene_manager->get_current_scene() != NULL) {
+            scene_manager->get_current_scene()->update(engine_time_elapsed);
+            scene_manager->get_current_scene()->draw();
+        //It draws the scene
+        }else {
+            scene_manager->get_current_scene()->draw();
+        }
+    }
+    /**
       @brief It starts the game engine
     */
 
@@ -72,7 +125,6 @@ namespace engine{
          assert(engine_is_running != NULL);
          SDL_Event event;
 
-
          //While engine is running
          while(engine_is_running){
              engine_step_time = SDL_GetTicks();
@@ -80,20 +132,7 @@ namespace engine{
              engine::InputManager::instance.update(event);
              SDL_RenderClear(WindowManager::getGameCanvas());
 
-             //If while engine is running it gets a quit request, SDL is finalized and Window is destroyed
-             if(engine::InputManager::instance.getQuitRequest()) {
-                 engine_is_running = false;
-                 assert(engine_is_running != NULL);
-                 sdl_manager->finalizeSDL();
-                 window_manager->destroyWindow();
-                 continue;
-             //Else it keeps engine running
-             }else {
-                 engine_step_time = SDL_GetTicks();
-                 engine::InputManager::instance.update(event);
-                 SDL_RenderClear(WindowManager::getGameCanvas());
-             }
-
+             stopEngine(engine_is_running, event);
 
              engine_time_elapsed = SDL_GetTicks() - engine_step_time;
              DEBUG("TICKS:" + std::to_string(SDL_GetTicks()));
@@ -103,23 +142,10 @@ namespace engine{
              assert(engine_time_elapsed != NULL);
 
              //It detects a delay in the engine
-             if(frame_time > engine_time_elapsed) {
-                 DEBUG("SDL_DELAY: " + std::to_string(frame_time - engine_time_elapsed));
-                 SDL_Delay(frame_time - engine_time_elapsed);
-                 engine_time_elapsed = SDL_GetTicks() - engine_step_time;
-             //If no delay is detected
-             }else {
-                 ERROR("NO DELAY");
-             }
+             delayDetector();
 
-             //If the current scene is null it updates and draw the scene
-             if(scene_manager->get_current_scene() != NULL) {
-               scene_manager->get_current_scene()->update(engine_time_elapsed);
-               scene_manager->get_current_scene()->draw();
-             //It draws the scene
-             }else {
-               scene_manager->get_current_scene()->draw();
-             }
+             //It detects a null scene
+             nullSceneCorrection();
 
              assert(get_current_scene() != NULL);
              AnimationManager::instance.draw_quads();

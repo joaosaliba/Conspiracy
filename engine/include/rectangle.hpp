@@ -19,6 +19,7 @@ public:
     void setAlphaActive(bool is_active);
     bool getAlphaActive();
     void setColor(Color * rectangle_new_color);
+    void nullSurfaceDetector(SDL_Surface *surface);
 private:
     bool alpha_active;
     SDL_Texture* texture;
