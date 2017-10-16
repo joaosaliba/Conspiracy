@@ -7,6 +7,7 @@
 #include "game_object.hpp"
 #include "log.h"
 #include <assert.h>
+#define HALF 2
 
 using namespace engine;
 
@@ -147,8 +148,8 @@ std::pair<double,double> GameObject::getCenter(){
     assert(position.first != NULL);
     assert(position.second != NULL);
     std::pair<double,double> center;
-    center.first = (position.first + size.first/2);
-    center.second = (position.second + size.second/2);
+    center.first = (position.first + size.first/HALF);
+    center.second = (position.second + size.second/HALF);
     return center;
 }
 

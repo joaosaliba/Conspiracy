@@ -24,6 +24,12 @@
 #include <assert.h>
 #include "line.hpp"
 
+#define DEAD_TIME 2500
+#define WIN_TIME 500
+#define COMPARE_CONSTANT 48
+#define POSITION_CONST 15
+#define WALL_POSITION_CONST 10
+
 using namespace engine;
 
 /**
@@ -177,14 +183,14 @@ void GameScene::verifyWinOrLose(){
 
     //If player is dead it reloads stage
     if(player->isDead()) {
-        if(stage_timer->elapsed_time() >= 2500){
+        if(stage_timer->elapsed_time() >= DEAD_TIME){
             getSceneManager()->loadScene(6);
         }else {
           //nothing to do
         }
 
     //Verifies winning conditions
-    }else if((all_papers_edited && aliens_in_position) || (InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_K) && skip_timer->total_elapsed_time() >= 500)){
+  }else if((all_papers_edited && aliens_in_position) || (InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_K) && skip_timer->total_elapsed_time() >= WIN_TIME)){
         //Loads winning scene
         if(getSceneManager()->get_current_scene_id() == 5){
             getSceneManager()->loadScene(9);
@@ -340,32 +346,32 @@ void GameScene::createCenary(){
         for(int i=0; i<=600; i+=20) {
             for(int j=0; j<=960; j+=20) {
                 tile_file.get(c);
-                compare = c-48;
+                compare = c-COMPARE_CONSTANT;
                 switch(compare) {
                     case 1: gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede2.png", j, HEADER_SIZE + i+25, 20, 40)); break;
 
-                    case 2: gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+15, HEADER_SIZE + i, 0, 0));
-                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+15, HEADER_SIZE + i+5, 5, 15));
-                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+15, HEADER_SIZE + i+10, 5, 15));
-                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+15, HEADER_SIZE + i+15, 5, 30));
-                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+15, HEADER_SIZE + i-5, 0, 0));
-                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+15, HEADER_SIZE + i-10, 0, 0));
-                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+15, HEADER_SIZE + i-15, 0, 0)); break;
+                    case 2: gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+POSITION_CONST, HEADER_SIZE + i, 0, 0));
+                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+POSITION_CONST, HEADER_SIZE + i+5, 5, 15));
+                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+POSITION_CONST, HEADER_SIZE + i+WALL_POSITION_CONST, 5, 15));
+                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+POSITION_CONST, HEADER_SIZE + i+POSITION_CONST, 5, 30));
+                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+POSITION_CONST, HEADER_SIZE + i-5, 0, 0));
+                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+POSITION_CONST, HEADER_SIZE + i-WALL_POSITION_CONST, 0, 0));
+                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+POSITION_CONST, HEADER_SIZE + i-POSITION_CONST, 0, 0)); break;
 
-                    case 3: gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, HEADER_SIZE + i+15, 5, 5));
-                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+5, HEADER_SIZE + i+15, 5, 5));
-                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+10, HEADER_SIZE + i+15, 5, 5));
-                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+15, HEADER_SIZE +i+15, 5, 5)); break;
+                    case 3: gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, HEADER_SIZE + i+POSITION_CONST, 5, 5));
+                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+5, HEADER_SIZE + i+POSITION_CONST, 5, 5));
+                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+WALL_POSITION_CONST, HEADER_SIZE + i+POSITION_CONST, 5, 5));
+                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j+POSITION_CONST, HEADER_SIZE +i+POSITION_CONST, 5, 5)); break;
 
                     case 4: gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, HEADER_SIZE + i, 0, 0));
                             gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, HEADER_SIZE + i+5, 5, 15));
-                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, HEADER_SIZE + i+10, 5, 15));
-                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, HEADER_SIZE + i+15, 5, 30));
+                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, HEADER_SIZE + i+WALL_POSITION_CONST, 5, 15));
+                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, HEADER_SIZE + i+POSITION_CONST, 5, 30));
                             gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, HEADER_SIZE + i-5, 0, 0));
-                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, HEADER_SIZE + i-10, 0, 0));
-                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, HEADER_SIZE + i-15, 0, 0)); break;
+                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, HEADER_SIZE + i-WALL_POSITION_CONST, 0, 0));
+                            gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", j, HEADER_SIZE + i-POSITION_CONST, 0, 0)); break;
 
-                    case 5: gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_door.png", j+15, HEADER_SIZE + i-20, 5, 60)); break;
+                    case 5: gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_door.png", j+POSITION_CONST, HEADER_SIZE + i-20, 5, 60)); break;
 
                     case 6: gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_door.png", j, HEADER_SIZE + i-20, 5, 60));break;
 

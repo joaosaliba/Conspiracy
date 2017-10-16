@@ -8,7 +8,8 @@
 #include <assert.h>
 
 namespace engine{
-
+    
+    double MILI_SECOND = 1000.0;
     const std::string GAME_NAME = "Conspiracy";
     const std::pair <int, int> WINDOW_SIZE (960, 640);
 
@@ -41,7 +42,7 @@ namespace engine{
 
          engine_start_time = SDL_GetTicks();
          engine_step_time = engine_start_time;
-         frame_time = 1000.0/frame_rate;
+         frame_time = MILI_SECOND/frame_rate;
 
 
          //If there is an error while initializing SDL it exits.
