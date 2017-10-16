@@ -1,6 +1,7 @@
 //#define NDEBUG *uncomment to disable assertions
 #include "paper.hpp"
 #include <assert.h>
+#define INITIAL_PERCENTAGE 0.0
 
 Paper::Paper(std::string object_name, double paper_position_x, double paper_position_y,
                                      int paper_width, int paper_height) : GameObject(object_name,
@@ -33,7 +34,7 @@ void Paper::update(double time_elapsed){
         paper_editing_bar->update(time_elapsed);
         animator->setInterval("beingEdited");
         //If paper is being edited it gets the percentage of the edition
-        if(paper_editing_bar->getPercent() <= 0.0){
+        if(paper_editing_bar->getPercent() <= INITIAL_PERCENTAGE){
             paper_is_being_edited = false;
             paper_edited = true;
             assert(paper_edited != NULL);

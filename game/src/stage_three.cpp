@@ -4,6 +4,11 @@
 using namespace engine;
 #define PAPERQUANTITY 3
 #define STAGENUMBER 3
+#define GUARD_PATH 770
+#define GUARD_PATH2 920
+#define GUARD_PATH3 640
+#define GUARD_PATH4 450
+
 StageThree::StageThree(int id, std::string newTiledFile) : GameScene (id, newTiledFile, "assets/sounds/TEMA3.wav"){
 
 }
@@ -24,15 +29,15 @@ void StageThree::createGuards(){
 
     gameObjectsList.push_back(guard1);
 
-    std::pair <std::string, int> GuardTwoWayOne ("left", 450);
+    std::pair <std::string, int> GuardTwoWayOne ("left", GUARD_PATH4);
     std::pair <std::string, int> GuardTwoWayTwo ("down", HEADER_SIZE + 300);
-    std::pair <std::string, int> GuardTwoWayThree ("right", 640);
+    std::pair <std::string, int> GuardTwoWayThree ("right", GUARD_PATH3);
     std::pair <std::string, int> GuardTwoWayFour ("down", HEADER_SIZE + 300);
-    std::pair <std::string, int> GuardTwoWayFive ("right", 920);
+    std::pair <std::string, int> GuardTwoWayFive ("right", GUARD_PATH2);
     std::pair <std::string, int> GuardTwoWaySix ("up", HEADER_SIZE + 50);
-    std::pair <std::string, int> GuardTwoWaySeven ("left", 770);
+    std::pair <std::string, int> GuardTwoWaySeven ("left", GUARD_PATH);
     std::pair <std::string, int> GuardTwoWayEight ("up", HEADER_SIZE + 50);
-    std::pair <std::string, int> GuardTwoWayNine ("left", 770);
+    std::pair <std::string, int> GuardTwoWayNine ("left", GUARD_PATH);
 
     Guard * guard2 = new Guard("assets/sprites/seguranca_sheet.png", 750, HEADER_SIZE + 50, 18, 35, "left", 2, 10);
     guard2->addWay(1, GuardTwoWayOne);
