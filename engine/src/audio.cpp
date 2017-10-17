@@ -15,7 +15,7 @@ using namespace engine;
 Audio::Audio(std::string audio_path, std::string audio_type, int audio_volume) {
 
     assert ( audio_volume != NULL);
-
+//verify if exist a audio
     if(audio_volume == NULL) {
       ERROR("do not exist the volume");
       exit(-1);
@@ -30,13 +30,13 @@ Audio::Audio(std::string audio_path, std::string audio_type, int audio_volume) {
   * @return string-audio_type
   * @return string-audio_effect
   */
-
+//this part make a comparison and depending the MUSIC value he load the music or not
     if(audio_type.compare("MUSIC") == 0) {
         audio_music = Mix_LoadMUS(audio_path.c_str());
         Mix_VolumeMusic(audio_volume);
         if(audio_music == NULL) {
             ERROR("Audio file could not be loaded");
-        }
+        }//this part make a comparison and depending on EFFECT value he load the effect and volume or not
     }else if(audio_type.compare("EFFECT") == 0) {
         audio_effect = Mix_LoadWAV(audio_path.c_str());
         Mix_VolumeChunk(audio_effect, audio_volume);
@@ -64,10 +64,11 @@ void Audio::play(const int times_to_play) {
     assert ( times_to_play != NULL);
 
     if(audio_music != NULL) {
+        //if the audio music is differente of null he get in and make others logical flows
         if(Mix_PlayMusic(audio_music, times_to_play) == -1) {
             ERROR("Audio could not be played");
         }else {
-            //if Mix_PlayMusic be different fo -1 it can be played
+            //if Mix_PlayMusic be different of -1 it can be played
         }
     }else {
         if(Mix_PlayChannel(-1, audio_effect, times_to_play) == -1) {
@@ -85,7 +86,9 @@ void Audio::play(const int times_to_play) {
 */
 
 void Audio::pause() {
+    //if the audio music is differente from null he get in and make others logical flows
     if(audio_music != NULL) {
+        //if Mix_PausedMusic is different of 1 he pause the music, or he send a error messsage
         if(Mix_PausedMusic() != 1) {
             Mix_PauseMusic();
         }else {
@@ -103,7 +106,9 @@ void Audio::pause() {
 */
 
 void Audio::resume() {
+    //if the audio music is differente of null he get in and make others logical flows
     if(audio_music != NULL) {
+        //this part verify if the music status is paused, then this IF resume the music, or send error message
         if(Mix_PausedMusic() == 1) {
             Mix_ResumeMusic();
         }else {

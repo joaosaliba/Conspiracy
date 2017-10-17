@@ -84,7 +84,7 @@ void DoorSwitch::update(double time_elapsed) {
     assert (time_elapsed != NULL);
 
     if(time_elapsed == NULL) {
-        ERROR("we do not find the atrribute time_elapsed");
+        ERROR("we didnt find the atrribute time_elapsed");
         exit(-1);
     }else {
       //nothing to do
