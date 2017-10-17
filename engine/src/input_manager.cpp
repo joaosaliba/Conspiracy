@@ -5,32 +5,6 @@ using namespace engine;
 
 InputManager InputManager::instance;
 
-    void InputManager::keyRepetitionDetector(int keyAction, SDL_Event event){
-
-      keyAction = event.key.keysym.sym;
-      //If there is no key event repetition it only answers the current event
-      if(!event.key.repeat) {
-          keyActive[keyAction] = true;
-          keyPrevious[keyAction] = false;
-          INFO("PUSH");
-
-      //If there is repetition it answers the previous action
-      }else if(event.key.repeat) {
-          keyPrevious[keyAction] = true;
-      //No key event detected
-      }else {
-          ERROR("No key event");
-      }
-    }
-
-    void InputManager::keyUp(int previousAction, SDL_Event event){
-      SDL_PollEvent(&event);
-      previousAction = event.key.keysym.sym;
-      keyPrevious = keyActive;
-      keyActive[previousAction] = false;
-      INFO("RELEASE");
-    }
-
     void InputManager::update(SDL_Event event) {
         int keyAction = 0, previousAction = 0;
 
@@ -41,10 +15,27 @@ InputManager InputManager::instance;
                 quitRequest = true;
                 break;
                 case SDL_KEYDOWN:
-                    keyRepetitionDetector(keyAction, event);
+                    keyAction = event.key.keysym.sym;
+
+                    //If there is no key event repetition it only answers the current event
+                    if(!event.key.repeat) {
+                        keyActive[keyAction] = true;
+                        keyPrevious[keyAction] = false;
+                        INFO("PUSH");
+
+                    //If there is repetition it answers the previous action
+                    }else if(event.key.repeat) {
+                        keyPrevious[keyAction] = true;
+                    //No key event detected
+                    }else {
+                        ERROR("No key event");
+                    }
                 break;
                 case SDL_KEYUP:
-                    keyUp(previousAction, event);
+                    previousAction = event.key.keysym.sym;
+                    keyPrevious = keyActive;
+                    keyActive[previousAction] = false;
+                    INFO("RELEASE");
                 break;
 
                 default:
@@ -80,4 +71,4 @@ InputManager InputManager::instance;
 
     void InputManager::setQuitRequest(bool isRequest){
         quitRequest = isRequest;
-    }
+}

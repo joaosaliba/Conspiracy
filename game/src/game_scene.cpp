@@ -117,62 +117,68 @@ void GameScene::update(double time_elapsed){
 }
 
 /**
-    @brief It vefifies if the player has won or lost the game.
+    @brief Verifies number of papers
 */
 
-void GameScene::verifyWinOrLose(){
-        bool all_papers_edited = true;
-        std::vector<Guard *> guards;
-        int count_papers = 0;
-        assert(guards != NULL);
-        assert(all_papers_edited != NULL);
-        assert(count_papers != NULL);
-        //For each game object detected
-        for(auto gameObject : gameObjectsList) {
-                //If verifies if the game object is a guard
-                if(typeid(*gameObject) == typeid(Guard)) {
-                        guards.push_back((Guard *)(gameObject));
-                //Verifies if the game object is a paper
-                }else if(typeid(*gameObject) == typeid(PaperTable)) {
-                        //Verifies if all papers are edited
-                        if(!(((PaperTable*)(gameObject))->getPaper())->isEdited()) {
-                            all_papers_edited = false;
-                        //All papers are edited
-                        }else{
-                            count_papers++;
-                        }
-                }else {
-                  //nothing to do
-                }
-        }
+void GameScene::verifyPapers(){
+    int count_papers = 0;
+    std::vector<Guard *> guards;
+    bool all_papers_edited = true;
+    (void)all_papers_edited;
 
-        //Verifies if the number of papers edited is equal to the actual number of papers
-        if(count_papers >= actual_papers) {
-            player->updatePaperQuantity(count_papers);
-            actual_papers = count_papers;
+    //For each game object detected
+    for(auto gameObject : gameObjectsList) {
+          //If verifies if the game object is a guard
+          if(typeid(*gameObject) == typeid(Guard)) {
+                  guards.push_back((Guard *)(gameObject));
+          //Verifies if the game object is a paper
+          }else if(typeid(*gameObject) == typeid(PaperTable)) {
+                  //Verifies if all papers are edited
+                  if(!(((PaperTable*)(gameObject))->getPaper())->isEdited()) {
+                      all_papers_edited = false;
+                  //All papers are edited
+                  }else{
+                      count_papers++;
+                  }
+          }else {
+            //nothing to do
+          }
+    }
+}
 
-        //All papers were edited
-        }else {
-            actual_papers = count_papers;
-        }
+/**
+    @brief Verifies if the papers were edited
+*/
 
-        //Verifies if the aliens were detected
-        for(Guard * guard : guards) {
-            guard->verifyDistance(player->getVarginha());
-            guard->verifyDistance(player->getBilu());
-            ((Etemer *)(player->getEtemer()))->verifyDistance(guard);
-        }
+void GameScene::allPapersEdited(){
+  int count_papers = 0;
 
-    //Verifies if all aliens are in position at the end of the stage
-    if((Etemer *)(player->getEtemer())->isInPosition() &&
-      (Bilu*)(player->getBilu())->isInPosition() &&
-      (Varginha*)(player->getVarginha())->isInPosition()) {
-          aliens_in_position = true;
+  //Verifies if the number of papers edited is equal to the actual number of papers
+  if(count_papers >= actual_papers) {
+      player->updatePaperQuantity(count_papers);
+      actual_papers = count_papers;
 
-      //Aliens are not in position
-      }else {
-          aliens_in_position = false;
-      }
+  //All papers were edited
+  }else {
+      actual_papers = count_papers;
+  }
+}
+
+void GameScene::aliensInPosition(){
+  //Verifies if all aliens are in position at the end of the stage
+  if((Etemer *)(player->getEtemer())->isInPosition() &&
+    (Bilu*)(player->getBilu())->isInPosition() &&
+    (Varginha*)(player->getVarginha())->isInPosition()) {
+        aliens_in_position = true;
+
+    //Aliens are not in position
+    }else {
+        aliens_in_position = false;
+    }
+}
+
+void GameScene::playerIsDead(){
+    bool all_papers_edited = true;
 
     //If the player is dead it stops the stage timer
     if(!player->isDead()) {
@@ -187,10 +193,10 @@ void GameScene::verifyWinOrLose(){
             getSceneManager()->loadScene(6);
         }else {
           //nothing to do
-        }
+    }
 
     //Verifies winning conditions
-  }else if((all_papers_edited && aliens_in_position) || (InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_K) && skip_timer->total_elapsed_time() >= WIN_TIME)){
+    }else if((all_papers_edited && aliens_in_position) || (InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_K) && skip_timer->total_elapsed_time() >= WIN_TIME)){
         //Loads winning scene
         if(getSceneManager()->get_current_scene_id() == 5){
             getSceneManager()->loadScene(9);
@@ -202,6 +208,28 @@ void GameScene::verifyWinOrLose(){
         //nothing to do
     }
 }
+/**
+    @brief It vefifies if the player has won or lost the game.
+*/
+
+void GameScene::verifyWinOrLose(){
+        std::vector<Guard *> guards;
+        assert(guards != NULL);
+        assert(all_papers_edited != NULL);
+        assert(count_papers != NULL);
+
+        verifyPapers();
+        allPapersEdited();
+        aliensInPosition();
+        playerIsDead();
+
+        //Verifies if the aliens were detected
+        for(Guard * guard : guards) {
+            guard->verifyDistance(player->getVarginha());
+            guard->verifyDistance(player->getBilu());
+            ((Etemer *)(player->getEtemer()))->verifyDistance(guard);
+        }
+  }
 
 /**
     @brief It starts the game collider.
@@ -384,4 +412,4 @@ void GameScene::createCenary(){
     }else {
       ERROR("Failed to open tiled file");
     }
-}
+  }

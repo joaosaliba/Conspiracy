@@ -27,23 +27,27 @@ Paper::Paper(std::string object_name, double paper_position_x, double paper_posi
 
 Paper::~Paper(){}
 
+void Paper::getPercentage(){
+  //If paper is being edited it gets the percentage of the edition
+  if(paper_editing_bar->getPercent() <= INITIAL_PERCENTAGE){
+      paper_is_being_edited = false;
+      paper_edited = true;
+      assert(paper_edited != NULL);
+      assert(paper_is_being_edited != NULL);
+  //Paper is not being edited
+  }else {
+      animator->setInterval("idle");
+      animator->update();
+  }
+}
+
 void Paper::update(double time_elapsed){
     time_elapsed = time_elapsed;
     //If paper is being edited it sets the paper editing bar
     if(paper_is_being_edited) {
         paper_editing_bar->update(time_elapsed);
         animator->setInterval("beingEdited");
-        //If paper is being edited it gets the percentage of the edition
-        if(paper_editing_bar->getPercent() <= INITIAL_PERCENTAGE){
-            paper_is_being_edited = false;
-            paper_edited = true;
-            assert(paper_edited != NULL);
-            assert(paper_is_being_edited != NULL);
-        //Paper is not being edited
-        }else {
-            animator->setInterval("idle");
-            animator->update();
-        }
+        getPercentage();
 
     }else {
       //nothing to do

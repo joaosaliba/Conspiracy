@@ -21,7 +21,7 @@
 #include <vector>
 
 #ifndef HEADER_SIZE
-   #define HEADER_SIZE 40
+#define HEADER_SIZE 40
 #endif
 
 using namespace engine;
@@ -36,6 +36,10 @@ public:
     void update(double time_elapsed);
     void unload();
     void verifyWinOrLose();
+    void verifyPapers();
+    void allPapersEdited();
+    void aliensInPosition();
+    void playerIsDead();
 protected:
     Player* player;
     Audio* background_music;

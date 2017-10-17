@@ -24,6 +24,7 @@ public:
     void resetEditingProgress();
     void playEffect();
     void stopEffect();
+    void getPercentage();
 protected:
     Animation* animator;
     ProgressBar *paper_editing_bar;
