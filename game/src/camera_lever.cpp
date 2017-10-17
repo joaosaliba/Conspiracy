@@ -47,8 +47,14 @@ void CameraLever::draw(){
 *    @param[in] timeElapsed its about the time
 */
 void CameraLever::update(double timeElapsed){
-    assert ( timeElapsed != NULL);  
-    timeElapsed = timeElapsed;
+    assert ( timeElapsed != NULL);
+    if (timeElapsed == NULL){
+      ERROR("Failed to start window manager");
+        exit(-1);
+    }
+    else{
+      timeElapsed = timeElapsed;
+    }
     animator->update();
 }
 /**
@@ -56,7 +62,13 @@ void CameraLever::update(double timeElapsed){
  *   @return [int] state
  */
 int CameraLever::getState(){
+  if (state == NULL){
+    ERROR("Failed to start window manager");
+      exit(-1);
+  }
+  else{
     return state;
+  }
 }
 /**
  *   @brief set the next possible state of the camera lever
@@ -66,10 +78,14 @@ void CameraLever::nextState(){
     if(state >= 2 || state <= 0){
         stateInc *= -1;
     }
+    else{
+      //nothing to do
+    }
     state += stateInc;
     switch(state){
         case 0: animator->setInterval("up"); break;
         case 1: animator->setInterval("mid"); break;
         case 2: animator->setInterval("down"); break;
+        default: break;
     }
 }

@@ -43,9 +43,17 @@ Arrow::~Arrow(){
 */
 void Arrow::update(double timeElapsed){
         assert ( timeElapsed != NULL);
-        timeElapsed = timeElapsed;
+        if (timeElapsed == NULL){
+          ERROR("Failed to start window manager");
+            exit(-1);
+        }
+        else{
+          timeElapsed = timeElapsed;
+        }
         if(isEnabled()){
                 animator->update();
+        }else{
+          //nothing to do
         }
 
 }
@@ -58,5 +66,8 @@ void Arrow::update(double timeElapsed){
 void Arrow::draw(){
         if(isEnabled()) {
                 animator->draw(getPositionX(), getPositionY());
+        }
+        else{
+          //nothing to do
         }
 }

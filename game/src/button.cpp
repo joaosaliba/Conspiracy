@@ -42,7 +42,13 @@ Button::~Button() {
 */
 void Button::update(double timeElapsed) {
     assert ( timeElapsed != NULL);
-    timeElapsed = timeElapsed;
+    if (timeElapsed == NULL){
+      ERROR("Failed to start window manager");
+        exit(-1);
+    }
+    else{
+      timeElapsed = timeElapsed;
+    }
     INFO(timeElapsed);
 
 }
@@ -69,5 +75,11 @@ void Button::setTextColor(Color * newTextColor) {
 */
 
 Text * Button::getText() {
+  if (text == NULL){
+    ERROR("Failed to start window manager");
+      exit(-1);
+  }
+  else{
     return text;
+  }
 }
