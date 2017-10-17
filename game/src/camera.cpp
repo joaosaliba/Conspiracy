@@ -13,6 +13,10 @@
 #define FILENAME "assets/sprites/camera(11X8).png"
 #define WIDTH 11
 #define HEIGHT 8
+#define MAX_STRANGE_POSITION 1000
+#define MIN_STRANGE_POSITION 0
+#define HALF 2
+#define MAX_STRANGE_ANGLE 1000
 
 
 /**
@@ -34,25 +38,25 @@ Camera::Camera(double camera_position_x, double camera_position_y, std::string d
     assert (WIDTH > 11);
     assert (HEIGHT > 8);
 
-    if(camera_position_x > 1000 || camera_position_x < 0) {
+    if(camera_position_x > MAX_STRANGE_POSITION || camera_position_x < MIN_STRANGE_POSITION) {
       ERROR("Strange camera position");
       exit(-1);
     }else {
       //nothing to do
     }
-    if(camera_position_y > 1000 || camera_position_y < 0) {
+    if(camera_position_y > MAX_STRANGE_POSITION || camera_position_y < MIN_STRANGE_POSITION) {
       ERROR("Strange camera position");
       exit(-1);
     }else {
       //nothing to do
     }
-    if(WIDTH > 100 || WIDTH < 0) {
+    if(WIDTH > 100 || WIDTH < MIN_STRANGE_POSITION) {
       ERROR("Strange camera width");
       exit(-1);
     }else {
       //nothing to do
     }
-    if(HEIGHT > 100 || HEIGHT < 0) {
+    if(HEIGHT > 100 || HEIGHT < MIN_STRANGE_POSITION) {
       ERROR("Strange camera height");
       exit(-1);
     }else {
@@ -86,28 +90,28 @@ Camera::Camera(double camera_position_x, double camera_position_y, std::string d
                                                                      WIDTH, HEIGHT){
     assert (camera_position_x != NULL);
     assert (camera_position_y != NULL);
-    assert (WIDTH > 11);
-    assert (HEIGHT > 8);
+    assert (WIDTH >= 11);
+    assert (HEIGHT >= 8);
 
-    if(camera_position_x > 1000 || camera_position_x < 0) {
+    if(camera_position_x > MAX_STRANGE_POSITION || camera_position_x < MIN_STRANGE_POSITION) {
       ERROR("Strange camera position");
       exit(-1);
     }else {
       //nothing to do
     }
-    if(camera_position_y > 1000 || camera_position_y < 0) {
+    if(camera_position_y > MAX_STRANGE_POSITION || camera_position_y < MIN_STRANGE_POSITION) {
       ERROR("Strange camera position");
       exit(-1);
     }else {
       //nothing to do
     }
-    if(WIDTH > 100 || WIDTH < 0) {
+    if(WIDTH > 100 || WIDTH < MIN_STRANGE_POSITION) {
       ERROR("Strange camera width");
       exit(-1);
     }else {
       //nothing to do
     }
-    if(HEIGHT > 100 || HEIGHT < 0) {
+    if(HEIGHT > 100 || HEIGHT < MIN_STRANGE_POSITION) {
       ERROR("Strange camera height");
       exit(-1);
     }else {
@@ -218,16 +222,16 @@ void Camera::initialize_vision(int p_range, int p_angle_of_vision, std::string d
     angle_of_vision = p_angle_of_vision;
 
     if(direction == "right") {
-        fieldOfVision = new fieldOfVision(get_camera_position_x()+4+get_width()/2,get_camera_position_y()+7, range, angle_of_vision);
+        fieldOfVision = new fieldOfVision(get_camera_position_x()+4+get_width()/HALF,get_camera_position_y()+7, range, angle_of_vision);
         initial_angle = 305;
     }else if(direction  == "left") {
-        fieldOfVision = new fieldOfVision(get_camera_position_x()-4+get_width()/2,get_camera_position_y()+7, range, angle_of_vision);
+        fieldOfVision = new fieldOfVision(get_camera_position_x()-4+get_width()/HALF,get_camera_position_y()+7, range, angle_of_vision);
         initial_angle = 220;
     }else if(direction == "upleft") {
-        fieldOfVision = new fieldOfVision(get_camera_position_x()-6+get_width()/2,get_camera_position_y(), range, angle_of_vision);
+        fieldOfVision = new fieldOfVision(get_camera_position_x()-6+get_width()/HALF,get_camera_position_y(), range, angle_of_vision);
         initial_angle = 140;
     }else {
-        fieldOfVision = new fieldOfVision(get_camera_position_x()+5+get_width()/2,get_camera_position_y(), range, angle_of_vision);
+        fieldOfVision = new fieldOfVision(get_camera_position_x()+5+get_width()/HALF,get_camera_position_y(), range, angle_of_vision);
         initial_angle = 45;
     }
     fieldOfVision->set_angle(initial_angle);
@@ -239,16 +243,16 @@ void Camera::initialize_vision(int p_range, int p_angle_of_vision, std::string d
 */
 
 void Camera::set_states(int angle2, int angle3) {
-    assert (angle2 > 1000);
-    assert (angle3 > 1000);
+    assert (angle2 > MAX_STRANGE_ANGLE);
+    assert (angle3 > MAX_STRANGE_ANGLE);
 
-    if(angle2 > 1000) {
+    if(angle2 > MAX_STRANGE_ANGLE) {
         ERROR("Strange value by angle2");
         exit(-1);
     }else {
       //nothing to do
     }
-    if(angle3 > 1000) {
+    if(angle3 > MAX_STRANGE_ANGLE) {
       ERROR("Strange value by angle3");
       exit(-1);
     }else {
