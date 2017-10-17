@@ -31,7 +31,7 @@ DoorSwitch::DoorSwitch(std::string object_name, double door_switch_position_x, d
     assert (door_switch_position_y != NULL);
     assert (door_switch_width != NULL);
     assert (door_switch_height != NULL);
-
+//this part verify if the value of door_switch_position_x and y is strange and return a error
     if(door_switch_position_x > MAX_STRANGE_DOOR_VALUE || door_switch_position_x < MIN_STRANGE_DOOR_VALUE) {
         ERROR("Strange door switch position");
         exit(-1);
@@ -44,12 +44,14 @@ DoorSwitch::DoorSwitch(std::string object_name, double door_switch_position_x, d
     }else {
         //nothing to do
     }
+    //this part verify if the door_switch_width is strange and return a error
     if(door_switch_width > 500 || door_switch_width < MIN_STRANGE_DOOR_VALUE) {
         ERROR("Strange camera width");
         exit(-1);
     }else {
         //nothing to do
     }
+    //this part verify if the door_switch_height is strange and return a error
     if(door_switch_height > 500 || door_switch_height < MIN_STRANGE_DOOR_VALUE) {
         ERROR("Strange camera height");
         exit(-1);
@@ -92,6 +94,7 @@ void DoorSwitch::update(double time_elapsed) {
 
     time_elapsed = time_elapsed;
     animator->update();
+    //this part cerify if is pressed and update passing the time_elapsed
     if(is_pressed())) {
         hacking_bar->update(time_elapsed);
     }
@@ -99,15 +102,17 @@ void DoorSwitch::update(double time_elapsed) {
 
 /**
 * @brief Method draw
-* <p>This method verify if camera is turned_on</p>
+* <p>This method draw the door switch</p>
 * @return void
 */
 
 void DoorSwitch::draw() {
     INFO("DoorSwitch DRAW");
+    //if the switch is pressed, he set the status "beingHacked"
     if(is_pressed()) {
         animator->set_interval("beingHacked");
         AnimationManager::instance.addProgressBar(hacking_bar);
+        //put the status false for pressed in the first flux condition or true to the others
         if(hacking_bar->get_percent() <= 0.0) {
             pressed = false;
             set_enabled(false);
@@ -118,6 +123,7 @@ void DoorSwitch::draw() {
     }else {
         animator->set_interval("idle");
     }
+    //and draw the switch getiing the position x and y
     animator->draw(get_door_switch_position_x(), get_door_switch_position_y());
 }
 
