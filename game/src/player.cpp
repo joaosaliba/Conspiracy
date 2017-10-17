@@ -1,46 +1,67 @@
 #include "log.h"
 #include "player.hpp"
 using namespace engine;
-# include<assert.h>
+#define int NOTUPDATE=0;
+#define const int ETEMER=1;
+# define const int BILU=2;
+# define  const int VARGINA=3;
+#define int TIMESTOPLAY =0;
+def type struct position{
+  int x,
+ int y;
+}
+#define const  int VOLUMESOUNDBILU =100;
+#define const  int VOLUMESOUNDVARGINA=25;
+#define const  int VOLUMESOUNDETEMER=75;
+#define const Position HEADERPOSITION.x=0;
+#define const Position HEADERPOSITION.y=0;
+struct  size{
+   int rows;
+   int columns;
+}
+#define const int VARGINATIME =0.5;
+#define size VARGINADIMENSIONS.rows=1;
+#define size  VARGINADIMENSIONS.columns=1;
 Player::Player(std::pair<int, int> biluPosition, std::pair<int, int> etemerPosition,
                std::pair<int,int> varginhaPosition, int paperQuantity, int stageNumber){
 
-        exclamationAnimation = new Animation("assets/sprites/exclamation2.png",1, 1, 0.5);
+        exclamationAnimation = new Animation("assets/sprites/exclamation2.png",VARGINADIMENSIONS.rows, VARGINADIMENSIONS.columns,  VARGINATIME );
 
         bilu = new Bilu(biluPosition.first, biluPosition.second);
         varginha = new Varginha(varginhaPosition.first, varginhaPosition.second);
         etemer = new Etemer(etemerPosition.first, etemerPosition.second);
-        header = new Header(0,0, paperQuantity, stageNumber);
+        header = new Header(HEADERPOSITION.x, HEADERPOSITION.y paperQuantity, stageNumber);
 
-        selectedAlien = 1;
+        selectedAlien = ETEMER;
 
-        etemer->update(0);
-        bilu->update(0);
-        varginha->update(0);
-        header->update(0);
+        etemer->update(NOTUPDATE);
+        bilu->update(NOTUPDATE);
+        varginha->update(NOTUPDATE);
+        header->update(NOTUPDATE);
 
         bilu->setAlienDeselect();
         varginha->setAlienDeselect();
         etemer->setAlienSelected();
 
-        bilu_sound_effect = new Audio("assets/sounds/TROCABILU.wav", "EFFECT", 100);
-        varginha_sound_effect = new Audio("assets/sounds/TROCAVARGINHA.wav", "EFFECT", 25);
-        etemer_sound_effect = new Audio("assets/sounds/TROCATEMER.wav", "EFFECT", 75);
+        bilu_sound_effect = new 
+
+Audio("assets/sounds/TROCABILU.wav", "EFFECT", VOLUMESOUNDBILU);
+        varginha_sound_effect = new Audio("assets/sounds/TROCAVARGINHA.wav", "EFFECT", VOLUMESOUNDVARGINA);
+        etemer_sound_effect = new Audio("assets/sounds/TROCATEMER.wav", "EFFECT", VOLUMESOUNDETEMER);
 }
 
 Player::~Player(){
 }
 
-void Player::update(double time_elapsed){
-        assert(time_elapsed>0);
+void Player::update(double timeElapsed){
         int beforeAlien = selectedAlien;
 
         if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_ONE)) {
-                selectedAlien = 1;
+                selectedAlien = ETEMER;
         } else if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_TWO)) {
-                selectedAlien = 2;
+                selectedAlien = BILU;
         } else if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_THREE)) {
-                selectedAlien = 3;
+                selectedAlien = VARGINA;
                 ((Varginha *)(varginha))->setDefault();
         }
 
@@ -52,18 +73,18 @@ void Player::update(double time_elapsed){
 
                 waitAnimation(beforeAlien);
                 switch(selectedAlien) {
-                case 1: etemer->setAlienSelected(); etemer_sound_effect->play(0); break;
-                case 2: bilu->setAlienSelected(); bilu_sound_effect->play(0); break;
-                case 3: varginha->setAlienSelected(); varginha_sound_effect->play(0);break;
+                case ETEMER: etemer->setAlienSelected(); etemer_sound_effect->play(TIMESTOPLAY); break;
+                case BILU: bilu->setAlienSelected(); bilu_sound_effect->play(TIMESTOPLAY); break;
+                case VARGINA: varginha->setAlienSelected(); varginha_sound_effect->play(TIMESTOPLAY);break;
                 }
         }
 
         exclamationAnimation->update();
 
-        etemer->update(time_elapsed);
-        bilu->update(time_elapsed);
-        varginha->update(time_elapsed);
-        header->update(time_elapsed);
+        etemer->update(timeElapsed);
+        bilu->update(timeElapsed);
+        varginha->update(timeElapsed);
+        header->update(timeElapsed);
 }
 
 void Player::draw(){
@@ -79,15 +100,15 @@ void Player::updatePaperQuantity(int newValue){
 }
 
 void Player::waitAnimation(int beforeAlien){
-        if(beforeAlien==1) {
+        if(beforeAlien==ETEMER) {
                 idleAnimation(etemer);
-                etemer->update(0);
-        }else if(beforeAlien==2) {
+                etemer->update(NOTUPDATE);
+        }else if(beforeAlien==BILU) {
                 idleAnimation(bilu);
-                bilu->update(0);
-        } else if(beforeAlien==3) {
+                bilu->update(NOTUPDATE);
+        } else if(beforeAlien== VARGINA) {
                 idleAnimation(varginha);
-                varginha->update(0);
+                varginha->update(NOTUPDATE);
         }
 }
 
