@@ -56,12 +56,25 @@ void ComputerTable::draw(){
  *   @return doorSwitch
  */
 DoorSwitch* ComputerTable::getDoorSwitch(){
+  if ( doorSwitch == NULL){
+    ERROR("Failed to start window manager");
+      exit(-1);
+  }
+  else{
     return doorSwitch;
+  }
+
 }
 /**
  *   @brief get the situation that the computer table are
  *   @return table;
  */
 Table* ComputerTable::getTable(){
+  if ( table == NULL){
+    ERROR("Failed to start window manager");
+      exit(-1);
+  }
+  else{
     return table;
+  }
 }
