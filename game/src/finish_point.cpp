@@ -48,27 +48,34 @@ void FinishPoint::draw() {
     animator->draw_instant(get_position_x(), get_position_y());
 
     if(orientation.compare("UPDOWN") == INITIAL_POSITION) {
+        //this part verify if the aliens "EBV" are in the initial position and then he modify the position
         if(aliens.compare("EBV") == INITIAL_POSITION) {
             etemer_anim->draw_instant(get_position_x()+1, get_position_y()+3.5);
             bilu_anim->draw_instant(get_position_x()+12, get_position_y()+3.5);
             varginha_anim->draw_instant(get_position_x()+23, get_position_y()+3.5);
+            //this part verify if the aliens "EB" are in the initial position and then he modify the position
         }else if(aliens.compare("EB") == INITIAL_POSITION) {
             etemer_anim->draw_instant(get_position_x()+1, get_position_y()+3.5);
             bilu_anim->draw_instant(get_position_x()+23, get_position_y()+3.5);
+            //this part verify if the aliens "BV" are in the initial position and then he modify the position
         }else if(aliens.compare("BV") == INITIAL_POSITION) {
             bilu_anim->draw_instant(get_position_x()+1, get_position_y()+3.5);
             varginha_anim->draw_instant(get_position_x()+23, get_position_y()+3.5);
+            //this part verify if the aliens "EV" are in the initial position and then he modify the position
         }else if(aliens.compare("EV") == INITIAL_POSITION) {
             etemer_anim->draw_instant(get_position_x()+1, get_position_y()+3.5);
             varginha_anim->draw_instant(get_position_x()+23, get_position_y()+3.5);
+            //this part verify if the alien "E" are in the initial position and then he modify the position
         }else if(aliens.compare("E") == INITIAL_POSITION) {
             etemer_anim->draw_instant(get_position_x()+12, get_position_y()+3.5);
+            //this part verify if the alien "B" are in the initial position and then he modify the position
         }else if(aliens.compare("B") == INITIAL_POSITION) {
             bilu_anim->draw_instant(get_position_x()+12, get_position_y()+3.5);
+            //this part verify if the alien "V" are in the initial position and then he modify the position
         }else if(aliens.compare("V") == INITIAL_POSITION) {
             varginha_anim->draw_instant(get_position_x()+12, get_position_y()+3.5);
         }
-    }else {
+    }else {//if he dont get in the first if he will take new positions
         if(aliens.compare("EBV") == INITIAL_POSITION) {
             etemer_anim->draw_instant(get_position_x()+3.5, get_position_y()+1);
             bilu_anim->draw_instant(get_position_x()+3.5, get_position_y()+12);
