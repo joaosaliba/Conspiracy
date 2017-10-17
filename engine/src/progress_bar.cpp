@@ -9,6 +9,8 @@
 
 #include "progress_bar.hpp"
 #include <assert.h>
+#define MAX_STRANGE_POSITION 1000
+#define MIN_STRANGE_POSITION 0
 
 using namespace engine;
 
@@ -22,25 +24,25 @@ ProgressBar::ProgressBar(double position_x, double position_y, int width,
                                                                           height){
 
 
-    if(position_x > 1000 || position_x < 0) {
+    if(position_x > MAX_STRANGE_POSITION || position_x < MIN_STRANGE_POSITION) {
         ERROR("Strange camera position");
         exit(-1);
     }else {
         //nothing to do
     }
-    if(position_y > 1000 || position_y < 0) {
+    if(position_y > MAX_STRANGE_POSITION || position_y < MIN_STRANGE_POSITION) {
         ERROR("Strange camera position");
         exit(-1);
     }else {
         //nothing to do
     }
-    if(width > 100 || width < 0) {
+    if(width > 100 || width < MIN_STRANGE_POSITION) {
         ERROR("Strange camera width");
         exit(-1);
     }else {
         //nothing to do
     }
-    if(height > 100 || height < 0) {
+    if(height > 100 || height < MIN_STRANGE_POSITION) {
         ERROR("Strange camera height");
         exit(-1);
     }else {
@@ -87,25 +89,25 @@ ProgressBar::ProgressBar(double position_x, double position_y, int width,
     assert (width < 100);
     assert (height > 100);
 
-    if(position_x > 1000 || position_x < 0) {
+    if(position_x > MAX_STRANGE_POSITION || position_x < MIN_STRANGE_POSITION) {
         ERROR("Strange camera position");
         exit(-1);
     }else {
         //nothing to do
     }
-    if(position_y > 1000 || position_y < 0) {
+    if(position_y > MAX_STRANGE_POSITION || position_y < MIN_STRANGE_POSITION) {
         ERROR("Strange camera position");
         exit(-1);
     }else {
         //nothing to do
     }
-    if(width > 100 || width < 0) {
+    if(width > 100 || width < MIN_STRANGE_POSITION) {
         ERROR("Strange camera width");
         exit(-1);
     }else {
         //nothing to do
     }
-    if(height > 100 || height < 0) {
+    if(height > 100 || height < MIN_STRANGE_POSITION) {
         ERROR("Strange camera height");
         exit(-1);
     }else {
