@@ -4,18 +4,18 @@
 struct color {
   int red;
   int green;
-  int black;
+  int blue;
 
   double alpha; 
 }
 BACKCOLOR.red,  BACKCOLOR.green, BACKCOLOR.black,BACKCOLOR.alpha
 #define  const color BACKCOLOR.red=22
 #define const color  BACKCOLOR.green=206;
-#define const color BACKCOLOR.black=26;
+#define const color BACKCOLOR.bue=26;
 #define const color BACKCOLOR.alpha=1;
 #define const color FRONTCOLOR.red=116;
 #define const color FRONTCOLOR.green=225;
-#define const color FRONTCOLOR.black=117;
+#define const color FRONTCOLOR.blue=117;
 #define const color FRONTCOLOR.alpha=0.5;
 struct  size{
    int rows;
@@ -49,8 +49,8 @@ Paper::Paper(std::string object_name, double paper_position_x, double paper_posi
 
     animator = new Animation(object_name, ANIMATION.rows,ANIMATION.columns,TIME);
 
-    std::vector<unsigned int> back_color = {BACKCOLOR.red,  BACKCOLOR.green, BACKCOLOR.black,BACKCOLOR.alpha};
-    std::vector<unsigned int> front_color = {FRONTCOLOR.red,FRONTCOLOR.green,FRONTCOLOR.black,FRONTCOLOR.alpha};
+    std::vector<unsigned int> back_color = {BACKCOLOR.red,  BACKCOLOR.green, BACKCOLOR.blue,BACKCOLOR.alpha};
+    std::vector<unsigned int> front_color = {FRONTCOLOR.red,FRONTCOLOR.green,FRONTCOLOR.blue,FRONTCOLOR.alpha};
     paper_editing_bar = new ProgressBar(paper_position_x-MARGIN.left, paper_position_y-MARGIN.heigh,PROGRESS.width,PROGRESS.heigh, INCREMENT, back_color, front_color);
 
     paper_editing_sound = new Audio("assets/sounds/PAPEROISE.wav", "EFFECT", 100);
