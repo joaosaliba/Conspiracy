@@ -47,9 +47,18 @@ void CameraSystem::update(double timeElapsed){
             last_lever_state = camera_lever->getState();
             camera->changeState(camera_lever->getState());
         }
+        else{
+          // nothing to do
+        }
+    }
+    else{
+      // nothing to do
     }
     if(!camera_switch->isWorking() && camera->isTurnedOn()){
          camera->turnOff();
+    }
+    else{
+      // nothing to do
     }
 }
 /**
@@ -63,13 +72,22 @@ void CameraSystem::draw(){
     if(camera_lever != NULL){
         camera_lever->draw();
     }
+    else{
+      //nothing to do
+    }
 }
 /**
  *   @brief   get the actual camera system
  *   @return camera
  */
 Camera* CameraSystem::getCamera(){
+  if (camera == NULL){
+    ERROR("Failed to start window manager");
+      exit(-1);
+  }
+  else{
     return camera;
+  }
 }
 /**
  *   @brief get the actual camera system
@@ -77,12 +95,24 @@ Camera* CameraSystem::getCamera(){
  */
 
 CameraSwitch* CameraSystem::getCameraSwitch(){
+  if (camera_switch == NULL){
+    ERROR("Failed to start window manager");
+      exit(-1);
+  }
+  else{
     return camera_switch;
+  }
 }
 /**
  *   @brief  get the actual camera lever
  *   @return camera
  */
 CameraLever* CameraSystem::getCameraLever(){
+  if (camera_lever == NULL){
+    ERROR("Failed to start window manager");
+      exit(-1);
+  }
+  else{
     return camera_lever;
+  }
 }

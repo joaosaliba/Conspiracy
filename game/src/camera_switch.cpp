@@ -47,14 +47,26 @@ void CameraSwitch::draw(){
 */
 void CameraSwitch::update(double timeElapsed){
     assert ( timeElapsed != NULL);
-    timeElapsed = timeElapsed;
+    if (timeElapsed == NULL){
+      ERROR("Failed to start window manager");
+        exit(-1);
+    }
+    else{
+      timeElapsed = timeElapsed;
+    }
     animator->update();
 }
 /**
 *    @brief check the camera switch if it working.
 */
 bool CameraSwitch::isWorking(){
+  if (working == NULL){
+    ERROR("Failed to start window manager");
+      exit(-1);
+  }
+  else{
     return working;
+  }
 }
 /**
 *    @brief change the camera switch to off.
@@ -64,5 +76,8 @@ void CameraSwitch::turnOff(){
         working = false;
         animator->setInterval("off");
         switchEfffect->play(0);
+    }
+    else{
+      //nothing to do
     }
 }
