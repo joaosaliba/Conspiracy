@@ -9,7 +9,8 @@
 
 #include "door_switch.hpp"
 #include <assert.h>
-
+#define MAX_STRANGE_DOOR_VALUE 1000
+#define MIN_STRANGE_DOOR_VALUE 0
 /**
  * @brief DoorSwitch object constructor.
  * @param[in] double-door_switch_x it sets the x coordinate of the object.
@@ -31,25 +32,25 @@ DoorSwitch::DoorSwitch(std::string object_name, double door_switch_position_x, d
     assert (door_switch_width != NULL);
     assert (door_switch_height != NULL);
 
-    if(door_switch_position_x > 1000 || door_switch_position_x < 0) {
+    if(door_switch_position_x > MAX_STRANGE_DOOR_VALUE || door_switch_position_x < MIN_STRANGE_DOOR_VALUE) {
         ERROR("Strange door switch position");
         exit(-1);
     }else {
         //nothing to do
     }
-    if(door_switch_position_y > 1000 || door_switch_position_y < 0) {
+    if(door_switch_position_y > MAX_STRANGE_DOOR_VALUE || door_switch_position_y < MIN_STRANGE_DOOR_VALUE) {
         ERROR("Strange door switch position");
         exit(-1);
     }else {
         //nothing to do
     }
-    if(door_switch_width > 500 || door_switch_width < 0) {
+    if(door_switch_width > 500 || door_switch_width < MIN_STRANGE_DOOR_VALUE) {
         ERROR("Strange camera width");
         exit(-1);
     }else {
         //nothing to do
     }
-    if(door_switch_height > 500 || door_switch_height < 0) {
+    if(door_switch_height > 500 || door_switch_height < MIN_STRANGE_DOOR_VALUE) {
         ERROR("Strange camera height");
         exit(-1);
     }else {
