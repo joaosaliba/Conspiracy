@@ -5,6 +5,7 @@
  */
 #include "button.hpp"
 #include <assert.h>
+//#define NDEBUG *uncomment to disable assertions
 /**
  *    @brief Button object constructor.
  *    @param[in] button_name name Key of the targeted object.

@@ -6,6 +6,7 @@
 #include "computer_table.hpp"
 #include "log.h"
 #include <assert.h>
+//#define NDEBUG *uncomment to disable assertions
 
 /**
  *    @brief Computer_table object constructor.

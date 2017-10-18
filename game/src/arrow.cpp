@@ -7,6 +7,7 @@
 #include "arrow.hpp"
 #include "log.h"
 #include <assert.h>
+//#define NDEBUG *uncomment to disable assertions
 
 /**
  *    @brief Arrow object constructor.

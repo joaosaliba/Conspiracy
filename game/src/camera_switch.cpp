@@ -5,6 +5,7 @@
  */
 #include "camera_switch.hpp"
 #include <assert.h>
+//#define NDEBUG *uncomment to disable assertions
 
 using namespace engine;
 #define FILENAME "assets/sprites/cenary/switch_cameras(14X16).png"

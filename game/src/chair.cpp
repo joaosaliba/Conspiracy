@@ -7,6 +7,7 @@
 #include "chair.hpp"
 #include "log.h"
 #include <assert.h>
+//#define NDEBUG *uncomment to disable assertions
 /**
  *    @brief Chair object constructor.
  *    @param[in] chair_position_x it sets the x coordinate of the object.

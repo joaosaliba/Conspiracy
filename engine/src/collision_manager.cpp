@@ -6,6 +6,7 @@
 #include "collision_manager.hpp"
 #include "log.h"
 #include <assert.h>
+//#define NDEBUG *uncomment to disable assertions
 
 using namespace engine;
 

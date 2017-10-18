@@ -6,6 +6,7 @@
 #include "log.h"
 #include "door_system.hpp"
 #include <assert.h>
+//#define NDEBUG *uncomment to disable assertions
 
 /**
  *    @brief door_system object constructor.

@@ -6,6 +6,7 @@
  */
  #include "camera_system.hpp"
  #include <assert.h>
+ //#define NDEBUG *uncomment to disable assertions
 
 using namespace engine;
 /**

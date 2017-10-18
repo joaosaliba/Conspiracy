@@ -5,6 +5,7 @@
  */
 #include "choice.hpp"
 #include <assert.h>
+//#define NDEBUG *uncomment to disable assertions
 /**
  *    @brief Choice object constructor.
  *    @param[in] positionX it sets the x coordinate of the object.
