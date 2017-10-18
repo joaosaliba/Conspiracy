@@ -12,6 +12,7 @@ using namespace engine;
 #define WIDTH 14 //  define the width to 14
 #define HEIGHT 16 //  define the height to 16
 #define ADJUSTX 10 // deine the variable adjustx to 10
+#define DOUBLE 2
 /**
  *    @brief Camemera switch object constructor.
  *    @param[in] positionX it sets the x coordinate of the object.
@@ -22,7 +23,7 @@ using namespace engine;
  *
  */
 CameraSwitch::CameraSwitch(double positionX, double positionY, std::string direction) : GameObject(FILENAME,positionX - ADJUSTX,positionY - ADJUSTX,
-                                                                     WIDTH+ADJUSTX*2, HEIGHT+ADJUSTX*2){
+                                                                     WIDTH+ADJUSTX*DOUBLE, HEIGHT+ADJUSTX*DOUBLE){
     assert ( positionX != NULL);
     assert ( positionY != NULL);
     animator = new Animation(FILENAME, 1, 2, 0.1);
