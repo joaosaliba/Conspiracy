@@ -5,7 +5,7 @@
 
 using namespace engine;
 /**
-*objective : this class is responsable to instace  the variables 
+*objective : this class is responsable to instace  the variables
 * for being used in camera_lever cpp
 */
 class CameraLever: public GameObject{
@@ -17,9 +17,9 @@ public:
     int getState();
     void nextState(); //  references for the camera lever state
 private:
-    Animation* animator;
-    int state;
-    int stateInc;
+    Animation* animator = nullptr;
+    int state = 0;
+    int stateInc = 0;
 };
 
 #endif

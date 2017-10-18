@@ -21,8 +21,8 @@ public:
     bool isWorking();
     void turnOff();
 private:
-    Audio* switchEfffect;
-    Animation* animator;
+    Audio* switchEfffect = nullptr;
+    Animation* animator = nullptr;
     bool working;
 };
 

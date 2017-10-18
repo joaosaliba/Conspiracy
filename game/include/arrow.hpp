@@ -16,7 +16,7 @@ public:
     void init();
     Animation * getAnimation(); // make animation in the arrow
 protected:
-    Animation* animator;
+    Animation* animator = nullptr;
 };
 
 #endif

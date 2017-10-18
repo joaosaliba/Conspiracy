@@ -14,10 +14,10 @@ public:
     ~Button();
     void update(double timeElapsed); // update button during time
     void setTextColor(Color * newTextColor); // set a color for the button
-    void draw(); // make a draw off the button  
+    void draw(); // make a draw off the button
     Text * getText();
 protected:
-    Text * text;
+    Text * text = nullptr;
 };
 
 #endif
