@@ -24,9 +24,10 @@
 #define CENTER_CHARACTER_2 20
 #define ANIMATION_IDLE "idle"
 #define ACTION_IDLE_LEFT "idle_left"
-#define ACTION_IDLE_LEFT "idle_right"
+#define ACTION_IDLE_RIGHT "idle_right"
 #define INITIAL_HACKING_BAR_PERCENT 0.0
 #define INITIAL_BAR_PERCENT 0.0
+#define NAME_CHARACTER "B"
 
 
 /** Objects included in the alien_bilu.hpp, door_switch.hpp classes found on lines 1 to
@@ -148,7 +149,7 @@ void Bilu::update(double time_elapsed) {
     
     //Check if the finish point is different from null
     if(finish_point != NULL) {
-        if(finish_point->get_alien_names().find("B") != std::string::npos) {
+        if(finish_point->get_alien_names().find(NAME_CHARACTER) != std::string::npos) {
             in_position = true;
         //Assigns a default in_position true
         }else {
