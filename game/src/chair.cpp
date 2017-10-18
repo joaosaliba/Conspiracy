@@ -7,6 +7,7 @@
 #include "chair.hpp"
 #include "log.h"
 #include <assert.h>
+#define QUARTERSECOND = 0.15
 //#define NDEBUG *uncomment to disable assertions
 /**
  *    @brief Chair object constructor.
@@ -48,8 +49,8 @@ Chair::~Chair(){
 
 void Chair::update(double timeElapsed){
         assert ( timeElapsed != NULL);
-        auto move_chair_in_x = 0.15*timeElapsed;
-        auto move_chair_in_y = 0.15*timeElapsed;
+        auto move_chair_in_x = QUARTERSECOND*timeElapsed;
+        auto move_chair_in_y = QUARTERSECOND*timeElapsed;
 
         if(isMoving) {
                 moveInX(move_chair_in_x);
