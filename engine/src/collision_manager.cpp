@@ -7,6 +7,7 @@
 #include "log.h"
 #include <assert.h>
 //#define NDEBUG *uncomment to disable assertions
+#define PIXELDISTANCEPLAYERS 0.85
 
 using namespace engine;
 
@@ -197,7 +198,7 @@ bool CollisionManager::verifyCollisionWithFieldsOfVision(GameObject* game_object
                             int distanceBetweenPlayer = calculateDistance(playerCenter,line->getPoint1()); // declareting varible distance betwen players
                             // Margin between player and line
                             // Or else just touching a line would make you lose
-                            if(distanceBetweenPlayer < field->getRange()*0.85) {
+                            if(distanceBetweenPlayer < field->getRange()*PIXELDISTANCEPLAYERS) {
                                     for(auto wall : wallList) {
                                             if(verifyRectangleCollisionWithLine(wall,line->getPoint1(),line->getPoint2())) {
                                                     std::pair<double,double> wallCenter = wall->getCenter();
