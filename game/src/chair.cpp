@@ -7,7 +7,7 @@
 #include "chair.hpp"
 #include "log.h"
 #include <assert.h>
-#define QUARTERSECOND = 0.15
+#define QUARTERSECOND  0.15
 //#define NDEBUG *uncomment to disable assertions
 /**
  *    @brief Chair object constructor.
