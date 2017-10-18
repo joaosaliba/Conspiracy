@@ -8,7 +8,7 @@
 
 using namespace engine;
 /**
-*objective : this class is responsable to instace  the variables 
+*objective : this class is responsable to instace  the variables
 * for being used in door system cpp
 */
 class DoorSystem: public GameObject{
@@ -21,7 +21,7 @@ public:
     GameObject* getSwitch();
     GameObject* getTable();
 private:
-    Door* door;
-    ComputerTable * computerTable;
+    Door* door = nullptr;
+    ComputerTable * computerTable = nullptr;
 };
 #endif

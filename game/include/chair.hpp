@@ -20,9 +20,9 @@ public:
     void setMoving(bool move);
     void setDirection(std::string currentDirection);
 protected:
-    Timer* audioTimer;
-    Audio* chairEffect;
-    Animation* animator;
+    Timer* audioTimer = nullptr;
+    Audio* chairEffect = nullptr;
+    Animation* animator = nullptr;
     bool isMoving; // bool variable that check if the chair are movening or not
     std::string direction;
     void moveInX(double move_chair_in_x);

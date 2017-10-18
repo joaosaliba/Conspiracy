@@ -21,9 +21,9 @@ public:
     CameraLever* getCameraLever();
     CameraSwitch* getCameraSwitch();
 private:
-    Camera* camera; // creat a objecte from camera
-    CameraSwitch* camera_switch;// creat a objecte from camera_switch
-    CameraLever* camera_lever; // creat a objecte from camera_lever
+    Camera* camera = nullptr; // creat a objecte from camera
+    CameraSwitch* camera_switch = nullptr;// creat a objecte from camera_switch
+    CameraLever* camera_lever = nullptr; // creat a objecte from camera_lever
     int last_lever_state; //  creat a variable  that saves the last lever state
 };
 

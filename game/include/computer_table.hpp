@@ -21,9 +21,9 @@ public:
     DoorSwitch* getDoorSwitch();
     Table* getTable();
 protected:
-    Animation* animator;
-    DoorSwitch* doorSwitch;// relation with the door switch
-    Table* table;
+    Animation* animator = nullptr;
+    DoorSwitch* doorSwitch = nullptr;// relation with the door switch
+    Table* table = nullptr;
 };
 
 #endif
