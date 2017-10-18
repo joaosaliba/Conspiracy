@@ -314,8 +314,8 @@ void CollisionManager::resetLists(){
  */
 bool CollisionManager::verifyCollision( GameObject* game_object_collision, GameObject* game_object_collision2){
         //The sides of the rectangles
-        int leftA, rightA, topA, bottomA; //declarating variables
-        int leftB, rightB, topB, bottomB; //declarating variables
+        int leftA = 0, rightA = 0, topA = 0, bottomA = 0; //declarating variables
+        int leftB = 0, rightB = 0, topB = 0, bottomB = 0; //declarating variables
 
         assert (leftA != NULL);
         assert (rightA != NULL);
@@ -409,8 +409,8 @@ double CollisionManager::CCW(std::pair<int, int> line_a, std::pair<int, int> lin
  */
 std::string CollisionManager::verifyCollisionChair(GameObject* game_object_collision, GameObject* game_object_collision2){
         //The sides of the rectangles
-        int leftA, rightA, topA, bottomA;  // declareting varibles
-        int leftB, rightB, topB, bottomB; // declareting varibles
+        int leftA = 0, rightA = 0, topA = 0, bottomA = 0; //declarating variables
+        int leftB = 0, rightB = 0, topB = 0, bottomB = 0; //declarating variables
 
         //Calculate the sides of rect A
         leftA = game_object_collision->getPositionX();
