@@ -5,6 +5,7 @@
  */
 #include "choice.hpp"
 #include <assert.h>
+#define HALF 1/2
 //#define NDEBUG *uncomment to disable assertions
 /**
  *    @brief Choice object constructor.
@@ -63,7 +64,7 @@ void Choice::draw(){
     INFO("TEXT DRAW");
     sprite->draw(getPositionX(), getPositionY());
     if(!unlock){
-        padlock->draw(getPositionX()+ (getWidth()/2)*0.8, getPositionY()+ (getHeight()/2)*0.8);
+        padlock->draw(getPositionX()+ (getWidth()*HALF)*0.8, getPositionY()+ (getHeight()*HALF)*0.8);
     }
     button->draw();
     rectangle->draw();
