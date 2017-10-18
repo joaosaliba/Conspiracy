@@ -8,6 +8,26 @@
 #define FILENAME "assets/sprites/bilu_sheet.png"
 #define WIDTH 19
 #define HEIGHT 22
+#define SCREEN_WIDTH 1000
+#define SCREEN_INITIAL 0
+#define VELOCITY_BILU 0.15
+#define ACTION_SPECIAL_LEFT "special_left"
+#define SPRITE_INITIAL_SPECIAL_LEFT 10
+#define SPRITE_FINAL_SPECIAL_LEFT 13
+#define ACTION_SPECIAL_RIGHT "special_right"
+#define SPRITE_INITIAL_SPECIAL_RIGHT 14
+#define SPRITE_FINAL_SPECIAL_RIGHT 17
+#define TOTAL_TIME_1 0.3
+#define TOTAL_TIME_2 0.6
+#define ANIMATION_NUMBER 5
+#define CENTER_CHARACTER_1 11
+#define CENTER_CHARACTER_2 20
+#define ANIMATION_IDLE "idle"
+#define ACTION_IDLE_LEFT "idle_left"
+#define ACTION_IDLE_LEFT "idle_right"
+#define INITIAL_HACKING_BAR_PERCENT 0.0
+#define INITIAL_BAR_PERCENT 0.0
+
 
 /** Objects included in the alien_bilu.hpp, door_switch.hpp classes found on lines 1 to
 * line 4, where the methods will be responsible for the manipulation and organization
@@ -40,7 +60,7 @@ Alien(FILENAME, bilu_position_x, bilu_position_y, WIDTH, HEIGHT) {
     assert (HEIGHT > 22);
     
     //verifies the position x of the character Bilu
-    if(bilu_position_x > 1000 || bilu_position_x < 0) {
+    if(bilu_position_x > SCREEN_WIDTH || bilu_position_x < SCREEN_INITIAL) {
         ERROR("Strange Bilu position x");
         exit(-1);
     }else {
@@ -48,31 +68,16 @@ Alien(FILENAME, bilu_position_x, bilu_position_y, WIDTH, HEIGHT) {
     }
 
     //verifies the position y of the character Bilu
-    if(bilu_position_y > 1000 || bilu_position_y < 0) {
+    if(bilu_position_y > SCREEN_WIDTH || bilu_position_y < SCREEN_INITIAL) {
        ERROR("Strange Bilu position y");
        exit(-1);
      }else {
        //nothing to do
      }
-
-    //verifies the width of the character Bilu
-    if(WIDTH > 19 || WIDTH < 0) {
-       ERROR("Strange width");
-       exit(-1);
-     }else {
-       //nothing to do
-     }
-
-    //verifies the height of the character Bilu 
-    if(HEIGHT > 22 || HEIGHT < 0) {
-       ERROR("Strange height");
-       exit(-1);
-     }else {
-       //nothing to do
-     }          
-    animator->add_action("special_right",14,17);
-    animator->add_action("special_left",10,13);
-
+      
+    animator->add_action(ACTION_SPECIAL_RIGHT,SPRITE_INITIAL_SPECIAL_RIGHT,SPRITE_FINAL_SPECIAL_RIGHT);
+    animator->add_action(ACTION_SPECIAL_LEFT,SPRITE_INITIAL_SPECIAL_LEFT,SPRITE_FINAL_SPECIAL_LEFT);
+    
     hacking = false;
     editing = false;
     last_action = false;
@@ -104,9 +109,9 @@ void Bilu::update(double time_elapsed) {
      }
 
     in_position = false;
-    animator->set_total_time(0.3);
-    auto move_bilu_in_y = 0.15*time_elapsed;
-    auto move_bilu_in_x = 0.15*time_elapsed;
+    animator->set_total_time(TOTAL_TIME_1);
+    auto move_bilu_in_y = VELOCITY_BILU*time_elapsed;//velocidade bilu
+    auto move_bilu_in_x = VELOCITY_BILU*time_elapsed;
 
     //checks conditions to move the player Bilu
     if(!block_movement && is_selected) {
@@ -120,22 +125,12 @@ void Bilu::update(double time_elapsed) {
     if(move_bilu_in_x == 0 && move_bilu_in_y == 0) {
         //if idle animation number
         if(idle_animation_number) {
-            animator->set_interval("idle_right");
+            animator->set_interval(ACTION_IDLE_RIGHT);
         //Assigns a default animator
         }else {
-            animator->set_interval("idle_left");
+            animator->set_interval(ACTION_IDLE_LEFT);
         //check atributes to move the player Bilu
-        if(move_bilu_in_x == 0 && move_bilu_in_y == 0) {
-                //if idle animation number
-                if(idle_animation_number) {
-                        animator->set_interval("idle_right");
-                //Assigns a default animator
-               }else {
-                        animator->set_interval("idle_left");
-                }
-        else{
-                //nothing to do
-            }    
+        
         }
 }
     special_action();
@@ -239,13 +234,13 @@ void Bilu::special_action() {
         ((DoorSwitch*)(doorSwitch))->animate();
         set_special_action_animator();
             // doorSwitch receives actions
-            if(((DoorSwitch*)(doorSwitch))->get_hacking_bar_percent() <= 0.0) {
-                hacking = false;
-                ((DoorSwitch*)(doorSwitch))->stop_animation();
-                ((DoorSwitch*)(doorSwitch))->stop_effect();
-                ((DoorSwitch*)(doorSwitch))->reset_hacking_progress();
-                Alien::animator->set_interval("idle");
-                block_movement = false;
+        if(((DoorSwitch*)(doorSwitch))->get_hacking_bar_percent() <= INITIAL_HACKING_BAR_PERCENT) {
+            hacking = false;
+            ((DoorSwitch*)(doorSwitch))->stop_animation();
+            ((DoorSwitch*)(doorSwitch))->stop_effect();
+            ((DoorSwitch*)(doorSwitch))->reset_hacking_progress();
+            Alien::animator->set_interval(ANIMATION_IDLE);
+            block_movement = false;
             //Assigns a default hacking and block_movement false
             }else {
                 hacking = true;
@@ -255,12 +250,12 @@ void Bilu::special_action() {
 }else if(editing) {
     ((Paper*)(paper))->animate();
     set_special_action_animator();
-        if(((Paper*)(paper))->get_editing_bar_percent() <= 0.0) {
+        if(((Paper*)(paper))->get_editing_bar_percent() <= INITIAL_BAR_PERCENT) {
             editing = false;
             ((Paper*)(paper))->stop_animation();
             //((Paper*)(paper))->stop_effect();
             ((Paper*)(paper))->reset_editing_progress();
-            Alien::animator->set_interval("idle");
+            Alien::animator->set_interval(ANIMATION_IDLE);
             block_movement = false;
         //Assigns a default hacking and block_movement false    
         }else {
@@ -285,7 +280,7 @@ void Bilu::draw() {
     double bilu_position_y = 0.0;
 
     INFO("Bilu DRAW");
-    animator->draw(get_position_x()-11, get_position_y()-20);
+    animator->draw(get_position_x() - CENTER_CHARACTER_1, get_position_y() - CENTER_CHARACTER_2);
     animator->draw_collider(get_position_x(), get_position_y(), get_width(), get_height());
 }
 
@@ -297,11 +292,11 @@ void Bilu::draw() {
 
 void Bilu::set_special_action_animator() {
     // Check if idle_animation_number is equals 5
-    if(idle_animation_number == 5) {
-        animator->set_interval("special_right");
+    if(idle_animation_number == ANIMATION_NUMBER) {
+        animator->set_interval(ACTION_SPECIAL_RIGHT);
     // If you do not receive an action
     }else {
-        animator->set_interval("special_left");
+        animator->set_interval(ACTION_SPECIAL_LEFT);
     }
-        animator->set_total_time(0.6);
+        animator->set_total_time(TOTAL_TIME_2);
 }
