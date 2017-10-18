@@ -65,19 +65,38 @@ void DoorSystem::draw(){
  *   @return door
  */
 GameObject* DoorSystem::getDoor(){
+  if ( door == NULL){
+    ERROR("Failed to start window manager");
+      exit(-1);
+  }
+  else{
     return door;
+  }
 }
 /**
  *   @brief get the actual way that the switch are
  *   @return computerTable->getDoorSwitch();
  */
 GameObject* DoorSystem::getSwitch(){
+  if ( computerTable->getDoorSwitch() == NULL){
+    ERROR("Failed to start window manager");
+      exit(-1);
+  }
+  else{
     return computerTable->getDoorSwitch();
+  }
 }
 /**
  *   @brief get the actual way that the table are
  *   @return computerTable->getTable();
  */
 GameObject* DoorSystem::getTable(){
-    return computerTable->getTable();
+  if ( computerTable->getTable() == NULL){
+    ERROR("Failed to start window manager");
+      exit(-1);
+  }
+  else{
+      return computerTable->getTable();
+  }
+
 }
