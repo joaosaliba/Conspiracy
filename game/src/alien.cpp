@@ -2,6 +2,49 @@
 #include "alien.hpp"
 #include <assert.h>
 
+#define SCREEN_WIDTH 1000
+#define SCREEN_INITIAL 0
+#define IMAGE_PATH_BILU "assets/sprites/bilu_sheet.png"
+#define IMAGE_PATH_VARGINHA "assets/sprites/varginha_sheet.png"
+#define IMAGE_PATH_ETEMER "assets/sprites/etemer_sheet.png"
+#define SOUND_PATH "assets/sounds/FOOTSTEP.wav"
+#define SOUND_1 "EFFECT"
+#define TIME_SOUND_1 128
+#define ALIEN_NAME_1 "Bilu"
+#define ALIEN_NAME_2 "Varginha"
+#define ALIEN_NAME_3 "Etemer"
+#define ANIMATION_1 2
+#define ANIMATION_2 10
+#define ANIMATION_3 0.5
+#define ACTION_RIGHT "right"
+#define ACTION_INITIAL_RIGHT 6
+#define ACTION_FINAL_RIGHT 9
+#define ACTION_LEFT "left"
+#define ACTION_INITIAL_LEFT 1
+#define ACTION_FINAL_LEFT 4
+#define ANIMATION_1 "up"
+#define ANIMATION_1_INITIAL 6
+#define ANIMATION_1_FINAL 9
+#define ANIMATION_2 "down"
+#define ANIMATION_2_INITIAL 1
+#define ANIMATION_2_FINAL 4
+#define ACTION_IDLE_RIGHT "idle_right"
+#define ACTION_IDLE_INITIAL_RIGHT 5
+#define ACTION_IDLE_FINAL_RIGHT 5
+#define ACTION_IDLE_LEFT "idle_left"
+#define ACTION_IDLE_INITIAL_LEFT 0
+#define ACTION_IDLE_FINAL_LEFT 0
+#define ACTION_IDLE_UP "idle_up"
+#define ACTION_IDLE_INITIAL_UP 5
+#define ACTION_IDLE_FINAL_UP 5
+#define ACTION_IDLE_DOWN "idle_down"
+#define ACTION_IDLE_INITIAL_DOWN 0
+#define ACTION_IDLE_FINAL_DOWN 0
+#define ANIMATION_NUMBER_1 5
+#define ANIMATION_NUMBER_2 0
+#define PLAY_EFECT_1 0
+#define PLAY_EFECT_2 1
+
 /** Objects included in the alien.hpp
 * where the methods will be responsible for the manipulation and organization
 * of these objects
@@ -30,59 +73,47 @@ GameObject(objectName,alien_position_x,alien_position_y,width, height) {
     assert (height !=NULL);
 
     // Verifies the position x of the character
-    if(alien_position_x > 1000 || alien_position_x < 0) {
+    if(alien_position_x > SCREEN_WIDTH || alien_position_x < SCREEN_INITIAL) {
         ERROR("Strange Alien position x");
         exit(-1);
     }else {
        //nothing to do
     }
     // Verifies the position y of the character
-    if(alien_position_y > 1000 || alien_position_y < 0) {
+    if(alien_position_y > SCREEN_WIDTH || alien_position_y < SCREEN_INITIAL) {
        ERROR("Strange Alien position y");
        exit(-1);
-     }else {
+    }else {
        //nothing to do
-     }
-    // Verifies the width of the character
-    if(width > 100 || width < 0) {
-       ERROR("Strange width");
-       exit(-1);
-     }else {
-       //nothing to do
-     }
-    // Verifies the height of the character
-    if(height > 100 || height < 0) {
-       ERROR("Strange height");
-       exit(-1);
-     }else {
-       //nothing to do
-     }
+    }
     
     //compare which character it is, if is Bilu
-    if(objectName.compare("assets/sprites/bilu_sheet.png") == 0) {
-        alienName = "Bilu";
+    if(objectName.compare(IMAGE_PATH_BILU) == 0) {
+        alienName = ALIEN_NAME_1;
     //compare which character it is, if is Varginha    
-    }else if(objectName.compare("assets/sprites/varginha_sheet.png") == 0) {
-        alienName = "Varginha";
+    }else if(objectName.compare(IMAGE_PATH_VARGINHA) == 0) {
+        alienName = ALIEN_NAME_2;
     //compare which character it is, if is Etemer
-    }else if(objectName.compare("assets/sprites/etemer_sheet.png") == 0) {
-        alienName = "Etemer";
+    }else if(objectName.compare(IMAGE_PATH_ETEMER) == 0) {
+        alienName = ALIEN_NAME_3;
     }
-    animator = new Animation(objectName, 2, 10, 0.5);
+    animator = new Animation(objectName, ANIMATION_1, ANIMATION_2, ANIMATION_3);
 
-    animator->add_action("right",6,9);
-    animator->add_action("left",1,4);
-    animator->add_action("up",6,9);
-    animator->add_action("down",1,4);
-    animator->add_action("idle_right",5,5);
-    animator->add_action("idle_left",0,0);
-    animator->add_action("idle_up",5,5);
-    animator->add_action("idle_down",0,0);
+    animator->add_action(ACTION_RIGHT,ACTION_INITIAL_RIGHT,ACTION_FINAL_RIGHT);
+    animator->add_action(ACTION_LEFT,ACTION_INITIAL_LEFT,ACTION_FINAL_LEFT);
+    animator->add_action(ANIMATION_1,ANIMATION_1_INITIAL,ANIMATION_1_FINAL);
+    animator->add_action(ANIMATION_2,ANIMATION_2_INITIAL,ANIMATION_2_FINAL);
+    animator->add_action(ACTION_IDLE_RIGHT,ACTION_IDLE_INITIAL_RIGHT,
+    ACTION_IDLE_FINAL_RIGHT);
+    animator->add_action(ACTION_IDLE_LEFT,ACTION_IDLE_INITIAL_LEFT,ACTION_IDLE_FINAL_LEFT);
+    animator->add_action(ACTION_IDLE_UP,ACTION_IDLE_INITIAL_UP,ACTION_IDLE_FINAL_UP);
+    animator->add_action(ACTION_IDLE_DOWN,ACTION_IDLE_INITIAL_DOWN,ACTION_IDLE_FINAL_DOWN);
 
-    idle_animation_number = 5;
+
+    idle_animation_number = ANIMATION_NUMBER_1;
     block_movement = false;
     in_position = false;
-    movement_sound_effect = new Audio("assets/sounds/FOOTSTEP.wav", "EFFECT", 128);
+    movement_sound_effect = new Audio(SOUND_PATH, SOUND_1, TIME_SOUND_1);
 }
 
 Alien::~Alien() {
@@ -103,7 +134,7 @@ void Alien::walk_in_x(double & alien_in_x) {
     
     assert (alien_in_x !=NULL);
     // Verifies the alien_in_x of the character
-    if(alien_in_x > 1000 || alien_in_x < 0) {
+    if(alien_in_x > SCREEN_WIDTH || alien_in_x < SCREEN_INITIAL) {
         ERROR("Strange Alien position x");
         exit(-1);
     }else {
@@ -112,32 +143,32 @@ void Alien::walk_in_x(double & alien_in_x) {
     //Chech if instance
     if(InputManager::instance.is_key_pressed(InputManager::KeyPress::KEY_PRESS_RIGHT)) {
         alien_in_x = alien_in_x;
-        idle_animation_number = 5;
-        animator->set_interval("right");
+        idle_animation_number = ANIMATION_NUMBER_1;
+        animator->set_interval(ACTION_RIGHT);
     //Chech if instance    
     if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_RIGHT)) {
         inc_x = inc_x;
-        idle_animation_number = 5;
-        animator->set_interval("right");
+        idle_animation_number = ANIMATION_NUMBER_1;
+        animator->set_interval(ACTION_RIGHT);
     }
     //Chech if instance 
     else if(InputManager::instance.is_key_pressed(InputManager::KeyPress::KEY_PRESS_LEFT)) {
         //movement_sound_effect->play(-1);
-        alien_in_x = alien_in_x * (0-1);
-        idle_animation_number = 0;
-        animator->set_interval("left");
-        inc_x = inc_x * (0-1);
-        idle_animation_number = 0;
-        animator->set_interval("left");
+        alien_in_x = alien_in_x * (PLAY_EFECT_1 - PLAY_EFECT_2);
+        idle_animation_number = ANIMATION_NUMBER_2;
+        animator->set_interval(ACTION_LEFT);
+        inc_x = inc_x * (PLAY_EFECT_1 - PLAY_EFECT_2);
+        idle_animation_number = ANIMATION_NUMBER_2;
+        animator->set_interval(ACTION_LEFT);
     }
     // If you do not receive an action
     else {
-        alien_in_x = 0;
+        alien_in_x = PLAY_EFECT_1;
     }
     set_alien_position_x(get_alien_position_x()+alien_in_x);
     //Chech if instance was collision
     if(CollisionManager::instance.verify_collision_with_walls_and_chairs(this)) {
-        set_alien_position_x(get_alien_position_x()+(alien_in_x*(0-1)));
+        set_alien_position_x(get_alien_position_x()+(alien_in_x*(PLAY_EFECT_1 - PLAY_EFECT_2)));
         }else {
             //nothing to do
         }
@@ -165,14 +196,14 @@ void Alien::walk_in_y(double & alien_in_y, double alien_in_x) {
     assert (alien_in_y !=NULL);
     assert (alien_in_x !=NULL);
     // Verifies the alien_in_x of the character
-    if(alien_in_x > 1000 || alien_in_x < 0) {
+    if(alien_in_x > SCREEN_WIDTH || alien_in_x < SCREEN_INITIAL) {
         ERROR("Strange Alien position x");
         exit(-1);
     }else {
        //nothing to do
     }
     // Verifies the alien_in_y of the character
-    if(alien_in_y > 1000 || alien_in_y < 0) {
+    if(alien_in_y > SCREEN_WIDTH || alien_in_y < SCREEN_INITIAL) {
         ERROR("Strange Alien position y");
         exit(-1);
     }else {
@@ -180,11 +211,11 @@ void Alien::walk_in_y(double & alien_in_y, double alien_in_x) {
     }
 
     if(InputManager::instance.is_key_pressed(InputManager::KeyPress::KEY_PRESS_UP)) {
-        alien_in_y = alien_in_y * (0-1);
-        idle_animation_number = 5;
+        alien_in_y = alien_in_y * (PLAY_EFECT_1 - PLAY_EFECT_2);
+        idle_animation_number = ANIMATION_NUMBER_1;
         // Check if alien_in_x is equals 0
         if(alien_in_x == 0){
-            animator->set_interval("up");
+            animator->set_interval(ANIMATION_1);
         }else {
             //nothing to do
         }
@@ -192,16 +223,16 @@ void Alien::walk_in_y(double & alien_in_y, double alien_in_x) {
     else if(engine::InputManager::
     instance.is_key_pressed(engine::InputManager::KeyPress::KEY_PRESS_DOWN)) {
         alien_in_y = alien_in_y;
-        idle_animation_number = 0;
+        idle_animation_number = ANIMATION_NUMBER_2;
         // Check if alien_in_x is equals 0, receives action down
         if(alien_in_x == 0){
-            animator->set_interval("down");
+            animator->set_interval(ANIMATION_2);
             if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_UP)) {
-                inc_y = inc_y * (0-1);
-                idle_animation_number = 5;
+                inc_y = inc_y * (PLAY_EFECT_1 - PLAY_EFECT_2);
+                idle_animation_number = ANIMATION_NUMBER_1;
                 // Check if inc_x is equals 0, receives action up
                 if(inc_x == 0){
-                animator->set_interval("up");
+                animator->set_interval(ANIMATION_1);
                 }else {
                     //nothing to do
                 }
@@ -211,21 +242,21 @@ void Alien::walk_in_y(double & alien_in_y, double alien_in_x) {
         else if(engine::InputManager::instance.isKeyPressed(engine::InputManager::KeyPress::
         KEY_PRESS_DOWN)) {
             inc_y = inc_y;
-            idle_animation_number = 0;
+            idle_animation_number = ANIMATION_NUMBER_2;
             // Check if alien_in_x is equals 0, receives action down
             if(inc_x == 0){
-                animator->set_interval("down");
+                animator->set_interval(ANIMATION_2);
             }else {
                 //nothing to do
             }
         //Assigns a default
         }else {
-            alien_in_y = 0;
+            alien_in_y = PLAY_EFECT_1;
         }
     set_alien_position_y(get_alien_position_y()+alien_in_y);
     // Instace verify collision
     if(CollisionManager::instance.verify_collision_with_walls_and_chairs(this)) {
-        set_alien_position_y(get_alien_position_y()+(alien_in_y*(0-1)));
+        set_alien_position_y(get_alien_position_y()+(alien_in_y*(PLAY_EFECT_1 - PLAY_EFECT_2)));
     }else {
         //nothing to do
     }
