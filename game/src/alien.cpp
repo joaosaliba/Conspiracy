@@ -256,7 +256,7 @@ void Alien::walk_in_y(double & alien_in_y, double alien_in_x) {
     set_alien_position_y(get_alien_position_y()+alien_in_y);
     // Instace verify collision
     if(CollisionManager::instance.verify_collision_with_walls_and_chairs(this)) {
-        set_alien_position_y(get_alien_position_y()+(alien_in_y*(PLAY_EFECT_1 - PLAY_EFECT_2)));
+        set_alien_position_y(get_alien_position_y()+(alien_in_y*(PLAY_EFECT_1 - PLAY_EFECT_2 )));
     }else {
         //nothing to do
     }
