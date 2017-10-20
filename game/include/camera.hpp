@@ -34,14 +34,14 @@ public:
 private:
     void initialize_vision(int p_range, int p_angle_of_vision, std::string direction);
     void initialize_animator(std::string filename);
-    int range;
-    bool turned_on;
+    int range = 0;
+    bool turned_on = true;
     std::vector<int> angles;
-    int angle_of_vision;
-    int initial_angle;
-    int state;
-    FieldOfVision* fieldOfVision;
-    Animation* animator;
+    int angle_of_vision = 0;
+    int initial_angle = 0;
+    int state = 0;
+    FieldOfVision* fieldOfVision = nullptr;
+    Animation* animator = nullptr;
 };
 
 #endif
