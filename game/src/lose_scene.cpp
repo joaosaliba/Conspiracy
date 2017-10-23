@@ -77,13 +77,13 @@ using namespace engine;
 
 LoseScene::LoseScene(int id) : Scene(id){
     selectButton = 1;
-    select = new Color(SELECTEDCOLOR[0], SELECTEDCOLOR[1], SELECTEDCOLOR[2], SELECTEDCOLOR[3]);
-    notSelect = new Color(NOTSELECTEDCOLOR[0], NOTSELECTEDCOLOR[1], NOTSELECTEDCOLOR[2], NOTSELECTEDCOLOR[3]);
+    select = new Color(SELECTEDCOLOR);
+    notSelect = new Color(NOTSELECTEDCOLOR);
 
     soundEffect = new Audio("assets/sounds/SELECT6.wav",”EFFECT”, SOUNDEFFECT );
     backgroundMusic = new Audio("assets/sounds/GAMEOVER.wav", "MUSIC", BACKGROUNMUSIC );
-    background = new Animation("assets/sprites/lose.png",ANIMATIONSIZE.X, ANIMATIONSIZE.Y,ANIMATIONTIME);
-    background->addAction("lose",POSITION.BEGIN,POSITION.LAST);
+    background = new Animation("assets/sprites/lose.png",ANIMATIONSIZE,ANIMATIONTIME);
+    background->addAction("lose",POSITION);
     background->setInterval("lose");
 }
 
@@ -91,7 +91,7 @@ LoseScene::~LoseScene(){
 }
 
 void LoseScene::draw(){
-        background->draw_instant(ANIMATIONPOSITION.X , ANIMATIONPOSITION.Y);
+        background->draw_instant(ANIMATIONPOSITION);
 
         for(auto gameObject : gameObjectsList) {
                 (*gameObject.second).draw();
@@ -117,10 +117,10 @@ void LoseScene::update(double timeElapsed){
 }
 
 void LoseScene::load(){
-        gameObjectsList.push_back(std::pair<int, GameObject*>( NUMBERCONTINUE,new Button("assets/fonts/font.ttf", OBJECTCONTINUE.WIDTH, OBJECTCONTINUE.HEIGH
-POSITIONCONTINUE.BEGIN, POSITIONCONTINUE.LAST, "Continue", 50)));
-        gameObjectsList.push_back(std::pair<int, GameObject*>( NUMBERMENU,new Button("assets/fonts/font.ttf" OBJECTMENU.WIDTH, OBJECTMENU.HEIGH, POSITIONMENU.BEGIN , POSITIONMENU.LAST,"Menu", 50)));
-        AnimationManager::instance.setBackgroundColor(new Color(BACKGROUND.red, BACKGROUND.green, BACKGROUND.black, BACKGROUND.alpha));
+        gameObjectsList.push_back(std::pair<int, GameObject*>( NUMBERCONTINUE,new Button("assets/fonts/font.ttf", OBJECTCONTINUE,
+POSITIONCONTINUE, "Continue", 50)));
+        gameObjectsList.push_back(std::pair<int, GameObject*>( NUMBERMENU,new Button("assets/fonts/font.ttf" OBJECTMENU, POSITIONMENU,"Menu", 50)));
+        AnimationManager::instance.setBackgroundColor(new Color(BACKGROUND));
 ));
         backgroundMusic->play(0);
 
@@ -152,18 +152,19 @@ void  selectActionLessThanContinue(){
 
 void  selectActionLeftorRightButton(){ 
                soundEffect->pause();
-                soundEffect->play(TIMESTOPLAY);  
-       if(InputManager::instance.isKeyTriggered(InputManager::KeyPress::KEY_PRESS_LEFT)){
+               soundEffect->play(TIMESTOPLAY);  
+if(InputManager::instance.isKeyTriggered(InputManager::KeyPress::KEY_PRESS_LEFT)){
     selectActionLessThanContinue();
-}else{     if(InputManager::instance.isKeyTriggered(InputManager::KeyPress::KEY_PRESS_RIGHT) {
+}else{    
+    if(InputManager::instance.isKeyTriggered(InputManager::KeyPress::KEY_PRESS_RIGHT) {
          selectActionMoreThanMenu();
 }
 
 void LoseScene::selectAction(){
 if(InputManager::instance.isKeyTriggered(InputManager::KeyPress::KEY_PRESS_ENTER)){
-  selectActionEnter()
+    selectActionEnter()
 }else{
- selectActionLeftorRightButton()
+    selectActionLeftorRightButton()
 }
  
 
