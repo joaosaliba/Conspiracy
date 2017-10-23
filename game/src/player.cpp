@@ -25,12 +25,12 @@ struct  size{
 Player::Player(std::pair<int, int> biluPosition, std::pair<int, int> etemerPosition,
                std::pair<int,int> varginhaPosition, int paperQuantity, int stageNumber){
 
-        exclamationAnimation = new Animation("assets/sprites/exclamation2.png",VARGINADIMENSIONS.rows, VARGINADIMENSIONS.columns,  VARGINATIME );
+        exclamationAnimation = new Animation("assets/sprites/exclamation2.png",VARGINADIMENSIONS,  VARGINATIME );
 
         bilu = new Bilu(biluPosition.first, biluPosition.second);
-        varginha = new Varginha(varginhaPosition.first, varginhaPosition.second);
-        etemer = new Etemer(etemerPosition.first, etemerPosition.second);
-        header = new Header(HEADERPOSITION.x, HEADERPOSITION.y paperQuantity, stageNumber);
+        varginha = new Varginha(varginhaPosition);
+        etemer = new Etemer(etemerPosition);
+        header = new Header(HEADERPOSITION paperQuantity, stageNumber);
 
         selectedAlien = ETEMER;
 
