@@ -24,10 +24,10 @@ public:
 private:
     std::string aliens;
     std::string orientation;
-    Animation* animator;
-    Animation* bilu_anim;
-    Animation* etemer_anim;
-    Animation* varginha_anim;
+    Animation* animator = nullptr;
+    Animation* bilu_anim = nullptr;
+    Animation* etemer_anim = nullptr;
+    Animation* varginha_anim = nullptr;
 };
 
 #endif

@@ -28,12 +28,12 @@ namespace engine {
         void reset_percent();
 
     private:
-        double percent;
-        double progress_increment;
-        int pw;
-        int px;
-        SDL_Rect *back_rect;
-        SDL_Rect *front_rect;
+        double percent = 0.0;
+        double progress_increment = 0.0;
+        int pw = 0;
+        int px = 0;
+        SDL_Rect *back_rect = nullptr;
+        SDL_Rect *front_rect = nullptr;
         SDL_Color back_color;
         SDL_Color front_color;
         SDL_Color old_color;

@@ -37,11 +37,11 @@ public:
     double get_hacking_bar_percent();
     void reset_hacking_progress();
 protected:
-    bool pressed;
-    Animation* animator;
+    bool pressed = true;
+    Animation* animator = nullptr;
 private:
-    Audio *hacking_effect;
-    ProgressBar *hacking_bar;
+    Audio *hacking_effect = nullptr;
+    ProgressBar *hacking_bar = nullptr;
 };
 
 #endif
