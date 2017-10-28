@@ -17,8 +17,7 @@
 #define MIN_STRANGE_POSITION 0
 #define HALF 2
 #define MAX_STRANGE_ANGLE 1000
-
-
+#define MAX_SIZE 100
 /**
  * @brief Camera object constructor.
  * @param[in] double-camera_position_x it sets the x coordinate of the object.
@@ -50,13 +49,13 @@ Camera::Camera(double camera_position_x, double camera_position_y, std::string d
     }else {
       //nothing to do
     }
-    if(WIDTH > 100 || WIDTH < MIN_STRANGE_POSITION) {
+    if(WIDTH > MAX_SIZE || WIDTH < MIN_STRANGE_POSITION) {
       ERROR("Strange camera width");
       exit(-1);
     }else {
       //nothing to do
     }
-    if(HEIGHT > 100 || HEIGHT < MIN_STRANGE_POSITION) {
+    if(HEIGHT > MAX_SIZE || HEIGHT < MIN_STRANGE_POSITION) {
       ERROR("Strange camera height");
       exit(-1);
     }else {
@@ -66,9 +65,9 @@ Camera::Camera(double camera_position_x, double camera_position_y, std::string d
     initialize_animator(FILENAME);
     animator->set_interval(direction);
     turned_on = true;
+
     int default_range = 180;
     int default_angle_of_vision = 80;
-
     initialize_vision(default_range, default_angle_of_vision, direction);
 }
 
@@ -105,13 +104,13 @@ Camera::Camera(double camera_position_x, double camera_position_y, std::string d
     }else {
       //nothing to do
     }
-    if(WIDTH > 100 || WIDTH < MIN_STRANGE_POSITION) {
+    if(WIDTH > MAX_SIZE || WIDTH < MIN_STRANGE_POSITION) {
       ERROR("Strange camera width");
       exit(-1);
     }else {
       //nothing to do
     }
-    if(HEIGHT > 100 || HEIGHT < MIN_STRANGE_POSITION) {
+    if(HEIGHT > MAX_SIZE || HEIGHT < MIN_STRANGE_POSITION) {
       ERROR("Strange camera height");
       exit(-1);
     }else {
@@ -230,7 +229,7 @@ void Camera::initialize_vision(int p_range, int p_angle_of_vision, std::string d
     }else if(direction == "upleft") {
         fieldOfVision = new fieldOfVision(get_camera_position_x()-6+get_width()/HALF,get_camera_position_y(), range, angle_of_vision);
         initial_angle = 140;
-    }else {
+    }else if(direction == "upright"){
         fieldOfVision = new fieldOfVision(get_camera_position_x()+5+get_width()/HALF,get_camera_position_y(), range, angle_of_vision);
         initial_angle = 45;
     }

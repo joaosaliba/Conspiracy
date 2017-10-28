@@ -16,27 +16,36 @@ namespace engine{
     public:
         FieldOfVision(double x, double y, int range, double total_angle);
         ~FieldOfVision();
+
         void update_center(double x, double y);
         void draw();
-        void increment_angle(double angle_increment);
-        void set_angle(double angle);
+
         int get_range();
-        void deactivate();
+
+
         int get_angle();
+        void set_angle(double angle);
+        void increment_angle(double angle_increment);
+
         bool is_active();
+        void deactivate();
+
         std::vector<Line*> get_lines();
+
         void play_effect();
     private:
-        Line* center_line;
         Audio* catch_effect;
-        std::vector<Line*> lines;
+
+        bool active;
+        int number_of_lines;
         std::pair<double,double> center;
+        Line* center_line;
+        std::vector<Line*> lines;
         void reset_lines();
         void create_lines(double x, double y, int range);
+
         int range;
         double total_angle;
-        int number_of_lines;
-        bool active;
     };
 }
 #endif

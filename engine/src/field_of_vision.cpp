@@ -77,11 +77,13 @@ void FieldOfVision::set_angle(double angle) {
     int i = 0;
     bool inverteu = false;
     for(auto line:lines) {
+
         if(i >= number_of_lines/2 && !inverteu) {
             line_angle = angle;
             angle_inc *= (-1);
             inverteu = true;
         }
+
         line_angle -= angle_inc;
         line->change_angle_to(line_angle);
         i++;
@@ -89,11 +91,14 @@ void FieldOfVision::set_angle(double angle) {
 }
 
 std::vector<Line*> FieldOfVision::get_lines() {
+
     std::vector<Line*> lines_return;
     lines_return.push_back(center_line);
+
     for(auto line:lines) {
         lines_return.push_back(line);
     }
+
     return lines_return;
 }
 

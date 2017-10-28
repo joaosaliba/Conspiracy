@@ -142,7 +142,6 @@ ProgressBar::ProgressBar(double position_x, double position_y, int width,
  */
 
 ProgressBar::~ProgressBar(){}
-
 void ProgressBar::update(double time_elapsed) {
     if(time_elapsed == NULL) {
       ERROR("type_elapsed can not be null");

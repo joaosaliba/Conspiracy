@@ -30,23 +30,54 @@ Audio::Audio(std::string audio_path, std::string audio_type, int audio_volume) {
   * @return string-audio_type
   * @return string-audio_effect
   */
-//this part make a comparison and depending the MUSIC value he load the music or not
+
+    audio_music = create_music(audio_type, audio_path, audio_volume);
+
+    audio_effect = create_effect(audio_type, audio_path, audio_volume);
+
+    verify_error(audio_music, audio_effect);
+}
+
+
+Audio::create_effect(std::string audio_type, std::string audio_path, int audio_volume){
+//assert()
+    Mix_Chunk* audio_effect = nullptr;
+    if(audio_type.compare("EFFECT") == 0) {
+      audio_effect = Mix_LoadWAV(audio_path.c_str());
+      Mix_VolumeChunk(audio_effect, audio_volume);
+      if(audio_effect == NULL) {
+        ERROR("Audio file could not be loaded");
+    }
+
+  }
+  return audio_effect;
+}
+
+
+Audio::create_music(std::string audio_type, std::string audio_path, int audio_volume){
+    //assert()
+
+    Mix_Music* audio_music = nullptr
     if(audio_type.compare("MUSIC") == 0) {
+
         audio_music = Mix_LoadMUS(audio_path.c_str());
         Mix_VolumeMusic(audio_volume);
         if(audio_music == NULL) {
             ERROR("Audio file could not be loaded");
-        }//this part make a comparison and depending on EFFECT value he load the effect and volume or not
-    }else if(audio_type.compare("EFFECT") == 0) {
-        audio_effect = Mix_LoadWAV(audio_path.c_str());
-        Mix_VolumeChunk(audio_effect, audio_volume);
-        if(audio_effect == NULL) {
-            ERROR("Audio file could not be loaded");
+
         }
-    }else {
-        ERROR("Audio type is not correct");
+
+    }
+    return audio_music;
+}
+
+Audio::verify_error(Mix_Music* audio_music, Mix_Music* audio_effect){
+    if(audio_music == NULL & audio_effect == NULL){
+      ERROR("Audio type is not correct");
     }
 }
+
+
 
 /**
   *    @brief Audio object destructor.
