@@ -88,7 +88,8 @@ Audio::~Audio(){}
 
 /**
 * @brief Method play
-* <p>This method execute the action to start the audio of the game</p>
+* <p>This method call other 2 functions to see if the music or effect of
+* the music will give error</p>
 * @param const int-times_to_play
 * @return void
 */
@@ -97,7 +98,11 @@ void Audio::play(const int times_to_play) {
 
     assert ( times_to_play != NULL);
 
-    if(audio_music != NULL) {
+    verify_audio_music_error(times_to_play);
+
+    verify_audio_effect_error(times_to_play);
+
+  /**  if(audio_music != NULL) {
         //if the audio music is differente of null he get in and make others logical flows
         if(Mix_PlayMusic(audio_music, times_to_play) == -1) {
             ERROR("Audio could not be played");
@@ -110,7 +115,33 @@ void Audio::play(const int times_to_play) {
         }else {
             //if Mix_PlayChannel be different of -1 he can be played
         }
-    }
+    }*/
+}
+
+Audio::verify_audio_music_error(const int times_to_play){
+
+    assert ( times_to_play != NULL);
+
+    if(audio_music != NULL) {
+        //if the audio music is differente of null he get in and make others logical flows
+        if(Mix_PlayMusic(audio_music, times_to_play) == -1) {
+            ERROR("Audio could not be played");
+        }else {
+            //if Mix_PlayMusic be different of -1 it can be played
+        }
+      }
+}
+
+Audio::verify_audio_effect_error(const int times_to_play){
+    assert (times_to_play != NULL);
+
+    if(audio_effect != NULL){
+        if(Mix_PlayChannel(-1, audio_effect, times_to_play) == -1) {
+            ERROR("Audio could not be played");
+        }else {
+            //if Mix_PlayChannel be different of -1 he can be played
+        }
+      }
 }
 
 /**

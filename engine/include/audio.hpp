@@ -26,6 +26,8 @@ namespace engine{
         Audio(std::string audio_path, std::string audio_type, int audio_volume);
         ~Audio();
         void play(const int times_to_play);
+        void verify_audio_music_error(const int times_to_play);
+        void verify_audio_effect_error(const int times_to_play);
         void pause();
         void resume();
         void stop();
