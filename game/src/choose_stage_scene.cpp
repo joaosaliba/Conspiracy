@@ -1,7 +1,7 @@
 /**class to object of choose_stage_scene, where you can find some values, files,
  *objects and meths to the same.
  */
- 
+
 #include "choose_stage_scene.hpp"
 #include "choice.hpp"
 
@@ -73,7 +73,7 @@ void ChooseStageScene::load(){
     AnimationManager::instance.set_background_color(new Color(255,225,142, 125));
 }
 
-void ChooseStageScene::select_action() {
+void ChooseStageScene::select_action_1() {
     if(InputManager::instance.is_key_triggered(InputManager::KeyPress::KEY_PRESS_LEFT)) {
         sound_effect->pause();
         sound_effect->play(0);
@@ -81,16 +81,26 @@ void ChooseStageScene::select_action() {
         if(select_button < MIN_CHOICE) {
             select_button = MAX_CHOICE;
         }
+    }else {
+      //nothing to do
     }
-    else if(InputManager::instance.is_key_triggered(InputManager::KeyPress::KEY_PRESS_RIGHT)) {
+}
+
+void ChooseStageScene::select_action_2() {
+    if(InputManager::instance.is_key_triggered(InputManager::KeyPress::KEY_PRESS_RIGHT)) {
         sound_effect->pause();
         sound_effect->play(0);
         select_button++;
         if(select_button > MAX_CHOICE) {
             select_button = MIN_CHOICE;
         }
+    }else {
+      //nothing to do
     }
 
+}
+
+void ChooseStageScene::select_action_3(){
     if(InputManager::instance.is_key_triggered(InputManager::KeyPress::KEY_PRESS_ENTER)) {
         switch(select_button) {
         case 0:
@@ -122,10 +132,12 @@ void ChooseStageScene::select_action() {
                 }
                 break;
         default:
+                //nothing to do
                 break;
         }
 
     }
+
 }
 
 void ChooseStageScene::unload() {

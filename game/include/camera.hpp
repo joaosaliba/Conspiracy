@@ -35,7 +35,7 @@ private:
     void initialize_vision(int p_range, int p_angle_of_vision, std::string direction);
     void initialize_animator(std::string filename);
     int range = 0;
-    bool turned_on = true;
+    bool turned_on = false;
     std::vector<int> angles;
     int angle_of_vision = 0;
     int initial_angle = 0;

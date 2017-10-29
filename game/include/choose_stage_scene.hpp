@@ -22,11 +22,14 @@ public:
     ChooseStageScene(int id);
     ~ChooseStageScene();
     void load();
+    void unload();
     void draw();
     void update(double time_elapsed);
-    void unload();
+
 private:
-    void select_action();
+    void select_action_1();
+    void select_action_2();
+    void select_action_3();
     int select_button;
     std::vector<std::pair<int, GameObject*>> game_objects_list;
     Sprite * background;
