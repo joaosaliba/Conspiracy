@@ -31,9 +31,9 @@ protected:
     void special_action();
 private:
     void verify_turn();
-    bool is_invisible;
-    bool turn_off;
-    Timer * timer_turn;
+    bool is_invisible = true;
+    bool turn_off = true;
+    Timer * timer_turn = nullptr;
 };
 
 #endif

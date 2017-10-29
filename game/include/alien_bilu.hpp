@@ -27,9 +27,9 @@ protected:
     void special_action();
 
 private:
-    bool hacking; //declaring variable hacking "computers
-    bool editing; // declaring variable editing "documents
-    bool last_action; // declaring variablre last action
+    bool hacking = true; //declaring variable hacking "computers
+    bool editing = true; // declaring variable editing "documents
+    bool last_action = true; // declaring variablre last action
     void set_special_action_animator();
 };
 

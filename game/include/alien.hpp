@@ -48,12 +48,12 @@ protected:
     void walk_in_x(double & alien_in_x);
     void walk_in_y(double & alien_in_y, double alien_in_x);
     Animation* animator;
-    int idle_animation_number; // delcaring variable idle animation number
+    int idle_animation_number = 0; // delcaring variable idle animation number
     std::string alienName;
-    bool block_movement; // delclarion  variable block movement
-    bool is_selected; // delcaring  varible  that reference if the personage is selected
-    bool in_position;// declaring variable in position
-    Audio *movement_sound_effect;
+    bool block_movement = true; // delclarion  variable block movement
+    bool is_selected = true; // delcaring  varible  that reference if the personage is selected
+    bool in_position = true;// declaring variable in position
+    Audio *movement_sound_effect = nullptr;
 };
 
 #endif

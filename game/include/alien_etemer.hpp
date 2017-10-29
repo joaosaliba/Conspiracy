@@ -32,7 +32,7 @@ protected:
     void walk_in_Y(double & etemer_in_y, double );
 
 private:
-    bool talking;
+    bool talking = true;
     void move_chair();
 };
 
