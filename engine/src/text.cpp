@@ -69,6 +69,7 @@ void Paper::update(double timeElapsed){
     }
 
     if(surface == NULL) {
+        WARN("without informations about quality!");
         exit(-1);
     }else{ 
 //do nothefing
@@ -76,11 +77,12 @@ void Paper::update(double timeElapsed){
     if(texture != NULL) {
 SDL_DestroyTexture(texture);
 }else{
-// do nothefing.
-
+  // do nothefing.
+    }
     texture = SDL_CreateTextureFromSurface(WindowManager::getGameCanvas(), surface);
 
     if (texture == NULL) {
+        WARN("don't create texture properly!");
         exit(-1);
     }else{
 //do nothefing.
