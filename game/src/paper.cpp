@@ -50,6 +50,7 @@ Paper::~Paper(){}
 */
 
 void Paper::getPercentage(){
+  INFO("Getting percentage");
   //If paper is being edited it gets the percentage of the edition
   if(paper_editing_bar->getPercent() <= INITIAL_PERCENTAGE){
       paper_is_being_edited = false;
@@ -68,6 +69,7 @@ void Paper::getPercentage(){
 */
 
 void Paper::update(double time_elapsed){
+    INFO("Updating paper state");
     time_elapsed = time_elapsed;
     //If paper is being edited it sets the paper editing bar
     if(paper_is_being_edited) {
@@ -85,6 +87,7 @@ void Paper::update(double time_elapsed){
 */
 
 void Paper::animate(){
+    INFO("Initializing paper animation");
     paper_is_being_edited = true;
     assert(paper_is_being_edited != NULL);
 }
@@ -94,6 +97,7 @@ void Paper::animate(){
 */
 
 void Paper::stopAnimation(){
+    INFO("Stoping paper animation");
     paper_is_being_edited = false;
     assert(paper_is_being_edited != NULL);
 }
@@ -104,6 +108,7 @@ void Paper::stopAnimation(){
 */
 
 bool Paper::isEdited(){
+    INFO("Verifying if paper is edited");
     return paper_edited;
     assert(paper_edited != NULL);
 }
@@ -129,6 +134,7 @@ void Paper::draw(){
 */
 
 Animation * Paper::getAnimation(){
+  INFO("Getting paper animation");
   return animator;
   assert(animator != NULL);
 }
@@ -138,6 +144,7 @@ Animation * Paper::getAnimation(){
 */
 
 double Paper::getEditingBarPercent(){
+    INFO("Getting editing bar percentage");
     return paper_editing_bar->getPercent();
     assert(paper_editing_bar != NULL);
 }
@@ -147,6 +154,7 @@ double Paper::getEditingBarPercent(){
 */
 
 void Paper::resetEditingProgress(){
+    INFO("Reseting paper editing percentage");
     paper_editing_bar->resetPercent();
     assert(paper_editing_bar != NULL);
 }
@@ -156,6 +164,7 @@ void Paper::resetEditingProgress(){
 */
 
 void Paper::playEffect(){
+    INFO("Starting editing sound");
     paper_editing_sound->play(0);
     assert(paper_editing_sound != NULL);
 }
@@ -165,6 +174,7 @@ void Paper::playEffect(){
 */
 
 void Paper::stopEffect(){
+    INFO("Stoping editing sound");
     paper_editing_sound->stop();
     assert(paper_editing_sound != NULL);
 }

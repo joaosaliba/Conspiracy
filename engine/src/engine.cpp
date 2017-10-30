@@ -34,6 +34,7 @@ namespace engine{
     */
 
     void loadEngine() {
+         INFO("Loading engine");
          assert(engine_start_time != NULL);
          assert(engine_step_time != NULL);
          assert(engine_time_elapsed != NULL);
@@ -65,6 +66,7 @@ namespace engine{
     */
 
     void delayDetector(){
+      INFO("Detecting delay");
       if(frame_time > engine_time_elapsed) {
           DEBUG("SDL_DELAY: " + std::to_string(frame_time - engine_time_elapsed));
           SDL_Delay(frame_time - engine_time_elapsed);
@@ -82,6 +84,7 @@ namespace engine{
     */
 
     void stopEngine(bool engine_is_running, SDL_Event event){
+        INFO("Stoping engine");
         bool running_engine = engine_is_running;
         //If while engine is running it gets a quit request, SDL is finalized and Window is destroyed
         if(engine::InputManager::instance.getQuitRequest()) {
@@ -103,6 +106,7 @@ namespace engine{
     */
 
     void nullSceneCorrection(){
+        INFO("Correcting null sound");
         //If the current scene is null it updates and draw the scene
         if(scene_manager->get_current_scene() != NULL) {
             scene_manager->get_current_scene()->update(engine_time_elapsed);
@@ -117,6 +121,7 @@ namespace engine{
     */
 
     void run() {
+         INFO("Running engine");
          assert(engine_start_time != NULL);
          assert(engine_step_time != NULL);
          assert(engine_time_elapsed != NULL);
