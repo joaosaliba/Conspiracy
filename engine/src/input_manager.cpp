@@ -1,3 +1,9 @@
+/**
+    @file input_manager.cpp
+    @brief Manages the inputs of the keyboard.
+    @copyright MIT License.
+*/
+
 #include "input_manager.hpp"
 #include "log.h"
 

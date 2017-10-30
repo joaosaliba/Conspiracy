@@ -1,6 +1,21 @@
+/**
+    @file rectangle.cpp
+    @brief Manage the surface of the stages.
+    @copyright MIT License.
+*/
+
 //#define NDEBUG *uncomment to disable assertions
 #include <assert.h>
 #include "rectangle.hpp"
+
+/**
+    @brief Paper class constructor.
+    @param[in] object_name stirng that contains the name of the object.
+    @param[in] rectangle_position double parameter with the coordinates of the object.
+    @param[in] rectangle_width rectangle width dimension
+    @param[in] rectangle_height rectangle height dimension
+    @param[in] new_alpha_active bool alpha active
+*/
 
 Rectangle::Rectangle(std::string object_name, double rectangle_position_x, double rectangle_position_y,
   int rectangle_width, int rectangle_height, bool new_alpha_active, Color * rectangle_new_color): GameObject(object_name,
@@ -14,9 +29,18 @@ Rectangle::Rectangle(std::string object_name, double rectangle_position_x, doubl
       init();
 }
 
+/**
+    @brief Rectangle class destructor.
+*/
+
 Rectangle::~Rectangle() {
 
 }
+
+/**
+    @brief It detects if the surface is null.
+    @param[in] surface surface object.
+*/
 
 void Rectangle::nullSurfaceDetector(SDL_Surface *surface){
 
@@ -37,12 +61,20 @@ void Rectangle::nullSurfaceDetector(SDL_Surface *surface){
   }
 }
 
+/**
+    @brief Starts instance of the class.
+*/
+
 void Rectangle::init() {
     SDL_Surface *surface = nullptr;
     surface = SDL_CreateRGBSurface(0, getWidth(),getHeight(), 8, 0, 0, 0,0);
 
     nullSurfaceDetector(surface);
 }
+
+/**
+    @brief Verifies object state.
+*/
 
 void Rectangle::update(double time_elapsed){
     time_elapsed = time_elapsed;
@@ -54,6 +86,10 @@ void Rectangle::update(double time_elapsed){
         ERROR("Rectangle is not enabled");
     }
 }
+
+/**
+    @brief Renderizes the surface.
+*/
 
 void Rectangle::draw() {
     //If there is a rectangle object enabled it draws the rectangle
@@ -67,6 +103,10 @@ void Rectangle::draw() {
     }
 }
 
+/**
+    @brief Verifies if the alpha is active.
+*/
+
 void Rectangle::verifyAlpha() {
     //If the rectangle alpha is active it sets the texture
     if(alpha_active){
@@ -79,13 +119,25 @@ void Rectangle::verifyAlpha() {
     }
 }
 
+/**
+    @brief Set alpha as active.
+*/
+
 void Rectangle::setAlphaActive(bool is_active) {
     alpha_active = is_active;
 }
 
+/**
+    @brief Gets alpha state.
+*/
+
 bool Rectangle::getAlphaActive() {
     return alpha_active;
 }
+
+/**
+    @brief Sets rectangle color.
+*/
 
 void Rectangle::setColor(Color * rectangle_new_color){
     assert(rectangle_new_color != NULL);
