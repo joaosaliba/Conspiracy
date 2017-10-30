@@ -203,17 +203,21 @@ void Etemer::update(double time_elapsed) {
 
 void Etemer::special_action(GameObject * guard, double etemer_distance) {
     
+    INFO("Etemer special action init");
+
     double etemer_distance = 0.0; 
     bool talking = true;
     bool block_movement = true;    
     
     assert (etemer_distance !=NULL);
+    DEBUG("etemer distance in special_action: "+etemer_distance);
 
     if(etemer_distance > SCREEN_WIDTH) {
        ERROR("distance greater than allowed");
        exit(-1);
      }else {
        //nothing to do
+       INFO("etemer distance ok");
      }
 
     if(InputManager::instance.is_key_pressed(InputManager::KEY_PRESS_SPACE) &&
@@ -223,38 +227,50 @@ void Etemer::special_action(GameObject * guard, double etemer_distance) {
         if(!talking && etemer_distance < DISTANCE) {
             talking = true;
             block_movement = true;
+            INFO("talking and etemer distance ok");
         if(((Guard *) (guard))->get_position_x() > get_position_x()) {
-                ((Guard *)(guard))->talking_to_etemer(ACTION_LEFT);
+            ((Guard *)(guard))->talking_to_etemer(ACTION_LEFT);
+            INFO("talking to etemer receives action left");
         }else {
             ((Guard *)(guard))->talking_to_etemer(ACTION_RIGHT);
+            INFO("talking to etemer receives action right");
         }
         }else {
             talking = false;
             block_movement = false;
+            INFO("talking and etemer distance false");
     }
     }else{
         //nothing to do
     }
 
     if(talking) {
+        INFO("talking init");
         if(((Guard *) (guard))->get_position_x() >= get_position_x()) {
             animator->set_interval(ACTION_SPECIAL_RIGHT);
             idle_animation_number = ANIMATION_NUMBER_1;
+            INFO("Animator special right");
+            INFO("Etemer idle animation number = animation number 1 ok");
         }else {
             animator->set_interval(ACTION_SPECIAL_LEFT);
             idle_animation_number = ANIMATION_NUMBER_2;
+            INFO("Animator special left");
+            INFO("Etemer idle animation number = animation number 2 ok");
         }
         if(((Guard *) (guard))->get_talking_bar_percent() <= BAR_PERCENT) {
             talking = false;
             block_movement = false;
             if(idle_animation_number) {
                 animator->set_interval(ACTION_IDLE_RIGHT);
+                INFO("talking receives action right");
             }else{
                 animator->set_interval(ACTION_IDLE_LEFT);
+                INFO("talking receives action left");
             }
         }else {
             talking = true;
             block_movement = false;
+            INFO("talking and block movement distance false");
         }
     }else {
         //nothing to do
@@ -270,9 +286,14 @@ void Etemer::special_action(GameObject * guard, double etemer_distance) {
 */
 
 void Etemer::draw() {
+
+    INFO("Etemer draw init");
     
     double etemer_position_x = 0.0;
     double etemer_position_y = 0.0;
+
+    DEBUG("etemer draw position x : "+etemer_position_x);
+    DEBUG("etemer draw position y : "+etemer_position_y);
 
     INFO("Etemer DRAW");
     animator->draw(get_position_x()-CENTER_CHARACTER_1, get_position_y()-CENTER_CHARACTER_2);
@@ -286,14 +307,21 @@ void Etemer::draw() {
 */
 
 void Etemer::move_chair() {
+
+    INFO("Etemer move_chair init");
+
     std::pair<std::string, GameObject *> chair = CollisionManager::
     instance.verify_collision_with_chairs(this);
     if(chair.second != NULL) {
+        DEBUG("chair.second : "+chair.second);
         if(animator->get_interval().first == chair.first) {
             ((Chair *) (chair.second))->set_moving(true);
             ((Chair *) (chair.second))->set_direction(chair.first);
+            INFO("set moving ok");
+            INFO("set direction ok");
         }else {
             ((Chair *) (chair.second))->set_moving(false);
+            INFO("set moving false");
         }
     }else {
         //nothing to do
@@ -309,37 +337,47 @@ void Etemer::move_chair() {
 */
 
 void Etemer::walk_in_x(double & etemer_in_x) {
+
+    INFO("Etemer walk in x init");
     
     double etemer_in_x = 0.0;
     double etemer_position_x = 0.0;
     
     assert (etemer_in_x !=NULL);
 
+    DEBUG("etemer walk in x : "+etemer_in_x);
+    DEBUG("etemer walk position x : "+etemer_position_x;
+
     if(etemer_in_x > SCREEN_WIDTH || etemer_in_x < SCREEN_INITIAL) {
        ERROR("distance Etemer greater than allowed");
        exit(-1);
      }else {
        //nothing to do
+       INFO("distance Etemer ok in walk in x");
      }
 
     if(InputManager::instance.is_key_pressed(InputManager::KeyPress::KEY_PRESS_RIGHT)) {
         etemer_in_x = etemer_in_x;
         idle_animation_number = ANIMATION_NUMBER_1;
         animator->set_interval(ACTION_RIGHT);
+        INFO("action right ok");
 }
     else if(InputManager::instance.is_key_pressed(InputManager::KeyPress::KEY_PRESS_LEFT)) {
         //movement_sound_effect->play(-1);
         etemer_in_x = etemer_in_x * (PLAY_EFECT_1 - PLAY_EFECT_2);
         idle_animation_number = ANIMATION_NUMBER_2;
         animator->set_interval(ACTION_LEFT);
+        INFO("action left ok");
 }
     else {
         etemer_in_x = PLAY_EFECT_1;
+        INFO("etemer in x receives play efect 1");
 }
     set_position_x(get_position_x()+etemer_in_x);
 
     if(CollisionManager::instance.verify_collision_with_walls_and_chairs(this)) {
         set_position_x(get_position_x()+(etemer_in_x*(PLAY_EFECT_1 - PLAY_EFECT_2)));
+        INFO("verify collision with walls and chair");
     }else {
         //nothing to do
     }
@@ -354,31 +392,39 @@ void Etemer::walk_in_x(double & etemer_in_x) {
 */
 
 void Etemer::walk_in_y(double & etemer_in_y, double etemer_in_x) {
-   
+    
+    INFO("Etemer walk in y init");
+
     double etemer_in_y = 0.0;
     double etemer_position_y = 0.0;
    
     assert (etemer_in_y !=NULL);
     assert (etemer_in_x !=NULL);
 
+    DEBUG("etemer walk in y : "+etemer_in_y);
+    DEBUG("etemer walk in x : "+etemer_in_x;
+
     if(etemer_in_x > SCREEN_WIDTH || etemer_in_x < SCREEN_INITIAL) {
        ERROR("distance Etemer X greater than allowed");
        exit(-1);
      }else {
        //nothing to do
+       INFO("distance Etemer ok in walk in y");
      }
     if(etemer_in_y > SCREEN_WIDTH || etemer_in_y < SCREEN_INITIAL) {
        ERROR("distance Etemer Y greater than allowed");
        exit(-1);
      }else {
        //nothing to do
+       INFO("distance Etemer ok in walk in y");
      }
 
     if(InputManager::instance.is_key_pressed(InputManager::KeyPress::KEY_PRESS_UP)) {
         etemer_in_y = etemer_in_y * (PLAY_EFECT_1 - PLAY_EFECT_2);
         idle_animation_number = ANIMATION_1;
         if(etemer_in_x == 0) {
-                animator->set_interval(ANIMATION_1);
+            animator->set_interval(ANIMATION_1);
+            INFO("Animation 1");
         }else {
             //nothing to do
         }
@@ -387,19 +433,24 @@ void Etemer::walk_in_y(double & etemer_in_y, double etemer_in_x) {
     KEY_PRESS_DOWN)) {
         etemer_in_y = etemer_in_y;
         idle_animation_number = ANIMATION_2;
+        INFO("etemer in y receives etemer in y");
+        INFO("animation number receives animation 2");
         if(etemer_in_x == 0) {
             animator->set_interval(ANIMATION_2);
+            INFO("Animation 2");
         }else {
             //nothing to do
         }
     }
     else {
         etemer_in_y = PLAY_EFECT_1;
+        INFO("etemer in y receives play efect 1");
     }
     set_position_y(get_position_y()+etemer_in_y);
 
     if(CollisionManager::instance.verify_collision_with_walls_and_chairs(this)) {
         set_position_y(get_position_y()+(etemer_in_y*(PLAY_EFECT_1 - PLAY_EFECT_2)));
+        INFO("verify collision with walls and chairs");
     }else {
         //nothing to do
     }
@@ -415,16 +466,23 @@ void Etemer::walk_in_y(double & etemer_in_y, double etemer_in_x) {
 */
 
 void Etemer::verify_etemer_distance(GameObject* guard) {
+
+    INFO("Etemer verify etemer distance init");
     
     double etemer_position_x = 0.0;
     double etemer_position_y = 0.0;
     double etemer_distance = 0.0;
+
+    DEBUG("etemer distance position in x : "+etemer_position_x);
+    DEBUG("etemer distance position in y : "+etemer_position_y;
+    DEBUG("etemer distance : "+etemer_distance;
     
     double etemer_distance = sqrt((pow(get_position_x() - guard->get_position_x(), ETEMER_DISTANCE)) +  
     (pow(get_position_y() - guard->get_position_y(), ETEMER_DISTANCE)));
 
     if(etemer_distance < DISTANCE){
         special_action(guard, etemer_distance);
+        INFO("special action receives guard, etemer distance");
     }else {
         //nothing to do
     }
