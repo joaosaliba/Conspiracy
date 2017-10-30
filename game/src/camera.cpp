@@ -143,6 +143,7 @@ Camera::~Camera() {
 */
 void Camera::turn_off() {
     turned_on = false;
+
     fieldOfVision->deactivate();
 }
 
@@ -163,6 +164,7 @@ bool Camera::is_turned_on() {
 
 void Camera::update(double time_elapsed) {
     assert (time_elapsed != NULL);
+    
     time_elapsed = time_elapsed;
     animator->update();
 }

@@ -90,7 +90,7 @@ Audio::~Audio(){}
 * @brief Method play
 * <p>This method call other 2 functions to see if the music or effect of
 * the music will give error</p>
-* @param const int-times_to_play
+* @param[in] const int-times_to_play
 * @return void
 */
 
