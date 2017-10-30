@@ -1,6 +1,7 @@
 #ifndef ALIEN_BILU_HPP
 #define ALIEN_BILU_HPP
 #include "alien.hpp"
+#include "log.h"
 
 /** The class Bilu receives an Alien public class where the parameters to be defined
 *received, such as position, type, and methods. The attributes that will be defined
@@ -31,6 +32,9 @@ private:
     bool editing = true; // declaring variable editing "documents
     bool last_action = true; // declaring variablre last action
     void set_special_action_animator();
+    void editing_paper(Paper* paper,bool &editing, bool &block_movement);
+    void check_final_position(FinishPoint* finish_point,bool &in_position);
+       
 };
 
 #endif
