@@ -51,6 +51,8 @@
 Etemer::Etemer(double etemer_position_x, double etemer_position_y) : 
 Alien(FILENAME, etemer_position_x, etemer_position_y, WIDTH, HEIGHT) {
    
+    INFO("Etemer constructor init");
+
     double etemer_position_x = 0.0;
     double etemer_position_y = 0.0;
     bool hacking = true;
@@ -66,17 +68,22 @@ Alien(FILENAME, etemer_position_x, etemer_position_y, WIDTH, HEIGHT) {
     assert (HEIGHT !=NULL);
     assert (HEIGHT > 22);
 
+    DEBUG("etemer position x : "+etemer_position_x);
+    DEBUG("etemer position y : "+etemer_position_y);
+
     if(etemer_position_x > SCREEN_WIDTH || etemer_position_x < SCREEN_INITIAL) {
         ERROR("Strange Etemer position x");
         exit(-1);
     }else {
        //nothing to do
+       INFO("Etemer position x ok");
     }
     if(etemer_position_y > SCREEN_WIDTH || etemer_position_y < SCREEN_INITIAL) {
        ERROR("Strange Etemer position y");
        exit(-1);
      }else {
        //nothing to do
+       INFO("Etemer position y ok");
      }
 
     animator->add_action(ACTION_SPECIAL_RIGHT,SPRITE_INITIAL_SPECIAL_RIGHT,SPRITE_FINAL_SPECIAL_RIGHT);
@@ -85,6 +92,8 @@ Alien(FILENAME, etemer_position_x, etemer_position_y, WIDTH, HEIGHT) {
     is_selected = true;
     talking = false;
     in_position = false;
+
+    INFO("Etemer constructor ok");
 }
 
 /**
@@ -99,25 +108,34 @@ Alien(FILENAME, etemer_position_x, etemer_position_y, WIDTH, HEIGHT) {
 
 void Etemer::update(double time_elapsed) {
     
+    INFO("Etemer update init");
+
     double time_elapsed = 0.0;
     bool in_position = true;
     double etemer_in_x = 0.0;
     double etemer_in_y = 0.0;
     
     assert (time_elapsed !=NULL);
+    
+    DEBUG("time elapsed update: "+time_elapsed);
+    DEBUG("etemer in x update: "+etemer_in_x);
+    DEBUG("etemer in y update: "+etemer_in_y);
 
     if(time_elapsed == -1) {
-       ERROR("Strange time ");
+       ERROR("Strange time elapsed");
        exit(-1);
      }else {
        //nothing to do
+       INFO("time elapsed Etemer ok");
      }
 
     in_position = false;
     if (block_movement) {
         animator->set_total_time(TOTAL_TIME_1);
+        INFO("block movement receives set total time 1");
     }else {
         animator->set_total_time(TOTAL_TIME_2);
+        INFO("block movement receives set total time 2");
     }
 
     auto etemer_in_y = VELOCITY_ETEMER*time_elapsed;
@@ -126,15 +144,22 @@ void Etemer::update(double time_elapsed) {
     if(!block_movement && is_selected) {
         walk_in_x(etemer_in_x);
         walk_in_y(etemer_in_y, etemer_in_x);
+        INFO("walk ok");
     }else {
         //nothing to do
+        INFO("walk strange");
     }
 
     if(etemer_in_x == 0.0 && etemer_in_y == 0.0 && !block_movement) {
+        INFO("check whether etemer in x and y receives such values");
+        DEBUG("etemer in x : "+etemer_in_x);
+        DEBUG("etemer in y : "+etemer_in_y);
         if(idle_animation_number) {
             animator->set_interval(ACTION_IDLE_RIGHT);
+            INFO("action idle right ok");
         }else {
-            animator->set_interval(ACTION_IDLE_LEFT);    
+            animator->set_interval(ACTION_IDLE_LEFT);
+            INFO("action idle left ok");    
         }   
     }else {
         //nothing to do
@@ -143,10 +168,13 @@ void Etemer::update(double time_elapsed) {
    FinishPoint* finish_point = (FinishPoint*)CollisionManager::
    instance.verify_collision_with_finish_points(this);
     if(finish_point != NULL) {
+        DEBUG("finish point in update : "+finish_point);
         if(finish_point->get_alien_names().find(NAME_CHARACTER) != std::string::npos) {
             in_position = true;
+            INFO("final position ok");
         }else {
             in_position = false;
+            INFO("final position false");
         }
     }else {
         //nothing to do
@@ -155,8 +183,10 @@ void Etemer::update(double time_elapsed) {
 
     if(CollisionManager::instance.verify_collision_with_cameras(this)) {
         set_enabled(false);
+        INFO("collision with camera false");
     }else {
         set_enabled(true);
+        INFO("collision with camera true");
     }
     animator->update();
 }

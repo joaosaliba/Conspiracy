@@ -3,6 +3,7 @@
 
 #include "alien.hpp"
 #include <time.h>
+#include "log.h"
 
 /** The class Etemer receives an Alien public class where the parameters to be defined
 *received, such as position, type, and methods. The attributes that will be defined
