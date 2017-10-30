@@ -7,6 +7,7 @@
 *received, such as position, type, and methods. The attributes that will be defined
 *public and private
 */
+
 class Bilu: public Alien {
 public:
 /**

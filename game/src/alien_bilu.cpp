@@ -353,6 +353,7 @@ void Bilu::draw() {
 void Bilu::set_special_action_animator() {
 
     INFO("Bilu set special action animator init");
+    
     // Check if idle_animation_number is equals 5
     if(idle_animation_number == ANIMATION_NUMBER) {
         animator->set_interval(ACTION_SPECIAL_RIGHT);
