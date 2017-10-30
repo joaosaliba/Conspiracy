@@ -63,7 +63,8 @@ void Player::update(double timeElapsed){
         } else if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_THREE)) {
                 selectedAlien = VARGINA;
                 ((Varginha *)(varginha))->setDefault();
-        }
+        }else{
+         WARN("ets number isn't correct!");
 
         if(beforeAlien != selectedAlien) {
                 header->setAlienSelect(selectedAlien);
