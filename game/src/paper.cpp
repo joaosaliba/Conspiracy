@@ -7,6 +7,8 @@
 //#define NDEBUG *uncomment to disable assertions
 #include "paper.hpp"
 #include <assert.h>
+#include "log.h"
+
 #define INITIAL_PERCENTAGE 0.0
 
 /**

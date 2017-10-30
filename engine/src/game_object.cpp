@@ -75,6 +75,7 @@ GameObject::~GameObject(){}
 */
 
 std::string GameObject::getName(){
+    INFO("Getting object name");
     assert(object_name != NULL);
     return name;
 }
@@ -85,6 +86,7 @@ std::string GameObject::getName(){
 */
 
 double GameObject::getPositionX(){
+    INFO("Getting object x coordinate");
     assert(object_position_x != NULL);
     return position.first;
 }
@@ -95,6 +97,7 @@ double GameObject::getPositionX(){
 */
 
 double GameObject::getPositionY(){
+    INFO("Getting object y coordinate");
     assert(object_position_y != NULL);
     return position.second;
 }
@@ -105,6 +108,7 @@ double GameObject::getPositionY(){
 */
 
 int GameObject::getWidth(){
+    INFO("Getting object width dimension");
     assert(object_width != NULL);
     return size.first;
 }
@@ -115,6 +119,7 @@ int GameObject::getWidth(){
 */
 
 int GameObject::getHeight(){
+    INFO("Getting object height dimension");
     assert(object_height != NULL);
     return size.second;
 }
@@ -125,6 +130,7 @@ int GameObject::getHeight(){
 */
 
 void GameObject::setName(std::string object_new_name){
+    INFO("Setting object name");
     assert(object_new_name != NULL);
     name = object_new_name;
 }
@@ -135,6 +141,7 @@ void GameObject::setName(std::string object_new_name){
 */
 
 void GameObject::setPositionX(double object_new_x){
+    INFO("Setting object x coordinate");
     assert(object_new_x != NULL);
     position.first = object_new_x;
 }
@@ -145,6 +152,7 @@ void GameObject::setPositionX(double object_new_x){
 */
 
 std::pair<double,double> GameObject::getCenter(){
+    INFO("Getting object center coordinate");
     assert(position.first != NULL);
     assert(position.second != NULL);
     std::pair<double,double> center;
@@ -159,6 +167,7 @@ std::pair<double,double> GameObject::getCenter(){
 */
 
 void GameObject::setPositionY(double object_new_y){
+    INFO("Setting object y coordinate");
     assert(object_new_y != NULL);
     position.second = object_new_y;
 }
@@ -169,6 +178,7 @@ void GameObject::setPositionY(double object_new_y){
 */
 
 void GameObject::setWidth(int object_new_width){
+    INFO("Getting object width dimension");
     assert(object_new_width != NULL);
     size.first = object_new_width;
 }
@@ -179,6 +189,7 @@ void GameObject::setWidth(int object_new_width){
 */
 
 void GameObject::setHeight(int object_new_height){
+    INFO("Setting object height dimension");
     assert(object_new_height != NULL);
     size.second = object_new_height;
 }
@@ -189,6 +200,7 @@ void GameObject::setHeight(int object_new_height){
 */
 
 void GameObject::setEnabled(bool param_enabled){
+    INFO("Setting object as enabled");
     assert(param_enabled != NULL);
     enabled = param_enabled;
 }
@@ -199,6 +211,7 @@ void GameObject::setEnabled(bool param_enabled){
 */
 
 void GameObject::setVisible(bool param_visible){
+    INFO("Setting object as visible");
     assert(param_visible != NULL);
     visible = param_visible;
 }
@@ -209,6 +222,7 @@ void GameObject::setVisible(bool param_visible){
 */
 
 bool GameObject::isEnabled(){
+    INFO("Verifyng if object is enabled");
     return enabled;
 }
 
@@ -218,5 +232,6 @@ bool GameObject::isEnabled(){
 */
 
 bool GameObject::isVisible(){
+    INFO("Verifying if the object is visible");
     return visible;
 }

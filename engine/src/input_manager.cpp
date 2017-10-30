@@ -53,18 +53,22 @@ InputManager InputManager::instance;
 
 
     bool InputManager::getQuitRequest(){
+        INFO("Getting quit request");
         return quitRequest;
     }
 
     bool InputManager::isKeyPressed(int iKeyCode) {
+        INFO("Verifying if key is pressed");
         return keyActive[iKeyCode];
     }
 
     bool InputManager::isKeyReleased(int iKeyCode){
+        INFO("Verifying if key is released");
         return (!keyActive[iKeyCode] && keyPrevious[iKeyCode]);
     }
 
     bool InputManager::isKeyTriggered(int iKeyCode){
+        INFO("Verifying if key is triggered");
         //It verifies if the key is triggered
         if(keyActive[iKeyCode] && !keyPrevious[iKeyCode]){
             keyPrevious[iKeyCode] = true;
@@ -76,5 +80,6 @@ InputManager InputManager::instance;
     }
 
     void InputManager::setQuitRequest(bool isRequest){
+        INFO("Setting quit request");
         quitRequest = isRequest;
 }

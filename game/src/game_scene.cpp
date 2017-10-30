@@ -17,6 +17,7 @@
 #include "table.hpp"
 #include "paper_table.hpp"
 #include "chair.hpp"
+#include "log.h"
 
 //#define NDEBUG *uncomment to disable assertions
 #include <typeinfo>

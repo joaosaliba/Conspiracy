@@ -7,6 +7,7 @@
 //#define NDEBUG *uncomment to disable assertions
 #include "engine.hpp"
 #include <assert.h>
+#include "log.h"
 
 namespace engine{
 

@@ -43,7 +43,7 @@ Rectangle::~Rectangle() {
 */
 
 void Rectangle::nullSurfaceDetector(SDL_Surface *surface){
-
+  INFO("Detecting if surfac is null");
   surface = SDL_CreateRGBSurface(0, getWidth(),getHeight(), 8, 0, 0, 0,0);
   //If the surface is null it fires an error
   if (surface == NULL) {
@@ -66,6 +66,7 @@ void Rectangle::nullSurfaceDetector(SDL_Surface *surface){
 */
 
 void Rectangle::init() {
+    INFO("Initializing rectangle object");
     SDL_Surface *surface = nullptr;
     surface = SDL_CreateRGBSurface(0, getWidth(),getHeight(), 8, 0, 0, 0,0);
 
@@ -77,6 +78,7 @@ void Rectangle::init() {
 */
 
 void Rectangle::update(double time_elapsed){
+    INFO("Updating object state");
     time_elapsed = time_elapsed;
     //Verifies if the rectangle is enabled
     if(isEnabled()) {
@@ -92,6 +94,7 @@ void Rectangle::update(double time_elapsed){
 */
 
 void Rectangle::draw() {
+    INFO("Drawing rectangle");
     //If there is a rectangle object enabled it draws the rectangle
     if(isEnabled()) {
       SDL_Rect clipRect = {0, 0, getWidth(), getHeight()};
@@ -108,6 +111,7 @@ void Rectangle::draw() {
 */
 
 void Rectangle::verifyAlpha() {
+    INFO("Verifying if alpha is active");
     //If the rectangle alpha is active it sets the texture
     if(alpha_active){
         SDL_SetTextureColorMod(texture, rectangle_color->r, rectangle_color->g, rectangle_color->b);
@@ -124,6 +128,7 @@ void Rectangle::verifyAlpha() {
 */
 
 void Rectangle::setAlphaActive(bool is_active) {
+    INFO("Setting alpha as active");
     alpha_active = is_active;
 }
 
@@ -132,6 +137,7 @@ void Rectangle::setAlphaActive(bool is_active) {
 */
 
 bool Rectangle::getAlphaActive() {
+    INFO("Getting alpha active");
     return alpha_active;
 }
 
@@ -140,6 +146,7 @@ bool Rectangle::getAlphaActive() {
 */
 
 void Rectangle::setColor(Color * rectangle_new_color){
+    INFO("Setting rectangle color");
     assert(rectangle_new_color != NULL);
     rectangle_color = rectangle_new_color;
 }
