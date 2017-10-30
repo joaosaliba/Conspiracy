@@ -137,5 +137,5 @@ void Paper::playEffect(){
 
 void Paper::stopEffect(){
     paper_editing_sound->stop();
-    assert(paper_editing_sound != NULL);
+    assert(paper_editing_sound !=  NULL);
 }
