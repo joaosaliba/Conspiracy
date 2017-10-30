@@ -121,23 +121,23 @@ void GameScene::update(double time_elapsed){
 */
 
 void GameScene::verifyPapers(){
-    int count_papers = 0;
-    std::vector<Guard *> guards;
-    bool all_papers_edited = true;
-    (void)all_papers_edited;
 
     //For each game object detected
     for(auto gameObject : gameObjectsList) {
           //If verifies if the game object is a guard
+          std::vector<Guard *> guards;
           if(typeid(*gameObject) == typeid(Guard)) {
                   guards.push_back((Guard *)(gameObject));
           //Verifies if the game object is a paper
           }else if(typeid(*gameObject) == typeid(PaperTable)) {
                   //Verifies if all papers are edited
+                  bool all_papers_edited = true;
+                  (void)all_papers_edited;
                   if(!(((PaperTable*)(gameObject))->getPaper())->isEdited()) {
                       all_papers_edited = false;
                   //All papers are edited
                   }else{
+                      int count_papers = 0;
                       count_papers++;
                   }
           }else {
@@ -152,7 +152,6 @@ void GameScene::verifyPapers(){
 
 void GameScene::allPapersEdited(){
   int count_papers = 0;
-
   //Verifies if the number of papers edited is equal to the actual number of papers
   if(count_papers >= actual_papers) {
       player->updatePaperQuantity(count_papers);
@@ -178,15 +177,13 @@ void GameScene::aliensInPosition(){
 }
 
 void GameScene::playerIsDead(){
-    bool all_papers_edited = true;
-
     //If the player is dead it stops the stage timer
     if(!player->isDead()) {
         stage_timer->step();
     }else{
         //nothing to do Player is alive
     }
-
+    bool all_papers_edited = true;
     //If player is dead it reloads stage
     if(player->isDead()) {
         if(stage_timer->elapsed_time() >= DEAD_TIME){
@@ -213,7 +210,6 @@ void GameScene::playerIsDead(){
 */
 
 void GameScene::verifyWinOrLose(){
-        std::vector<Guard *> guards;
         assert(guards != NULL);
         assert(all_papers_edited != NULL);
         assert(count_papers != NULL);
@@ -223,6 +219,7 @@ void GameScene::verifyWinOrLose(){
         aliensInPosition();
         playerIsDead();
 
+        std::vector<Guard *> guards;
         //Verifies if the aliens were detected
         for(Guard * guard : guards) {
             guard->verifyDistance(player->getVarginha());
@@ -312,12 +309,12 @@ void GameScene::load(){
 
 void GameScene::unload(){
     CollisionManager::instance.resetLists();
-    actual_papers = 0;
     assert(actual_papers != NULL);
     //For each game object detected
     for(GameObject* object: gameObjectsList){
         free(object);
     }
+    actual_papers = 0;
     gameObjectsList.clear();
 }
 

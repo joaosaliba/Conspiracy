@@ -14,13 +14,14 @@ StageThree::StageThree(int id, std::string newTiledFile) : GameScene (id, newTil
 }
 
 void StageThree::createGuards(){
+
+    Guard * guard1 = new Guard("assets/sprites/seguranca_sheet.png", 30, HEADER_SIZE + 180, 18, 35, "right", 2, 10);
+
     std::pair <std::string, int> GuardOneWayOne ("right", 600);
     std::pair <std::string, int> GuardOneWayTwo ("up", HEADER_SIZE + 30);
     std::pair <std::string, int> GuardOneWayThree ("left", 30);
     std::pair <std::string, int> GuardOneWayFour ("down", HEADER_SIZE + 180);
     std::pair <std::string, int> GuardOneWayFive ("left", 30);
-
-    Guard * guard1 = new Guard("assets/sprites/seguranca_sheet.png", 30, HEADER_SIZE + 180, 18, 35, "right", 2, 10);
     guard1->addWay(1, GuardOneWayOne);
     guard1->addWay(2, GuardOneWayTwo);
     guard1->addWay(3, GuardOneWayThree);
@@ -28,6 +29,9 @@ void StageThree::createGuards(){
     guard1->addWay(5, GuardOneWayFive);
 
     gameObjectsList.push_back(guard1);
+
+
+    Guard * guard2 = new Guard("assets/sprites/seguranca_sheet.png", 750, HEADER_SIZE + 50, 18, 35, "left", 2, 10);
 
     std::pair <std::string, int> GuardTwoWayOne ("left", GUARD_PATH4);
     std::pair <std::string, int> GuardTwoWayTwo ("down", HEADER_SIZE + 300);
@@ -38,8 +42,6 @@ void StageThree::createGuards(){
     std::pair <std::string, int> GuardTwoWaySeven ("left", GUARD_PATH);
     std::pair <std::string, int> GuardTwoWayEight ("up", HEADER_SIZE + 50);
     std::pair <std::string, int> GuardTwoWayNine ("left", GUARD_PATH);
-
-    Guard * guard2 = new Guard("assets/sprites/seguranca_sheet.png", 750, HEADER_SIZE + 50, 18, 35, "left", 2, 10);
     guard2->addWay(1, GuardTwoWayOne);
     guard2->addWay(2, GuardTwoWayTwo);
     guard2->addWay(3, GuardTwoWayThree);

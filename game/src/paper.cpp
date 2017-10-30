@@ -13,8 +13,8 @@ Paper::Paper(std::string object_name, double paper_position_x, double paper_posi
 
     std::vector<unsigned int> back_color = {22, 206, 26, 1};
     std::vector<unsigned int> front_color = {116, 225, 117, 1};
-    paper_editing_bar = new ProgressBar(paper_position_x-3, paper_position_y-8, 22.5, 5, 0.005, back_color, front_color);
 
+    paper_editing_bar = new ProgressBar(paper_position_x-3, paper_position_y-8, 22.5, 5, 0.005, back_color, front_color);
     paper_editing_sound = new Audio("assets/sounds/PAPEROISE.wav", "EFFECT", 100);
 
     animator->addAction("idle",0,0);

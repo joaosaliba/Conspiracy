@@ -38,14 +38,13 @@ namespace engine{
          assert(engine_step_time != NULL);
          assert(engine_time_elapsed != NULL);
          scene_manager = new SceneManager();
-         window_manager = new WindowManager();
-         sdl_manager = new SDLManager();
 
          engine_start_time = SDL_GetTicks();
          engine_step_time = engine_start_time;
          frame_time = MILI_SECOND/frame_rate;
 
-
+         sdl_manager = new SDLManager();
+         window_manager = new WindowManager();
          //If there is an error while initializing SDL it exits.
          if(!sdl_manager->initSDL()) {
              ERROR("ERRO AO INICIAR SDL");
@@ -121,10 +120,10 @@ namespace engine{
          assert(engine_start_time != NULL);
          assert(engine_step_time != NULL);
          assert(engine_time_elapsed != NULL);
-         bool engine_is_running = true;
          assert(engine_is_running != NULL);
-         SDL_Event event;
 
+         SDL_Event event;
+         bool engine_is_running = true;
          //While engine is running
          while(engine_is_running){
              engine_step_time = SDL_GetTicks();
