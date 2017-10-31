@@ -1,5 +1,8 @@
-/**class to object of choose_stage_scene, where you can find some values, files,
- *objects and meths to the same.
+/**
+ * @file choose_stage_scene.cpp
+ * @brief class to object of choose_stage_scene, where you can find some values, files, others objects
+ * and methods to the same.
+ * @copyright  GNU GENERAL PUBLIC LICENSE.
  */
 
 #include "choose_stage_scene.hpp"
@@ -16,13 +19,20 @@ using namespace engine;
 
 ChooseStageScene::ChooseStageScene(int id) : Scene(id){
     select_button = 1;
+
     select = new Color(255, 255, 255, 0);
     not_select = new Color(0, 0, 0, 0);
+
     background = new Sprite("assets/sprites/selecao_fases.png");
     sound_effect = new Audio("assets/sounds/SELECT6.wav", "EFFECT", 100);
 }
 
+/**
+  *    @brief ChooseStageScene object destructor.
+ */
+
 ChooseStageScene::~ChooseStageScene(){
+
 }
 
 void ChooseStageScene::draw(){
@@ -34,7 +44,9 @@ void ChooseStageScene::draw(){
 }
 
 void ChooseStageScene::update(double time_elapsed){
-    select_action();
+    select_action_1();
+    select_action_2();
+    select_action_3();
 
     for(auto gameObject : game_objects_list) {
         if(typeid(*gameObject.second) == typeid(Choice)) {
