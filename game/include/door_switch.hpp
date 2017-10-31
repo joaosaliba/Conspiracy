@@ -13,6 +13,7 @@
 #include "game_object.hpp"
 #include "audio.hpp"
 #include "progress_bar.hpp"
+#include "log.h"
 
 using namespace engine;
 

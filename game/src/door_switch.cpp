@@ -27,6 +27,8 @@ DoorSwitch::DoorSwitch(std::string object_name, double door_switch_position_x, d
                                                                          door_switch_width,
                                                                          door_switch_height) {
 
+    INFO("Bilu constructor init");
+
     assert (door_switch_position_x != NULL);
     assert (door_switch_position_y != NULL);
     assert (door_switch_width != NULL);
@@ -37,12 +39,14 @@ DoorSwitch::DoorSwitch(std::string object_name, double door_switch_position_x, d
         exit(-1);
     }else {
         //nothing to do
+        INFO("door_switch_position_x");
     }
     if(door_switch_position_y > MAX_STRANGE_DOOR_VALUE || door_switch_position_y < MIN_STRANGE_DOOR_VALUE) {
         ERROR("Strange door switch position");
         exit(-1);
     }else {
         //nothing to do
+        INFO("door_switch_position_y ok");
     }
     //this part verify if the door_switch_width is strange and return a error
     if(door_switch_width > 500 || door_switch_width < MIN_STRANGE_DOOR_VALUE) {
@@ -50,6 +54,7 @@ DoorSwitch::DoorSwitch(std::string object_name, double door_switch_position_x, d
         exit(-1);
     }else {
         //nothing to do
+        INFO("door_switch_width ok");
     }
     //this part verify if the door_switch_height is strange and return a error
     if(door_switch_height > 500 || door_switch_height < MIN_STRANGE_DOOR_VALUE) {
@@ -57,6 +62,7 @@ DoorSwitch::DoorSwitch(std::string object_name, double door_switch_position_x, d
         exit(-1);
     }else {
         //nothing to do
+        INFO("door_switch_height ok");
     }
 
     animator = new Animation(object_name, 1, 6, 0.5);
@@ -67,6 +73,8 @@ DoorSwitch::DoorSwitch(std::string object_name, double door_switch_position_x, d
     animator->add_action("beingHacked", 1,5);
     animator->add_action("idle", 0, 0);
     pressed = false;
+
+    INFO("Bilu constructor ok");
 }
 
 /**
@@ -85,14 +93,18 @@ DoorSwitch::~DoorSwitch(){}
 void DoorSwitch::update(double time_elapsed) {
     assert (time_elapsed != NULL);
 
+    DEBUG("time_elapsed: "+time_elapsed);
+
     if(time_elapsed == NULL) {
         ERROR("we didnt find the atrribute time_elapsed");
         exit(-1);
     }else {
       //nothing to do
+      INFO("time_elapsed is ok");
     }
 
     time_elapsed = time_elapsed;
+    
     animator->update();
     //this part cerify if is pressed and update passing the time_elapsed
     if(is_pressed())) {
