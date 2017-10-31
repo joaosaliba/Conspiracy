@@ -61,7 +61,7 @@ Audio::Audio(std::string audio_path, std::string audio_type, int audio_volume) {
 Audio::create_effect(std::string audio_type, std::string audio_path, int audio_volume){
 //assert()
     Mix_Chunk* audio_effect = nullptr;
-
+    //flux offset structure, that load the audio effect or throw the error if the the effect is null.
     if(audio_type.compare("EFFECT") == 0) {
       audio_effect = Mix_LoadWAV(audio_path.c_str());
       Mix_VolumeChunk(audio_effect, audio_volume);
@@ -78,6 +78,7 @@ Audio::create_music(std::string audio_type, std::string audio_path, int audio_vo
     //assert()
 
     Mix_Music* audio_music = nullptr;
+    //flux offset structure, that load the audio music or throw the error if the the music state is null.
     if(audio_type.compare("MUSIC") == 0) {
 
         audio_music = Mix_LoadMUS(audio_path.c_str());
@@ -93,6 +94,7 @@ Audio::create_music(std::string audio_type, std::string audio_path, int audio_vo
 
 Audio::verify_error(Mix_Music* audio_music, Mix_Music* audio_effect){
 
+    //flux offset structure, that verify if the music and audio effect are null and throw a error.
     if(audio_music == NULL & audio_effect == NULL){
       ERROR("Audio type is not correct");
     }

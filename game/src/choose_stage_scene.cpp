@@ -113,6 +113,7 @@ void ChooseStageScene::select_action_2() {
 }
 
 void ChooseStageScene::select_action_3(){
+    
     if(InputManager::instance.is_key_triggered(InputManager::KeyPress::KEY_PRESS_ENTER)) {
         switch(select_button) {
         case 0:
