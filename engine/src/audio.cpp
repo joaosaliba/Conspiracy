@@ -15,7 +15,8 @@ using namespace engine;
 Audio::Audio(std::string audio_path, std::string audio_type, int audio_volume) {
 
     assert ( audio_volume != NULL);
-//verify if exist a audio
+
+    //verify if the volume exist
     if(audio_volume == NULL) {
       ERROR("do not exist the volume");
       exit(-1);
@@ -24,16 +25,34 @@ Audio::Audio(std::string audio_path, std::string audio_type, int audio_volume) {
     }
 
   /**
-  * @brief Method did to load the audio of the game
-  * <p>This method execute actions to load the audio of the game and treat the erros
-  * of the class "audio"</p>
-  * @return string-audio_type
-  * @return string-audio_effect
+  * @brief Method create_music
+  * <p>This method load the audio music of the game
+  * @param[in] audio_type - std::string
+  * @param[in] audio_path - std::string
+  * @param[in] audio_volume - int
+  * @return[out] audio_music - Mix_Music*
   */
 
     audio_music = create_music(audio_type, audio_path, audio_volume);
 
+    /**
+    * @brief Method create_effect
+    * <p>This method load the effect of the music in the game
+    * @param[in] audio_type - std::string
+    * @param[in] audio_path - std::string
+    * @param[in] audio_volume - int
+    * @return[out] audio_effect - Mix_Chunk*
+    */
+
     audio_effect = create_effect(audio_type, audio_path, audio_volume);
+
+    /**
+    * @brief Method verify_error
+    * <p>This method verify if the audio and the effect is NULL.
+    * @param[in] audio_effect - Mix_Chunk*
+    * @param[in] audio_music - Mix_Music*
+    * @return[out] void
+    */
 
     verify_error(audio_music, audio_effect);
 }
