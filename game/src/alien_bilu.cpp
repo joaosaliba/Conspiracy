@@ -129,31 +129,11 @@ void Bilu::update(double time_elapsed) {
     auto move_bilu_in_x = VELOCITY_BILU*time_elapsed;
 
     //checks conditions to move the player Bilu
-    if(!block_movement && is_selected) {
-        walk_in_x(move_bilu_in_x);
-        walk_in_y(move_bilu_in_y, move_bilu_in_x);
-        INFO("walk ok");
-    }else {
-        //nothing to do
-        INFO("walk strange");
-    }
+    walk(&block_movement, &is_selected, &move_bilu_in_x, &move_bilu_in_y);
 
     //check atributes to move the player Bilu
-    if(move_bilu_in_x == 0 && move_bilu_in_y == 0) {
-        INFO("check whether move_bilu receives such values");
-        DEBUG("move bilu in x : "+move_bilu_in_x);
-        DEBUG("move bilu in y : "+move_bilu_in_y);
-        //if idle animation number
-        if(idle_animation_number) {
-            animator->set_interval(ACTION_IDLE_RIGHT);
-            INFO("action idle right ok");
-        //Assigns a default animator
-        }else {
-            animator->set_interval(ACTION_IDLE_LEFT);
-            INFO("action idle left ok");
-        //check atributes to move the player Bilu
-        }
-}
+    idle_animator(&move_bilu_in_x, &move_bilu_in_y, &idle_animation_number);
+
     special_action();
     
     //Check the collisions with the cameras
@@ -192,6 +172,39 @@ void Bilu::check_final_position(FinishPoint* finish_point,bool &in_position){
         }
     }else{
         //nothing to do
+    }
+}
+
+void Bilu::walk(bool &block_movement, bool &is_selected, double &move_bilu_in_x, 
+double &move_bilu_in_y){
+    
+    if(!block_movement && is_selected) {
+        walk_in_x(move_bilu_in_x);
+        walk_in_y(move_bilu_in_y, move_bilu_in_x);             
+        INFO("walk ok");
+    }else {
+        //nothing to do
+        INFO("walk strange");
+    }
+}
+
+void Bilu::idle_animator(double &move_bilu_in_x, double &move_bilu_in_y, 
+int &idle_animation_number){
+
+    if(move_bilu_in_x == 0 && move_bilu_in_y == 0) {
+        INFO("check whether move_bilu receives such values");
+        DEBUG("move bilu in x : "+move_bilu_in_x);
+        DEBUG("move bilu in y : "+move_bilu_in_y);
+        //if idle animation number
+        if(idle_animation_number) {
+            animator->set_interval(ACTION_IDLE_RIGHT);
+            INFO("action idle right ok");
+        //Assigns a default animator
+        }else {
+            animator->set_interval(ACTION_IDLE_LEFT);
+            INFO("action idle left ok");
+        //check atributes to move the player Bilu
+        }
     }
 }
 
@@ -260,27 +273,10 @@ void Bilu::special_action() {
         }
 }
     // If hacking
-    if(hacking) {
-        INFO("hacking init");
-        ((DoorSwitch*)(doorSwitch))->animate();
-        set_special_action_animator();
-            // doorSwitch receives actions
-        if(((DoorSwitch*)(doorSwitch))->get_hacking_bar_percent() <= INITIAL_HACKING_BAR_PERCENT) {
-            INFO("initial hacking bar percent");
-            hacking = false;
-            ((DoorSwitch*)(doorSwitch))->stop_animation();
-            ((DoorSwitch*)(doorSwitch))->stop_effect();
-            ((DoorSwitch*)(doorSwitch))->reset_hacking_progress();
-            Alien::animator->set_interval(ANIMATION_IDLE);
-            block_movement = false;
-            //Assigns a default hacking and block_movement false
-            }else {
-                hacking = true;
-                block_movement = true;
-                INFO("hacking ok");
-            }
-// If editing receives actions
-}else if(editing) {
+    hacking(doorSwitch, &hacking, &block_movement);
+
+    // If editing receives actions
+    else if(editing) {
     INFO("editing init");
     ((Paper*)(paper))->animate();
     set_special_action_animator();
@@ -321,6 +317,31 @@ void Bilu::editing_paper(Paper* paper,bool &editing, bool &block_movement){
             //nothing to do
         }
 }
+
+void hacking(DoorSwitch* doorSwitch, bool &hacking, bool &block_movement){
+    if(hacking) {
+        INFO("hacking init");
+        ((DoorSwitch*)(doorSwitch))->animate();
+        set_special_action_animator();
+        // doorSwitch receives actions
+        if(((DoorSwitch*)(doorSwitch))->get_hacking_bar_percent() <= INITIAL_HACKING_BAR_PERCENT) {
+            INFO("initial hacking bar percent");
+            hacking = false;
+            ((DoorSwitch*)(doorSwitch))->stop_animation();
+            ((DoorSwitch*)(doorSwitch))->stop_effect();
+            ((DoorSwitch*)(doorSwitch))->reset_hacking_progress();
+            Alien::animator->set_interval(ANIMATION_IDLE);
+            block_movement = false;
+            //Assigns a default hacking and block_movement false
+        }else {
+            hacking = true;
+            block_movement = true;
+            INFO("hacking ok");
+        }
+
+    }
+}
+
 /**
 * Draw method
 * <p>draws the animation of the character according to its position</p>

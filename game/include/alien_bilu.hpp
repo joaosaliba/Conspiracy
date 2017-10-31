@@ -35,7 +35,11 @@ private:
     void set_special_action_animator();
     void editing_paper(Paper* paper,bool &editing, bool &block_movement);
     void check_final_position(FinishPoint* finish_point,bool &in_position);
-       
+    void idle_animator(double &move_bilu_in_x, double &move_bilu_in_y, int &idle_animation_number);
+    void walk(bool &block_movement, bool &is_selected, double &move_bilu_in_x, 
+    double &move_bilu_in_y);
+    void hacking(DoorSwitch* doorSwitch, bool &hacking, bool &block_movement);
+ 
 };
 
 #endif
