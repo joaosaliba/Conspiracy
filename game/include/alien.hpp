@@ -8,6 +8,7 @@
 #include "collision_manager.hpp"
 #include "audio.hpp"
 #include "finish_point.hpp"
+#include "log.h"
 
 /** The class Alien receives an GameObject public class where the parameters to be defined
 * received, such as position, type, and methods. The attributes that will be defined
