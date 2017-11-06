@@ -61,9 +61,6 @@ GameScene::GameScene(int id, std::string new_tiled_file) : Scene(id){
 
 GameScene::GameScene(int id, std::string new_tiled_file, std::string audio_file) : Scene(id){
     assert(audio_file != NULL);
-    assert(new_tiled_file != NULL);
-    assert(id != NULL);
-
     //Verifies if tha audio file is TEMA3.wav and it assigns a background music
     if(audio_file == "assets/sounds/TEMA3.wav"){
         background_music = new Audio(audio_file, "MUSIC", 55);
@@ -74,6 +71,7 @@ GameScene::GameScene(int id, std::string new_tiled_file, std::string audio_file)
         assert(background_music != NULL);
     }
     tiled_file = new_tiled_file;
+    assert(new_tiled_file != NULL);
     skip_timer = new Timer();
     stage_timer = new Timer();
     actual_papers = 0;
@@ -81,6 +79,7 @@ GameScene::GameScene(int id, std::string new_tiled_file, std::string audio_file)
     assert(skip_timer != NULL);
     assert(stage_timer != NULL);
     assert(actual_papers != NULL);
+    assert(id != NULL);
 }
 
 /**
@@ -88,6 +87,7 @@ GameScene::GameScene(int id, std::string new_tiled_file, std::string audio_file)
 */
 
 void GameScene::draw(){
+
         INFO("Renderizing game scene");
         //For each game object detected it draws
         for(auto gameObject : gameObjectsList) {
@@ -101,6 +101,7 @@ void GameScene::draw(){
 
 void GameScene::update(double time_elapsed){
     INFO("Updating game scene");
+
     assert(time_elapsed != NULL);
     //It verifies if the player is dead to update scene
     if(!player->isDead()){
@@ -125,6 +126,7 @@ void GameScene::update(double time_elapsed){
 
 void GameScene::verifyPapers(){
     INFO("Verifing if papers are edited");
+
     //For each game object detected
     for(auto gameObject : gameObjectsList) {
           //If verifies if the game object is a guard
@@ -136,6 +138,7 @@ void GameScene::verifyPapers(){
                   //Verifies if all papers are edited
                   bool all_papers_edited = true;
                   (void)all_papers_edited;
+                  assert(all_papers_edited != NULL);
                   if(!(((PaperTable*)(gameObject))->getPaper())->isEdited()) {
                       all_papers_edited = false;
                   //All papers are edited
@@ -155,9 +158,11 @@ void GameScene::verifyPapers(){
 
 void GameScene::allPapersEdited(){
   INFO("Setting all papers as edited");
+
   int count_papers = 0;
   //Verifies if the number of papers edited is equal to the actual number of papers
   if(count_papers >= actual_papers) {
+      assert(count_papers != NULL && count_papers >= 50);
       player->updatePaperQuantity(count_papers);
       actual_papers = count_papers;
 
@@ -169,6 +174,7 @@ void GameScene::allPapersEdited(){
 
 void GameScene::aliensInPosition(){
   INFO("Verifing if aliens are in position");
+
   //Verifies if all aliens are in position at the end of the stage
   if((Etemer *)(player->getEtemer())->isInPosition() &&
     (Bilu*)(player->getBilu())->isInPosition() &&
@@ -183,6 +189,7 @@ void GameScene::aliensInPosition(){
 
 void GameScene::playerIsDead(){
     INFO("Verifing if playes is dead");
+
     //If the player is dead it stops the stage timer
     if(!player->isDead()) {
         stage_timer->step();
@@ -217,6 +224,7 @@ void GameScene::playerIsDead(){
 
 void GameScene::verifyWinOrLose(){
         INFO("Verifing all coditions for winning");
+
         assert(guards != NULL);
         assert(all_papers_edited != NULL);
         assert(count_papers != NULL);
@@ -241,6 +249,7 @@ void GameScene::verifyWinOrLose(){
 
 void GameScene::initializeColliders(){
     INFO("Initializing colliders");
+
     assert(gameObjectsList != NULL);
     //For each game object detected
     for(auto gameObject: gameObjectsList){
@@ -286,6 +295,7 @@ void GameScene::initializeColliders(){
 
 void GameScene::load(){
     INFO("Loading game scene");
+
     background_music->play(-1);
     aliens_in_position = false;
     stage_timer->start();
@@ -318,6 +328,7 @@ void GameScene::load(){
 
 void GameScene::unload(){
     INFO("Unloading game scene");
+
     CollisionManager::instance.resetLists();
     assert(actual_papers != NULL);
     //For each game object detected
@@ -350,6 +361,7 @@ void GameScene::createChairs(){
 
 void GameScene::createGameBorders(){
         INFO("Renderizing chairs");
+
         for(int i=0; i<=960; i+=5) {
                 gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", i, HEADER_SIZE + 0, 5, 20));
                 gameObjectsList.push_back(new Wall("assets/sprites/cenary/parede_cima1.png", i, HEADER_SIZE + 595, 5, 5));
@@ -366,6 +378,7 @@ void GameScene::createGameBorders(){
 
 void GameScene::createGround(){
         INFO("Renderizing ground");
+
         for(int i=0; i<=960; i+=20) {
                 for(int j=0; j<=600; j+=20) {
                         gameObjectsList.push_back(new Ground("assets/sprites/cenary/chao.png", i, HEADER_SIZE + j, 20, 20));
@@ -379,6 +392,7 @@ void GameScene::createGround(){
 
 void GameScene::createCenary(){
     INFO("Renderizing cenary");
+
     std::ifstream tile_file;
     assert(tile_file != NULL);
     tile_file.open(tiled_file);
