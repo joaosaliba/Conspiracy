@@ -65,8 +65,24 @@ Alien(FILENAME, bilu_position_x, bilu_position_y, WIDTH, HEIGHT) {
     DEBUG("bilu position x : "+bilu_position_x);
     DEBUG("bilu position y : "+bilu_position_y);
 
+    bilu_position(&bilu_position_x, &bilu_position_y, &SCREEN_INITIAL,
+    &SCREEN_WIDTH);
     
-    //verifies the position x of the character Bilu
+    animator->add_action(ACTION_SPECIAL_RIGHT,SPRITE_INITIAL_SPECIAL_RIGHT,SPRITE_FINAL_SPECIAL_RIGHT);
+    animator->add_action(ACTION_SPECIAL_LEFT,SPRITE_INITIAL_SPECIAL_LEFT,SPRITE_FINAL_SPECIAL_LEFT);
+    
+    hacking = false;
+    editing = false;
+    last_action = false;
+    is_selected = false;
+    in_position = false;
+
+    INFO("Bilu constructor ok");
+}
+
+void Bilu::bilu_position(double &bilu_position_x,double &bilu_position_y, int &SCREEN_INITIAL,
+int &SCREEN_WIDTH){
+//verifies the position x of the character Bilu
     if(bilu_position_x > SCREEN_WIDTH || bilu_position_x < SCREEN_INITIAL) {
         ERROR("Strange Bilu position x");
         exit(-1);
@@ -84,17 +100,8 @@ Alien(FILENAME, bilu_position_x, bilu_position_y, WIDTH, HEIGHT) {
        INFO("Bilu position y ok");
      }
       
-    animator->add_action(ACTION_SPECIAL_RIGHT,SPRITE_INITIAL_SPECIAL_RIGHT,SPRITE_FINAL_SPECIAL_RIGHT);
-    animator->add_action(ACTION_SPECIAL_LEFT,SPRITE_INITIAL_SPECIAL_LEFT,SPRITE_FINAL_SPECIAL_LEFT);
-    
-    hacking = false;
-    editing = false;
-    last_action = false;
-    is_selected = false;
-    in_position = false;
+} 
 
-    INFO("Bilu constructor ok");
-}
 /**
 * Update method
 * <p>movement and special actions of the character, in addition to checking the finishi point</p>
@@ -125,7 +132,7 @@ void Bilu::update(double time_elapsed) {
 
     in_position = false;
     animator->set_total_time(TOTAL_TIME_1);
-    auto move_bilu_in_y = VELOCITY_BILU*time_elapsed;//velocidade bilu
+    auto move_bilu_in_y = VELOCITY_BILU*time_elapsed;
     auto move_bilu_in_x = VELOCITY_BILU*time_elapsed;
 
     //checks conditions to move the player Bilu
@@ -137,16 +144,9 @@ void Bilu::update(double time_elapsed) {
     special_action();
     
     //Check the collisions with the cameras
-    if(CollisionManager::instance.verify_collision_with_guards(this) ||
-    CollisionManager::instance.verify_collision_with_cameras(this)) {
-        
-        INFO("check the collisions with the cameras and guards");
+    verify_collision();
 
-        setEnabled(false);
-        //Assigns a default true
-        }else {
-            setEnabled(true);          
-    }
+
     FinishPoint* finish_point = (FinishPoint*)
     CollisionManager::instance.verify_collision_with_finish_points(this);
     
@@ -154,6 +154,19 @@ void Bilu::update(double time_elapsed) {
     check_final_position(finish_point,&in_position);
 
     animator->update();
+}
+
+void Bilu::verify_collision(){
+    if(CollisionManager::instance.verify_collision_with_guards(this) ||
+    CollisionManager::instance.verify_collision_with_cameras(this)) {
+        
+    INFO("check the collisions with the cameras and guards");
+
+    setEnabled(false);
+        //Assigns a default true
+    }else {
+        setEnabled(true);          
+    }
 }
 
 void Bilu::check_final_position(FinishPoint* finish_point,bool &in_position){
@@ -228,6 +241,43 @@ void Bilu::special_action() {
     GameObject* paper = CollisionManager::instance.verify_collision_with_papers(this);
     GameObject* doorSwitch = CollisionManager::instance.verify_collision_with_switches(this);
 
+    interaction(doorSwitch, &hacking, &block_movement);
+
+    instance_actions(DoorSwitch* doorSwitch,Paper* paper, &block_movement, &editing, &hacking);
+
+    // If hacking
+    hacking(doorSwitch, &hacking, &block_movement);
+
+    // If editing receives actions
+    editing_percent(paper, &block_movement, &editing);
+
+    last_action = hacking;
+}
+
+void Bilu::instance_actions(DoorSwitch* doorSwitch,Paper* paper, bool &block_movement, bool &editing,
+bool &hacking){
+    if(InputManager::instance.is_key_pressed(InputManager::KEY_PRESS_ESC)&& is_selected) {
+    // If hacking
+    else if(hacking) {
+        INFO("hacking where the instance was selected");
+        hacking = false;
+        block_movement = false;
+        ((DoorSwitch*)(doorSwitch))->stop_effect();
+        ((DoorSwitch*)(doorSwitch))->stop_animation();
+        ((DoorSwitch*)(doorSwitch))->reset_hacking_progress();
+        //Assigns a default hacking and block_movement false, and paper receives actions
+        }else if (editing) {
+            INFO("editing where the instance was selected");
+            editing = false;
+            block_movement = false;
+            ((Paper*)(paper))->stop_effect();
+            ((Paper*)(paper))->stop_animation();
+            ((Paper*)(paper))->reset_editing_progress();
+        }
+    }
+}
+
+void Bilu::interaction(DoorSwitch* doorSwitch, bool &hacking, bool &block_movement){
     if(InputManager::instance.is_key_pressed(InputManager::KEY_PRESS_SPACE) && is_selected) {
     // Paper interaction
         editing_paper(paper,editing,block_movement);
@@ -251,37 +301,17 @@ void Bilu::special_action() {
         }else{
             //nothing to do
         }
-
 //Chech if instance was selected
-}else if(InputManager::instance.is_key_pressed(InputManager::KEY_PRESS_ESC)&& is_selected) {
-    // If hacking
-    if(hacking) {
-        INFO("hacking where the instance was selected");
-        hacking = false;
-        block_movement = false;
-        ((DoorSwitch*)(doorSwitch))->stop_effect();
-        ((DoorSwitch*)(doorSwitch))->stop_animation();
-        ((DoorSwitch*)(doorSwitch))->reset_hacking_progress();
-        //Assigns a default hacking and block_movement false, and paper receives actions
-        }else if (editing) {
-            INFO("editing where the instance was selected");
-            editing = false;
-            block_movement = false;
-            ((Paper*)(paper))->stop_effect();
-            ((Paper*)(paper))->stop_animation();
-            ((Paper*)(paper))->reset_editing_progress();
-        }
+    }
 }
-    // If hacking
-    hacking(doorSwitch, &hacking, &block_movement);
 
-    // If editing receives actions
-    else if(editing) {
+void Bilu::editing_percent(Paper* paper,bool &block_movement, bool &editing){
+    if(editing) {
     INFO("editing init");
     ((Paper*)(paper))->animate();
     set_special_action_animator();
-        if(((Paper*)(paper))->get_editing_bar_percent() <= INITIAL_BAR_PERCENT) {
-             INFO("initial editing bar percent");
+        else if(((Paper*)(paper))->get_editing_bar_percent() <= INITIAL_BAR_PERCENT) {
+            INFO("initial editing bar percent");
             editing = false;
             ((Paper*)(paper))->stop_animation();
             //((Paper*)(paper))->stop_effect();
@@ -294,9 +324,9 @@ void Bilu::special_action() {
             block_movement = true;
             INFO("editing ok"); 
         }
+    }
 }
-    last_action = hacking;
-}
+
 void Bilu::editing_paper(Paper* paper,bool &editing, bool &block_movement){
     INFO("Editing paper");
     if(paper != NULL) {
@@ -318,7 +348,7 @@ void Bilu::editing_paper(Paper* paper,bool &editing, bool &block_movement){
         }
 }
 
-void hacking(DoorSwitch* doorSwitch, bool &hacking, bool &block_movement){
+void Bilu::hacking(DoorSwitch* doorSwitch, bool &hacking, bool &block_movement){
     if(hacking) {
         INFO("hacking init");
         ((DoorSwitch*)(doorSwitch))->animate();
