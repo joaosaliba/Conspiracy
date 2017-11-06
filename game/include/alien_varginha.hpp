@@ -39,7 +39,17 @@ private:
     void check_final_position(FinishPoint* finish_point, bool &in_position);
     void verify_colision();
     void idle_animator(double &varginha_in_x, double &varginha_in_y, int &idle_animation_number,
-    bool &turn_off, bool &is_selected); 
+    bool &turn_off, bool &is_selected);
+    void walk(bool &block_movement, bool &is_selected, double &varginha_in_x, double &varginha_in_y);
+    void camera(CameraSwitch* camera_switch, int &x, bool &turn_off,int &idle_animation_number, 
+    bool &block_movement, Timer* timer_turn, CameraLever* camera_lever,
+    int &ANIMATION_NUMBER_1, int &ANIMATION_NUMBER_2);
+    void animation_invisible(bool &is_invisible, int &idle_animation_number, 
+    int &ANIMATION_NUMBER_1, int &ANIMATION_NUMBER_2);
+    void is_selected_camera(bool &is_selected, CameraSwitch* camera_switch, 
+    CameraLever* camera_lever, bool &block_movement, bool &is_invisible);
+    void key_released(bool &is_selected, bool &turn_off);
+
 };
 
 #endif
