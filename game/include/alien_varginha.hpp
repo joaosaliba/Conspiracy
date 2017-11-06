@@ -34,6 +34,12 @@ private:
     bool is_invisible = true;
     bool turn_off = true;
     Timer * timer_turn = nullptr;
+    void varginha_position(double &varginha_position_x, double &varginha_position_y,
+    int &SCREEN_INITIAL, int &SCREEN_WIDTH);  
+    void check_final_position(FinishPoint* finish_point, bool &in_position);
+    void verify_colision();
+    void idle_animator(double &varginha_in_x, double &varginha_in_y, int &idle_animation_number,
+    bool &turn_off, bool &is_selected); 
 };
 
 #endif

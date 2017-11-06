@@ -47,7 +47,7 @@ private:
     void interaction(DoorSwitch* doorSwitch, bool &hacking, bool &block_movement);
     void instance_actions(DoorSwitch* doorSwitch,Paper* paper, bool &block_movement, bool &editing,
     bool &hacking);
-   
+    
 };
 
 #endif

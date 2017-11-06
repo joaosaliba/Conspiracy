@@ -64,20 +64,8 @@ Alien(FILENAME, varginha_position_x, varginha_position_y, WIDTH, HEIGHT) {
     assert (HEIGHT !=NULL);
     assert (HEIGHT > 15);
 
-    // Verifies the position x of the character Varginha
-    if(varginha_position_x > SCREEN_WIDTH || varginha_position_x < SCREEN_INITIAL) {
-        ERROR("Strange Varginha position x");
-        exit(-1);
-    }else {
-       //nothing to do
-    }
-    // Verifies the position y of the character Varginha
-    if(varginha_position_y > SCREEN_WIDTH || varginha_position_y < SCREEN_INITIAL) {
-       ERROR("Strange Varginha position y");
-       exit(-1);
-     }else {
-       //nothing to do
-     }
+    // Verifies the position of the character Varginha
+    varginha_position(&varginha_position_x, &varginha_position_y, &SCREEN_INITIAL, &SCREEN_WIDTH);
 
     animator->add_action(SPECIAL_RIGHT,SPRITE_INITIAL_SPECIAL_RIGHT,SPRITE_FINAL_SPECIAL_RIGHT);
     animator->add_action(SPECIAL_LEFT,SPRITE_INITIAL_SPECIAL_LEFT,SPRITE_FINAL_SPECIAL_LEFT);
@@ -94,6 +82,24 @@ Alien(FILENAME, varginha_position_x, varginha_position_y, WIDTH, HEIGHT) {
 
     timer_turn = new Timer();
     timer_turn->start();
+}
+
+void Varginha::varginha_position(double &varginha_position_x, double &varginha_position_y,
+int &SCREEN_INITIAL, int &SCREEN_WIDTH){  
+    // Verifies the position x of the character Varginha
+    if(varginha_position_x > SCREEN_WIDTH || varginha_position_x < SCREEN_INITIAL) {
+        ERROR("Strange Varginha position x");
+        exit(-1);
+    }else {
+       //nothing to do
+    }
+    // Verifies the position y of the character Varginha
+    if(varginha_position_y > SCREEN_WIDTH || varginha_position_y < SCREEN_INITIAL) {
+       ERROR("Strange Varginha position y");
+       exit(-1);
+     }else {
+       //nothing to do
+    }
 }
 
 /**
@@ -136,8 +142,27 @@ void Varginha::update(double time_elapsed) {
     }
 
     //Chech if instance was selected
-    if((varginha_in_x == 0 && varginha_in_y == 0) || (!turn_off && !is_selected)) {
-        
+    idle_animator(&varginha_in_x, &varginha_in_y, &idle_animation_number,
+    &turn_off, &is_selected);
+
+    special_action();
+
+    verify_turn();
+
+    // If collision, receives actions
+    verify_collision();
+
+    FinishPoint* finish_point = (FinishPoint*)CollisionManager::
+    instance.verify_collision_with_finish_points(this);
+    //Check if the finish point is different from null
+    check_final_position(FinishPoint* finish_point, &in_position);
+
+    animator->update();
+}
+
+void Varginha::idle_animator(double &varginha_in_x, double &varginha_in_y, int &idle_animation_number,
+bool &turn_off, bool &is_selected){
+    if((varginha_in_x == 0 && varginha_in_y == 0) || (!turn_off && !is_selected)) {        
         // If idle_animation_number true, receives actions
         if(idle_animation_number) {
             animator->set_interval(ACTION_IDLE_RIGHT);
@@ -146,19 +171,18 @@ void Varginha::update(double time_elapsed) {
             animator->set_interval(ACTION_IDLE_LEFT);
         }
     }
-    special_action();
-    verify_turn();
-    // If collision, receives actions
+}
+
+void Varginha::verify_collision(){
     if(CollisionManager::instance.verify_collision_with_guards(this)) {
         set_enabled(false);
     //Assigns a default, and animator receives actions
     }else{
         set_enabled(true);
     }
+}    
 
-    FinishPoint* finish_point = (FinishPoint*)CollisionManager::
-    instance.verify_collision_with_finish_points(this);
-    //Check if the finish point is different from null
+void Verginha::check_final_position(FinishPoint* finish_point, bool &in_position){
     if(finish_point != NULL) {
         if(finish_point->get_alien_names().find(NAME_CHARACTER) != std::string::npos) {
             in_position = true;
@@ -169,8 +193,6 @@ void Varginha::update(double time_elapsed) {
     }else {
         //nothing to do
     }
-
-    animator->update();
 }
 
 /** 
