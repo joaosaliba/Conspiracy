@@ -10,6 +10,7 @@
 
 #include "sdl2includes.hpp"
 #include <string>
+#include "log.h"
 
 namespace engine{
 
@@ -40,7 +41,7 @@ namespace engine{
 
         Mix_Music* create_music(std::string audio_type, std::string audio_path, int audio_volume);
         Mix_Chunk* create_effect(std::string audio_type, std::string audio_path, int audio_volume);
-        
+
         void verify_error(Mix_Music* audio_music, Mix_Music* audio_effect);
     };
 }

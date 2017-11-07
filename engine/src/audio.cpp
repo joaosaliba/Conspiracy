@@ -14,6 +14,8 @@ using namespace engine;
 
 Audio::Audio(std::string audio_path, std::string audio_type, int audio_volume) {
 
+    INFO("Audio constructor init");
+
     assert ( audio_volume != NULL);
 
     //verify if the volume exist
@@ -22,6 +24,7 @@ Audio::Audio(std::string audio_path, std::string audio_type, int audio_volume) {
       exit(-1);
     }else {
       //nothing to do
+      INFO("have a audio_volume");
     }
 
   /**
@@ -55,16 +58,23 @@ Audio::Audio(std::string audio_path, std::string audio_type, int audio_volume) {
     */
 
     verify_error(audio_music, audio_effect);
+
+    INFO("Audio constructor ok");
 }
 
 
 Audio::create_effect(std::string audio_type, std::string audio_path, int audio_volume){
-//assert()
+    //assert()
+    INFO("the method create_effect started");
+
+    DEBUG("the volume of the audio: "+audio_volume);
+
     Mix_Chunk* audio_effect = nullptr;
     //flux offset structure, that load the audio effect or throw the error if the the effect is null.
     if(audio_type.compare("EFFECT") == 0) {
       audio_effect = Mix_LoadWAV(audio_path.c_str());
       Mix_VolumeChunk(audio_effect, audio_volume);
+      INFO("the effect is ok");
       if(audio_effect == NULL) {
         ERROR("Audio file could not be loaded");
     }
@@ -77,12 +87,17 @@ Audio::create_effect(std::string audio_type, std::string audio_path, int audio_v
 Audio::create_music(std::string audio_type, std::string audio_path, int audio_volume){
     //assert()
 
+    DEBUG("the volume of the audio: "+audio_volume);
+
+    INFO("the method create_effect started");
+
     Mix_Music* audio_music = nullptr;
     //flux offset structure, that load the audio music or throw the error if the the music state is null.
     if(audio_type.compare("MUSIC") == 0) {
 
         audio_music = Mix_LoadMUS(audio_path.c_str());
         Mix_VolumeMusic(audio_volume);
+        INFO("audio is ok");
         if(audio_music == NULL) {
             ERROR("Audio file could not be loaded");
 
@@ -117,7 +132,11 @@ Audio::~Audio(){}
 
 void Audio::play(const int times_to_play) {
 
+    INFO("the method play init ");
+
     assert ( times_to_play != NULL);
+
+    DEBUG("times to play receive: "+times_to_play);
 
     verify_audio_music_error(times_to_play);
 
@@ -137,18 +156,21 @@ void Audio::play(const int times_to_play) {
             //if Mix_PlayChannel be different of -1 he can be played
         }
     }*/
+    INFO("method init is working");
 }
 
 Audio::verify_audio_music_error(const int times_to_play){
 
     assert ( times_to_play != NULL);
 
+    DEBUG("times to play receive: "+times_to_play);
+
     if(audio_music != NULL) {
         //if the audio music is differente of null he get in and make others logical flows
         if(Mix_PlayMusic(audio_music, times_to_play) == -1) {
             ERROR("Audio could not be played");
         }else {
-            //if Mix_PlayMusic be different of -1 it can be played
+            INFO("if Mix_PlayMusic be different of -1 it can be played");
         }
       }
 }
@@ -160,7 +182,7 @@ Audio::verify_audio_effect_error(const int times_to_play){
         if(Mix_PlayChannel(-1, audio_effect, times_to_play) == -1) {
             ERROR("Audio could not be played");
         }else {
-            //if Mix_PlayChannel be different of -1 he can be played
+            INFO("if Mix_PlayChannel be different of -1 he can be played");
         }
       }
 }

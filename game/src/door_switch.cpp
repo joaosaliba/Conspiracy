@@ -27,7 +27,7 @@ DoorSwitch::DoorSwitch(std::string object_name, double door_switch_position_x, d
                                                                          door_switch_width,
                                                                          door_switch_height) {
 
-    INFO("Bilu constructor init");
+    INFO("Door switch constructor init");
 
     assert (door_switch_position_x != NULL);
     assert (door_switch_position_y != NULL);
@@ -74,7 +74,7 @@ DoorSwitch::DoorSwitch(std::string object_name, double door_switch_position_x, d
     animator->add_action("idle", 0, 0);
     pressed = false;
 
-    INFO("Bilu constructor ok");
+    INFO("door_switch constructor ok");
 }
 
 /**
@@ -104,7 +104,7 @@ void DoorSwitch::update(double time_elapsed) {
     }
 
     time_elapsed = time_elapsed;
-    
+
     animator->update();
     //this part cerify if is pressed and update passing the time_elapsed
     if(is_pressed())) {
