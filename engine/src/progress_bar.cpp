@@ -23,33 +23,41 @@ ProgressBar::ProgressBar(double position_x, double position_y, int width,
                                                                           width,
                                                                           height){
 
+    INFO("progress_bar constructor init");
 
     if(position_x > MAX_STRANGE_POSITION || position_x < MIN_STRANGE_POSITION) {
-        ERROR("Strange camera position");
+        ERROR("Strange progress_bar position");
         exit(-1);
     }else {
         //nothing to do
+        INFO("progress_bar position_x is ok");
     }
     if(position_y > MAX_STRANGE_POSITION || position_y < MIN_STRANGE_POSITION) {
-        ERROR("Strange camera position");
+        ERROR("Strange progress_bar position");
         exit(-1);
     }else {
         //nothing to do
+        INFO("progress_bar position y is ok");
     }
     if(width > 100 || width < MIN_STRANGE_POSITION) {
-        ERROR("Strange camera width");
+        ERROR("Strange progress_bar width");
         exit(-1);
     }else {
         //nothing to do
+        INFO("progress_bar width is ok");
     }
     if(height > 100 || height < MIN_STRANGE_POSITION) {
-        ERROR("Strange camera height");
+        ERROR("Strange progress_bar height");
         exit(-1);
     }else {
         //nothing to do
+        INFO("progress_bar height is ok");
     }
 
     percent = 1.0;
+
+    DEBUG("percent receive: "+percent);
+
     progress_increment = increment;
 
     backRect = new SDL_Rect();
@@ -70,6 +78,8 @@ ProgressBar::ProgressBar(double position_x, double position_y, int width,
     SDL_GetRenderDrawColor(WindowManager::getGameCanvas(),
                                  &old_color.r, &old_color.g,
                                  &old_color.g, &old_color.a);
+
+    INFO("progress_bar constructor is ok");
 }
 
 ProgressBar::ProgressBar(double position_x, double position_y, int width,
@@ -90,28 +100,32 @@ ProgressBar::ProgressBar(double position_x, double position_y, int width,
     assert (height > 100);
 
     if(position_x > MAX_STRANGE_POSITION || position_x < MIN_STRANGE_POSITION) {
-        ERROR("Strange camera position");
+        ERROR("Strange progress_bar position");
         exit(-1);
     }else {
         //nothing to do
+        INFO("progress_bar position_x is ok");
     }
     if(position_y > MAX_STRANGE_POSITION || position_y < MIN_STRANGE_POSITION) {
-        ERROR("Strange camera position");
+        ERROR("Strange progress_bar position");
         exit(-1);
     }else {
         //nothing to do
+        INFO("progress_bar position_y is ok");
     }
     if(width > 100 || width < MIN_STRANGE_POSITION) {
-        ERROR("Strange camera width");
+        ERROR("Strange progress_bar width");
         exit(-1);
     }else {
         //nothing to do
+        INFO("progress_bar width is ok");
     }
     if(height > 100 || height < MIN_STRANGE_POSITION) {
-        ERROR("Strange camera height");
+        ERROR("Strange progress_bar height");
         exit(-1);
     }else {
         //nothing to do
+        INFO("progress_bar height is ok");
     }
 
     percent = 1.0;
@@ -142,15 +156,22 @@ ProgressBar::ProgressBar(double position_x, double position_y, int width,
  */
 
 ProgressBar::~ProgressBar(){}
+
+
 void ProgressBar::update(double time_elapsed) {
+
+    DEBUG("time_elapsed receive: "+time_elapsed);
+
     if(time_elapsed == NULL) {
       ERROR("type_elapsed can not be null");
       exit(-1);
     }else {
       //nothing to do
+      INFO("exist the time_elapsed data");
     }
 
     time_elapsed = time_elapsed;
+
     if(percent > 1.0){
         percent = 1.0;
     }else if(percent < 0.0){

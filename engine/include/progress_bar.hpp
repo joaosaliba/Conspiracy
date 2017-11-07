@@ -12,7 +12,7 @@
 #include "sdl2includes.hpp"
 #include "window_manager.hpp"
 #include "game_object.hpp"
-
+#include "log.h"
 #include <vector>
 
 namespace engine {
