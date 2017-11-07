@@ -16,7 +16,12 @@ using namespace engine;
 
 
 FinishScene::FinishScene(int id) : Scene(id) {
+    INFO("finish_scene constructor init");
+
     select_button = 1;
+
+    DEBUG("the buttom selected: "+select_button);
+
     select = new Color(255, 255, 255, 0);
     not_select = new Color(0, 0, 0, 0);
     sound_effect = new Audio("assets/sounds/SELECT6.wav", "EFFECT", 100);
@@ -24,6 +29,8 @@ FinishScene::FinishScene(int id) : Scene(id) {
     background = new Animation("assets/sprites/finish.png", 1, 1, 0.8);
     background->add_action("finish", 0,0);
     background->set_interval("finish");
+
+    INFO("finish_scene constructor ok");
 }
 
 /**
@@ -56,6 +63,8 @@ void FinishScene::draw() {
 */
 
 void FinishScene::update(double time_elapsed) {
+    DEBUG("time_elapsed receive"+time_elapsed);
+
     select_action();
 
     background->update();
@@ -68,7 +77,7 @@ void FinishScene::update(double time_elapsed) {
                 ((Button *)(gameObject.second))->set_text_color(not_select);
                  }
         }else {
-            //nothing to do
+            INFO("the wont update the background with the new colors");
         }
 
     (*gameObject.second).update(time_elapsed);
@@ -93,10 +102,14 @@ void FinishScene::load() {
 * @return void
 */
 void FinishScene::select_action() {
+
+    INFO("the method select_action init");
+
     if(InputManager::instance.is_key_triggered(InputManager::KeyPress::KEY_PRESS_ENTER)) {
         switch(select_button) {
         case 1:
             get_scene_manager()->load_scene(0);
+            INFO("selected the action one and load the respective scene");
             break;
         default:
             break;

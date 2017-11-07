@@ -14,6 +14,7 @@
 #include "game_object.hpp"
 #include "color.hpp"
 #include "audio.hpp"
+#include "log.h"
 
 #include <vector>
 
