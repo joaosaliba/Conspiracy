@@ -34,6 +34,7 @@ CameraLever::CameraLever(double camera_lever_position_x, double camera_lever_pos
     camera_lever_direction = camera_lever_direction;
     stateInc = 1;
     state = 1;
+           INFO("Constructor CameraLever");
 }
 /**
  *   @brief draws the animation of the button according to its position
@@ -42,6 +43,7 @@ CameraLever::CameraLever(double camera_lever_position_x, double camera_lever_pos
 void CameraLever::draw(){
     animator->draw(getPositionX(), getPositionY());
     animator->draw_collider(getPositionX(), getPositionY(), getWidth(), getHeight());
+       INFO("Draw CameraLever");
 }
 /**
 *    @brief update the camera lever  decoring the time.
@@ -57,6 +59,7 @@ void CameraLever::update(double timeElapsed){
       timeElapsed = timeElapsed;
     }
     animator->update();
+     INFO("Update CameraLever");
 }
 /**
  *   @brief check the atual state of the camera lever
@@ -70,6 +73,7 @@ int CameraLever::getState(){
   else{
     return state;
   }
+   INFO("Get State CameraLever");
 }
 /**
  *   @brief set the next possible state of the camera lever
@@ -89,4 +93,5 @@ void CameraLever::nextState(){
         case 2: animator->setInterval("down"); break;
         default: break;
     }
+     INFO("Next state CameraLever");
 }

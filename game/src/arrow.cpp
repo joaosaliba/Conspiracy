@@ -30,12 +30,14 @@ Arrow::Arrow(std::string arrow_name, double arrow_position_x, double arrow_posit
         assert ( arrow_position_y != NULL);
         assert ( arrow_width != NULL);
         assert ( arrow_height != NULL);
+           INFO("Constructor Arrow");
 }
 
 /**
 *    @brief Arrow object destryctor.
 */
 Arrow::~Arrow(){
+   INFO("Destructor Arrow");
 
 }
 /**
@@ -56,7 +58,7 @@ void Arrow::update(double timeElapsed){
         }else{
           //nothing to do
         }
-
+           INFO("update Arrow");
 }
 
 /**
@@ -71,4 +73,5 @@ void Arrow::draw(){
         else{
           //nothing to do
         }
+           INFO("Draw Arrow");
 }

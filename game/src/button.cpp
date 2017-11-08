@@ -29,12 +29,13 @@ Button::Button(std::string button_name, double button_position_x, double button_
     assert ( button_position_y != NULL);
     assert ( button_width != NULL);
     assert ( button_height != NULL);
+       INFO("Constructor Button");
 }
 /**
  *    @brief Button object destructor.
  */
 Button::~Button() {
-
+       INFO("Destructor Button");
 }
 
 /**
@@ -51,7 +52,7 @@ void Button::update(double timeElapsed) {
       timeElapsed = timeElapsed;
     }
     INFO(timeElapsed);
-
+       INFO("Update Button");
 }
 /**
  *   @brief draws the animation of the button according to its position
@@ -60,6 +61,7 @@ void Button::update(double timeElapsed) {
 void Button::draw() {
     INFO("TEXT DRAW");
     text->draw(getPositionX(), getPositionY());
+           INFO("draw Button");
 }
 /**
  *   @brief set a text Color for the button in the game
@@ -68,6 +70,7 @@ void Button::draw() {
 
 void Button::setTextColor(Color * newTextColor) {
     text->setTextColor(newTextColor);
+           INFO("Set Text Collor Button");
 }
 
 /**
@@ -83,4 +86,5 @@ Text * Button::getText() {
   else{
     return text;
   }
+         INFO("Get Text Button");
 }
