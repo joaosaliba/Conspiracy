@@ -21,6 +21,7 @@ CameraSystem::CameraSystem(Camera* p_camera, CameraSwitch* p_camera_switch){
     camera_switch = p_camera_switch;
     camera_lever = NULL;
     last_lever_state = 1;
+    INFO("Constructor CameraSystem");
 }
 
 /**
@@ -34,6 +35,7 @@ CameraSystem::CameraSystem(Camera* p_camera, CameraSwitch* p_camera_switch, Came
     camera = p_camera;
     camera_switch = p_camera_switch;
     camera_lever = p_camera_lever;
+    INFO("Constructor CameraSystem");
 }
 /**
 *    @brief update the camera system  decoring the time.
@@ -61,6 +63,7 @@ void CameraSystem::update(double timeElapsed){
     else{
       // nothing to do
     }
+    INFO("update CameraSystem");
 }
 /**
  *   @brief draws the animation of the Camera System according to its position
@@ -76,6 +79,7 @@ void CameraSystem::draw(){
     else{
       //nothing to do
     }
+    INFO("draw CameraSystem");
 }
 /**
  *   @brief   get the actual camera system
@@ -89,6 +93,7 @@ Camera* CameraSystem::getCamera(){
   else{
     return camera;
   }
+  INFO("getCamera CameraSystem");
 }
 /**
  *   @brief get the actual camera system
@@ -103,6 +108,7 @@ CameraSwitch* CameraSystem::getCameraSwitch(){
   else{
     return camera_switch;
   }
+  INFO("Get System in CameraSystem");
 }
 /**
  *   @brief  get the actual camera lever
@@ -116,4 +122,5 @@ CameraLever* CameraSystem::getCameraLever(){
   else{
     return camera_lever;
   }
+  INFO("Get Camera lerver in CameraSystem");
 }
