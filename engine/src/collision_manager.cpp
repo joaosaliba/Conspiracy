@@ -17,22 +17,26 @@ CollisionManager CollisionManager::instance;
  */
 void CollisionManager::addGuardFieldOfVision(FieldOfVision* filed_vision){
         guardsVision.push_back(filed_vision);
+        INFO("Add guard field of vision ");
 }
 /**
  *    @brief collision manager  add camera field
  */
 void CollisionManager::addCameraFieldOfVision(FieldOfVision* field_vision){
         camerasVision.push_back(field_vision);
+        INFO("Add camera field of vision ");
 }
 /**
  *    @brief collision manager  add wall
  */
 void CollisionManager::addWall(GameObject* game_object){
         wallList.push_back(game_object);
+        INFO("Add wall ");
 }
 
 void CollisionManager::addCameraSwitch(GameObject* game_object){
     cameraSwitchList.push_back(game_object);
+    INFO("Add Camera switch ");
 }
 /**
  *    @brief collision manager  add camera lever
@@ -40,43 +44,52 @@ void CollisionManager::addCameraSwitch(GameObject* game_object){
 void CollisionManager::addCameraLever(GameObject* game_object){
     if(game_object != NULL){
         cameraLeverList.push_back(game_object);
+    }else{
+      //nothing to do
     }
+      INFO("Add Camera lever ");
 }
 /**
  *    @brief collision manager  add guard
  */
 void CollisionManager::addGuard(GameObject* game_object){
         guardList.push_back(game_object);
+          INFO("Add Guard ");
 }
 /**
  *    @brief collision manager  add paper ( object to be change in the game)
  */
 void CollisionManager::addPaper(GameObject* game_object){
         paperList.push_back(game_object);
+          INFO("Add Paper");
 }
 /**
  *    @brief collision manager  add door ( object to be opened when hakc computer)
  */
 void CollisionManager::addDoor(GameObject* game_object){
         doorList.push_back(game_object);
+          INFO("Add Door ");
 }
 /**
  *    @brief collision manager  add switch
  */
 void CollisionManager::addSwitch(GameObject* game_object){
         switchList.push_back(game_object);
+          INFO("Add switch ");
 }
 /**
  *    @brief collision manager  add chair
  */
 void CollisionManager::addChair(GameObject* game_object){
         chairList.push_back(game_object);
+          INFO("Add Chair ");
 }
 /**
  *    @brief collision manager  add a finish point for the phase
  */
 void CollisionManager::addFinishPoint(GameObject* game_object){
         finishPointList.push_back(game_object);
+          INFO("Add Finish Point ");
 }
 /**
  *    @brief collision manager  and verify if the personage have a collision with the walls
@@ -94,6 +107,7 @@ bool CollisionManager::verifyCollisionWithWalls(GameObject* game_object_collisio
                 }
         }
         return false;
+          INFO("Verify Collision with Walls");
 }
 /**
  *    @brief collision manager  and verify if the personage have a collision with the walls and chairs
@@ -116,6 +130,7 @@ bool CollisionManager::verifyCollisionWithWallsAndChairs(GameObject* game_object
                 }
         }
         return false;
+        INFO("Verify Collision with Walls and Chairs");
 }
 /**
  *    @brief collision manager  verify the collisions with chairs
@@ -129,6 +144,7 @@ std::pair<std::string, GameObject *> CollisionManager::verifyCollisionWithChairs
                 }
         }
         return std::pair<std::string, GameObject*>(collision, NULL);
+        INFO("Verify Collision with Walls");
 }
 /**
  *    @brief collision manager  verify the collisions with  other chairs
@@ -143,6 +159,7 @@ bool CollisionManager::verifyCollisionWithOtherChairs(GameObject* game_object){
       }
   }
   return false;
+  INFO("Verify Collision with Others Walls");
 }
 
 /**
@@ -156,6 +173,7 @@ bool CollisionManager::verifyCollisionWithGuardsBody(GameObject* game_object){
                 }
         }
         return false;
+        INFO("Verify Collision with Guards Body");
 }
 /**
  *    @brief collision manager  verify the collisions wth guards
@@ -173,6 +191,7 @@ bool CollisionManager::verifyCollisionWithGuards(GameObject* game_object_collisi
             return status;
         }
         assert (status != NULL);
+        INFO("Verify Collision with Guards");
 }
 /**
  *    @brief collision manager  verify the collisions wth cameras( if personage were caught)
@@ -183,6 +202,7 @@ bool CollisionManager::verifyCollisionWithCameras(GameObject* game_object_collis
     status = verifyCollisionWithFieldsOfVision(game_object_collision, camerasVision);
     assert (status != NULL);
     return status;
+    INFO("Verify Collision with Cameras");
 }
 /**
  *    @brief collision manager  verify if the personage where in the plane vision of the guards or cameras
@@ -220,6 +240,7 @@ bool CollisionManager::verifyCollisionWithFieldsOfVision(GameObject* game_object
     }
     return false;
     assert( isVisible != NULL);
+    INFO("Verify Collision with Fields Of Vision");
 }
 /**
  *    @brief collision manager  and verify the interection with the switches
@@ -232,6 +253,7 @@ GameObject* CollisionManager::verifyCollisionWithSwitches(GameObject* game_objec
                 }
         }
         return NULL;
+        INFO("Verify Collision with Switches");
 }
 /**
  *    @brief collision manager  and verify the interection with the camera switches
@@ -244,6 +266,7 @@ GameObject* CollisionManager::verifyCollisionWithCameraSwitches(GameObject* game
             }
     }
     return NULL;
+    INFO("Verify Collision with Camera Switches");
 
 }
 /**
@@ -257,6 +280,7 @@ GameObject* CollisionManager::verifyCollisionWithCameraLevers(GameObject* game_o
             }
     }
     return NULL;
+    INFO("Verify Collision with Camera Levers");
 }
 /**
  *    @brief collision manager  and verify the interection with the papers
@@ -269,6 +293,7 @@ GameObject* CollisionManager::verifyCollisionWithPapers(GameObject* game_object_
                 }
         }
         return NULL;
+        INFO("Verify Collision with Papers");
 }
 /**
  *    @brief collision manager  and verify the finishs points
@@ -281,6 +306,7 @@ GameObject* CollisionManager::verifyCollisionWithFinishPoints(GameObject* game_o
             }
     }
     return NULL;
+    INFO("Verify Collision with Finish Points");
 }
 /**
  *    @brief collision manager  calculate the distance between the things
@@ -292,6 +318,7 @@ double CollisionManager::calculateDistance(std::pair<double,double> center, std:
                      (center.first-lineCenter.first))+
                     ((center.second-lineCenter.second)*
                      (center.second-lineCenter.second)));
+                     INFO("Calculate distance");
 }
 /**
  *    @brief reset: walllist,guard,list,paperlist,doorlist,swithclist,chairlist,
@@ -308,6 +335,7 @@ void CollisionManager::resetLists(){
         camerasVision.clear();
         cameraLeverList.clear();
         cameraSwitchList.clear();
+        INFO("Reset List");
 }
 /**
  *    @brief collision manager  and verify if the personage have a collision
@@ -352,6 +380,7 @@ bool CollisionManager::verifyCollision( GameObject* game_object_collision, GameO
         if( leftA >= rightB ) { return false; }
         //If none of the sides from A are outside B
         return true;
+        INFO("Verify Collision");
 }
 /**
  *    @brief collision manager  and verify if the rectangle game have a collision with the reference line
@@ -388,6 +417,7 @@ bool CollisionManager::verifyRectangleCollisionWithLine(GameObject* game_object,
         if(verifyLineCollisionWithLine(left.first,left.second,a,b)) {return true; }
         if(verifyLineCollisionWithLine(bottom.first,bottom.second,a,b)) {return true; }
         return false;
+        INFO("Verify Collision with Line");
 }
 /**
  *    @brief collision manager  and verify  the collisions lines
@@ -395,6 +425,7 @@ bool CollisionManager::verifyRectangleCollisionWithLine(GameObject* game_object,
  */
 bool CollisionManager::verifyLineCollisionWithLine(std::pair<int, int> line_a, std::pair<int, int> line_b, std::pair<int, int> line_c, std::pair<int, int> line_d){
         return (CCW(line_a,line_b,line_c)*CCW(line_a,line_b,line_d)<0 && CCW(line_c,line_d,line_b)*CCW(line_c,line_d,line_a)<0);
+        INFO("Verify Collision with Lines 2");
 }
 /**
  *    @brief collision manager  and verify the time when happens the collision
@@ -402,6 +433,7 @@ bool CollisionManager::verifyLineCollisionWithLine(std::pair<int, int> line_a, s
  */
 double CollisionManager::CCW(std::pair<int, int> line_a, std::pair<int, int> line_b, std::pair<int, int> line_c){
         return (line_b.first-line_a.first)*(line_c.second-line_a.second) - (line_b.second-line_a.second)*(line_c.first-line_a.first);
+        INFO("Verify Collision with CCW");
 }
 
 /**
@@ -469,4 +501,5 @@ std::string CollisionManager::verifyCollisionChair(GameObject* game_object_colli
         }
 
         return "none";
+        INFO("Verify Collision with Chair 2");
 }
