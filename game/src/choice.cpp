@@ -34,12 +34,14 @@ Choice::Choice(std::string objectName, double positionX, double positionY,
     unlock = false;
     Color *color = new Color(0, 0, 0, 150);
     rectangle = new Rectangle("Rectangle", positionX, positionY, width, height, true, color);
+    INFO("Constructor Choice ");
 }
 
 /**
  *    @brief Choice object destructor.
  */
 Choice::~Choice() {
+    INFO("Destructor Choice ");
 
 }
 /**
@@ -54,6 +56,7 @@ void Choice::update(double timeElapsed){
         rectangle->setEnabled(true);
     }
     rectangle->update(timeElapsed);
+    INFO("update Choice ");
 
 }
 /**
@@ -68,6 +71,7 @@ void Choice::draw(){
     }
     button->draw();
     rectangle->draw();
+      INFO("draw choice ");
 }
 
 /**
@@ -75,12 +79,14 @@ void Choice::draw(){
  */
 void Choice::setTextColor(Color * newTextColor){
     button->setTextColor(newTextColor);
+    INFO("Set text color in Choice ");
 }
 /**
  *   @brief Set a back ground color for the button
  */
 void Choice::setBackgroundColor(Color * newBackgroundColor){
     button->setTextColor(newBackgroundColor);
+    INFO("Set background color for Choice ");
 }
 /**
  *   @brief Set a text for the choice button
@@ -94,6 +100,7 @@ Text * Choice::getText(){
   else{
     return button->getText();
   }
+  INFO("gte Choice  text");
 }
 /**
  *   @brief Set a chosen for the choice
@@ -101,6 +108,7 @@ Text * Choice::getText(){
 void Choice::setChosen(bool isChosen){
   assert( isChosen != NULL);
   chosen = isChosen;
+  INFO("set Choisen ");
 }
 /**
  *   @brief Set if the choice are unlock
@@ -108,6 +116,7 @@ void Choice::setChosen(bool isChosen){
 void Choice::setUnlock(bool isUnlock){
     assert( isUnlock != NULL);
     unlock = isUnlock;
+    INFO("set Choice unlock ");
 }
 /**
  *   @brief get the actual situation for the choice
@@ -121,5 +130,5 @@ bool Choice::getUnlock(){
   else{
     return unlock;
   }
-
+  INFO("get Choice unlock ");
 }

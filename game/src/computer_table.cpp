@@ -22,17 +22,19 @@ ComputerTable::ComputerTable(std::string objectName, double positionX, double po
                                                                          positionX,
                                                                          positionY,
                                                                          width, height){
-assert (positionX !=NULL);
-assert (positionY !=NULL);
-assert (width !=NULL);
-assert (height !=NULL);
-table = new Table("assets/sprites/mesa.png", positionX, positionY, width, height);
-doorSwitch = new DoorSwitch("assets/sprites/PC_sprites(34X20).png", positionX + 15, positionY - 7, 34, 60);
+  assert (positionX !=NULL);
+  assert (positionY !=NULL);
+  assert (width !=NULL);
+  assert (height !=NULL);
+  table = new Table("assets/sprites/mesa.png", positionX, positionY, width, height);
+  doorSwitch = new DoorSwitch("assets/sprites/PC_sprites(34X20).png", positionX + 15, positionY - 7, 34, 60);
+  INFO("Computer Table Constructor ");
 }
 /**
  *    @brief ComputetTable object destructor.
  */
 ComputerTable::~ComputerTable(){
+  INFO("Computer Table Destructor ");
 
 }
 /**
@@ -43,6 +45,7 @@ void ComputerTable::update(double timeElapsed){
    assert(timeElapsed != NULL);
    table->update(timeElapsed);
     doorSwitch->update(timeElapsed);
+    INFO("Update Computer Table  ");
 }
 /**
  *   @brief draws the animation of the chair according to its position
@@ -51,6 +54,7 @@ void ComputerTable::update(double timeElapsed){
 void ComputerTable::draw(){
    table->draw();
    doorSwitch->draw();
+   INFO("Draw Computer Table  ");
 }
 /**
  *   @brief get the actual way that the switch are
@@ -64,6 +68,7 @@ DoorSwitch* ComputerTable::getDoorSwitch(){
   else{
     return doorSwitch;
   }
+  INFO("Get door switch in Computer Table  ");
 
 }
 /**
@@ -78,4 +83,5 @@ Table* ComputerTable::getTable(){
   else{
     return table;
   }
+  INFO("get Table in Computer Table  ");
 }
