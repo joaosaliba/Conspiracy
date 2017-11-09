@@ -93,14 +93,9 @@ void Choice::setBackgroundColor(Color * newBackgroundColor){
  *   @return button->getText();
  */
 Text * Choice::getText(){
-  if ( button->getText() == NULL){
-    ERROR("Failed to start window manager");
-      exit(-1);
-  }
-  else{
     return button->getText();
-  }
-  INFO("gte Choice  text");
+
+  INFO("get Choice  text");
 }
 /**
  *   @brief Set a chosen for the choice
@@ -123,12 +118,8 @@ void Choice::setUnlock(bool isUnlock){
  *   @return unlock
  */
 bool Choice::getUnlock(){
-  if ( unlock == NULL){
-    ERROR("Failed to start window manager");
-      exit(-1);
-  }
-  else{
+
     return unlock;
-  }
+  
   INFO("get Choice unlock ");
 }
