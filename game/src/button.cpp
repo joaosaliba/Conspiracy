@@ -44,13 +44,8 @@ Button::~Button() {
 */
 void Button::update(double timeElapsed) {
     assert ( timeElapsed != NULL);
-    if (timeElapsed == NULL){
-      ERROR("Failed to start window manager");
-        exit(-1);
-    }
-    else{
       timeElapsed = timeElapsed;
-    }
+
     INFO(timeElapsed);
        INFO("Update Button");
 }
