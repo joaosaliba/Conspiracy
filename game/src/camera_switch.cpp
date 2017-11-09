@@ -51,13 +51,7 @@ void CameraSwitch::draw(){
 */
 void CameraSwitch::update(double timeElapsed){
     assert ( timeElapsed != NULL);
-    if (timeElapsed == NULL){
-      ERROR("Failed to start window manager");
-        exit(-1);
-    }
-    else{
-      timeElapsed = timeElapsed;
-    }
+    timeElapsed = timeElapsed;
     animator->update();
     INFO("update CameraSwitch");
 }
@@ -65,13 +59,7 @@ void CameraSwitch::update(double timeElapsed){
 *    @brief check the camera switch if it working.
 */
 bool CameraSwitch::isWorking(){
-  if (working == NULL){
-    ERROR("Failed to start window manager");
-      exit(-1);
-  }
-  else{
-    return working;
-  }
+  return working;
   INFO("Check if working CameraSwitch");
 }
 /**
