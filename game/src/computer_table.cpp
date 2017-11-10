@@ -37,6 +37,17 @@ ComputerTable::~ComputerTable(){
   INFO("Computer Table Destructor ");
 
 }
+
+/**
+ *   @brief draws the animation of the chair according to its position
+ *   @return void
+ */
+void ComputerTable::draw(){
+   table->draw();
+   doorSwitch->draw();
+   INFO("Draw Computer Table  ");
+}
+
 /**
 *    @brief update the ComputerTable  during the time.
 *    @param[in] timeElapsed its about the time
@@ -47,15 +58,22 @@ void ComputerTable::update(double timeElapsed){
     doorSwitch->update(timeElapsed);
     INFO("Update Computer Table  ");
 }
+
 /**
- *   @brief draws the animation of the chair according to its position
- *   @return void
+ *   @brief get the situation that the computer table are
+ *   @return table;
  */
-void ComputerTable::draw(){
-   table->draw();
-   doorSwitch->draw();
-   INFO("Draw Computer Table  ");
+Table* ComputerTable::getTable(){
+  if ( table == NULL){
+    ERROR("Failed to start window manager");
+      exit(-1);
+  }
+  else{
+    return table;
+  }
+  INFO("get Table in Computer Table  ");
 }
+
 /**
  *   @brief get the actual way that the switch are
  *   @return doorSwitch
@@ -70,18 +88,4 @@ DoorSwitch* ComputerTable::getDoorSwitch(){
   }
   INFO("Get door switch in Computer Table  ");
 
-}
-/**
- *   @brief get the situation that the computer table are
- *   @return table;
- */
-Table* ComputerTable::getTable(){
-  if ( table == NULL){
-    ERROR("Failed to start window manager");
-      exit(-1);
-  }
-  else{
-    return table;
-  }
-  INFO("get Table in Computer Table  ");
 }
