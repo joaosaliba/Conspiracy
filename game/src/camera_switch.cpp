@@ -37,6 +37,13 @@ CameraSwitch::CameraSwitch(double positionX, double positionY, std::string direc
     INFO("Constructor CameraSwitch");
 }
 /**
+*    @brief check the camera switch if it working.
+*/
+bool CameraSwitch::isWorking(){
+  return working;
+  INFO("Check if working CameraSwitch");
+}
+/**
  *   @brief draws the animation of the button according to its position
  *   @return void
  */
@@ -55,13 +62,7 @@ void CameraSwitch::update(double timeElapsed){
     animator->update();
     INFO("update CameraSwitch");
 }
-/**
-*    @brief check the camera switch if it working.
-*/
-bool CameraSwitch::isWorking(){
-  return working;
-  INFO("Check if working CameraSwitch");
-}
+
 /**
 *    @brief change the camera switch to off.
 */

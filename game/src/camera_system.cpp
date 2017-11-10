@@ -37,6 +37,24 @@ CameraSystem::CameraSystem(Camera* p_camera, CameraSwitch* p_camera_switch, Came
     camera_lever = p_camera_lever;
     INFO("Constructor CameraSystem");
 }
+
+/**
+ *   @brief draws the animation of the Camera System according to its position
+ *   @return void
+ */
+void CameraSystem::draw(){
+    assert ( timeElapsed != NULL);
+    camera->draw();
+    camera_switch->draw();
+    if(camera_lever != NULL){
+        camera_lever->draw();
+    }
+    else{
+      //nothing to do
+    }
+    INFO("draw CameraSystem");
+}
+
 /**
 *    @brief update the camera system  decoring the time.
 *    @param[in] timeElapsed its about the time
@@ -65,22 +83,7 @@ void CameraSystem::update(double timeElapsed){
     }
     INFO("update CameraSystem");
 }
-/**
- *   @brief draws the animation of the Camera System according to its position
- *   @return void
- */
-void CameraSystem::draw(){
-    assert ( timeElapsed != NULL);
-    camera->draw();
-    camera_switch->draw();
-    if(camera_lever != NULL){
-        camera_lever->draw();
-    }
-    else{
-      //nothing to do
-    }
-    INFO("draw CameraSystem");
-}
+
 /**
  *   @brief   get the actual camera system
  *   @return camera
