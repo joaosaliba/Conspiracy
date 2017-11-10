@@ -43,11 +43,21 @@ Chair::Chair(std::string chair_name, double chair_position_x, double chair_posit
 Chair::~Chair(){
   INFO("Destructor chair ");
 }
+
+/**
+ *   @brief draws the animation of the chair according to its position
+ *   @return void
+ */
+void Chair::draw(){
+        animator->draw(getPositionX(), getPositionY()-15);
+        animator->draw_collider(getPositionX(), getPositionY(), getWidth(), getHeight());
+        INFO("draw chair ");
+}
+
 /**
 *    @brief update the chair  decoring the time.
 *    @param[in] timeElapsed its about the time
 */
-
 void Chair::update(double timeElapsed){
         assert ( timeElapsed != NULL);
         auto move_chair_in_x = QUARTERSECOND*timeElapsed;
@@ -65,15 +75,7 @@ void Chair::update(double timeElapsed){
           INFO("update chair ");
 }
 
-/**
- *   @brief draws the animation of the chair according to its position
- *   @return void
- */
-void Chair::draw(){
-        animator->draw(getPositionX(), getPositionY()-15);
-        animator->draw_collider(getPositionX(), getPositionY(), getWidth(), getHeight());
-        INFO("draw chair ");
-}
+
 
 /**
  *   @brief set a  new position for the chair in the x plan

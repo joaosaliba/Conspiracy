@@ -45,6 +45,21 @@ Choice::~Choice() {
 
 }
 /**
+*   @brief draws the animation of the chair according to its position
+*   @return void
+*/
+void Choice::draw(){
+  INFO("TEXT DRAW");
+  sprite->draw(getPositionX(), getPositionY());
+  if(!unlock){
+    padlock->draw(getPositionX()+ (getWidth()*HALF)*0.8, getPositionY()+ (getHeight()*HALF)*0.8);
+  }
+  button->draw();
+  rectangle->draw();
+  INFO("draw choice ");
+}
+
+/**
 *    @brief update the choice  during the time.
 *    @param[in] timeElapsed its about the time
 */
@@ -60,18 +75,13 @@ void Choice::update(double timeElapsed){
 
 }
 /**
- *   @brief draws the animation of the chair according to its position
- *   @return void
+ *   @brief Set a text for the choice button
+ *   @return button->getText();
  */
-void Choice::draw(){
-    INFO("TEXT DRAW");
-    sprite->draw(getPositionX(), getPositionY());
-    if(!unlock){
-        padlock->draw(getPositionX()+ (getWidth()*HALF)*0.8, getPositionY()+ (getHeight()*HALF)*0.8);
-    }
-    button->draw();
-    rectangle->draw();
-      INFO("draw choice ");
+Text * Choice::getText(){
+    return button->getText();
+
+  INFO("get Choice  text");
 }
 
 /**
@@ -88,15 +98,7 @@ void Choice::setBackgroundColor(Color * newBackgroundColor){
     button->setTextColor(newBackgroundColor);
     INFO("Set background color for Choice ");
 }
-/**
- *   @brief Set a text for the choice button
- *   @return button->getText();
- */
-Text * Choice::getText(){
-    return button->getText();
 
-  INFO("get Choice  text");
-}
 /**
  *   @brief Set a chosen for the choice
  */
@@ -120,6 +122,6 @@ void Choice::setUnlock(bool isUnlock){
 bool Choice::getUnlock(){
 
     return unlock;
-  
+
   INFO("get Choice unlock ");
 }
