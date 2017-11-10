@@ -342,9 +342,20 @@ void CollisionManager::resetLists(){
  *    @return bool
  */
 bool CollisionManager::verifyCollision( GameObject* game_object_collision, GameObject* game_object_collision2){
-        //The sides of the rectangles
-        int leftA = 0, rightA = 0, topA = 0, bottomA = 0; //declarating variables
-        int leftB = 0, rightB = 0, topB = 0, bottomB = 0; //declarating variables
+
+        //Calculate the sides of rect A
+        int leftA = 0, rightA = 0, topA = 0, bottomA = 0; //declarating variables for rectangles sides
+        leftA = game_object_collision->getPositionX();
+        rightA = leftA + game_object_collision->getWidth();
+        topA = game_object_collision->getPositionY();
+        bottomA = topA + game_object_collision->getHeight();
+
+        //Calculate the sides of rect B
+        int leftB = 0, rightB = 0, topB = 0, bottomB = 0; //declarating variables for rectangles sides
+        leftB = game_object_collision2->getPositionX();
+        rightB = leftB + game_object_collision2->getWidth();
+        topB = game_object_collision2->getPositionY();
+        bottomB = topB + game_object_collision2->getHeight();
 
         assert (leftA != NULL);
         assert (rightA != NULL);
@@ -354,17 +365,6 @@ bool CollisionManager::verifyCollision( GameObject* game_object_collision, GameO
         assert (rightB != NULL);
         assert (topB != NULL);
         assert (buttonB != NULL);
-        //Calculate the sides of rect A
-        leftA = game_object_collision->getPositionX();
-        rightA = leftA + game_object_collision->getWidth();
-        topA = game_object_collision->getPositionY();
-        bottomA = topA + game_object_collision->getHeight();
-
-        //Calculate the sides of rect B
-        leftB = game_object_collision2->getPositionX();
-        rightB = leftB + game_object_collision2->getWidth();
-        topB = game_object_collision2->getPositionY();
-        bottomB = topB + game_object_collision2->getHeight();
 
         if(game_object_collision2->getWidth() == 0 || game_object_collision2->getHeight() == 0) {
                 return false;
@@ -387,26 +387,30 @@ bool CollisionManager::verifyCollision( GameObject* game_object_collision, GameO
  *    @return bool
  */
 bool CollisionManager::verifyRectangleCollisionWithLine(GameObject* game_object, std::pair<int, int> a, std::pair<int, int> b){
-        std::pair<std::pair<int, int>, std::pair<int, int> > top;
-        std::pair<std::pair<int, int>, std::pair<int, int> > right;
-        std::pair<std::pair<int, int>, std::pair<int, int> > left;
-        std::pair<std::pair<int, int>, std::pair<int, int> > bottom;
 
+
+
+
+
+        std::pair<std::pair<int, int>, std::pair<int, int> > top;
         top.first.first = game_object->getPositionX();
         top.first.second = game_object->getPositionY();
         top.second.first = game_object->getPositionX()+game_object->getWidth();
         top.second.second= game_object->getPositionY();
 
+        std::pair<std::pair<int, int>, std::pair<int, int> > right;
         right.first.first = game_object->getPositionX()+game_object->getWidth();
         right.first.second = game_object->getPositionY();
         right.second.first = game_object->getPositionX()+game_object->getWidth();
         right.second.second= game_object->getPositionY()+game_object->getHeight();
 
+        std::pair<std::pair<int, int>, std::pair<int, int> > left;
         left.first.first = game_object->getPositionX();
         left.first.second = game_object->getPositionY();
         left.second.first = game_object->getPositionX();
         left.second.second= game_object->getPositionY()+game_object->getHeight();
 
+        std::pair<std::pair<int, int>, std::pair<int, int> > bottom;
         bottom.first.first = game_object->getPositionX();
         bottom.first.second = game_object->getPositionY()+game_object->getHeight();
         bottom.second.first = game_object->getPositionX()+game_object->getWidth();
@@ -441,17 +445,17 @@ double CollisionManager::CCW(std::pair<int, int> line_a, std::pair<int, int> lin
  *    @return string
  */
 std::string CollisionManager::verifyCollisionChair(GameObject* game_object_collision, GameObject* game_object_collision2){
-        //The sides of the rectangles
-        int leftA = 0, rightA = 0, topA = 0, bottomA = 0; //declarating variables
-        int leftB = 0, rightB = 0, topB = 0, bottomB = 0; //declarating variables
+
 
         //Calculate the sides of rect A
+        int leftA = 0, rightA = 0, topA = 0, bottomA = 0; //declarating variables of rectangle sides
         leftA = game_object_collision->getPositionX();
         rightA = leftA + game_object_collision->getWidth();
         topA = game_object_collision->getPositionY();
         bottomA = topA + game_object_collision->getHeight();
 
         //Calculate the sides of rect B
+        int leftB = 0, rightB = 0, topB = 0, bottomB = 0; //declarating variables of rectangles sides
         leftB = game_object_collision2->getPositionX();
         rightB = leftB + game_object_collision2->getWidth();
         topB = game_object_collision2->getPositionY();
