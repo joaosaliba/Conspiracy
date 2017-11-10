@@ -18,11 +18,13 @@ Guard::Guard(std::string objectName, double positionX, double positionY,
         animator->addAction("idle_up",5,5);
         animator->addAction("idle_down",0,0);
 
-        range = 150;
-        int angleOfVision = 60;
+
+
         quantityRepeatWay = newQuantityRepeatWay;
         currentRepeat = 0;
 
+        int angleOfVision = 60;
+        range = 150;
         fieldOfVision = new FieldOfVision(positionX+width/2,positionY-7, range, angleOfVision);
         talkingBar = new ProgressBar(positionX, positionY, 45, 5, 0.0025);
 
@@ -94,7 +96,7 @@ void Guard::update(double timeElapsed){
 }
 
 void Guard::walkInX(double & incX){
-        int beforeWay = wayActual;
+
 
         if(wayActive) {
                 walkInXSpecial(incX);
@@ -113,6 +115,7 @@ void Guard::walkInX(double & incX){
         }
 
         setPositionX(getPositionX()+incX);
+        int beforeWay = wayActual;
         if(CollisionManager::instance.verifyCollisionWithWallsAndChairs(this)) {
                 if (!wayActive) {
                         verifyDeadLockHorizontal();
@@ -133,7 +136,7 @@ void Guard::walkInX(double & incX){
 }
 
 void Guard::walkInY(double & incY){
-        int beforeWay = wayActual;
+
 
         if(wayActive) {
                 walkInYSpecial(incY);
@@ -152,6 +155,7 @@ void Guard::walkInY(double & incY){
         }
 
         setPositionY(getPositionY()+incY);
+        int beforeWay = wayActual;
         if(CollisionManager::instance.verifyCollisionWithWallsAndChairs(this)) {
                 if (!wayActive) {
                         verifyDeadLockVertical();
@@ -165,6 +169,7 @@ void Guard::walkInY(double & incY){
 
                 setPositionY(getPositionY()+(incY*(0-1)));
                 incY = 0;
+
                 if (beforeWay == wayActual){
                     nextWay();
                 }
