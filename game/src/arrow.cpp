@@ -40,21 +40,6 @@ Arrow::~Arrow(){
    INFO("Destructor Arrow");
 
 }
-/**
-*    @brief update the arrow  decoring the time.
-*    @param[in] timeElapsed its about the time
-*/
-void Arrow::update(double timeElapsed){
-        assert ( timeElapsed != NULL);
-
-        timeElapsed = timeElapsed;
-        if(isEnabled()){
-                animator->update();
-        }else{
-          //nothing to do
-        }
-           INFO("update Arrow");
-}
 
 /**
  *   @brief draws the animation of the arrow according to its position
@@ -69,4 +54,20 @@ void Arrow::draw(){
           //nothing to do
         }
            INFO("Draw Arrow");
+}
+
+/**
+*    @brief update the arrow  decoring the time.
+*    @param[in] timeElapsed its about the time
+*/
+void Arrow::update(double timeElapsed){
+        assert ( timeElapsed != NULL);
+
+        timeElapsed = timeElapsed;
+        if(isEnabled()){
+                animator->update();
+        }else{
+          //nothing to do
+        }
+           INFO("update Arrow");
 }
