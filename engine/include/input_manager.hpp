@@ -31,7 +31,7 @@ namespace engine{
         void Update(void);
 
         bool isKeyTriggered(int iKeyCode);
-        bool isKeyPressed(int iKeyCode);
+        bool is_key_pressed(int iKeyCode);
         bool isKeyReleased(int iKeyCode);
 
     private:

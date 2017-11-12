@@ -18,12 +18,12 @@ public:
     void init();
     Animation * getAnimation();
     void animate();
-    void stopAnimation();
+    void stop_animation();
     bool isPressed();
     void playEffect();
-    void stopEffect();
+    void stop_effect();
     double getHackingBarPercent();
-    void resetHackingProgress();
+    void reset_hacking_progress();
 protected:
     bool pressed;
     Animation* animator;

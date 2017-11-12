@@ -48,7 +48,7 @@ void DoorSwitch::animate(){
     pressed = true;
 }
 
-void DoorSwitch::stopAnimation(){
+void DoorSwitch::stop_animation(){
     pressed = false;
 }
 
@@ -60,7 +60,7 @@ void DoorSwitch::playEffect(){
     hacking_effect->play(2);
 }
 
-void DoorSwitch::stopEffect(){
+void DoorSwitch::stop_effect(){
     hacking_effect->stop();
 }
 
@@ -68,6 +68,6 @@ double DoorSwitch::getHackingBarPercent(){
     return hacking_bar->getPercent();
 }
 
-void DoorSwitch::resetHackingProgress(){
+void DoorSwitch::reset_hacking_progress(){
     hacking_bar->resetPercent();
 }

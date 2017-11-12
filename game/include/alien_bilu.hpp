@@ -2,6 +2,9 @@
 #define ALIEN_BILU_HPP
 #include "alien.hpp"
 #include "log.h"
+#include "paper.hpp"
+#include "door_switch.hpp"
+
 
 /** The class Bilu receives an Alien public class where the parameters to be defined
 *received, such as position, type, and methods. The attributes that will be defined
@@ -29,8 +32,7 @@ protected:
     void special_action();
 
 private:
-
-    bool hacking = true; //declaring variable hacking "computers
+    
     bool editing = true; // declaring variable editing "documents
     bool last_action = true; // declaring variablre last action
     void set_special_action_animator();
@@ -39,7 +41,7 @@ private:
     void idle_animator(double &move_bilu_in_x, double &move_bilu_in_y, int &idle_animation_number);
     void walk(bool &block_movement, bool &is_selected, double &move_bilu_in_x, 
     double &move_bilu_in_y);
-    void hacking(DoorSwitch* doorSwitch, bool &hacking, bool &block_movement);
+    void hacking_bilu(DoorSwitch* doorSwitch,bool &hacking, bool &block_movement);
     void bilu_position(double &bilu_position_x,double &bilu_position_y, int &SCREEN_INITIAL,
     int &SCREEN_WIDTH); 
     void verify_collision();

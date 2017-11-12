@@ -38,7 +38,7 @@ InputManager InputManager::instance;
         return quitRequest;
     }
 
-    bool InputManager::isKeyPressed(int iKeyCode) {
+    bool InputManager::is_key_pressed(int iKeyCode) {
         return keyActive[iKeyCode];
     }
 

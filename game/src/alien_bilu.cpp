@@ -47,13 +47,14 @@ Alien(FILENAME, bilu_position_x, bilu_position_y, WIDTH, HEIGHT) {
    
     INFO("Bilu constructor init");
     
-    double bilu_position_x = 0.0;
+   /* double bilu_position_x = 0.0;
     double bilu_position_y = 0.0;
     bool hacking = true;
     bool editing = true;
     bool last_action = true;
     bool is_selected = true;
-    bool in_position = true;  
+    bool in_position = true; */ 
+    bool hacking;
    
     assert (bilu_position_x !=NULL);
     assert (bilu_position_y !=NULL);
@@ -114,8 +115,8 @@ void Bilu::update(double time_elapsed) {
     
     INFO("Bilu update init");
 
-    double time_elapsed = 0.0;
-    bool in_position = true;
+    /*double time_elapsed = 0.0;
+    bool in_position = true;*/
     
     assert ( time_elapsed != NULL);
 
@@ -233,9 +234,10 @@ void Bilu::special_action() {
 
     INFO("Bilu special action init");
 
-    bool hacking = true;
-    bool editing = true;
-
+    /*bool hacking = true;
+    bool editing = true;*/
+    bool hacking;
+    bool editing;
     std::pair<int, int> interval;
 
     GameObject* paper = CollisionManager::instance.verify_collision_with_papers(this);
@@ -256,16 +258,17 @@ void Bilu::special_action() {
 
 void Bilu::instance_actions(DoorSwitch* doorSwitch,Paper* paper, bool &block_movement, bool &editing,
 bool &hacking) {
+
     if(InputManager::instance.is_key_pressed(InputManager::KEY_PRESS_ESC)&& is_selected) {
     // If hacking
-    else if(hacking) {
-        INFO("hacking where the instance was selected");
-        hacking = false;
-        block_movement = false;
-        ((DoorSwitch*)(doorSwitch))->stop_effect();
-        ((DoorSwitch*)(doorSwitch))->stop_animation();
-        ((DoorSwitch*)(doorSwitch))->reset_hacking_progress();
-        //Assigns a default hacking and block_movement false, and paper receives actions
+        }else if(hacking) {
+            INFO("hacking where the instance was selected");
+            hacking = false;
+            block_movement = false;
+            ((DoorSwitch*)(doorSwitch))->stop_effect();
+            ((DoorSwitch*)(doorSwitch))->stop_animation();
+            ((DoorSwitch*)(doorSwitch))->reset_hacking_progress();
+            //Assigns a default hacking and block_movement false, and paper receives actions
         }else if (editing) {
             INFO("editing where the instance was selected");
             editing = false;

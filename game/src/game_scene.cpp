@@ -144,7 +144,7 @@ void GameScene::verifyWinOrLose(){
             getSceneManager()->loadScene(6);
         }
 
-    }else if((all_papers_edited && aliens_in_position) || (InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_K) && skip_timer->total_elapsed_time() >= 500)){
+    }else if((all_papers_edited && aliens_in_position) || (InputManager::instance.is_key_pressed(InputManager::KeyPress::KEY_PRESS_K) && skip_timer->total_elapsed_time() >= 500)){
         if(getSceneManager()->get_current_scene_id() == 5){
             getSceneManager()->loadScene(9);
         }else{

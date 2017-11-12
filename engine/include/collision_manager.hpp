@@ -16,8 +16,8 @@ public:
     bool verify_collision_with_guards(GameObject* game_object);
     bool verify_collision_with_cameras(GameObject* game_object);
     bool verifyCollisionWithOtherChairs(GameObject* game_object);
-    GameObject* verifyCollisionWithPapers(GameObject* game_object);
-    GameObject* verifyCollisionWithSwitches(GameObject* game_object);
+    GameObject* verify_collision_with_papers(GameObject* game_object);
+    GameObject* verify_collision_with_switches(GameObject* game_object);
     GameObject* verify_collision_with_cameraswitches(GameObject* game_object);
     GameObject* verifyCollisionWithCameraLevers(GameObject* game_object);
     GameObject* verify_collision_with_finish_points(GameObject* game_object);

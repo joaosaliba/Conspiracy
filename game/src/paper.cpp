@@ -48,7 +48,7 @@ void Paper::animate(){
     assert(paper_is_being_edited != NULL);
 }
 
-void Paper::stopAnimation(){
+void Paper::stop_animation(){
     paper_is_being_edited = false;
     assert(paper_is_being_edited != NULL);
 }
@@ -77,7 +77,7 @@ double Paper::getEditingBarPercent(){
     assert(paper_editing_bar != NULL);
 }
 
-void Paper::resetEditingProgress(){
+void Paper::reset_editing_progress(){
     paper_editing_bar->resetPercent();
     assert(paper_editing_bar != NULL);
 }
@@ -87,7 +87,7 @@ void Paper::playEffect(){
     assert(paper_editing_sound != NULL);
 }
 
-void Paper::stopEffect(){
+void Paper::stop_effect(){
     paper_editing_sound->stop();
     assert(paper_editing_sound != NULL);
 }

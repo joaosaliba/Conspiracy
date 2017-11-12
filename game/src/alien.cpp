@@ -166,7 +166,7 @@ void Alien::walk_in_x(double & alien_in_x) {
         animator->set_interval(ACTION_RIGHT);
         INFO("action right ok");
     //Chech if instance    
-    if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_RIGHT)) {
+    if(InputManager::instance.is_key_pressed(InputManager::KeyPress::KEY_PRESS_RIGHT)) {
         inc_x = inc_x;
         idle_animation_number = ANIMATION_NUMBER_1;
         animator->set_interval(ACTION_RIGHT);
@@ -261,7 +261,7 @@ void Alien::walk_in_y(double & alien_in_y, double alien_in_x) {
             animator->set_interval(ANIMATION_2);
             INFO("alien in x receives 0");
             INFO("alien receives animation 2");
-            if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_UP)) {
+            if(InputManager::instance.is_key_pressed(InputManager::KeyPress::KEY_PRESS_UP)) {
                 inc_y = inc_y * (PLAY_EFECT_1 - PLAY_EFECT_2);
                 idle_animation_number = ANIMATION_NUMBER_1;
                 INFO("press up instance");
@@ -276,7 +276,7 @@ void Alien::walk_in_y(double & alien_in_y, double alien_in_x) {
             }else {
                 //nothing to do
             }
-        else if(engine::InputManager::instance.isKeyPressed(engine::InputManager::KeyPress::
+        else if(engine::InputManager::instance.is_key_pressed(engine::InputManager::KeyPress::
         KEY_PRESS_DOWN)) {
             inc_y = inc_y;
             idle_animation_number = ANIMATION_NUMBER_2;

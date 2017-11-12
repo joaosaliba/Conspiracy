@@ -258,7 +258,7 @@ bool CollisionManager::verifyCollisionWithFieldsOfVision(GameObject* game_object
  *    @brief collision manager  and verify the interection with the switches
  *    @return null
  */
-GameObject* CollisionManager::verifyCollisionWithSwitches(GameObject* game_object_collision){
+GameObject* CollisionManager::verify_collision_with_switches(GameObject* game_object_collision){
         for(GameObject * doorSwitch : switchList) {
                 if(verifyCollision(doorSwitch, game_object_collision)) {
                         return doorSwitch;
@@ -304,7 +304,7 @@ GameObject* CollisionManager::verifyCollisionWithCameraLevers(GameObject* game_o
  *    @brief collision manager  and verify the interection with the papers
  *    @return null
  */
-GameObject* CollisionManager::verifyCollisionWithPapers(GameObject* game_object_collision){
+GameObject* CollisionManager::verify_collision_with_papers(GameObject* game_object_collision){
         for(GameObject * paper : paperList) {
                 if(verifyCollision(paper, game_object_collision)) {
                         return paper;

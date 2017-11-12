@@ -34,11 +34,11 @@ Player::~Player(){
 void Player::update(double timeElapsed){
         int beforeAlien = selectedAlien;
 
-        if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_ONE)) {
+        if(InputManager::instance.is_key_pressed(InputManager::KeyPress::KEY_PRESS_ONE)) {
                 selectedAlien = 1;
-        } else if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_TWO)) {
+        } else if(InputManager::instance.is_key_pressed(InputManager::KeyPress::KEY_PRESS_TWO)) {
                 selectedAlien = 2;
-        } else if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_THREE)) {
+        } else if(InputManager::instance.is_key_pressed(InputManager::KeyPress::KEY_PRESS_THREE)) {
                 selectedAlien = 3;
                 ((Varginha *)(varginha))->set_default();
         }
