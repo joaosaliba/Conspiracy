@@ -52,8 +52,8 @@ Alien(FILENAME, varginha_position_x, varginha_position_y, WIDTH, HEIGHT) {
     
     double varginha_position_x = 0.0;
     double varginha_position_y = 0.0;
-    bool-is_invisible = true;
-    bool-is_selected = true; //conferir com o professor
+    bool is_invisible = true;
+    bool is_selected = true; //conferir com o professor
     bool in_position = true;
     bool turn_off = true;
     
@@ -114,10 +114,8 @@ int &SCREEN_INITIAL, int &SCREEN_WIDTH) {
 
 void Varginha::update(double time_elapsed) {
 
-     double-time_elapsed = 0.0;
-     bool-in_position = true;
-     double-varginha_in_x = 0.0;
-     double-varginha_in_y = 0.0;    
+     double time_elapsed = 0.0;
+     bool in_position = true;    
         
     assert (time_elapsed !=NULL);
     
@@ -130,6 +128,8 @@ void Varginha::update(double time_elapsed) {
      }
     in_position = false;
     animator->set_total_time(TOTAL_TIME_1);
+    double varginha_in_x = 0.0;
+    double varginha_in_y = 0.0;
     auto varginha_in_y = VELOCITY_VARGINHA*time_elapsed;
     auto varginha_in_x = VELOCITY_VARGINHA*time_elapsed;
 
@@ -212,22 +212,19 @@ void Verginha::check_final_position(FinishPoint* finish_point, bool &in_position
 *@param unsigned bool-is_selected
 *@return void
 */
-void Varginha::special_action() {
-    double-varginha_position_x = 0.0;
-    double-varginha_position_y = 0.0;
-    bool-block_movement = true;
-    bool-turn_off = true;
-    bool-is_selected = true;
-   
+void Varginha::special_action() {   
     std::pair<int, int> interval;
 
     // Check is_invisible
     animation_invisible(&is_invisible, &idle_animation_number, &ANIMATION_NUMBER_1, 
     &ANIMATION_NUMBER_2);
 
+    bool is_selected = true;
+    bool block_movement = true;
     is_selected_camera(&is_selected, CameraSwitch* camera_switch, 
     CameraLever* camera_lever, &block_movement, &is_invisible);
 
+    bool turn_off = true;
     key_released(&is_selected, &turn_off);
 }
 
@@ -341,8 +338,8 @@ void Varginha::set_default() {
 */
  
 void Varginha::draw() {
-    double-varginha_position_x = 0.0;
-    double-varginha_position_y = 0.0;
+    double varginha_position_x = 0.0;
+    double varginha_position_y = 0.0;
 
     INFO("Varginha DRAW");
     animator->draw(get_varginha_position_x()-CENTER_CHARACTER_1, 
