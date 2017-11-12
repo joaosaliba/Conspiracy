@@ -63,7 +63,6 @@ GameObject(objectName,alien_position_x,alien_position_y,width, height) {
     INFO("Alien constructor init");
 
     double alien_position_x = 0.0;
-    double alien_position_y = 0.0
     int width = 0;
     int height = 0;
     bool block_movement = true;
@@ -87,6 +86,7 @@ GameObject(objectName,alien_position_x,alien_position_y,width, height) {
        //nothing to do
         INFO("Alien position x ok");
     }
+    double alien_position_y = 0.0;
     // Verifies the position y of the character
     if(alien_position_y > SCREEN_WIDTH || alien_position_y < SCREEN_INITIAL) {
         ERROR("Strange Alien position y");
@@ -144,12 +144,12 @@ void Alien::walk_in_x(double & alien_in_x) {
     INFO("Alien walk in x init");
 
     double alien_in_x = 0.0;
-    double alien_position_x = 0.0;
+   
     
     assert (alien_in_x !=NULL);
 
     DEBUG("alien walk in x : "+alien_in_x);
-    DEBUG("alien walk in y : "+alien_in_y);
+    DEBUG("alien walk position in x : "+alien_position_x);
 
     // Verifies the alien_in_x of the character
     if(alien_in_x > SCREEN_WIDTH || alien_in_x < SCREEN_INITIAL) {
@@ -190,6 +190,7 @@ void Alien::walk_in_x(double & alien_in_x) {
         alien_in_x = PLAY_EFECT_1;
         INFO("alien in x receives play efect 1");
     }
+    double alien_position_x = 0.0;
     set_alien_position_x(get_alien_position_x()+alien_in_x);
     //Chech if instance was collision
     if(CollisionManager::instance.verify_collision_with_walls_and_chairs(this)) {
@@ -215,9 +216,8 @@ void Alien::walk_in_x(double & alien_in_x) {
 void Alien::walk_in_y(double & alien_in_y, double alien_in_x) {
 
     double alien_in_x = 0.0;
-    double alien_in_y = 0.0;
     double alien_position_x = 0.0;
-    double alien_position_y = 0.0;
+    
     
     assert (alien_in_y !=NULL);
     assert (alien_in_x !=NULL);
@@ -229,6 +229,7 @@ void Alien::walk_in_y(double & alien_in_y, double alien_in_x) {
        //nothing to do
         INFO("Alien x ok in walk in y");
     }
+    double alien_in_y = 0.0;
     // Verifies the alien_in_y of the character
     if(alien_in_y > SCREEN_WIDTH || alien_in_y < SCREEN_INITIAL) {
         ERROR("Strange Alien position y");
@@ -292,6 +293,7 @@ void Alien::walk_in_y(double & alien_in_y, double alien_in_x) {
             alien_in_y = PLAY_EFECT_1;
             INFO("alien in y receives play efect 1");
         }
+    double alien_position_y = 0.0;
     set_alien_position_y(get_alien_position_y()+alien_in_y);
     // Instace verify collision
     if(CollisionManager::instance.verify_collision_with_walls_and_chairs(this)) {
