@@ -33,6 +33,7 @@ Chair::Chair(std::string chair_name, double chair_position_x, double chair_posit
         assert ( chair_position_y != NULL);
         assert ( chair_width != NULL);
         assert ( chair_height != NULL);
+          INFO("Constructor chair ");
 }
 
 /**
@@ -40,13 +41,23 @@ Chair::Chair(std::string chair_name, double chair_position_x, double chair_posit
  */
 
 Chair::~Chair(){
-
+  INFO("Destructor chair ");
 }
+
+/**
+ *   @brief draws the animation of the chair according to its position
+ *   @return void
+ */
+void Chair::draw(){
+        animator->draw(getPositionX(), getPositionY()-15);
+        animator->draw_collider(getPositionX(), getPositionY(), getWidth(), getHeight());
+        INFO("draw chair ");
+}
+
 /**
 *    @brief update the chair  decoring the time.
 *    @param[in] timeElapsed its about the time
 */
-
 void Chair::update(double timeElapsed){
         assert ( timeElapsed != NULL);
         auto move_chair_in_x = QUARTERSECOND*timeElapsed;
@@ -61,16 +72,10 @@ void Chair::update(double timeElapsed){
 
         animator->update();
         setMoving(false);
+          INFO("update chair ");
 }
 
-/**
- *   @brief draws the animation of the chair according to its position
- *   @return void
- */
-void Chair::draw(){
-        animator->draw(getPositionX(), getPositionY()-15);
-        animator->draw_collider(getPositionX(), getPositionY(), getWidth(), getHeight());
-}
+
 
 /**
  *   @brief set a  new position for the chair in the x plan
@@ -94,7 +99,7 @@ void Chair::moveInX(double move_chair_in_x){
         if(CollisionManager::instance.verifyCollisionWithOtherChairs(this) || CollisionManager::instance.verifyCollisionWithWalls(this) || CollisionManager::instance.verifyCollisionWithGuardsBody(this)) {
                 setPositionX(getPositionX()+(move_chair_in_x*(0-1)));
         }
-
+        INFO("move chair in X");
 }
 
 /**
@@ -119,7 +124,7 @@ void Chair::moveInY(double move_chair_in_y){
         if(CollisionManager::instance.verifyCollisionWithOtherChairs(this) || CollisionManager::instance.verifyCollisionWithWalls(this) || CollisionManager::instance.verifyCollisionWithGuardsBody(this)) {
                 setPositionY(getPositionY()+(move_chair_in_y*(0-1)));
         }
-
+        INFO("move chair in Y");
 }
 /**
  *   @brief if player are move the chair call this function
@@ -128,6 +133,7 @@ void Chair::moveInY(double move_chair_in_y){
 void Chair::setMoving(bool chair_move){
         assert ( chair_move != NULL);
         isMoving = chair_move;
+        INFO("Set chair movement");
 }
 /**
  *   @brief when move the chair set the correct direction that it was moved
@@ -135,4 +141,5 @@ void Chair::setMoving(bool chair_move){
  */
 void Chair::setDirection(std::string currentDirection){
         direction = currentDirection;
+        INFO("Set chair direction");
 }

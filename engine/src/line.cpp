@@ -1,6 +1,8 @@
 #include "line.hpp"
 
 using namespace engine;
+//#define NDEBUG *uncomment to disable assertions
+#include <assert.h>
 
 Line::Line(double x1, double y1, int size, double p_angle){
     point1.first = x1;
@@ -8,6 +10,10 @@ Line::Line(double x1, double y1, int size, double p_angle){
     point2.first = x1 + size;
     point2.second = y1;
     this->angle = 0;
+    assert(x1 != NULL);
+    assert(y1 != NULL);
+    assert(size != NULL);
+    assert(p_anlge != NULL);
     if(p_angle != this->angle){
         rotateLine(angle);
     }
@@ -21,6 +27,10 @@ Line::Line(Line* referenceLine){
 }
 
 Line::Line(double x1, double y1, double x2, double y2){
+    assert(x1 != NULL);
+    assert(y1 != NULL);
+    assert(x2 != NULL);
+    assert(y2 != NULL);
     point1.first = x1;
     point1.second = y1;
     point2.first = x2;
@@ -44,6 +54,8 @@ double Line::getAngle(){
 }
 
 void Line::updatePosition(double incX, double incY){
+    assert(incX != NULL);
+    assert(incY != NULL);
     point1.first += incX;
     point1.second += incY;
 
@@ -52,15 +64,21 @@ void Line::updatePosition(double incX, double incY){
 }
 
 void Line::setPoint1(double x, double y){
+    assert(x != NULL);
+    assert(y != NULL);
     point1.first = x;
     point1.second = y;
 }
 void Line::setPoint2(double x, double y){
+    assert(x != NULL);
+    assert(y != NULL);
     point2.first = x;
     point2.second = y;
 }
 
 void Line::rotateLine(double p_angle){
+    assert(p_angle != NULL);
+
     if(angle > 360){
         angle -= 360;
     }
@@ -92,6 +110,7 @@ void Line::rotateLine(double p_angle){
 }
 
 void Line::changeAngleTo(double p_angle){
+    assert(p_angle != NULL);
     rotateLine(-angle);
     rotateLine(p_angle);
 }

@@ -34,6 +34,14 @@ CameraSwitch::CameraSwitch(double positionX, double positionY, std::string direc
     animator->setInterval("on");
     direction = direction;
     working = true;
+    INFO("Constructor CameraSwitch");
+}
+/**
+*    @brief check the camera switch if it working.
+*/
+bool CameraSwitch::isWorking(){
+  return working;
+  INFO("Check if working CameraSwitch");
 }
 /**
  *   @brief draws the animation of the button according to its position
@@ -42,6 +50,7 @@ CameraSwitch::CameraSwitch(double positionX, double positionY, std::string direc
 void CameraSwitch::draw(){
     animator->draw_instant(getPositionX()+ADJUSTX, getPositionY()+ADJUSTX);
     animator->draw_collider(getPositionX(), getPositionY(), getWidth(), getHeight());
+    INFO("draw CameraSwitch");
 }
 /**
 *    @brief update the camera switch  decoring the time.
@@ -49,27 +58,11 @@ void CameraSwitch::draw(){
 */
 void CameraSwitch::update(double timeElapsed){
     assert ( timeElapsed != NULL);
-    if (timeElapsed == NULL){
-      ERROR("Failed to start window manager");
-        exit(-1);
-    }
-    else{
-      timeElapsed = timeElapsed;
-    }
+    timeElapsed = timeElapsed;
     animator->update();
+    INFO("update CameraSwitch");
 }
-/**
-*    @brief check the camera switch if it working.
-*/
-bool CameraSwitch::isWorking(){
-  if (working == NULL){
-    ERROR("Failed to start window manager");
-      exit(-1);
-  }
-  else{
-    return working;
-  }
-}
+
 /**
 *    @brief change the camera switch to off.
 */
@@ -82,4 +75,5 @@ void CameraSwitch::turnOff(){
     else{
       //nothing to do
     }
+    INFO("Turn Off CameraSwitch");
 }

@@ -34,14 +34,31 @@ Choice::Choice(std::string objectName, double positionX, double positionY,
     unlock = false;
     Color *color = new Color(0, 0, 0, 150);
     rectangle = new Rectangle("Rectangle", positionX, positionY, width, height, true, color);
+    INFO("Constructor Choice ");
 }
 
 /**
  *    @brief Choice object destructor.
  */
 Choice::~Choice() {
+    INFO("Destructor Choice ");
 
 }
+/**
+*   @brief draws the animation of the chair according to its position
+*   @return void
+*/
+void Choice::draw(){
+  INFO("TEXT DRAW");
+  sprite->draw(getPositionX(), getPositionY());
+  if(!unlock){
+    padlock->draw(getPositionX()+ (getWidth()*HALF)*0.8, getPositionY()+ (getHeight()*HALF)*0.8);
+  }
+  button->draw();
+  rectangle->draw();
+  INFO("draw choice ");
+}
+
 /**
 *    @brief update the choice  during the time.
 *    @param[in] timeElapsed its about the time
@@ -54,20 +71,17 @@ void Choice::update(double timeElapsed){
         rectangle->setEnabled(true);
     }
     rectangle->update(timeElapsed);
+    INFO("update Choice ");
 
 }
 /**
- *   @brief draws the animation of the chair according to its position
- *   @return void
+ *   @brief Set a text for the choice button
+ *   @return button->getText();
  */
-void Choice::draw(){
-    INFO("TEXT DRAW");
-    sprite->draw(getPositionX(), getPositionY());
-    if(!unlock){
-        padlock->draw(getPositionX()+ (getWidth()*HALF)*0.8, getPositionY()+ (getHeight()*HALF)*0.8);
-    }
-    button->draw();
-    rectangle->draw();
+Text * Choice::getText(){
+    return button->getText();
+
+  INFO("get Choice  text");
 }
 
 /**
@@ -75,32 +89,23 @@ void Choice::draw(){
  */
 void Choice::setTextColor(Color * newTextColor){
     button->setTextColor(newTextColor);
+    INFO("Set text color in Choice ");
 }
 /**
  *   @brief Set a back ground color for the button
  */
 void Choice::setBackgroundColor(Color * newBackgroundColor){
     button->setTextColor(newBackgroundColor);
+    INFO("Set background color for Choice ");
 }
-/**
- *   @brief Set a text for the choice button
- *   @return button->getText();
- */
-Text * Choice::getText(){
-  if ( button->getText() == NULL){
-    ERROR("Failed to start window manager");
-      exit(-1);
-  }
-  else{
-    return button->getText();
-  }
-}
+
 /**
  *   @brief Set a chosen for the choice
  */
 void Choice::setChosen(bool isChosen){
   assert( isChosen != NULL);
   chosen = isChosen;
+  INFO("set Choisen ");
 }
 /**
  *   @brief Set if the choice are unlock
@@ -108,18 +113,15 @@ void Choice::setChosen(bool isChosen){
 void Choice::setUnlock(bool isUnlock){
     assert( isUnlock != NULL);
     unlock = isUnlock;
+    INFO("set Choice unlock ");
 }
 /**
  *   @brief get the actual situation for the choice
  *   @return unlock
  */
 bool Choice::getUnlock(){
-  if ( unlock == NULL){
-    ERROR("Failed to start window manager");
-      exit(-1);
-  }
-  else{
-    return unlock;
-  }
 
+    return unlock;
+
+  INFO("get Choice unlock ");
 }

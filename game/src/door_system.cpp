@@ -35,6 +35,16 @@ DoorSystem::DoorSystem(std::pair<int,int> doorPosition,
 DoorSystem::~DoorSystem() {
 
 }
+
+/**
+ *   @brief draws the animation of the chair according to its position
+ *   @return void
+ */
+void DoorSystem::draw(){
+    door->draw();
+    computerTable->draw();
+}
+
 /**
 *    @brief update the DoorSystem  during the time.
 *    @param[in] timeElapsed its about the time
@@ -53,14 +63,7 @@ void DoorSystem::update(double timeElapsed){
         }
     }
 }
-/**
- *   @brief draws the animation of the chair according to its position
- *   @return void
- */
-void DoorSystem::draw(){
-    door->draw();
-    computerTable->draw();
-}
+
 /**
  *   @brief get the way that the door be
  *   @return door

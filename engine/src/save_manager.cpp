@@ -1,6 +1,8 @@
 #include "save_manager.hpp"
 
 using namespace engine;
+//#define NDEBUG *uncomment to disable assertions
+#include <assert.h>
 
 SaveManager SaveManager::instance;
 
@@ -21,7 +23,7 @@ void SaveManager::verifySave(){
 
 void SaveManager::saveActualSituation(int unlockNumber){
   std::ofstream save(path.c_str());
-
+  assert(unlockNumber != NULL);
   stageNumberUnlock = unlockNumber;
 
   if(save.is_open()){

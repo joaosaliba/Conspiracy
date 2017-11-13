@@ -29,29 +29,13 @@ Button::Button(std::string button_name, double button_position_x, double button_
     assert ( button_position_y != NULL);
     assert ( button_width != NULL);
     assert ( button_height != NULL);
+       INFO("Constructor Button");
 }
 /**
  *    @brief Button object destructor.
  */
 Button::~Button() {
-
-}
-
-/**
-*    @brief update the button  decoring the time.
-*    @param[in] timeElapsed its about the time
-*/
-void Button::update(double timeElapsed) {
-    assert ( timeElapsed != NULL);
-    if (timeElapsed == NULL){
-      ERROR("Failed to start window manager");
-        exit(-1);
-    }
-    else{
-      timeElapsed = timeElapsed;
-    }
-    INFO(timeElapsed);
-
+       INFO("Destructor Button");
 }
 /**
  *   @brief draws the animation of the button according to its position
@@ -60,14 +44,19 @@ void Button::update(double timeElapsed) {
 void Button::draw() {
     INFO("TEXT DRAW");
     text->draw(getPositionX(), getPositionY());
+           INFO("draw Button");
 }
-/**
- *   @brief set a text Color for the button in the game
- *   @return void
- */
 
-void Button::setTextColor(Color * newTextColor) {
-    text->setTextColor(newTextColor);
+/**
+*    @brief update the button  decoring the time.
+*    @param[in] timeElapsed its about the time
+*/
+void Button::update(double timeElapsed) {
+    assert ( timeElapsed != NULL);
+      timeElapsed = timeElapsed;
+
+    INFO(timeElapsed);
+       INFO("Update Button");
 }
 
 /**
@@ -83,4 +72,14 @@ Text * Button::getText() {
   else{
     return text;
   }
+         INFO("Get Text Button");
+}
+/**
+ *   @brief set a text Color for the button in the game
+ *   @return void
+ */
+
+void Button::setTextColor(Color * newTextColor) {
+    text->setTextColor(newTextColor);
+           INFO("Set Text Collor Button");
 }

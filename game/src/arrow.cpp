@@ -30,32 +30,14 @@ Arrow::Arrow(std::string arrow_name, double arrow_position_x, double arrow_posit
         assert ( arrow_position_y != NULL);
         assert ( arrow_width != NULL);
         assert ( arrow_height != NULL);
+           INFO("Constructor Arrow");
 }
 
 /**
 *    @brief Arrow object destryctor.
 */
 Arrow::~Arrow(){
-
-}
-/**
-*    @brief update the arrow  decoring the time.
-*    @param[in] timeElapsed its about the time
-*/
-void Arrow::update(double timeElapsed){
-        assert ( timeElapsed != NULL);
-        if (timeElapsed == NULL){
-          ERROR("Failed to start window manager");
-            exit(-1);
-        }
-        else{
-          timeElapsed = timeElapsed;
-        }
-        if(isEnabled()){
-                animator->update();
-        }else{
-          //nothing to do
-        }
+   INFO("Destructor Arrow");
 
 }
 
@@ -71,4 +53,21 @@ void Arrow::draw(){
         else{
           //nothing to do
         }
+           INFO("Draw Arrow");
+}
+
+/**
+*    @brief update the arrow  decoring the time.
+*    @param[in] timeElapsed its about the time
+*/
+void Arrow::update(double timeElapsed){
+        assert ( timeElapsed != NULL);
+
+        timeElapsed = timeElapsed;
+        if(isEnabled()){
+                animator->update();
+        }else{
+          //nothing to do
+        }
+           INFO("update Arrow");
 }

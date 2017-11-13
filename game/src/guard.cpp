@@ -1,4 +1,9 @@
 #include "guard.hpp"
+#define ZERO_ANGLE 0
+#define PLANE_ANGLE 180
+#define STRAIGHT_ANGLE 90
+#define REVERSE_STRAIGHT_ANGLE 270
+#define MAKE_SECONDS 100.0
 
 Guard::Guard(std::string objectName, double positionX, double positionY,
              int width, int height, std::string initialDirection,int newQuantityRepeatWay, double newWaitingTime) : Enemy(objectName,
@@ -18,11 +23,13 @@ Guard::Guard(std::string objectName, double positionX, double positionY,
         animator->addAction("idle_up",5,5);
         animator->addAction("idle_down",0,0);
 
-        range = 150;
-        int angleOfVision = 60;
+
+
         quantityRepeatWay = newQuantityRepeatWay;
         currentRepeat = 0;
 
+        int angleOfVision = 60;
+        range = 150;
         fieldOfVision = new FieldOfVision(positionX+width/2,positionY-7, range, angleOfVision);
         talkingBar = new ProgressBar(positionX, positionY, 45, 5, 0.0025);
 
@@ -94,7 +101,7 @@ void Guard::update(double timeElapsed){
 }
 
 void Guard::walkInX(double & incX){
-        int beforeWay = wayActual;
+
 
         if(wayActive) {
                 walkInXSpecial(incX);
@@ -113,6 +120,7 @@ void Guard::walkInX(double & incX){
         }
 
         setPositionX(getPositionX()+incX);
+        int beforeWay = wayActual;
         if(CollisionManager::instance.verifyCollisionWithWallsAndChairs(this)) {
                 if (!wayActive) {
                         verifyDeadLockHorizontal();
@@ -133,7 +141,7 @@ void Guard::walkInX(double & incX){
 }
 
 void Guard::walkInY(double & incY){
-        int beforeWay = wayActual;
+
 
         if(wayActive) {
                 walkInYSpecial(incY);
@@ -152,6 +160,7 @@ void Guard::walkInY(double & incY){
         }
 
         setPositionY(getPositionY()+incY);
+        int beforeWay = wayActual;
         if(CollisionManager::instance.verifyCollisionWithWallsAndChairs(this)) {
                 if (!wayActive) {
                         verifyDeadLockVertical();
@@ -165,6 +174,7 @@ void Guard::walkInY(double & incY){
 
                 setPositionY(getPositionY()+(incY*(0-1)));
                 incY = 0;
+
                 if (beforeWay == wayActual){
                     nextWay();
                 }
@@ -267,15 +277,15 @@ void Guard::selectLine(){
         if(lastDirection != action) {
                 lastDirection = action;
                 if(action == "right" || action == "idle_right") {
-                        fieldOfVision->setAngle(0);
+                        fieldOfVision->setAngle(ZERO_ANGLE);//00
                 }else if(action == "left" || action == "idle_left") {
-                  fieldOfVision->setAngle(180);
+                  fieldOfVision->setAngle(PLANE_ANGLE); //180
                 }else if(action == "up") {
-                        fieldOfVision->setAngle(90);
+                        fieldOfVision->setAngle(STRAIGHT_ANGLE); //90
                 }else if(action == "down") {
-                        fieldOfVision->setAngle(270);
+                        fieldOfVision->setAngle(REVERSE_STRAIGHT_ANGLE);//270
                 }
-        }
+              }
 }
 int Guard::getRange(){
         return range;
@@ -305,7 +315,7 @@ double Guard::getTalkingBarPercent(){
 
 
 void Guard::verifyDeadLockHorizontal(){
-  if(timerHorizontal->elapsed_time()/100.0 < (waitingTime + 3)){
+  if(timerHorizontal->elapsed_time()/MAKE_SECONDS < (waitingTime + 3)){
           if(direction == "right") {
                   direction = "up";
           }else if(direction == "left"){
@@ -316,7 +326,7 @@ void Guard::verifyDeadLockHorizontal(){
 }
 
 void Guard::verifyDeadLockVertical(){
-  if(timerVertical->elapsed_time()/100.0 < (waitingTime + 3)){
+  if(timerVertical->elapsed_time()/MAKE_SECONDS  < (waitingTime + 3)){
           if(direction == "down"){
                   direction = "left";
           }else if(direction == "up"){
@@ -327,7 +337,7 @@ void Guard::verifyDeadLockVertical(){
 }
 
 void Guard::stop(double &incX, double &incY){
-      if(((timerVertical->elapsed_time()/100.0) < waitingTime || (timerHorizontal->elapsed_time()/100.0) < waitingTime) && !wayActive){
+      if(((timerVertical->elapsed_time()/MAKE_SECONDS) < waitingTime || (timerHorizontal->elapsed_time()/MAKE_SECONDS) < waitingTime) && !wayActive){
         incX = 0.0;
         incY = 0.0;
       }
