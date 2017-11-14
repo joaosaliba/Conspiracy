@@ -60,21 +60,6 @@ void ComputerTable::update(double timeElapsed){
 }
 
 /**
- *   @brief get the situation that the computer table are
- *   @return table;
- */
-Table* ComputerTable::getTable(){
-  if ( table == NULL){
-    ERROR("Failed to start window manager");
-      exit(-1);
-  }
-  else{
-    return table;
-  }
-  INFO("get Table in Computer Table  ");
-}
-
-/**
  *   @brief get the actual way that the switch are
  *   @return doorSwitch
  */
@@ -88,4 +73,18 @@ DoorSwitch* ComputerTable::getDoorSwitch(){
   }
   INFO("Get door switch in Computer Table  ");
 
+}
+/**
+ *   @brief get the situation that the computer table are
+ *   @return table;
+ */
+Table* ComputerTable::getTable(){
+  if ( table == NULL){
+    ERROR("Failed to start window manager");
+      exit(-1);
+  }
+  else{
+    return table;
+  }
+  INFO("get Table in Computer Table  ");
 }

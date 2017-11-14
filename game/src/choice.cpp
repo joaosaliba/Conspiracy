@@ -78,11 +78,23 @@ void Choice::update(double timeElapsed){
  *   @brief Set a text for the choice button
  *   @return button->getText();
  */
+
 Text * Choice::getText(){
     return button->getText();
 
   INFO("get Choice  text");
 }
+/**
+ *   @brief get the actual situation for the choice
+ *   @return unlock
+ */
+bool Choice::getUnlock(){
+
+    return unlock;
+
+  INFO("get Choice unlock ");
+}
+
 
 /**
  *   @brief Set a color for the text button
@@ -98,7 +110,6 @@ void Choice::setBackgroundColor(Color * newBackgroundColor){
     button->setTextColor(newBackgroundColor);
     INFO("Set background color for Choice ");
 }
-
 /**
  *   @brief Set a chosen for the choice
  */
@@ -114,14 +125,4 @@ void Choice::setUnlock(bool isUnlock){
     assert( isUnlock != NULL);
     unlock = isUnlock;
     INFO("set Choice unlock ");
-}
-/**
- *   @brief get the actual situation for the choice
- *   @return unlock
- */
-bool Choice::getUnlock(){
-
-    return unlock;
-
-  INFO("get Choice unlock ");
 }
