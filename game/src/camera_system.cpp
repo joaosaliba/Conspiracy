@@ -60,6 +60,7 @@ void CameraSystem::draw(){
 *    @param[in] timeElapsed its about the time
 */
 void CameraSystem::update(double timeElapsed){
+  assert(last_lever_state > –2147483648 || last_lever_state < 2147483648);
     camera->update(timeElapsed);
     camera_switch->update(timeElapsed);
     if(camera_lever != NULL){

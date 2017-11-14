@@ -66,6 +66,8 @@ void CameraLever::update(double timeElapsed){
  *   @return [int] state
  */
 int CameraLever::getState(){
+  // verify limits of int
+  assert(state > –2147483648 || state < 2147483648);
   if (state == NULL){
     ERROR("Failed to start window manager");
       exit(-1);
@@ -80,6 +82,9 @@ int CameraLever::getState(){
  *   @return void
  */
 void CameraLever::nextState(){
+  // verify int limits
+    assert(state > –2147483648 || state < 2147483648);
+    assert(stateInc > –2147483648 || stateInc < 2147483648);
     if(state >= 2 || state <= 0){
         stateInc *= -1;
     }
