@@ -216,6 +216,8 @@ bool CollisionManager::verifyCollisionWithCameras(GameObject* game_object_collis
  */
 bool CollisionManager::verifyCollisionWithFieldsOfVision(GameObject* game_object_collision, std::vector<FieldOfVision*> fields){
     bool isVisible = true;
+    assert ( distanceBetweenPlayer > -2147483648 || distanceBetweenPlayer < 2147483648);
+    assert ( distanceBetweenWall > -2147483648 || distanceBetweenWall < 2147483648);
     for(FieldOfVision* field : fields) {
         if(field->isActive()){
             for(Line* line : field->getLines()) {
@@ -321,6 +323,11 @@ GameObject* CollisionManager::verifyCollisionWithFinishPoints(GameObject* game_o
  *    @return bool
  */
 bool CollisionManager::verifyCollision( GameObject* game_object_collision, GameObject* game_object_collision2){
+        assert (leftA > -2147483648 ||leftA < 2147483648);
+        assert (rightA > -2147483648 ||rightA < 2147483648);
+        assert (topA > -2147483648 || topA < 2147483648);
+        assert (buttonA > -2147483648 ||buttonA < 2147483648);
+
 
         //Calculate the sides of rect A
         int leftA = 0, rightA = 0, topA = 0, bottomA = 0; //declarating variables for rectangles sides
@@ -328,6 +335,12 @@ bool CollisionManager::verifyCollision( GameObject* game_object_collision, GameO
         rightA = leftA + game_object_collision->getWidth();
         topA = game_object_collision->getPositionY();
         bottomA = topA + game_object_collision->getHeight();
+
+
+        assert (leftB > -2147483648 ||leftB < 2147483648);
+        assert (rightB > -2147483648 ||rightB < 2147483648);
+        assert (topB > -2147483648 || topB < 2147483648);
+        assert (buttonB > -2147483648 ||buttonB < 2147483648);
 
         //Calculate the sides of rect B
         int leftB = 0, rightB = 0, topB = 0, bottomB = 0; //declarating variables for rectangles sides
@@ -426,13 +439,20 @@ double CollisionManager::CCW(std::pair<int, int> line_a, std::pair<int, int> lin
 std::string CollisionManager::verifyCollisionChair(GameObject* game_object_collision, GameObject* game_object_collision2){
 
 
+        assert (leftA > -2147483648 ||leftA < 2147483648);
+        assert (rightA > -2147483648 ||rightA < 2147483648);
+        assert (topA > -2147483648 || topA < 2147483648);
+        assert (buttonA > -2147483648 ||buttonA < 2147483648);
         //Calculate the sides of rect A
         int leftA = 0, rightA = 0, topA = 0, bottomA = 0; //declarating variables of rectangle sides
         leftA = game_object_collision->getPositionX();
         rightA = leftA + game_object_collision->getWidth();
         topA = game_object_collision->getPositionY();
         bottomA = topA + game_object_collision->getHeight();
-
+        assert (leftB > -2147483648 ||leftB < 2147483648);
+        assert (rightB > -2147483648 ||rightB < 2147483648);
+        assert (topB > -2147483648 || topB < 2147483648);
+        assert (buttonB > -2147483648 ||buttonB < 2147483648);
         //Calculate the sides of rect B
         int leftB = 0, rightB = 0, topB = 0, bottomB = 0; //declarating variables of rectangles sides
         leftB = game_object_collision2->getPositionX();
