@@ -84,20 +84,7 @@ void CameraSystem::update(double timeElapsed){
     INFO("update CameraSystem");
 }
 
-/**
- *   @brief   get the actual camera system
- *   @return camera
- */
-Camera* CameraSystem::getCamera(){
-  if (camera == NULL){
-    ERROR("Failed to start window manager");
-      exit(-1);
-  }
-  else{
-    return camera;
-  }
-  INFO("getCamera CameraSystem");
-}
+
 /**
  *   @brief get the actual camera system
  *   @return camera switch
@@ -113,6 +100,21 @@ CameraSwitch* CameraSystem::getCameraSwitch(){
   }
   INFO("Get System in CameraSystem");
 }
+/**
+ *   @brief   get the actual camera system
+ *   @return camera
+ */
+Camera* CameraSystem::getCamera(){
+  if (camera == NULL){
+    ERROR("Failed to start window manager");
+      exit(-1);
+  }
+  else{
+    return camera;
+  }
+  INFO("getCamera CameraSystem");
+}
+
 /**
  *   @brief  get the actual camera lever
  *   @return camera
