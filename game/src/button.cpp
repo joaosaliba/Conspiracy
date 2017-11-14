@@ -59,6 +59,19 @@ void Button::update(double timeElapsed) {
        INFO("Update Button");
 }
 
+
+
+/**
+ *   @brief set a text Color for the button in the game
+ *   @return void
+ */
+
+void Button::setTextColor(Color * newTextColor) {
+    text->setTextColor(newTextColor);
+           INFO("Set Text Collor Button");
+}
+
+
 /**
 *   @brief get a text for the button in the game
 *   @return text
@@ -73,13 +86,4 @@ Text * Button::getText() {
     return text;
   }
          INFO("Get Text Button");
-}
-/**
- *   @brief set a text Color for the button in the game
- *   @return void
- */
-
-void Button::setTextColor(Color * newTextColor) {
-    text->setTextColor(newTextColor);
-           INFO("Set Text Collor Button");
 }
