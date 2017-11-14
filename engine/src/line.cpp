@@ -39,6 +39,8 @@ Line::Line(double x1, double y1, double x2, double y2){
     double deltaY = y2 - y1;
     double deltaX = x2 - x1;
 
+    // angle represent angles so go  -360 to 360
+    assert (angle >-360 || anlge < 360);
     this->angle = atan2(deltaY,deltaX) * 180 / PI;
 }
 std::pair<double,double> Line::getPoint1(){
@@ -78,6 +80,8 @@ void Line::setPoint2(double x, double y){
 
 void Line::rotateLine(double p_angle){
     assert(p_angle != NULL);
+    // angle represent angles so go  -360 to 360
+    assert (angle >-360 || anlge < 360);
 
     if(angle > 360){
         angle -= 360;
