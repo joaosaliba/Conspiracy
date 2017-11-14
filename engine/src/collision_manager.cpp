@@ -12,6 +12,8 @@
 using namespace engine;
 
 CollisionManager CollisionManager::instance;
+
+//COlisions
 /**
  *    @brief collision manager  add guard vision
  */
@@ -26,6 +28,8 @@ void CollisionManager::addCameraFieldOfVision(FieldOfVision* field_vision){
         camerasVision.push_back(field_vision);
         INFO("Add camera field of vision ");
 }
+
+//adds
 /**
  *    @brief collision manager  add wall
  */
@@ -91,6 +95,8 @@ void CollisionManager::addFinishPoint(GameObject* game_object){
         finishPointList.push_back(game_object);
           INFO("Add Finish Point ");
 }
+
+//verify
 /**
  *    @brief collision manager  and verify if the personage have a collision with the walls
  *    @return bool
@@ -308,35 +314,8 @@ GameObject* CollisionManager::verifyCollisionWithFinishPoints(GameObject* game_o
     return NULL;
     INFO("Verify Collision with Finish Points");
 }
-/**
- *    @brief collision manager  calculate the distance between the things
- *    @return double sqrt
- */
 
-double CollisionManager::calculateDistance(std::pair<double,double> center, std::pair<double,double> lineCenter){
-        return sqrt(((center.first-lineCenter.first)*
-                     (center.first-lineCenter.first))+
-                    ((center.second-lineCenter.second)*
-                     (center.second-lineCenter.second)));
-                     INFO("Calculate distance");
-}
-/**
- *    @brief reset: walllist,guard,list,paperlist,doorlist,swithclist,chairlist,
- *                  guardsvision,camerasvision,cameralerverlist,and cameraswitchlever
- */
-void CollisionManager::resetLists(){
-        wallList.clear();
-        guardList.clear();
-        paperList.clear();
-        doorList.clear();
-        switchList.clear();
-        chairList.clear();
-        guardsVision.clear();
-        camerasVision.clear();
-        cameraLeverList.clear();
-        cameraSwitchList.clear();
-        INFO("Reset List");
-}
+
 /**
  *    @brief collision manager  and verify if the personage have a collision
  *    @return bool
@@ -506,4 +485,34 @@ std::string CollisionManager::verifyCollisionChair(GameObject* game_object_colli
 
         return "none";
         INFO("Verify Collision with Chair 2");
+}
+
+// calculetes
+/**
+ *    @brief collision manager  calculate the distance between the things
+ *    @return double sqrt
+ */
+double CollisionManager::calculateDistance(std::pair<double,double> center, std::pair<double,double> lineCenter){
+        return sqrt(((center.first-lineCenter.first)*
+                     (center.first-lineCenter.first))+
+                    ((center.second-lineCenter.second)*
+                     (center.second-lineCenter.second)));
+                     INFO("Calculate distance");
+}
+/**
+ *    @brief reset: walllist,guard,list,paperlist,doorlist,swithclist,chairlist,
+ *                  guardsvision,camerasvision,cameralerverlist,and cameraswitchlever
+ */
+void CollisionManager::resetLists(){
+        wallList.clear();
+        guardList.clear();
+        paperList.clear();
+        doorList.clear();
+        switchList.clear();
+        chairList.clear();
+        guardsVision.clear();
+        camerasVision.clear();
+        cameraLeverList.clear();
+        cameraSwitchList.clear();
+        INFO("Reset List");
 }
