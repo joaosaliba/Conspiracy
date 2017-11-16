@@ -8,6 +8,7 @@
 #include "finish_point.hpp"
 #include <assert.h>
 #define INITIAL_POSITION 0
+
 //#define NDEBUG *uncomment to disable assertions
 
 FinishPoint::FinishPoint(std::string object_name, double position_x,
@@ -20,6 +21,7 @@ FinishPoint::FinishPoint(std::string object_name, double position_x,
                                                                                      width,
                                                                                      height){
     aliens = alien_names;
+
     if(object_name.compare("assets/sprites/cenary/tapete.png") == 0) {
         animator = new Animation(object_name, 2, 1, 0.5);
         orientation = "UPDOWN";
@@ -45,7 +47,21 @@ std::string FinishPoint::get_alien_names() {
 }
 
 void FinishPoint::draw() {
-    animator->draw_instant(get_position_x(), get_position_y());
+    animator->draw_instant(getPositionX(), getPositionY());
+
+    if (getPositionX() == NULL) {
+
+      ERROR("this function can not return null value");
+      exit(-1);
+
+    }
+
+    if (getPositionY() == NULL) {
+
+      ERROR("this function can not return null value");
+      exit(-1);
+
+    }
 
     if(orientation.compare("UPDOWN") == INITIAL_POSITION) {
         //this part verify if the aliens "EBV" are in the initial position and then he modify the position
