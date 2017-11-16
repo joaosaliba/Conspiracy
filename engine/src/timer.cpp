@@ -8,6 +8,7 @@
   //#define NDEBUG *uncomment to disable assertions
 
 #include "timer.hpp"
+#include <assert.h>
 
 using namespace engine;
 

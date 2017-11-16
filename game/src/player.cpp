@@ -1,13 +1,21 @@
-/**class to object of player, where you can find some objects, files, variables and meths
- *used to the samen.
+/**
+ * @file player.cpp
+ * @brief class to object of player, where you can find some values, files,
+ * others objects used in this class and methods to the same.
+ * @copyright  GNU GENERAL PUBLIC LICENSE.
  */
 
 #include "log.h"
 #include "player.hpp"
+#include <assert.h>
+
 using namespace engine;
 
 Player::Player(std::pair<int, int> bilu_position, std::pair<int, int> etemer_position,
                std::pair<int,int> varginha_position, int paper_quantity, int stage_number) {
+
+    assert(paper_quantity > 0 && paper_quantity < 100000);
+    assert(stage_number > -10000 && stage_number < 100000);
 
     exclamation_animation = new Animation("assets/sprites/exclamation2.png",1, 1, 0.5);
 
@@ -36,6 +44,8 @@ Player::~Player() {
 }
 
 void Player::update(double time_elapsed) {
+    assert(time_elapsed > 0 && time_elapsed < 20000000);
+
     int before_alien = selected_alien;
 
     if(InputManager::instance.is_key_pressed(InputManager::KeyPress::KEY_PRESS_ONE)) {

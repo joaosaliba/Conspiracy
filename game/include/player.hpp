@@ -1,5 +1,8 @@
-/**class to object of player, where you can find some objects, files, variables and meths
- *used to the same.
+/**
+ * @file player.hpp
+ * @brief class to object of player, where you can find some values, files,
+ * others objects used in this class and methods to the same.
+ * @copyright  GNU GENERAL PUBLIC LICENSE.
  */
 
 #ifndef PLAYER_HPP
@@ -21,6 +24,7 @@ public:
     Player(std::pair<int, int> bilu_position, std::pair<int, int> etemer_position,
           std::pair<int,int> varginha_position, int paper_quantity, int stage_number);
     ~Player();
+    
     void update(double time_elapsed);
     void draw();
     bool is_dead();
