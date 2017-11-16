@@ -79,7 +79,7 @@ ProgressBar::ProgressBar(double position_x, double position_y, int width,
                                  &old_color.r, &old_color.g,
                                  &old_color.g, &old_color.a);
 
-    INFO("progress_bar constructor is ok");
+    INFO("progress_bar constructor finished");
 }
 
 ProgressBar::ProgressBar(double position_x, double position_y, int width,
@@ -179,9 +179,26 @@ void ProgressBar::update(double time_elapsed) {
     }
 
     back_rect->x = getPositionX();
+
+    if(getPositionX() == NULL){
+      ERROR("the value of position x cant be null");
+      exit(-1);
+    }
+
     back_rect->y = getPositionY();
 
+    if(getPositionY() == NULL){
+      ERROR("the value of position y cant be null");
+      exit(-1);
+    }
+
     pw = (int)((double)getWidth() * percent);
+
+    if(getWidth() == NULL){
+      ERROR("the value of position x cant be null");
+      exit(-1);
+    }
+
     px = getPositionX() + (getWidth() - pw);
 
     front_rect->x = px;
