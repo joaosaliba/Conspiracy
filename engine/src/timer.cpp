@@ -5,6 +5,8 @@
  * @copyright  GNU GENERAL PUBLIC LICENSE.
  */
 
+  //#define NDEBUG *uncomment to disable assertions
+
 #include "timer.hpp"
 
 using namespace engine;
@@ -45,6 +47,8 @@ void Timer::step() {
 */
 
 unsigned int Timer::elapsed_time() {
+    assert(step_ticks > -100000 && step_ticks < 200000);
+
     if (SDL_GetTicks() == NULL){
         ERROR("the return of this function can not be null");
         exit(-1);
@@ -61,6 +65,8 @@ unsigned int Timer::elapsed_time() {
 * @return total_elapsed_time
 */
 unsigned int Timer::total_elapsed_time() {
+    assert(ticks > -200000 && ticks < 200000);
+
     if (SDL_GetTicks() == NULL){
         ERROR("the return of this function can not be null");
         exit(-1);
@@ -70,6 +76,6 @@ unsigned int Timer::total_elapsed_time() {
       ERROR("this value can not be null");
       exit(-1);
     }
-    
+
     return SDL_GetTicks() - ticks;
 }
