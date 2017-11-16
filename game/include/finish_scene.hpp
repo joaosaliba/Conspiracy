@@ -28,17 +28,18 @@ class FinishScene: public Scene{
 
 public:
     FinishScene(int id);
-    /**
-      *    @brief FinishScene object destructor.
-     */
     ~FinishScene();
+
     void load();
-    void draw();
     void update(double time_elapsed);
     void unload();
+
+    void draw();
+
 private:
     void select_action();
     int select_button;
+    
     std::vector<std::pair<int, GameObject*>> game_objects_list;
     Animation * background;
     Color * select;

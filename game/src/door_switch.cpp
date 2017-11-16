@@ -41,6 +41,7 @@ DoorSwitch::DoorSwitch(std::string object_name, double door_switch_position_x, d
         //nothing to do
         INFO("door_switch_position_x");
     }
+
     if(door_switch_position_y > MAX_STRANGE_DOOR_VALUE || door_switch_position_y < MIN_STRANGE_DOOR_VALUE) {
         ERROR("Strange door switch position");
         exit(-1);
@@ -48,6 +49,7 @@ DoorSwitch::DoorSwitch(std::string object_name, double door_switch_position_x, d
         //nothing to do
         INFO("door_switch_position_y ok");
     }
+
     //this part verify if the door_switch_width is strange and return a error
     if(door_switch_width > 500 || door_switch_width < MIN_STRANGE_DOOR_VALUE) {
         ERROR("Strange camera width");
@@ -56,6 +58,7 @@ DoorSwitch::DoorSwitch(std::string object_name, double door_switch_position_x, d
         //nothing to do
         INFO("door_switch_width ok");
     }
+
     //this part verify if the door_switch_height is strange and return a error
     if(door_switch_height > 500 || door_switch_height < MIN_STRANGE_DOOR_VALUE) {
         ERROR("Strange camera height");
@@ -74,7 +77,7 @@ DoorSwitch::DoorSwitch(std::string object_name, double door_switch_position_x, d
     animator->add_action("idle", 0, 0);
     pressed = false;
 
-    INFO("door_switch constructor ok");
+    INFO("door_switch constructor finished");
 }
 
 /**
@@ -106,6 +109,12 @@ void DoorSwitch::update(double time_elapsed) {
     time_elapsed = time_elapsed;
 
     animator->update();
+
+    if(update() == NULL){
+        ERROR("this function can not return null");
+        exit(-1);
+    }
+
     //this part cerify if is pressed and update passing the time_elapsed
     if(is_pressed())) {
         hacking_bar->update(time_elapsed);
@@ -200,6 +209,12 @@ void DoorSwitch::stop_effect() {
 */
 
 double DoorSwitch::get_hacking_bar_percent() {
+
+    if(get_percent() == NULL){
+        ERROR("the function can not return null");
+        exit(-1);
+    }
+
     return hacking_bar->get_percent();
 
 }

@@ -89,6 +89,7 @@ void FinishScene::update(double time_elapsed) {
 * <p>This method load the pattern style applied in the level.</p>
 * @return void
 */
+
 void FinishScene::load() {
     game_objects_list.push_back(std::pair<int, GameObject*>(1,new Button("assets/fonts/font.ttf", 420, 500, 500, 500, "Menu", 50)));
     AnimationManager::instance.set_background_color(new Color(158,228,159, 125));
@@ -101,9 +102,8 @@ void FinishScene::load() {
 * <p>This method create cases to load the next scene of the game.</p>
 * @return void
 */
-void FinishScene::select_action() {
 
-    INFO("the method select_action init");
+void FinishScene::select_action() {
 
     if(InputManager::instance.is_key_triggered(InputManager::KeyPress::KEY_PRESS_ENTER)) {
         switch(select_button) {

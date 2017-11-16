@@ -32,6 +32,7 @@ ProgressBar::ProgressBar(double position_x, double position_y, int width,
         //nothing to do
         INFO("progress_bar position_x is ok");
     }
+
     if(position_y > MAX_STRANGE_POSITION || position_y < MIN_STRANGE_POSITION) {
         ERROR("Strange progress_bar position");
         exit(-1);
@@ -39,6 +40,7 @@ ProgressBar::ProgressBar(double position_x, double position_y, int width,
         //nothing to do
         INFO("progress_bar position y is ok");
     }
+
     if(width > 100 || width < MIN_STRANGE_POSITION) {
         ERROR("Strange progress_bar width");
         exit(-1);
@@ -46,6 +48,7 @@ ProgressBar::ProgressBar(double position_x, double position_y, int width,
         //nothing to do
         INFO("progress_bar width is ok");
     }
+    
     if(height > 100 || height < MIN_STRANGE_POSITION) {
         ERROR("Strange progress_bar height");
         exit(-1);
