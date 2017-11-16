@@ -1,12 +1,23 @@
-/**class to object of field_of_vision, where you can find some variables, files, others objects
- *and meths to the same.
+/**
+ * @file progress_bar.cpp
+ * @brief class to object of progress_bar, where you can find some values, files,
+ * others objects used in this class and methods to the same.
+ * @copyright  GNU GENERAL PUBLIC LICENSE.
  */
 
+ //#define NDEBUG *uncomment to disable assertions
+
 #include "field_of_vision.hpp"
+#include <assert.h>
 
 using namespace engine;
 
 FieldOfVision::FieldOfVision(double x, double y, int size, double angle) {
+    assert(x < 10000 && x > 10000);
+    assert(y < 10000 && y > 10000);
+    assert(angle > -180 && angle < 360);
+    assert(range > -10000 && range < 10000);
+
     range = size;
     total_angle = angle;
 

@@ -9,6 +9,7 @@
 
 #include "progress_bar.hpp"
 #include <assert.h>
+
 #define MAX_STRANGE_POSITION 1000
 #define MIN_STRANGE_POSITION 0
 
@@ -48,7 +49,7 @@ ProgressBar::ProgressBar(double position_x, double position_y, int width,
         //nothing to do
         INFO("progress_bar width is ok");
     }
-    
+
     if(height > 100 || height < MIN_STRANGE_POSITION) {
         ERROR("Strange progress_bar height");
         exit(-1);

@@ -1,5 +1,8 @@
-/**class to object of field_of_vision, where you can find some variables, files, others objects
- *and meths to the same.
+/**
+ * @file progress_bar.cpp
+ * @brief class to object of progress_bar, where you can find some values, files,
+ * others objects used in this class and methods to the same.
+ * @copyright  GNU GENERAL PUBLIC LICENSE.
  */
 
 #ifndef FIELD_OF_VISION_HPP
@@ -38,9 +41,11 @@ namespace engine{
 
         bool active;
         int number_of_lines;
+        
         std::pair<double,double> center;
         Line* center_line;
         std::vector<Line*> lines;
+
         void reset_lines();
         void create_lines(double x, double y, int range);
 
