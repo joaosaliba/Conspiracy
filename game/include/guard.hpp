@@ -16,8 +16,7 @@ class Guard: public Enemy{
 public:
     Guard(std::string objectName, double positionX, double positionY, int width, int height, std::string initialDirection, int newQuantityRepeatWay, double newWaitingTime);
     ~Guard();
-    void update(double timeElapsed);
-    void draw();
+
     void addWay(int key, std::pair<std::string, int> way);
     void setWayActive(bool isActive);
     void verifyDistance(GameObject* alien);
@@ -30,6 +29,8 @@ public:
     FieldOfVision* getFieldOfVision();
     std::pair<std::pair<int,int>,std::pair<int,int>> getLine();
 private:
+    void update(double timeElapsed);
+    void draw();
     void walkInX(double & incX);
     void walkInY(double & incY);
     void walkInXSpecial(double & incX);
