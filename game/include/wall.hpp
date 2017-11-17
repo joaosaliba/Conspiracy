@@ -11,11 +11,12 @@ class Wall: public GameObject{
 public:
     Wall(std::string objectName, double positionX, double positionY, int width, int height);
     ~Wall();
-    void update(double timeElapsed);
-    void draw();
+
     void init();
     Animation * getAnimation();
 private:
+  void update(double timeElapsed);
+  void draw();
     Animation* animator;
 };
 #endif

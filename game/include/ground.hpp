@@ -10,11 +10,12 @@ class Ground: public GameObject{
 public:
     Ground(std::string object_name, double position_x, double position_y, int width, int height);
     ~Ground();
-    void update(double time_elapsed);
-    void draw();
+
     void init();
     Animation * getAnimation();
 private:
+  void update(double time_elapsed);
+  void draw();
     Animation* animator;
 };
 #endif
