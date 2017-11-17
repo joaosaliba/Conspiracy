@@ -78,12 +78,8 @@ void Button::setTextColor(Color * newTextColor) {
 */
 
 Text * Button::getText() {
-  if (text == NULL){
-    ERROR("Failed to start window manager");
-      exit(-1);
-  }
-  else{
+
     return text;
-  }
+  
          INFO("Get Text Button");
 }
