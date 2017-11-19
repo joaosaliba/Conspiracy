@@ -53,10 +53,10 @@ void DoorSystem::update(double timeElapsed){
     assert(timeElapsed !=NULL);
     door->update(timeElapsed);
     computerTable->update(timeElapsed);
-    if(!computerTable->getDoorSwitch()->isEnabled() && !door->isOpen()){
+    if(!computerTable->get_door_switch()->isEnabled() && !door->isOpen()){
         door->setOpen(true);
         door->play_effect();
-        if(door->getDoorSide().compare("DOWN") == 0){
+        if(door->get_doorSide().compare("DOWN") == 0){
             door->set_enabled(false);
         }else{
             door->setHeight(25);
@@ -67,22 +67,22 @@ void DoorSystem::update(double timeElapsed){
 
 /**
  *   @brief get the actual way that the switch are
- *   @return computerTable->getDoorSwitch();
+ *   @return computerTable->get_door_switch();
  */
 GameObject* DoorSystem::getSwitch(){
-  if ( computerTable->getDoorSwitch() == NULL){
+  if ( computerTable->get_door_switch() == NULL){
     ERROR("Failed to start window manager");
       exit(-1);
   }
   else{
-    return computerTable->getDoorSwitch();
+    return computerTable->get_door_switch();
   }
 }
 /**
  *   @brief get the way that the door be
  *   @return door
  */
-GameObject* DoorSystem::getDoor(){
+GameObject* DoorSystem::get_door(){
   if ( door == NULL){
     ERROR("Failed to start window manager");
       exit(-1);

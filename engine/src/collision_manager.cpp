@@ -255,9 +255,9 @@ bool CollisionManager::verify_collisionWithFieldsOfVision(GameObject* game_objec
  *    @return null
  */
 GameObject* CollisionManager::verify_collision_with_switches(GameObject* game_object_collision){
-        for(GameObject * doorSwitch : switchList) {
-                if(verify_collision(doorSwitch, game_object_collision)) {
-                        return doorSwitch;
+        for(GameObject * door_switch : switchList) {
+                if(verify_collision(door_switch, game_object_collision)) {
+                        return door_switch;
                 }
         }
         return NULL;

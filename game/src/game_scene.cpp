@@ -262,7 +262,7 @@ void GameScene::initializeColliders(){
             CollisionManager::instance.addWall(((PaperTable*)(gameObject))->getTable());
         //Adds door
         }else if(typeid(*gameObject) == typeid(DoorSystem)){
-            CollisionManager::instance.addDoor(((DoorSystem*)(gameObject))->getDoor());
+            CollisionManager::instance.addDoor(((DoorSystem*)(gameObject))->get_door());
             CollisionManager::instance.addSwitch(((DoorSystem*)(gameObject))->getSwitch());
             CollisionManager::instance.addWall(((DoorSystem*)(gameObject))->getTable());
         //Adds table

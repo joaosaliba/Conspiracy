@@ -27,7 +27,7 @@ ComputerTable::ComputerTable(std::string objectName, double position_x, double p
   assert (width !=NULL);
   assert (height !=NULL);
   table = new Table("assets/sprites/mesa.png", position_x, position_y, width, height);
-  doorSwitch = new DoorSwitch("assets/sprites/PC_sprites(34X20).png", position_x + 15, position_y - 7, 34, 60);
+  door_switch = new DoorSwitch("assets/sprites/PC_sprites(34X20).png", position_x + 15, position_y - 7, 34, 60);
   INFO("Computer Table Constructor ");
 }
 /**
@@ -44,7 +44,7 @@ ComputerTable::~ComputerTable(){
  */
 void ComputerTable::draw(){
    table->draw();
-   doorSwitch->draw();
+   door_switch->draw();
    INFO("Draw Computer Table  ");
 }
 
@@ -55,21 +55,21 @@ void ComputerTable::draw(){
 void ComputerTable::update(double time_elapsed){
    assert(time_elapsed != NULL);
    table->update(time_elapsed);
-    doorSwitch->update(time_elapsed);
+    door_switch->update(time_elapsed);
     INFO("Update Computer Table  ");
 }
 
 /**
  *   @brief get the actual way that the switch are
- *   @return doorSwitch
+ *   @return door_switch
  */
-DoorSwitch* ComputerTable::getDoorSwitch(){
-  if ( doorSwitch == NULL){
+ DoorSwitch* ComputerTable::get_door_switch(){
+  if ( door_switch == NULL){
     ERROR("Failed to start window manager");
       exit(-1);
   }
   else{
-    return doorSwitch;
+    return door_switch;
   }
   INFO("Get door switch in Computer Table  ");
 

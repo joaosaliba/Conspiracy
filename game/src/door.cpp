@@ -64,6 +64,6 @@ void Door::play_effect(){
     door_effect->play(0);
 }
 
-std::string Door::getDoorSide(){
+std::string Door::get_doorSide(){
     return side;
 }

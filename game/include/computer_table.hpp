@@ -18,11 +18,11 @@ public:
     void draw(); // show the table draw
     void init();
     Animation * getAnimation();
-    DoorSwitch* getDoorSwitch();
+    DoorSwitch* get_door_switch();
     Table* getTable();
 protected:
     Animation* animator = nullptr;
-    DoorSwitch* doorSwitch = nullptr;// relation with the door switch
+    DoorSwitch* door_switch = nullptr;// relation with the door switch
     Table* table = nullptr;
 };
 

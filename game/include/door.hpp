@@ -20,7 +20,7 @@ public:
     bool isOpen();
     void setOpen(bool status);
     void play_effect();
-    std::string getDoorSide();
+    std::string get_doorSide();
 protected:
     Animation* animator;
 private:

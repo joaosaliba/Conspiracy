@@ -17,7 +17,7 @@ public:
     ~DoorSystem();
     void update(double time_elapsed);
     void draw();
-    GameObject* getDoor();
+    GameObject* get_door();
     GameObject* getSwitch();
     GameObject* getTable();
 private:
