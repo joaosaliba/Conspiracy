@@ -13,7 +13,6 @@ class Rectangle: public GameObject{
 public:
     Rectangle(std::string object_name, double rectangle_position_x, double rectangle_position_y, int rectangle_width, int rectangle_height, bool new_alpha_active, Color * rectangle_new_color);
     ~Rectangle();
-private:
     void update(double time_elapsed);
     void draw();
     void init();
@@ -21,6 +20,7 @@ private:
     bool getAlphaActive();
     void setColor(Color * rectangle_new_color);
     void nullSurfaceDetector(SDL_Surface *surface);
+private:
     bool alpha_active;
     SDL_Texture* texture;
     Color* rectangle_color;
