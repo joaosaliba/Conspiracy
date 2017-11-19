@@ -39,6 +39,9 @@ namespace engine{
          assert(engine_start_time != NULL);
          assert(engine_step_time != NULL);
          assert(engine_time_elapsed != NULL);
+         assert ( engine_time_elapsed > -2147483648 || engine_time_elapsed < 2147483648);
+         assert ( engine_start_time > -2147483648 || engine_start_time < 2147483648);
+         assert ( engine_step_time > -2147483648 || engine_step_time < 2147483648);
          scene_manager = new SceneManager();
 
          engine_start_time = SDL_GetTicks();
@@ -133,6 +136,7 @@ namespace engine{
          //While engine is running
          while(engine_is_running){
              engine_step_time = SDL_GetTicks();
+             assert ( engine_step_time > -2147483648 || engine_step_time < 2147483648);
              assert(engine_step_time != NULL);
              engine::InputManager::instance.update(event);
              SDL_RenderClear(WindowManager::getGameCanvas());
@@ -140,6 +144,7 @@ namespace engine{
              stopEngine(engine_is_running, event);
 
              engine_time_elapsed = SDL_GetTicks() - engine_step_time;
+             assert ( engine_step_time > -2147483648 || engine_step_time < 2147483648);
              DEBUG("TICKS:" + std::to_string(SDL_GetTicks()));
              DEBUG("frameTime:" + std::to_string(frame_time));
              DEBUG("timeElapsed: " + std::to_string(engine_time_elapsed));
