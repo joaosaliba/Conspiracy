@@ -55,14 +55,14 @@ double Line::getAngle(){
     return angle;
 }
 
-void Line::updatePosition(double incX, double incY){
-    assert(incX != NULL);
-    assert(incY != NULL);
-    point1.first += incX;
-    point1.second += incY;
+void Line::updatePosition(double inc_x, double inc_y){
+    assert(inc_x != NULL);
+    assert(inc_y != NULL);
+    point1.first += inc_x;
+    point1.second += inc_y;
 
-    point2.first += incX;
-    point2.second += incY;
+    point2.first += inc_x;
+    point2.second += inc_y;
 }
 
 void Line::setPoint1(double x, double y){

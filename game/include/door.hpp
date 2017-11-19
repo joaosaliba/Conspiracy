@@ -10,16 +10,16 @@ using namespace engine;
 
 class Door: public GameObject{
 public:
-    Door(std::string objectName, double positionX, double positionY,
+    Door(std::string objectName, double position_x, double position_y,
          int width, int height, std::string doorSide);
     ~Door();
-    void update(double timeElapsed);
+    void update(double time_elapsed);
     void draw();
     void init();
     Animation * getAnimation();
     bool isOpen();
     void setOpen(bool status);
-    void playEffect();
+    void play_effect();
     std::string getDoorSide();
 protected:
     Animation* animator;

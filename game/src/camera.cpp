@@ -5,10 +5,10 @@
 #define WIDTH 11
 #define HEIGHT 8
 
-Camera::Camera(double positionX, double positionY, std::string direction) : Enemy(FILENAME,positionX,positionY,
+Camera::Camera(double position_x, double position_y, std::string direction) : Enemy(FILENAME,position_x,position_y,
                                                                      WIDTH, HEIGHT){
     initializeAnimator(FILENAME);
-    animator->setInterval(direction);
+    animator->set_interval(direction);
     turnedOn = true;
     int default_range = 180;
     int default_angleOfVision = 80;
@@ -16,11 +16,11 @@ Camera::Camera(double positionX, double positionY, std::string direction) : Enem
     initializeVision(default_range, default_angleOfVision, direction);
 }
 
-Camera::Camera(double positionX, double positionY, std::string direction,
-               int p_angleOfVision, int p_range, int p_initialAngle): Enemy(FILENAME,positionX,positionY,
+Camera::Camera(double position_x, double position_y, std::string direction,
+               int p_angleOfVision, int p_range, int p_initialAngle): Enemy(FILENAME,position_x,position_y,
                                                                      WIDTH, HEIGHT){
     initializeAnimator(FILENAME);
-    animator->setInterval(direction);
+    animator->set_interval(direction);
     turnedOn = true;
 
     initializeVision(p_range, p_angleOfVision, direction);
@@ -33,7 +33,7 @@ Camera::Camera(double positionX, double positionY, std::string direction,
 Camera::~Camera(){
 }
 
-void Camera::turnOff(){
+void Camera::turn_off(){
     turnedOn = false;
     fieldOfVision->deactivate();
 }
@@ -48,18 +48,18 @@ void Camera::update(double timeElapsed){
 }
 
 void Camera::draw(){
-    animator->draw(getPositionX(), getPositionY());
-    animator->draw_collider(getPositionX(), getPositionY(), getWidth(), getHeight());
+    animator->draw(get_position_x(), get_position_y());
+    animator->draw_collider(get_position_x(), get_position_y(), get_width(), get_height());
     fieldOfVision->draw();
 }
 
 void Camera::initializeAnimator(std::string filename){
     state = 1;
     animator = new Animation(filename, 2, 4, 0.1);
-    animator->addAction("right",0,0);
-    animator->addAction("left",2,2);
-    animator->addAction("upright",4,4);
-    animator->addAction("upleft",6,6);
+    animator->add_action("right",0,0);
+    animator->add_action("left",2,2);
+    animator->add_action("upright",4,4);
+    animator->add_action("upleft",6,6);
 }
 
 void Camera::initializeVision(int p_range, int p_angleOfVision, std::string direction){
@@ -67,16 +67,16 @@ void Camera::initializeVision(int p_range, int p_angleOfVision, std::string dire
     angleOfVision = p_angleOfVision;
 
     if(direction == "right"){
-        fieldOfVision = new FieldOfVision(getPositionX()+4+getWidth()/2,getPositionY()+7, range, angleOfVision);
+        fieldOfVision = new FieldOfVision(get_position_x()+4+get_width()/2,get_position_y()+7, range, angleOfVision);
         initialAngle = 305;
     }else if(direction  == "left"){
-        fieldOfVision = new FieldOfVision(getPositionX()-4+getWidth()/2,getPositionY()+7, range, angleOfVision);
+        fieldOfVision = new FieldOfVision(get_position_x()-4+get_width()/2,get_position_y()+7, range, angleOfVision);
         initialAngle = 220;
     }else if(direction == "upleft"){
-        fieldOfVision = new FieldOfVision(getPositionX()-6+getWidth()/2,getPositionY(), range, angleOfVision);
+        fieldOfVision = new FieldOfVision(get_position_x()-6+get_width()/2,get_position_y(), range, angleOfVision);
         initialAngle = 140;
     }else{
-        fieldOfVision = new FieldOfVision(getPositionX()+5+getWidth()/2,getPositionY(), range, angleOfVision);
+        fieldOfVision = new FieldOfVision(get_position_x()+5+get_width()/2,get_position_y(), range, angleOfVision);
         initialAngle = 45;
     }
     fieldOfVision->setAngle(initialAngle);

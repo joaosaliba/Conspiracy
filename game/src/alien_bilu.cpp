@@ -1,134 +1,423 @@
+//#define NDEBUG *uncomment to disable assertions
 #include "alien_bilu.hpp"
 #include "collision_manager.hpp"
 #include "paper.hpp"
 #include "door_switch.hpp"
+#include <assert.h>
 
 #define FILENAME "assets/sprites/bilu_sheet.png"
+#define ACTION_SPECIAL_LEFT "special_left"
+#define ACTION_SPECIAL_RIGHT "special_right"
+#define ANIMATION_IDLE "idle"
+#define ACTION_IDLE_LEFT "idle_left"
+#define ACTION_IDLE_RIGHT "idle_right"
+#define NAME_CHARACTER "B"
 #define WIDTH 19
 #define HEIGHT 22
+#define SCREEN_WIDTH 1000.0
+#define SCREEN_INITIAL 0 
+#define VELOCITY_BILU 0.15
+#define SPRITE_INITIAL_SPECIAL_LEFT 10
+#define SPRITE_FINAL_SPECIAL_LEFT 13
+#define SPRITE_INITIAL_SPECIAL_RIGHT 14
+#define SPRITE_FINAL_SPECIAL_RIGHT 17
+#define TOTAL_TIME_1 0.3
+#define TOTAL_TIME_2 0.6
+#define ANIMATION_NUMBER 5
+#define CENTER_CHARACTER_1 11
+#define CENTER_CHARACTER_2 20
+#define INITIAL_HACKING_BAR_PERCENT 0.0
+#define INITIAL_BAR_PERCENT 0.0
 
-Bilu::Bilu(double position_x, double position_y) : Alien(FILENAME, position_x, position_y, WIDTH, HEIGHT) {
-        animator->addAction("special_right",14,17);
-        animator->addAction("special_left",10,13);
+/** Objects included in the alien_bilu.hpp, door_switch.hpp classes found on lines 1 to
+* line 4, where the methods will be responsible for the manipulation and organization
+* of these objects
+*@param unsigned double-bilu_position_x
+*@param unsigned double-bilu_position_y
+*@param unsigned bool-hacking
+*@param unsigned bool-editing
+*@param unsigned bool-last_action
+*@param unsigned bool-is_selected
+*@param unsigned bool-in_position
+*/
 
-        hacking = false;
-        editing = false;
-        last_action = false;
-        is_selected = false;
-        in_position = false;
+Bilu::Bilu(double bilu_position_x, double bilu_position_y) :
+Alien(FILENAME, bilu_position_x, bilu_position_y, WIDTH, HEIGHT) {
+    
+    assert (bilu_position_x !=NULL);
+    assert (bilu_position_y !=NULL);
+    assert (WIDTH !=NULL);
+    assert (WIDTH > 19);
+    assert (HEIGHT !=NULL);
+    assert (HEIGHT > 22);
+
+    DEBUG("bilu position x : "+bilu_position_x);
+    DEBUG("bilu position y : "+bilu_position_y);
+        
+    animator->add_action(ACTION_SPECIAL_RIGHT,SPRITE_INITIAL_SPECIAL_RIGHT,SPRITE_FINAL_SPECIAL_RIGHT);
+    animator->add_action(ACTION_SPECIAL_LEFT,SPRITE_INITIAL_SPECIAL_LEFT,SPRITE_FINAL_SPECIAL_LEFT);
+
+    hacking = false;
+    editing = false;
+    last_action = false;
+    is_selected = false;
+    in_position = false;
+
+    INFO("Bilu constructor ok");
+
 }
+
+/**
+* Update method
+* <p>movement and special actions of the character, in addition to checking the finishi point</p>
+*@param unsigned double-time_elapsed
+*@param unsigned bool-in_position
+*@return void
+*/
 
 void Bilu::update(double time_elapsed) {
-        in_position = false;
-        animator->setTotalTime(0.3);
-        auto inc_y = 0.15*time_elapsed;
-        auto inc_x = 0.15*time_elapsed;
 
-        if(!block_movement && is_selected) {
-                walkInX(inc_x);
-                walkInY(inc_y, inc_x);
-        }
+    INFO("Bilu update init");
 
-        if(inc_x == 0 && inc_y == 0) {
-                if(idle_animation_number) {
-                        animator->setInterval("idle_right");
-                }else {
-                        animator->setInterval("idle_left");
-                }
-        }
-        specialAction();
+    /*double time_elapsed = 0.0;
+    bool in_position = true;*/
 
-        if(CollisionManager::instance.verifyCollisionWithGuards(this) || CollisionManager::instance.verifyCollisionWithCameras(this)) {
-                setEnabled(false);
-        }
-        FinishPoint* finishPoint = (FinishPoint*)CollisionManager::instance.verifyCollisionWithFinishPoints(this);
-        if(finishPoint != NULL) {
-            if(finishPoint->getAlienNames().find("B") != std::string::npos){
-                in_position = true;
-            }
-        }
+    assert ( time_elapsed != NULL);
 
-        animator->update();
+    //check the elapsed time
+    DEBUG("time elapsed : "+time_elapsed);
+
+    if(time_elapsed == -1) {
+       ERROR("Strange time Bilu update");
+       exit(-1);
+     }else {
+       //nothing to do
+       INFO("time elapsed Bilu ok");
+     }
+
+    in_position = false;
+    animator->set_total_time(TOTAL_TIME_1);
+    auto move_bilu_in_y = VELOCITY_BILU*time_elapsed;
+    auto move_bilu_in_x = VELOCITY_BILU*time_elapsed;
+
+    //checks conditions to move the player Bilu
+    walk(block_movement, is_selected, move_bilu_in_x, move_bilu_in_y);
+
+    //check atributes to move the player Bilu
+    idle_animator(move_bilu_in_x, move_bilu_in_y, idle_animation_number);
+
+    special_action();
+
+    //Check the collisions with the cameras
+    verify_collision();
+
+
+    FinishPoint* finish_point = (FinishPoint*)
+    CollisionManager::instance.verify_collision_with_finish_points(this);
+
+    //Check if the finish point is different from null
+    check_final_position(finish_point,in_position);
+
+    animator->update();
 }
 
-void Bilu::specialAction() {
-        std::pair<int, int> interval;
+void Bilu::verify_collision() {
+    if(CollisionManager::instance.verify_collision_with_guards(this) ||
+    CollisionManager::instance.verify_collision_with_cameras(this)) {
 
-        GameObject* paper = CollisionManager::instance.verifyCollisionWithPapers(this);
-        GameObject* doorSwitch = CollisionManager::instance.verifyCollisionWithSwitches(this);
+    INFO("check the collisions with the cameras and guards");
 
-        if(InputManager::instance.isKeyPressed(InputManager::KEY_PRESS_SPACE) && is_selected) {
-                // Paper interaction
-                if(paper != NULL) {
-                        if(! editing) {
-                                editing = true;
-                                block_movement = true;
-                                ((Paper*)(paper))->playEffect();
-                        }
-                }
+    set_enabled(false);
+        //Assigns a default true
+    }else {
+        set_enabled(true);
+    }
+}
 
-                // PC interaction
-                if(doorSwitch != NULL) {
-                        if(!hacking) {
-                                hacking = true;
-                                block_movement = true;
-                                ((DoorSwitch*)(doorSwitch))->playEffect();
-                        }
-                }
+void Bilu::check_final_position(FinishPoint* finish_point,bool &in_position) {
 
-        }else if(InputManager::instance.isKeyPressed(InputManager::KEY_PRESS_ESC) && is_selected) {
-                if(hacking) {
-                        hacking = false;
-                        block_movement = false;
-                        ((DoorSwitch*)(doorSwitch))->stopEffect();
-                        ((DoorSwitch*)(doorSwitch))->stopAnimation();
-                        ((DoorSwitch*)(doorSwitch))->resetHackingProgress();
-                }else if(editing) {
-                        editing = false;
-                        block_movement = false;
-                        ((Paper*)(paper))->stopEffect();
-                        ((Paper*)(paper))->stopAnimation();
-                        ((Paper*)(paper))->resetEditingProgress();
-                }
+    INFO("Bilu check final position");
+
+    if(finish_point != NULL) {
+    DEBUG("finish point in check_final_position : "+finish_point);
+        if(finish_point->get_alien_names().find(NAME_CHARACTER) != std::string::npos) {
+            in_position = true;
+            INFO("final position ok");
+        //Assigns a default in_position true
+        }else {
+            in_position = false;
+            INFO("final position false");
+        }
+    }else{
+        //nothing to do
+    }
+}
+
+
+void Bilu::walk(bool block_movement, bool is_selected, double move_bilu_in_x,
+double move_bilu_in_y) {
+
+    if(!block_movement && is_selected) {
+        walk_in_x(move_bilu_in_x);
+        walk_in_y(move_bilu_in_y, move_bilu_in_x);
+        INFO("walk ok");
+    }else {
+        //nothing to do
+        INFO("walk strange");
+    }
+}
+
+void Bilu::editing_paper(Paper* paper,bool editing, bool block_movement) {
+    INFO("Editing paper");
+    if(paper != NULL) {
+        DEBUG("paper in editing_paper : "+paper);
+        // If editing
+        if(! editing) {
+            editing = true;
+            block_movement = true;
+            ((Paper*)(paper))->play_effect();
+            INFO("editing_paper ok");
+            //Assigns a default editing and block_movement false
+            }else {
+                editing = false;
+                block_movement = false;
+                INFO("editing_paper false");
+            }
+        }else {
+            //nothing to do
+    }
+}
+
+void Bilu::editing_percent(Paper* paper,bool block_movement, bool editing) {
+    if(editing) {
+    INFO("editing init");
+    ((Paper*)(paper))->animate();
+    set_special_action_animator();
+        }else if(((Paper*)(paper))->get_editing_bar_percent() <= INITIAL_BAR_PERCENT) {
+            INFO("initial editing bar percent");
+            editing = false;
+            ((Paper*)(paper))->stop_animation();
+            //((Paper*)(paper))->stop_effect();
+            ((Paper*)(paper))->reset_editing_progress();
+            Alien::animator->set_interval(ANIMATION_IDLE);
+            block_movement = false;
+        //Assigns a default hacking and block_movement false
+        }else {
+            editing = true;
+            block_movement = true;
+            INFO("editing ok");
+    }
+}
+
+void Bilu::interaction(DoorSwitch* doorSwitch,Paper* paper, bool hacking, bool block_movement) {
+    if(InputManager::instance.is_key_pressed(InputManager::KEY_PRESS_SPACE) && is_selected) {
+    // Paper interaction
+        editing_paper(paper,editing,block_movement);
+        INFO("Bilu editing paper");
+    // PC interaction
+        //Check if the door switch is different from null
+        if(doorSwitch != NULL) {
+            INFO("check if doorSwitch receives values ​​other than null");
+            DEBUG("doorSwitch in special_action : "+doorSwitch);
+            if(!hacking) {
+                hacking = true;
+                block_movement = true;
+                ((DoorSwitch*)(doorSwitch))->play_effect();
+                INFO("hacking ok, doorSwitch receives play_effect");
+            //Assigns a default hacking and block_movement false
+            }else {
+                hacking = false;
+                block_movement = false;
+                INFO("hacking false");
+            }
+        }else{
+            //nothing to do
+        }
+//Chech if instance was selected
+    }
+}
+
+void Bilu::instance_actions(DoorSwitch* doorSwitch,Paper* paper, bool block_movement, bool editing,
+bool hacking) {
+
+    if(InputManager::instance.is_key_pressed(InputManager::KEY_PRESS_ESC)&& is_selected) {
+    // If hacking
+        }else if(hacking) {
+            INFO("hacking where the instance was selected");
+            hacking = false;
+            block_movement = false;
+            ((DoorSwitch*)(doorSwitch))->stop_effect();
+            ((DoorSwitch*)(doorSwitch))->stop_animation();
+            ((DoorSwitch*)(doorSwitch))->reset_hacking_progress();
+            //Assigns a default hacking and block_movement false, and paper receives actions
+        }else if (editing) {
+            INFO("editing where the instance was selected");
+            editing = false;
+            block_movement = false;
+            ((Paper*)(paper))->stop_effect();
+            ((Paper*)(paper))->stop_animation();
+            ((Paper*)(paper))->reset_editing_progress();
+    }
+}
+
+void Bilu::idle_animator(double &move_bilu_in_x, double &move_bilu_in_y,
+int &idle_animation_number) {
+
+    if(move_bilu_in_x == 0 && move_bilu_in_y == 0) {
+        INFO("check whether move_bilu receives such values");
+        DEBUG("move bilu in x : "+move_bilu_in_x);
+        DEBUG("move bilu in y : "+move_bilu_in_y);
+        //if idle animation number
+        if(idle_animation_number) {
+            animator->set_interval(ACTION_IDLE_RIGHT);
+            INFO("action idle right ok");
+        //Assigns a default animator
+        }else {
+            animator->set_interval(ACTION_IDLE_LEFT);
+            INFO("action idle left ok");
+        //check atributes to move the player Bilu
+        }
+    }
+}
+
+void Bilu::hacking_bilu(DoorSwitch* doorSwitch, bool hacking, bool block_movement){
+    if(hacking) {
+        INFO("hacking init");
+        ((DoorSwitch*)(doorSwitch))->animate();
+        set_special_action_animator();
+        // doorSwitch receives actions
+        if(((DoorSwitch*)(doorSwitch))->get_hacking_bar_percent() <= INITIAL_HACKING_BAR_PERCENT) {
+            INFO("initial hacking bar percent");
+            hacking = false;
+            ((DoorSwitch*)(doorSwitch))->stop_animation();
+            ((DoorSwitch*)(doorSwitch))->stop_effect();
+            ((DoorSwitch*)(doorSwitch))->reset_hacking_progress();
+            Alien::animator->set_interval(ANIMATION_IDLE);
+            block_movement = false;
+            //Assigns a default hacking and block_movement false
+        }else {
+            hacking = true;
+            block_movement = true;
+            INFO("hacking ok");
         }
 
+    }
+}
+
+/**
+* Special action method
+* <p>verifies the interaction of both paper and pc</p>
+*@param unsigned bool-hacking
+*@param unsigned bool-editing
+*@return void
+*/
+
+void Bilu::special_action() {
+    std::pair<int, int> interval;
+
+    GameObject* paper = CollisionManager::instance.verify_collision_with_papers(this);
+    GameObject* doorSwitch = CollisionManager::instance.verify_collision_with_switches(this);
+
+    if(InputManager::instance.is_key_pressed(InputManager::KEY_PRESS_SPACE) && is_selected) {
+        // Paper interaction
+        if(paper != NULL) {
+            if(! editing) {
+                editing = true;
+                block_movement = true;
+                ((Paper*)(paper))->play_effect();
+            }
+        }
+        // PC interaction
+        if(doorSwitch != NULL) {
+            if(!hacking) {
+                hacking = true;
+                block_movement = true;
+                ((DoorSwitch*)(doorSwitch))->play_effect();
+            }
+        }
+        }else if(InputManager::instance.is_key_pressed(InputManager::KEY_PRESS_ESC) 
+        && is_selected) {
+            if(hacking) {
+                hacking = false;
+                block_movement = false;
+                ((DoorSwitch*)(doorSwitch))->stop_effect();
+                ((DoorSwitch*)(doorSwitch))->stop_animation();
+                ((DoorSwitch*)(doorSwitch))->reset_hacking_progress();
+            }else if(editing) {
+                editing = false;
+                block_movement = false;
+                ((Paper*)(paper))->stop_effect();
+                ((Paper*)(paper))->stop_animation();
+                ((Paper*)(paper))->reset_editing_progress();
+            }
+        }
         if(hacking) {
-                ((DoorSwitch*)(doorSwitch))->animate();
-                setSpecialActionAnimator();
-                if(((DoorSwitch*)(doorSwitch))->getHackingBarPercent() <= 0.0) {
-                        hacking = false;
-                        ((DoorSwitch*)(doorSwitch))->stopAnimation();
-                        ((DoorSwitch*)(doorSwitch))->stopEffect();
-                        ((DoorSwitch*)(doorSwitch))->resetHackingProgress();
-                        Alien::animator->setInterval("idle");
-                        block_movement = false;
-                }
+            ((DoorSwitch*)(doorSwitch))->animate();
+            set_special_action_animator();
+            if(((DoorSwitch*)(doorSwitch))->get_hacking_bar_percent() <= 0.0) {
+                hacking = false;
+                ((DoorSwitch*)(doorSwitch))->stop_animation();
+                ((DoorSwitch*)(doorSwitch))->stop_effect();
+                ((DoorSwitch*)(doorSwitch))->reset_hacking_progress();
+                Alien::animator->set_interval("idle");
+                block_movement = false;
+            }
         }else if(editing) {
-                ((Paper*)(paper))->animate();
-                setSpecialActionAnimator();
-                if(((Paper*)(paper))->getEditingBarPercent() <= 0.0) {
-                        editing = false;
-                        ((Paper*)(paper))->stopAnimation();
-                        //((Paper*)(paper))->stopEffect();
-                        ((Paper*)(paper))->resetEditingProgress();
-                        Alien::animator->setInterval("idle");
-                        block_movement = false;
-                }
+            ((Paper*)(paper))->animate();
+            set_special_action_animator();
+            if(((Paper*)(paper))->get_editing_bar_percent() <= 0.0) {
+                editing = false;
+                ((Paper*)(paper))->stop_animation();
+                //((Paper*)(paper))->stopEffect();
+                ((Paper*)(paper))->reset_editing_progress();
+                Alien::animator->set_interval("idle");
+                block_movement = false;
+            }
         }
         last_action = hacking;
 }
 
+/**
+* Draw method
+* <p>draws the animation of the character according to its position</p>
+*@param unsigned double-bilu_position_x
+*@param unsigned double-bilu_position_y
+*@return void
+*/
+
 void Bilu::draw() {
-        INFO("Bilu DRAW");
-        animator->draw(getPositionX()-11, getPositionY()-20);
-        animator->draw_collider(getPositionX(), getPositionY(), getWidth(), getHeight());
+
+    INFO("Bilu draw init");
+
+    double bilu_position_x = 0.0;
+    double bilu_position_y = 0.0;
+
+    DEBUG("bilu draw position x : "+bilu_position_x);
+    DEBUG("bilu draw position y : "+bilu_position_y);
+
+    INFO("Bilu DRAW");
+    animator->draw(get_position_x() - CENTER_CHARACTER_1, get_position_y() - CENTER_CHARACTER_2);
+    animator->draw_collider(get_position_x(), get_position_y(), get_width(), get_height());
 }
 
-void Bilu::setSpecialActionAnimator() {
-        if(idle_animation_number == 5) {
-                animator->setInterval("special_right");
-        }else {
-                animator->setInterval("special_left");
-        }
-        animator->setTotalTime(0.6);
+/**
+* Special action animator
+* <p>special character animation</p>
+*@return void
+*/
+
+void Bilu::set_special_action_animator() {
+
+    INFO("Bilu set special action animator init");
+
+    // Check if idle_animation_number is equals 5
+    if(idle_animation_number == ANIMATION_NUMBER) {
+        animator->set_interval(ACTION_SPECIAL_RIGHT);
+        INFO("Bilu idle animation number == animation number ok");
+    // If you do not receive an action
+    }else {
+        animator->set_interval(ACTION_SPECIAL_LEFT);
+        INFO("Bilu idle animation number receives action special left");
+    }
+        animator->set_total_time(TOTAL_TIME_2);
 }

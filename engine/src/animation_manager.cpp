@@ -38,7 +38,7 @@ void AnimationManager::clearAnimationQuads(){
 }
 
 void AnimationManager::draw_quads(){
-    if(InputManager::instance.isKeyTriggered(InputManager::KEY_PRESS_L)){
+    if(InputManager::instance.is_key_triggered(InputManager::KEY_PRESS_L)){
         if(isActive){
             isActive = false;
         }else{

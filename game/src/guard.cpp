@@ -5,23 +5,23 @@
 #define REVERSE_STRAIGHT_ANGLE 270
 #define MAKE_SECONDS 100.0
 
-Guard::Guard(std::string objectName, double positionX, double positionY,
+Guard::Guard(std::string objectName, double position_x, double position_y,
              int width, int height, std::string initialDirection,int newQuantityRepeatWay, double newWaitingTime) : Enemy(objectName,
-                                                                          positionX,
-                                                                          positionY,
+                                                                          position_x,
+                                                                          position_y,
                                                                           width, height){
 
         animator = new Animation(objectName, 1, 10, 0.5);
         exclamation = new Animation("assets/sprites/exclamation.png",1, 1, 0.5);
 
-        animator->addAction("right",6,9);
-        animator->addAction("left",1,4);
-        animator->addAction("up",6,9);
-        animator->addAction("down",1,4);
-        animator->addAction("idle_right",5,5);
-        animator->addAction("idle_left",0,0);
-        animator->addAction("idle_up",5,5);
-        animator->addAction("idle_down",0,0);
+        animator->add_action("right",6,9);
+        animator->add_action("left",1,4);
+        animator->add_action("up",6,9);
+        animator->add_action("down",1,4);
+        animator->add_action("idle_right",5,5);
+        animator->add_action("idle_left",0,0);
+        animator->add_action("idle_up",5,5);
+        animator->add_action("idle_down",0,0);
 
 
 
@@ -30,12 +30,12 @@ Guard::Guard(std::string objectName, double positionX, double positionY,
 
         int angleOfVision = 60;
         range = 150;
-        fieldOfVision = new FieldOfVision(positionX+width/2,positionY-7, range, angleOfVision);
-        talkingBar = new ProgressBar(positionX, positionY, 45, 5, 0.0025);
+        fieldOfVision = new FieldOfVision(position_x+width/2,position_y-7, range, angleOfVision);
+        talkingBar = new ProgressBar(position_x, position_y, 45, 5, 0.0025);
 
         std::vector<unsigned int> backColor = {255, 0, 0, 255};
         std::vector<unsigned int> frontColor = {0, 0, 0, 255};
-        detectionBar = new ProgressBar(positionX, positionY, 30, 5, 0.01, backColor, frontColor);
+        detectionBar = new ProgressBar(position_x, position_y, 30, 5, 0.01, backColor, frontColor);
 
         idle_animation_number = 0;
         waitingTime = newWaitingTime;
@@ -55,40 +55,40 @@ Guard::Guard(std::string objectName, double positionX, double positionY,
 Guard::~Guard(){
 }
 
-void Guard::update(double timeElapsed){
-        auto incY = 0.1*timeElapsed;
-        auto incX = 0.1*timeElapsed;
+void Guard::update(double time_elapsed){
+        auto inc_y = 0.1*time_elapsed;
+        auto inc_x = 0.1*time_elapsed;
 
         // To Do: Use Time Elapsed in angleOfVision.
         if(talking) {
                 wayActive = false;
-                incX = 0.0;
-                incY = 0.0;
+                inc_x = 0.0;
+                inc_y = 0.0;
         }else{
                 if(wayActive) {
-                        incY = 0.15*timeElapsed;
-                        incX = 0.15*timeElapsed;
+                        inc_y = 0.15*time_elapsed;
+                        inc_x = 0.15*time_elapsed;
                 }else{
-                        stop(incX, incY);
+                        stop(inc_x, inc_y);
                 }
 
-                walkInX(incX);
-                walkInY(incY);
-                fieldOfVision->updateCenter(incX,incY);
+                walk_in_x(inc_x);
+                walk_in_y(inc_y);
+                fieldOfVision->updateCenter(inc_x,inc_y);
         }
-        if(incX == 0.0 && incY == 0.0) {
+        if(inc_x == 0.0 && inc_y == 0.0) {
                 if(idle_animation_number) {
-                        animator->setInterval("idle_right");
+                        animator->set_interval("idle_right");
                 }else{
-                        animator->setInterval("idle_left");
+                        animator->set_interval("idle_left");
                 }
         }
 
         if(talking){
-                talkingBar->update(timeElapsed);
+                talkingBar->update(time_elapsed);
         }
         if(detecting){
-            detectionBar->update(timeElapsed);
+            detectionBar->update(time_elapsed);
             if(detectionBar->getPercent() <= 0.0){
                 detecting = false;
                 wayActive = true;
@@ -100,28 +100,28 @@ void Guard::update(double timeElapsed){
         selectLine();
 }
 
-void Guard::walkInX(double & incX){
+void Guard::walk_in_x(double & inc_x){
 
 
         if(wayActive) {
-                walkInXSpecial(incX);
+                walk_in_xSpecial(inc_x);
         }else{
                 if(direction == "right") {
-                        incX = incX * (1);
+                        inc_x = inc_x * (1);
                         idle_animation_number = 5;
-                        animator->setInterval(direction);
+                        animator->set_interval(direction);
                 }else if(direction == "left") {
-                        incX = incX * (-1);
+                        inc_x = inc_x * (-1);
                         idle_animation_number = 0;
-                        animator->setInterval(direction);
+                        animator->set_interval(direction);
                 }else {
-                        incX = 0;
+                        inc_x = 0;
                 }
         }
 
-        setPositionX(getPositionX()+incX);
+        setposition_x(get_position_x()+inc_x);
         int beforeWay = wayActual;
-        if(CollisionManager::instance.verifyCollisionWithWallsAndChairs(this)) {
+        if(CollisionManager::instance.verify_collisionWithWallsAndChairs(this)) {
                 if (!wayActive) {
                         verifyDeadLockHorizontal();
 
@@ -132,36 +132,36 @@ void Guard::walkInX(double & incX){
                         }
                 }
 
-                setPositionX(getPositionX()+(incX*(0-1)));
-                incX = 0;
+                setposition_x(get_position_x()+(inc_x*(0-1)));
+                inc_x = 0;
                 if (beforeWay == wayActual){
                     nextWay();
                 }
         }
 }
 
-void Guard::walkInY(double & incY){
+void Guard::walk_in_y(double & inc_y){
 
 
         if(wayActive) {
-                walkInYSpecial(incY);
+                walk_in_ySpecial(inc_y);
         }else{
                 if(direction == "down") {
-                        incY = incY * (1);
+                        inc_y = inc_y * (1);
                         idle_animation_number = 5;
-                        animator->setInterval(direction);
+                        animator->set_interval(direction);
                 }else if(direction == "up") {
-                        incY = incY * (-1);
+                        inc_y = inc_y * (-1);
                         idle_animation_number = 0;
-                        animator->setInterval(direction);
+                        animator->set_interval(direction);
                 }else {
-                        incY = 0;
+                        inc_y = 0;
                 }
         }
 
-        setPositionY(getPositionY()+incY);
+        setposition_y(get_position_y()+inc_y);
         int beforeWay = wayActual;
-        if(CollisionManager::instance.verifyCollisionWithWallsAndChairs(this)) {
+        if(CollisionManager::instance.verify_collisionWithWallsAndChairs(this)) {
                 if (!wayActive) {
                         verifyDeadLockVertical();
 
@@ -172,8 +172,8 @@ void Guard::walkInY(double & incY){
                         }
                 }
 
-                setPositionY(getPositionY()+(incY*(0-1)));
-                incY = 0;
+                setposition_y(get_position_y()+(inc_y*(0-1)));
+                inc_y = 0;
 
                 if (beforeWay == wayActual){
                     nextWay();
@@ -181,65 +181,65 @@ void Guard::walkInY(double & incY){
         }
 }
 
-void Guard::walkInXSpecial(double & incX){
+void Guard::walk_in_xSpecial(double & inc_x){
         if(ways[wayActual].first == "right") {
-                incX = incX * (1);
+                inc_x = inc_x * (1);
                 idle_animation_number = 5;
-                animator->setInterval("right");
+                animator->set_interval("right");
                 direction = "right";
-                if(getPositionX()+incX > ways[wayActual].second) {
-                        incX = 0.0;
+                if(get_position_x()+inc_x > ways[wayActual].second) {
+                        inc_x = 0.0;
                         nextWay();
                 }
         }else if(ways[wayActual].first == "left") {
-                incX = incX * (-1);
+                inc_x = inc_x * (-1);
                 idle_animation_number = 0;
-                animator->setInterval("left");
+                animator->set_interval("left");
                 direction = "left";
-                if(getPositionX()+incX < ways[wayActual].second) {
-                        incX = 0.0;
+                if(get_position_x()+inc_x < ways[wayActual].second) {
+                        inc_x = 0.0;
                         nextWay();
                 }
         }else {
-                incX = 0;
+                inc_x = 0;
         }
 }
 
-void Guard::walkInYSpecial(double & incY){
+void Guard::walk_in_ySpecial(double & inc_y){
         if(ways[wayActual].first == "down") {
-                incY = incY * (1);
+                inc_y = inc_y * (1);
                 idle_animation_number = 5;
-                animator->setInterval("down");
+                animator->set_interval("down");
                 direction = "down";
-                if(getPositionY()+incY > ways[wayActual].second) {
-                        incY = 0.0;
+                if(get_position_y()+inc_y > ways[wayActual].second) {
+                        inc_y = 0.0;
                         nextWay();
                 }
         }else if(ways[wayActual].first == "up") {
-                incY = incY * (-1);
+                inc_y = inc_y * (-1);
                 idle_animation_number = 0;
-                animator->setInterval("up");
+                animator->set_interval("up");
                 direction = "up";
-                if(getPositionY()+incY < ways[wayActual].second) {
-                        incY = 0.0;
+                if(get_position_y()+inc_y < ways[wayActual].second) {
+                        inc_y = 0.0;
                         nextWay();
                 }
         }else {
-                incY = 0;
+                inc_y = 0;
         }
 }
 
 void Guard::draw(){
-        animator->draw(getPositionX()-10, getPositionY()-10);
-        animator->draw_collider(getPositionX(), getPositionY(), getWidth(), getHeight());
+        animator->draw(get_position_x()-10, get_position_y()-10);
+        animator->draw_collider(get_position_x(), get_position_y(), get_width(), get_height());
 
         if(detecting) {
-            detectionBar->setPositionX(getPositionX() - 10);
-            detectionBar->setPositionY(getPositionY() - 20);
+            detectionBar->setposition_x(get_position_x() - 10);
+            detectionBar->setposition_y(get_position_y() - 20);
             AnimationManager::instance.addProgressBar(detectionBar);
         }
         if(wayActive){
-            exclamation->draw(getPositionX(), getPositionY()-30);
+            exclamation->draw(get_position_x(), get_position_y()-30);
         }
         if(talking) {
                 AnimationManager::instance.addProgressBar(talkingBar);
@@ -255,8 +255,8 @@ void Guard::addWay(int key, std::pair<std::string, int> way){
         ways[key] = way;
 }
 
-void Guard::verifyDistance(GameObject* alien){
-        double distance = sqrt((pow(getPositionX() - alien->getPositionX(), 2.0)) +  (pow(getPositionY() - alien->getPositionY(), 2.0)));
+void Guard::verify_distance(GameObject* alien){
+        double distance = sqrt((pow(get_position_x() - alien->get_position_x(), 2.0)) +  (pow(get_position_y() - alien->get_position_y(), 2.0)));
 // TODO Definir quando irá iniciar o percurso especial do guarda
     //std::cout << alien->getName() << std::endl;
     if(alien->getName().compare("assets/sprites/varginha_sheet.png") == 0){
@@ -302,8 +302,8 @@ void Guard::talkingToETemer(std::string status){
                 idle_animation_number = 0;
         }
         talkingBar->resetPercent();
-        talkingBar->setPositionX(getPositionX() - 10);
-        talkingBar->setPositionY(getPositionY() - 20);
+        talkingBar->setposition_x(get_position_x() - 10);
+        talkingBar->setposition_y(get_position_y() - 20);
 }
 
 void Guard::notTalkingToETemer(){
@@ -336,10 +336,10 @@ void Guard::verifyDeadLockVertical(){
   timerVertical->step();
 }
 
-void Guard::stop(double &incX, double &incY){
+void Guard::stop(double &inc_x, double &inc_y){
       if(((timerVertical->elapsed_time()/MAKE_SECONDS) < waitingTime || (timerHorizontal->elapsed_time()/MAKE_SECONDS) < waitingTime) && !wayActive){
-        incX = 0.0;
-        incY = 0.0;
+        inc_x = 0.0;
+        inc_y = 0.0;
       }
 }
 

@@ -21,7 +21,7 @@ namespace engine{
         int getAngle();
         bool isActive();
         std::vector<Line*> getLines();
-        void playEffect();
+        void play_effect();
     private:
         Line* center_line;
         Audio* catch_effect;

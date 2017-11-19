@@ -101,14 +101,14 @@ void CollisionManager::addFinishPoint(GameObject* game_object){
  *    @brief collision manager  and verify if the personage have a collision with the walls
  *    @return bool
  */
-bool CollisionManager::verifyCollisionWithWalls(GameObject* game_object_collision){
+bool CollisionManager::verify_collisionWithWalls(GameObject* game_object_collision){
         for(GameObject * wall : wallList) {
-                if(verifyCollision(wall, game_object_collision)) {
+                if(verify_collision(wall, game_object_collision)) {
                         return true;
                 }
         }
         for(GameObject* door : doorList) {
-                if(door->isEnabled() && verifyCollision(door,game_object_collision)) {
+                if(door->isEnabled() && verify_collision(door,game_object_collision)) {
                         return true;
                 }
         }
@@ -119,19 +119,19 @@ bool CollisionManager::verifyCollisionWithWalls(GameObject* game_object_collisio
  *    @brief collision manager  and verify if the personage have a collision with the walls and chairs
  *    @return bool
  */
-bool CollisionManager::verifyCollisionWithWallsAndChairs(GameObject* game_object_collision){
+bool CollisionManager::verify_collisionWithWallsAndChairs(GameObject* game_object_collision){
         for(GameObject * wall : wallList) {
-                if(verifyCollision(wall, game_object_collision)) {
+                if(verify_collision(wall, game_object_collision)) {
                         return true;
                 }
         }
         for(GameObject * chair : chairList) {
-                if(verifyCollision(chair, game_object_collision)) {
+                if(verify_collision(chair, game_object_collision)) {
                         return true;
                 }
         }
         for(GameObject* door : doorList) {
-                if(door->isEnabled() && verifyCollision(door,game_object_collision)) {
+                if(door->isEnabled() && verify_collision(door,game_object_collision)) {
                         return true;
                 }
         }
@@ -142,10 +142,10 @@ bool CollisionManager::verifyCollisionWithWallsAndChairs(GameObject* game_object
  *    @brief collision manager  verify the collisions with chairs
  *    @return ?
  */
-std::pair<std::string, GameObject *> CollisionManager::verifyCollisionWithChairs(GameObject* game_object_collision){
+std::pair<std::string, GameObject *> CollisionManager::verify_collisionWithChairs(GameObject* game_object_collision){
         std::string collision = "";
         for(GameObject * chair : chairList) {
-                if((collision = verifyCollisionChair(chair, game_object_collision))!="none") {
+                if((collision = verify_collisionChair(chair, game_object_collision))!="none") {
                         return std::pair<std::string, GameObject*>(collision, chair);
                 }
         }
@@ -156,10 +156,10 @@ std::pair<std::string, GameObject *> CollisionManager::verifyCollisionWithChairs
  *    @brief collision manager  verify the collisions with  other chairs
  *    @return boll
  */
-bool CollisionManager::verifyCollisionWithOtherChairs(GameObject* game_object){
+bool CollisionManager::verify_collisionWithOtherChairs(GameObject* game_object){
   for(GameObject * chair : chairList) {
       if(chair != game_object){
-            if(verifyCollision(chair, game_object)) {
+            if(verify_collision(chair, game_object)) {
                     return true;
             }
       }
@@ -172,9 +172,9 @@ bool CollisionManager::verifyCollisionWithOtherChairs(GameObject* game_object){
  *    @brief collision manager  verify the collisions wth guards body
  *    @return bool
  */
-bool CollisionManager::verifyCollisionWithGuardsBody(GameObject* game_object){
+bool CollisionManager::verify_collision_with_guardsBody(GameObject* game_object){
         for(GameObject * enemy : guardList) {
-                if(verifyCollision(enemy, game_object)) {
+                if(verify_collision(enemy, game_object)) {
                         return true;
                 }
         }
@@ -186,14 +186,14 @@ bool CollisionManager::verifyCollisionWithGuardsBody(GameObject* game_object){
  *    @return bool
  */
 
-bool CollisionManager::verifyCollisionWithGuards(GameObject* game_object_collision){
+bool CollisionManager::verify_collision_with_guards(GameObject* game_object_collision){
     bool status = false;
 
-        status = verifyCollisionWithGuardsBody(game_object_collision);
+        status = verify_collision_with_guardsBody(game_object_collision);
         if(status){
             return status;
         }else{
-            status = verifyCollisionWithFieldsOfVision(game_object_collision, guardsVision);
+            status = verify_collisionWithFieldsOfVision(game_object_collision, guardsVision);
             return status;
         }
         assert (status != NULL);
@@ -203,9 +203,9 @@ bool CollisionManager::verifyCollisionWithGuards(GameObject* game_object_collisi
  *    @brief collision manager  verify the collisions wth cameras( if personage were caught)
  *    @return bool
  */
-bool CollisionManager::verifyCollisionWithCameras(GameObject* game_object_collision){
+bool CollisionManager::verify_collision_with_cameras(GameObject* game_object_collision){
     bool status = false;
-    status = verifyCollisionWithFieldsOfVision(game_object_collision, camerasVision);
+    status = verify_collisionWithFieldsOfVision(game_object_collision, camerasVision);
     assert (status != NULL);
     return status;
     INFO("Verify Collision with Cameras");
@@ -214,7 +214,7 @@ bool CollisionManager::verifyCollisionWithCameras(GameObject* game_object_collis
  *    @brief collision manager  verify if the personage where in the plane vision of the guards or cameras
  *    @return bool
  */
-bool CollisionManager::verifyCollisionWithFieldsOfVision(GameObject* game_object_collision, std::vector<FieldOfVision*> fields){
+bool CollisionManager::verify_collisionWithFieldsOfVision(GameObject* game_object_collision, std::vector<FieldOfVision*> fields){
     bool isVisible = true;
     assert ( distanceBetweenPlayer > -2147483648 || distanceBetweenPlayer < 2147483648);
     assert ( distanceBetweenWall > -2147483648 || distanceBetweenWall < 2147483648);
@@ -238,7 +238,7 @@ bool CollisionManager::verifyCollisionWithFieldsOfVision(GameObject* game_object
                                             }
                                     }
                                     if((isVisible && game_object_collision->isVisible())) {
-                                            field->playEffect();
+                                            field->play_effect();
                                             return true;
                                     }
                             }
@@ -254,9 +254,9 @@ bool CollisionManager::verifyCollisionWithFieldsOfVision(GameObject* game_object
  *    @brief collision manager  and verify the interection with the switches
  *    @return null
  */
-GameObject* CollisionManager::verifyCollisionWithSwitches(GameObject* game_object_collision){
+GameObject* CollisionManager::verify_collision_with_switches(GameObject* game_object_collision){
         for(GameObject * doorSwitch : switchList) {
-                if(verifyCollision(doorSwitch, game_object_collision)) {
+                if(verify_collision(doorSwitch, game_object_collision)) {
                         return doorSwitch;
                 }
         }
@@ -267,9 +267,9 @@ GameObject* CollisionManager::verifyCollisionWithSwitches(GameObject* game_objec
  *    @brief collision manager  and verify the interection with the camera switches
  *    @return null
  */
-GameObject* CollisionManager::verifyCollisionWithCameraSwitches(GameObject* game_object){
+GameObject* CollisionManager::verify_collision_with_camera_switches(GameObject* game_object){
     for(GameObject * cameraSwitch : cameraSwitchList) {
-            if(verifyCollision(cameraSwitch, game_object)) {
+            if(verify_collision(cameraSwitch, game_object)) {
                     return cameraSwitch;
             }
     }
@@ -281,9 +281,9 @@ GameObject* CollisionManager::verifyCollisionWithCameraSwitches(GameObject* game
  *    @brief collision manager  and verify the interection with the cameras levers
  *    @return null
  */
-GameObject* CollisionManager::verifyCollisionWithCameraLevers(GameObject* game_object){
+GameObject* CollisionManager::verify_collision_with_camera_levers(GameObject* game_object){
     for(GameObject * lever : cameraLeverList) {
-            if(verifyCollision(lever, game_object)) {
+            if(verify_collision(lever, game_object)) {
                     return lever;
             }
     }
@@ -294,9 +294,9 @@ GameObject* CollisionManager::verifyCollisionWithCameraLevers(GameObject* game_o
  *    @brief collision manager  and verify the interection with the papers
  *    @return null
  */
-GameObject* CollisionManager::verifyCollisionWithPapers(GameObject* game_object_collision){
+GameObject* CollisionManager::verify_collision_with_papers(GameObject* game_object_collision){
         for(GameObject * paper : paperList) {
-                if(verifyCollision(paper, game_object_collision)) {
+                if(verify_collision(paper, game_object_collision)) {
                         return paper;
                 }
         }
@@ -307,9 +307,9 @@ GameObject* CollisionManager::verifyCollisionWithPapers(GameObject* game_object_
  *    @brief collision manager  and verify the finishs points
  *    @return null
  */
-GameObject* CollisionManager::verifyCollisionWithFinishPoints(GameObject* game_object_collision){
+GameObject* CollisionManager::verify_collision_with_finish_points(GameObject* game_object_collision){
     for(GameObject * finishPoint : finishPointList) {
-            if(verifyCollision(finishPoint, game_object_collision)) {
+            if(verify_collision(finishPoint, game_object_collision)) {
                     return finishPoint;
             }
     }
@@ -322,7 +322,7 @@ GameObject* CollisionManager::verifyCollisionWithFinishPoints(GameObject* game_o
  *    @brief collision manager  and verify if the personage have a collision
  *    @return bool
  */
-bool CollisionManager::verifyCollision( GameObject* game_object_collision, GameObject* game_object_collision2){
+bool CollisionManager::verify_collision( GameObject* game_object_collision, GameObject* game_object_collision2){
         assert (leftA > -2147483648 ||leftA < 2147483648);
         assert (rightA > -2147483648 ||rightA < 2147483648);
         assert (topA > -2147483648 || topA < 2147483648);
@@ -331,10 +331,10 @@ bool CollisionManager::verifyCollision( GameObject* game_object_collision, GameO
 
         //Calculate the sides of rect A
         int leftA = 0, rightA = 0, topA = 0, bottomA = 0; //declarating variables for rectangles sides
-        leftA = game_object_collision->getPositionX();
-        rightA = leftA + game_object_collision->getWidth();
-        topA = game_object_collision->getPositionY();
-        bottomA = topA + game_object_collision->getHeight();
+        leftA = game_object_collision->get_position_x();
+        rightA = leftA + game_object_collision->get_width();
+        topA = game_object_collision->get_position_y();
+        bottomA = topA + game_object_collision->get_height();
 
 
         assert (leftB > -2147483648 ||leftB < 2147483648);
@@ -344,10 +344,10 @@ bool CollisionManager::verifyCollision( GameObject* game_object_collision, GameO
 
         //Calculate the sides of rect B
         int leftB = 0, rightB = 0, topB = 0, bottomB = 0; //declarating variables for rectangles sides
-        leftB = game_object_collision2->getPositionX();
-        rightB = leftB + game_object_collision2->getWidth();
-        topB = game_object_collision2->getPositionY();
-        bottomB = topB + game_object_collision2->getHeight();
+        leftB = game_object_collision2->get_position_x();
+        rightB = leftB + game_object_collision2->get_width();
+        topB = game_object_collision2->get_position_y();
+        bottomB = topB + game_object_collision2->get_height();
 
         assert (leftA != NULL);
         assert (rightA != NULL);
@@ -358,10 +358,10 @@ bool CollisionManager::verifyCollision( GameObject* game_object_collision, GameO
         assert (topB != NULL);
         assert (buttonB != NULL);
 
-        if(game_object_collision2->getWidth() == 0 || game_object_collision2->getHeight() == 0) {
+        if(game_object_collision2->get_width() == 0 || game_object_collision2->get_height() == 0) {
                 return false;
         }
-        if(game_object_collision->getWidth() == 0 || game_object_collision->getHeight() == 0) {
+        if(game_object_collision->get_width() == 0 || game_object_collision->get_height() == 0) {
                 return false;
         }
 
@@ -385,28 +385,28 @@ bool CollisionManager::verifyRectangleCollisionWithLine(GameObject* game_object,
 
 
         std::pair<std::pair<int, int>, std::pair<int, int> > top;
-        top.first.first = game_object->getPositionX();
-        top.first.second = game_object->getPositionY();
-        top.second.first = game_object->getPositionX()+game_object->getWidth();
-        top.second.second= game_object->getPositionY();
+        top.first.first = game_object->get_position_x();
+        top.first.second = game_object->get_position_y();
+        top.second.first = game_object->get_position_x()+game_object->get_width();
+        top.second.second= game_object->get_position_y();
 
         std::pair<std::pair<int, int>, std::pair<int, int> > right;
-        right.first.first = game_object->getPositionX()+game_object->getWidth();
-        right.first.second = game_object->getPositionY();
-        right.second.first = game_object->getPositionX()+game_object->getWidth();
-        right.second.second= game_object->getPositionY()+game_object->getHeight();
+        right.first.first = game_object->get_position_x()+game_object->get_width();
+        right.first.second = game_object->get_position_y();
+        right.second.first = game_object->get_position_x()+game_object->get_width();
+        right.second.second= game_object->get_position_y()+game_object->get_height();
 
         std::pair<std::pair<int, int>, std::pair<int, int> > left;
-        left.first.first = game_object->getPositionX();
-        left.first.second = game_object->getPositionY();
-        left.second.first = game_object->getPositionX();
-        left.second.second= game_object->getPositionY()+game_object->getHeight();
+        left.first.first = game_object->get_position_x();
+        left.first.second = game_object->get_position_y();
+        left.second.first = game_object->get_position_x();
+        left.second.second= game_object->get_position_y()+game_object->get_height();
 
         std::pair<std::pair<int, int>, std::pair<int, int> > bottom;
-        bottom.first.first = game_object->getPositionX();
-        bottom.first.second = game_object->getPositionY()+game_object->getHeight();
-        bottom.second.first = game_object->getPositionX()+game_object->getWidth();
-        bottom.second.second= game_object->getPositionY()+game_object->getHeight();
+        bottom.first.first = game_object->get_position_x();
+        bottom.first.second = game_object->get_position_y()+game_object->get_height();
+        bottom.second.first = game_object->get_position_x()+game_object->get_width();
+        bottom.second.second= game_object->get_position_y()+game_object->get_height();
 
         if(verifyLineCollisionWithLine(top.first,top.second,a,b)) {return true; }
         if(verifyLineCollisionWithLine(right.first,right.second,a,b)) {return true; }
@@ -436,7 +436,7 @@ double CollisionManager::CCW(std::pair<int, int> line_a, std::pair<int, int> lin
  *    @brief collision manager  and verify if the personage have a collision with the chairs
  *    @return string
  */
-std::string CollisionManager::verifyCollisionChair(GameObject* game_object_collision, GameObject* game_object_collision2){
+std::string CollisionManager::verify_collisionChair(GameObject* game_object_collision, GameObject* game_object_collision2){
 
 
         assert (leftA > -2147483648 ||leftA < 2147483648);
@@ -445,25 +445,25 @@ std::string CollisionManager::verifyCollisionChair(GameObject* game_object_colli
         assert (buttonA > -2147483648 ||buttonA < 2147483648);
         //Calculate the sides of rect A
         int leftA = 0, rightA = 0, topA = 0, bottomA = 0; //declarating variables of rectangle sides
-        leftA = game_object_collision->getPositionX();
-        rightA = leftA + game_object_collision->getWidth();
-        topA = game_object_collision->getPositionY();
-        bottomA = topA + game_object_collision->getHeight();
+        leftA = game_object_collision->get_position_x();
+        rightA = leftA + game_object_collision->get_width();
+        topA = game_object_collision->get_position_y();
+        bottomA = topA + game_object_collision->get_height();
         assert (leftB > -2147483648 ||leftB < 2147483648);
         assert (rightB > -2147483648 ||rightB < 2147483648);
         assert (topB > -2147483648 || topB < 2147483648);
         assert (buttonB > -2147483648 ||buttonB < 2147483648);
         //Calculate the sides of rect B
         int leftB = 0, rightB = 0, topB = 0, bottomB = 0; //declarating variables of rectangles sides
-        leftB = game_object_collision2->getPositionX();
-        rightB = leftB + game_object_collision2->getWidth();
-        topB = game_object_collision2->getPositionY();
-        bottomB = topB + game_object_collision2->getHeight();
+        leftB = game_object_collision2->get_position_x();
+        rightB = leftB + game_object_collision2->get_width();
+        topB = game_object_collision2->get_position_y();
+        bottomB = topB + game_object_collision2->get_height();
 
-        if(game_object_collision2->getWidth() == 0 || game_object_collision2->getHeight() == 0) {
+        if(game_object_collision2->get_width() == 0 || game_object_collision2->get_height() == 0) {
                 return "none";
         }
-        if(game_object_collision->getWidth() == 0 || game_object_collision->getHeight() == 0) {
+        if(game_object_collision->get_width() == 0 || game_object_collision->get_height() == 0) {
                 return "none";
         }
 

@@ -43,7 +43,7 @@ Button::~Button() {
  */
 void Button::draw() {
     INFO("TEXT DRAW");
-    text->draw(getPositionX(), getPositionY());
+    text->draw(get_position_x(), get_position_y());
            INFO("draw Button");
 }
 

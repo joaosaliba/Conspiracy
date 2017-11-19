@@ -12,7 +12,7 @@ void TutorialScene::draw() {
 
 void TutorialScene::update(double time_elapsed) {
     time_elapsed = time_elapsed;
-    if(InputManager::instance.isKeyTriggered(InputManager::KeyPress::KEY_PRESS_ENTER) || scene_timer->total_elapsed_time() >= 4000) {
+    if(InputManager::instance.is_key_triggered(InputManager::KeyPress::KEY_PRESS_ENTER) || scene_timer->total_elapsed_time() >= 4000) {
         getSceneManager()->loadScene(new_next_scene);
     }
 }

@@ -12,8 +12,8 @@ WinScene::WinScene(int id) : Scene(id){
     notSelect = new Color(0, 0, 0, 0);
     soundEffect = new Audio("assets/sounds/SELECT6.wav", "EFFECT",100);
     background = new Animation("assets/sprites/win.png", 1, 5, 0.8);
-    background->addAction("win", 0, 4);
-    background->setInterval("win");
+    background->add_action("win", 0, 4);
+    background->set_interval("win");
 }
 
 WinScene::~WinScene(){
@@ -52,7 +52,7 @@ void WinScene::load(){
 }
 
 void WinScene::selectAction(){
-        if(InputManager::instance.isKeyTriggered(InputManager::KeyPress::KEY_PRESS_LEFT)) {
+        if(InputManager::instance.is_key_triggered(InputManager::KeyPress::KEY_PRESS_LEFT)) {
                 soundEffect->pause();
                 soundEffect->play(0);
                 selectButton--;
@@ -60,7 +60,7 @@ void WinScene::selectAction(){
                         selectButton = 2;
                 }
         }
-        else if(InputManager::instance.isKeyTriggered(InputManager::KeyPress::KEY_PRESS_RIGHT)) {
+        else if(InputManager::instance.is_key_triggered(InputManager::KeyPress::KEY_PRESS_RIGHT)) {
                 soundEffect->pause();
                 soundEffect->play(0);
                 selectButton++;
@@ -69,7 +69,7 @@ void WinScene::selectAction(){
                 }
         }
 
-        if(InputManager::instance.isKeyTriggered(InputManager::KeyPress::KEY_PRESS_ENTER)) {
+        if(InputManager::instance.is_key_triggered(InputManager::KeyPress::KEY_PRESS_ENTER)) {
                 switch(selectButton) {
                 case 1:
                         if(getSceneManager()->get_before_scene_id() == 1){

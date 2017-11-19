@@ -15,7 +15,7 @@ class DoorSystem: public GameObject{
 public:
     DoorSystem(std::pair<int,int> doorPosition, std::pair<int,int> switchPosition, std::string doorSide);
     ~DoorSystem();
-    void update(double timeElapsed);
+    void update(double time_elapsed);
     void draw();
     GameObject* getDoor();
     GameObject* getSwitch();

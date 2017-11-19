@@ -43,7 +43,7 @@ CameraSystem::CameraSystem(Camera* p_camera, CameraSwitch* p_camera_switch, Came
  *   @return void
  */
 void CameraSystem::draw(){
-    assert ( timeElapsed != NULL);
+    assert ( time_elapsed != NULL);
     camera->draw();
     camera_switch->draw();
     if(camera_lever != NULL){
@@ -57,14 +57,14 @@ void CameraSystem::draw(){
 
 /**
 *    @brief update the camera system  decoring the time.
-*    @param[in] timeElapsed its about the time
+*    @param[in] time_elapsed its about the time
 */
-void CameraSystem::update(double timeElapsed){
+void CameraSystem::update(double time_elapsed){
   assert(last_lever_state > –2147483648 || last_lever_state < 2147483648);
-    camera->update(timeElapsed);
-    camera_switch->update(timeElapsed);
+    camera->update(time_elapsed);
+    camera_switch->update(time_elapsed);
     if(camera_lever != NULL){
-     camera_lever->update(timeElapsed);
+     camera_lever->update(time_elapsed);
         if(camera_lever->getState() != last_lever_state){
             last_lever_state = camera_lever->getState();
             camera->changeState(camera_lever->getState());
@@ -77,7 +77,7 @@ void CameraSystem::update(double timeElapsed){
       // nothing to do
     }
     if(!camera_switch->isWorking() && camera->isTurnedOn()){
-         camera->turnOff();
+         camera->turn_off();
     }
     else{
       // nothing to do

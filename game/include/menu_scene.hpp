@@ -19,7 +19,7 @@ public:
     ~MenuScene();
     void load();
     void draw();
-    void update(double timeElapsed);
+    void update(double time_elapsed);
     void unload();
     void selectAction();
 

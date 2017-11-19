@@ -44,7 +44,7 @@ Rectangle::~Rectangle() {
 
 void Rectangle::nullSurfaceDetector(SDL_Surface *surface){
   INFO("Detecting if surfac is null");
-  surface = SDL_CreateRGBSurface(0, getWidth(),getHeight(), 8, 0, 0, 0,0);
+  surface = SDL_CreateRGBSurface(0, get_width(),get_height(), 8, 0, 0, 0,0);
   //If the surface is null it fires an error
   if (surface == NULL) {
       ERROR("Create surface failed.");
@@ -68,7 +68,7 @@ void Rectangle::nullSurfaceDetector(SDL_Surface *surface){
 void Rectangle::init() {
     INFO("Initializing rectangle object");
     SDL_Surface *surface = nullptr;
-    surface = SDL_CreateRGBSurface(0, getWidth(),getHeight(), 8, 0, 0, 0,0);
+    surface = SDL_CreateRGBSurface(0, get_width(),get_height(), 8, 0, 0, 0,0);
 
     nullSurfaceDetector(surface);
 }
@@ -97,8 +97,8 @@ void Rectangle::draw() {
     INFO("Drawing rectangle");
     //If there is a rectangle object enabled it draws the rectangle
     if(isEnabled()) {
-      SDL_Rect clipRect = {0, 0, getWidth(), getHeight()};
-      SDL_Rect renderQuad = {(int)getPositionX(), (int)getPositionY(), clipRect.w, clipRect.h};
+      SDL_Rect clipRect = {0, 0, get_width(), get_height()};
+      SDL_Rect renderQuad = {(int)get_position_x(), (int)get_position_y(), clipRect.w, clipRect.h};
       SDL_RenderCopy(WindowManager::getGameCanvas(), texture, &clipRect, &renderQuad);
     //Rectangle is not enabled
     }else {

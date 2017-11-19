@@ -33,8 +33,8 @@ Paper::Paper(std::string object_name, double paper_position_x, double paper_posi
     paper_editing_bar = new ProgressBar(paper_position_x-3, paper_position_y-8, 22.5, 5, 0.005, back_color, front_color);
     paper_editing_sound = new Audio("assets/sounds/PAPEROISE.wav", "EFFECT", 100);
 
-    animator->addAction("idle",0,0);
-    animator->addAction("beingEdited",1,3);
+    animator->add_action("idle",0,0);
+    animator->add_action("beingEdited",1,3);
     paper_edited = false;
     paper_is_being_edited = false;
     assert(paper_edited != NULL);
@@ -61,7 +61,7 @@ void Paper::getPercentage(){
       assert(paper_is_being_edited != NULL);
   //Paper is not being edited
   }else {
-      animator->setInterval("idle");
+      animator->set_interval("idle");
       animator->update();
   }
 }
@@ -76,7 +76,7 @@ void Paper::update(double time_elapsed){
     //If paper is being edited it sets the paper editing bar
     if(paper_is_being_edited) {
         paper_editing_bar->update(time_elapsed);
-        animator->setInterval("beingEdited");
+        animator->set_interval("beingEdited");
         getPercentage();
 
     }else {
@@ -98,7 +98,7 @@ void Paper::animate(){
     @brief Stops the paper animation.
 */
 
-void Paper::stopAnimation(){
+void Paper::stop_animation(){
     INFO("Stoping paper animation");
     paper_is_being_edited = false;
     assert(paper_is_being_edited != NULL);
@@ -121,8 +121,8 @@ bool Paper::isEdited(){
 
 void Paper::draw(){
     INFO("Paper DRAW");
-    animator->draw(getPositionX(), getPositionY());
-    animator->draw_collider(getPositionX(), getPositionY(), getWidth(), getHeight());
+    animator->draw(get_position_x(), get_position_y());
+    animator->draw_collider(get_position_x(), get_position_y(), get_width(), get_height());
     //It draws editing bar if the paper is being edited
     if(paper_is_being_edited){
         AnimationManager::instance.addProgressBar(paper_editing_bar);
@@ -145,7 +145,7 @@ Animation * Paper::getAnimation(){
     @brief Gets the percentage of paper that is edited.
 */
 
-double Paper::getEditingBarPercent(){
+double Paper::get_editing_bar_percent(){
     INFO("Getting editing bar percentage");
     return paper_editing_bar->getPercent();
     assert(paper_editing_bar != NULL);
@@ -155,7 +155,7 @@ double Paper::getEditingBarPercent(){
     @brief Resets editing progress.
 */
 
-void Paper::resetEditingProgress(){
+void Paper::reset_editing_progress(){
     INFO("Reseting paper editing percentage");
     paper_editing_bar->resetPercent();
     assert(paper_editing_bar != NULL);
@@ -165,7 +165,7 @@ void Paper::resetEditingProgress(){
     @brief Start paper editing sound.
 */
 
-void Paper::playEffect(){
+void Paper::play_effect(){
     INFO("Starting editing sound");
     paper_editing_sound->play(0);
     assert(paper_editing_sound != NULL);
@@ -175,7 +175,7 @@ void Paper::playEffect(){
     @brief Stop paper editing sound.
 */
 
-void Paper::stopEffect(){
+void Paper::stop_effect(){
     INFO("Stoping editing sound");
     paper_editing_sound->stop();
     assert(paper_editing_sound != NULL);

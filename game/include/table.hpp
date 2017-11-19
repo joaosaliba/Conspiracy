@@ -9,9 +9,9 @@ using namespace engine;
 
 class Table: public GameObject{
 public:
-    Table(std::string objectName, double positionX, double positionY, int width, int height);
+    Table(std::string objectName, double position_x, double position_y, int width, int height);
     ~Table();
-    void update(double timeElapsed);
+    void update(double time_elapsed);
     void draw();
     void init();
     Animation * getAnimation();

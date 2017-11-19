@@ -27,10 +27,10 @@ CameraLever::CameraLever(double camera_lever_position_x, double camera_lever_pos
     assert ( camera_lever_position_x != NULL);
     assert ( camera_lever_position_y != NULL);
     animator = new Animation(FILENAME, 1, 3, 0.1);
-    animator->addAction("up", 2,2);
-    animator->addAction("mid",1,1);
-    animator->addAction("down", 0,0);
-    animator->setInterval("mid");
+    animator->add_action("up", 2,2);
+    animator->add_action("mid",1,1);
+    animator->add_action("down", 0,0);
+    animator->set_interval("mid");
     camera_lever_direction = camera_lever_direction;
     stateInc = 1;
     state = 1;
@@ -41,8 +41,8 @@ CameraLever::CameraLever(double camera_lever_position_x, double camera_lever_pos
  *   @return void
  */
 void CameraLever::draw(){
-    animator->draw(getPositionX(), getPositionY());
-    animator->draw_collider(getPositionX(), getPositionY(), getWidth(), getHeight());
+    animator->draw(get_position_x(), get_position_y());
+    animator->draw_collider(get_position_x(), get_position_y(), get_width(), get_height());
        INFO("Draw CameraLever");
 }
 /**
@@ -73,7 +73,7 @@ int CameraLever::getState(){
  *   @brief set the next possible state of the camera lever
  *   @return void
  */
-void CameraLever::nextState(){
+void CameraLever::next_state(){
   // verify int limits
     assert(state > –2147483648 || state < 2147483648);
     assert(stateInc > –2147483648 || stateInc < 2147483648);
@@ -85,9 +85,9 @@ void CameraLever::nextState(){
     }
     state += stateInc;
     switch(state){
-        case 0: animator->setInterval("up"); break;
-        case 1: animator->setInterval("mid"); break;
-        case 2: animator->setInterval("down"); break;
+        case 0: animator->set_interval("up"); break;
+        case 1: animator->set_interval("mid"); break;
+        case 2: animator->set_interval("down"); break;
         default: break;
     }
      INFO("Next state CameraLever");

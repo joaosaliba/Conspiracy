@@ -57,17 +57,17 @@ InputManager InputManager::instance;
         return quitRequest;
     }
 
-    bool InputManager::isKeyPressed(int iKeyCode) {
+    bool InputManager::is_key_pressed(int iKeyCode) {
         INFO("Verifying if key is pressed");
         return keyActive[iKeyCode];
     }
 
-    bool InputManager::isKeyReleased(int iKeyCode){
+    bool InputManager::is_key_released(int iKeyCode){
         INFO("Verifying if key is released");
         return (!keyActive[iKeyCode] && keyPrevious[iKeyCode]);
     }
 
-    bool InputManager::isKeyTriggered(int iKeyCode){
+    bool InputManager::is_key_triggered(int iKeyCode){
         INFO("Verifying if key is triggered");
         //It verifies if the key is triggered
         if(keyActive[iKeyCode] && !keyPrevious[iKeyCode]){

@@ -25,9 +25,9 @@ Chair::Chair(std::string chair_name, double chair_position_x, double chair_posit
                                                  chair_width, chair_height){
         chairEffect = new Audio("assets/sounds/DRAG.wav", "EFFECT", 128);
         animator = new Animation(chair_name, 1, 4, 0.5);
-        animator->addAction("move",0,3);
-        animator->addAction("idle",0,0);
-        animator->setInterval("idle");
+        animator->add_action("move",0,3);
+        animator->add_action("idle",0,0);
+        animator->set_interval("idle");
         isMoving = false;
         assert ( chair_position_x != NULL);
         assert ( chair_position_y != NULL);
@@ -49,8 +49,8 @@ Chair::~Chair(){
  *   @return void
  */
 void Chair::draw(){
-        animator->draw(getPositionX(), getPositionY()-15);
-        animator->draw_collider(getPositionX(), getPositionY(), getWidth(), getHeight());
+        animator->draw(get_position_x(), get_position_y()-15);
+        animator->draw_collider(get_position_x(), get_position_y(), get_width(), get_height());
         INFO("draw chair ");
 }
 
@@ -67,7 +67,7 @@ void Chair::update(double timeElapsed){
                 moveInX(move_chair_in_x);
                 moveInY(move_chair_in_y);
         }else{
-          animator->setInterval("idle");
+          animator->set_interval("idle");
         }
 
         animator->update();
@@ -96,18 +96,18 @@ void Chair::moveInX(double move_chair_in_x){
         assert ( move_chair_in_x != NULL);
         if(direction == "right") {
                 move_chair_in_x = move_chair_in_x;
-                animator->setInterval("move");
+                animator->set_interval("move");
         }
         else if(direction == "left") {
                 move_chair_in_x = move_chair_in_x * (0-1);
-                animator->setInterval("move");
+                animator->set_interval("move");
         }
         else {
                 move_chair_in_x = 0;
         }
-        setPositionX(getPositionX()+move_chair_in_x);
-        if(CollisionManager::instance.verifyCollisionWithOtherChairs(this) || CollisionManager::instance.verifyCollisionWithWalls(this) || CollisionManager::instance.verifyCollisionWithGuardsBody(this)) {
-                setPositionX(getPositionX()+(move_chair_in_x*(0-1)));
+        setposition_x(get_position_x()+move_chair_in_x);
+        if(CollisionManager::instance.verify_collisionWithOtherChairs(this) || CollisionManager::instance.verify_collisionWithWalls(this) || CollisionManager::instance.verify_collision_with_guardsBody(this)) {
+                setposition_x(get_position_x()+(move_chair_in_x*(0-1)));
         }
         INFO("move chair in X");
 }
@@ -121,18 +121,18 @@ void Chair::moveInY(double move_chair_in_y){
 
         if(direction == "down") {
                 move_chair_in_y = move_chair_in_y;
-                animator->setInterval("move");
+                animator->set_interval("move");
         }
         else if(direction == "up") {
                 move_chair_in_y = move_chair_in_y * (0-1);
-                animator->setInterval("move");
+                animator->set_interval("move");
         }
         else {
                 move_chair_in_y = 0;
         }
-        setPositionY(getPositionY()+move_chair_in_y);
-        if(CollisionManager::instance.verifyCollisionWithOtherChairs(this) || CollisionManager::instance.verifyCollisionWithWalls(this) || CollisionManager::instance.verifyCollisionWithGuardsBody(this)) {
-                setPositionY(getPositionY()+(move_chair_in_y*(0-1)));
+        setposition_y(get_position_y()+move_chair_in_y);
+        if(CollisionManager::instance.verify_collisionWithOtherChairs(this) || CollisionManager::instance.verify_collisionWithWalls(this) || CollisionManager::instance.verify_collision_with_guardsBody(this)) {
+                setposition_y(get_position_y()+(move_chair_in_y*(0-1)));
         }
         INFO("move chair in Y");
 }

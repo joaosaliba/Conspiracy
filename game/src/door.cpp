@@ -1,24 +1,24 @@
 #include "door.hpp"
 
-Door::Door(std::string objectName, double positionX, double positionY,
+Door::Door(std::string objectName, double position_x, double position_y,
            int width, int height, std::string doorSide) : GameObject(objectName,
-                                                                     positionX,
-                                                                     positionY,
+                                                                     position_x,
+                                                                     position_y,
                                                                      width,
                                                                      height){
 
     if(doorSide.compare("DOWN") == 0){
         animator = new Animation(objectName, 1, 4, 0.5);
-        animator->addAction("closed", 0,0);
-        animator->addAction("open",1,3);
+        animator->add_action("closed", 0,0);
+        animator->add_action("open",1,3);
     }else if(doorSide.compare("RIGHT") == 0){
         animator = new Animation(objectName, 1, 8, 0.5);
-        animator->addAction("closed", 0,0);
-        animator->addAction("open",1,3);
+        animator->add_action("closed", 0,0);
+        animator->add_action("open",1,3);
     }else if(doorSide.compare("LEFT") == 0){
         animator = new Animation(objectName, 1, 8, 0.5);
-        animator->addAction("closed", 4,4);
-        animator->addAction("open",5,7);
+        animator->add_action("closed", 4,4);
+        animator->add_action("open",5,7);
     }
 
     side = doorSide;
@@ -36,16 +36,16 @@ void Door::update(double timeElapsed){
         animator->update();
     }
     if(isOpen()){
-        animator->setInterval("open");
+        animator->set_interval("open");
     }else{
-        animator->setInterval("closed");
+        animator->set_interval("closed");
     }
 }
 
 void Door::draw(){
     INFO("Door DRAW");
-    animator->draw(getPositionX(), getPositionY());
-    animator->draw_collider(getPositionX(), getPositionY(), getWidth(), getHeight());
+    animator->draw(get_position_x(), get_position_y());
+    animator->draw_collider(get_position_x(), get_position_y(), get_width(), get_height());
 }
 
 Animation * Door::getAnimation(){
@@ -60,7 +60,7 @@ void Door::setOpen(bool status){
         open = status;
 }
 
-void Door::playEffect(){
+void Door::play_effect(){
     door_effect->play(0);
 }
 

@@ -10,24 +10,24 @@
 
 /**
  *    @brief Computer_table object constructor.
- *    @param[in] positionX it sets the x coordinate of the object.
- *    @param[in] positionY it sets the y coordinate of the object.
+ *    @param[in] position_x it sets the x coordinate of the object.
+ *    @param[in] position_y it sets the y coordinate of the object.
  *    @param[in] width it sets the width dimension of the object.
  *    @param[in] height it sets the height dimension of the object.
  *    @param[in] objectName set the name of the object
  *
  */
-ComputerTable::ComputerTable(std::string objectName, double positionX, double positionY,
+ComputerTable::ComputerTable(std::string objectName, double position_x, double position_y,
                                      int width, int height) : GameObject(objectName,
-                                                                         positionX,
-                                                                         positionY,
+                                                                         position_x,
+                                                                         position_y,
                                                                          width, height){
-  assert (positionX !=NULL);
-  assert (positionY !=NULL);
+  assert (position_x !=NULL);
+  assert (position_y !=NULL);
   assert (width !=NULL);
   assert (height !=NULL);
-  table = new Table("assets/sprites/mesa.png", positionX, positionY, width, height);
-  doorSwitch = new DoorSwitch("assets/sprites/PC_sprites(34X20).png", positionX + 15, positionY - 7, 34, 60);
+  table = new Table("assets/sprites/mesa.png", position_x, position_y, width, height);
+  doorSwitch = new DoorSwitch("assets/sprites/PC_sprites(34X20).png", position_x + 15, position_y - 7, 34, 60);
   INFO("Computer Table Constructor ");
 }
 /**
@@ -50,12 +50,12 @@ void ComputerTable::draw(){
 
 /**
 *    @brief update the ComputerTable  during the time.
-*    @param[in] timeElapsed its about the time
+*    @param[in] time_elapsed its about the time
 */
-void ComputerTable::update(double timeElapsed){
-   assert(timeElapsed != NULL);
-   table->update(timeElapsed);
-    doorSwitch->update(timeElapsed);
+void ComputerTable::update(double time_elapsed){
+   assert(time_elapsed != NULL);
+   table->update(time_elapsed);
+    doorSwitch->update(time_elapsed);
     INFO("Update Computer Table  ");
 }
 

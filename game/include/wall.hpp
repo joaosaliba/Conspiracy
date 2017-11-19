@@ -15,7 +15,7 @@ public:
     void init();
     Animation * getAnimation();
 private:
-  void update(double timeElapsed);
+  void update(double time_elapsed);
   void draw();
     Animation* animator;
 };

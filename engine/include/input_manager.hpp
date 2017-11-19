@@ -32,9 +32,9 @@ namespace engine{
         void keyRepetitionDetector(int keyAction, SDL_Event event);
         void keyUp(int previousAction, SDL_Event event);
 
-        bool isKeyTriggered(int iKeyCode);
-        bool isKeyPressed(int iKeyCode);
-        bool isKeyReleased(int iKeyCode);
+        bool is_key_triggered(int iKeyCode);
+        bool is_key_pressed(int iKeyCode);
+        bool is_key_released(int iKeyCode);
 
     private:
         InputManager(): quitRequest(false){}

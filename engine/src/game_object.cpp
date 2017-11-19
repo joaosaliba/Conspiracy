@@ -27,12 +27,12 @@ GameObject::GameObject(std::string object_name, double object_position_x, double
         assert(object_width != NULL);
         assert(object_height != NULL);
         setName(object_name);
-        setPositionX(object_position_x);
-        setPositionY(object_position_y);
+        setposition_x(object_position_x);
+        setposition_y(object_position_y);
         setWidth(object_width);
         setHeight(object_height);
-        setEnabled(true);
-        setVisible(true);
+        set_enabled(true);
+        set_visible(true);
 }
 
 /**
@@ -48,11 +48,11 @@ GameObject::GameObject(double object_position_x, double object_position_y,int ob
     assert(object_position_y != NULL);
     assert(object_width != NULL);
     assert(object_height != NULL);
-    setPositionX(object_position_x);
-    setPositionY(object_position_y);
+    setposition_x(object_position_x);
+    setposition_y(object_position_y);
     setWidth(object_width);
     setHeight(object_height);
-    setEnabled(true);
+    set_enabled(true);
 }
 
 /**
@@ -85,7 +85,7 @@ std::string GameObject::getName(){
     @return position.first x coordinate value.
 */
 
-double GameObject::getPositionX(){
+double GameObject::get_position_x(){
     INFO("Getting object x coordinate");
     assert(object_position_x != NULL);
     return position.first;
@@ -96,7 +96,7 @@ double GameObject::getPositionX(){
     @return position.second y coordinate value.
 */
 
-double GameObject::getPositionY(){
+double GameObject::get_position_y(){
     INFO("Getting object y coordinate");
     assert(object_position_y != NULL);
     return position.second;
@@ -107,7 +107,7 @@ double GameObject::getPositionY(){
     @return size.first width dimension value.
 */
 
-int GameObject::getWidth(){
+int GameObject::get_width(){
     INFO("Getting object width dimension");
     assert(object_width != NULL);
     return size.first;
@@ -118,7 +118,7 @@ int GameObject::getWidth(){
     @return size.second height dimension value.
 */
 
-int GameObject::getHeight(){
+int GameObject::get_height(){
     INFO("Getting object height dimension");
     assert(object_height != NULL);
     return size.second;
@@ -140,7 +140,7 @@ void GameObject::setName(std::string object_new_name){
     @param[in] newX the new x coordinate of the object.
 */
 
-void GameObject::setPositionX(double object_new_x){
+void GameObject::setposition_x(double object_new_x){
     INFO("Setting object x coordinate");
     assert(object_new_x != NULL);
     position.first = object_new_x;
@@ -166,7 +166,7 @@ std::pair<double,double> GameObject::getCenter(){
     @param[in] newY the new y coordinate of the object.
 */
 
-void GameObject::setPositionY(double object_new_y){
+void GameObject::setposition_y(double object_new_y){
     INFO("Setting object y coordinate");
     assert(object_new_y != NULL);
     position.second = object_new_y;
@@ -199,7 +199,7 @@ void GameObject::setHeight(int object_new_height){
     @param[in] paramEnabled object utilization status.
 */
 
-void GameObject::setEnabled(bool param_enabled){
+void GameObject::set_enabled(bool param_enabled){
     INFO("Setting object as enabled");
     assert(param_enabled != NULL);
     enabled = param_enabled;
@@ -210,7 +210,7 @@ void GameObject::setEnabled(bool param_enabled){
     @param[in] paramVisible status of visibility of the object.
 */
 
-void GameObject::setVisible(bool param_visible){
+void GameObject::set_visible(bool param_visible){
     INFO("Setting object as visible");
     assert(param_visible != NULL);
     visible = param_visible;

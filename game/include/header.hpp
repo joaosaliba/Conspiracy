@@ -9,9 +9,9 @@ using namespace engine;
 
 class Header: public GameObject{
 public:
-    Header(double positionX, double positionY, int maxPapers, int stageNumber);
+    Header(double position_x, double position_y, int maxPapers, int stageNumber);
     ~Header();
-    void update(double timeElapsed);
+    void update(double time_elapsed);
     void draw();
     void init();
     void setAlienSelect(int select);

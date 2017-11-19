@@ -12,18 +12,18 @@ Header::Header(double position_x, double position_y, int max_papers, int stage_n
         stage_text = new Text("Stage "+std::to_string(stage_number),"assets/fonts/font.ttf", 40, true, new Color(100,100,100,1), new Color(0,0,0,0));
         paper_icon = new Animation("assets/sprites/papeis(19X21).png", 1, 4, 0.5);
         paper_icon->setDrawSize(40,50);
-        paper_icon->addAction("static", 0,0);
-        paper_icon->setInterval("static");
+        paper_icon->add_action("static", 0,0);
+        paper_icon->set_interval("static");
 
         total_papers = max_papers;
 
         updatePaperQuantity(0);
 
         animator = new Animation(FILENAME, 1, 4, 0.5);
-        animator->addAction("none", 0,0);
-        animator->addAction("Etemer", 1,1);
-        animator->addAction("Etbilu", 2,2);
-        animator->addAction("Etvarginha", 3,3);
+        animator->add_action("none", 0,0);
+        animator->add_action("Etemer", 1,1);
+        animator->add_action("Etbilu", 2,2);
+        animator->add_action("Etvarginha", 3,3);
 
         alien_select = 1;
 }
@@ -40,10 +40,10 @@ void Header::update(double timeElapsed) {
 }
 
 void Header::draw() {
-        animator->draw(getPositionX()+MARGIN, getPositionY()+MARGIN);
-        paper_icon->draw(getPositionX()+800, getPositionY()- MARGIN);
-        paper_text->draw(getPositionX()+840, getPositionY()+MARGIN);
-        stage_text->draw(getPositionX()+400, getPositionY()+MARGIN);
+        animator->draw(get_position_x()+MARGIN, get_position_y()+MARGIN);
+        paper_icon->draw(get_position_x()+800, get_position_y()- MARGIN);
+        paper_text->draw(get_position_x()+840, get_position_y()+MARGIN);
+        stage_text->draw(get_position_x()+400, get_position_y()+MARGIN);
 }
 
 void Header::updatePaperQuantity(int new_value) {
@@ -56,16 +56,16 @@ Text* Header::convertToText(int new_value) {
 void Header::verifySelect() {
         switch(alien_select) {
         case 0:
-                animator->setInterval("none");
+                animator->set_interval("none");
                 break;
         case 1:
-                animator->setInterval("Etemer");
+                animator->set_interval("Etemer");
                 break;
         case 2:
-                animator->setInterval("Etbilu");
+                animator->set_interval("Etbilu");
                 break;
         case 3:
-                animator->setInterval("Etvarginha");
+                animator->set_interval("Etvarginha");
                 break;
         default:
                 // Nothing to do.

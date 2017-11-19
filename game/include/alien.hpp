@@ -24,8 +24,8 @@ public:
     bool isInPosition();
 
 protected:
-    void walkInX(double & inc_x);
-    void walkInY(double & inc_y, double inc_x);
+    void walk_in_x(double & inc_x);
+    void walk_in_y(double & inc_y, double inc_x);
     Animation* animator;
     int idle_animation_number; // delcaring variable idle animation number
     std::string alienName;

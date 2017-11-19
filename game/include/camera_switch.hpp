@@ -14,12 +14,12 @@ using namespace engine;
 
 class CameraSwitch: public GameObject{
 public:
-    CameraSwitch(double positionX, double positionY, std::string direction);
+    CameraSwitch(double position_x, double position_y, std::string direction);
     ~CameraSwitch();
-    void update(double timeElapsed);
+    void update(double time_elapsed);
     void draw();
     bool isWorking();
-    void turnOff();
+    void turn_off();
 private:
     Audio* switchEfffect = nullptr;
     Animation* animator = nullptr;

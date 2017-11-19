@@ -50,9 +50,9 @@ Choice::~Choice() {
 */
 void Choice::draw(){
   INFO("TEXT DRAW");
-  sprite->draw(getPositionX(), getPositionY());
+  sprite->draw(get_position_x(), get_position_y());
   if(!unlock){
-    padlock->draw(getPositionX()+ (getWidth()*HALF)*0.8, getPositionY()+ (getHeight()*HALF)*0.8);
+    padlock->draw(get_position_x()+ (get_width()*HALF)*0.8, get_position_y()+ (get_height()*HALF)*0.8);
   }
   button->draw();
   rectangle->draw();
@@ -66,9 +66,9 @@ void Choice::draw(){
 void Choice::update(double timeElapsed){
     assert ( timeElapsed != NULL);
     if(chosen && unlock){
-        rectangle->setEnabled(false);
+        rectangle->set_enabled(false);
     }else{
-        rectangle->setEnabled(true);
+        rectangle->set_enabled(true);
     }
     rectangle->update(timeElapsed);
     INFO("update Choice ");

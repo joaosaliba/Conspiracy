@@ -18,7 +18,7 @@ public:
     Text * getText();
 
 private:
-    void update(double timeElapsed); // update button during time
+    void update(double time_elapsed); // update button during time
 
 protected:
     Text * text = nullptr;

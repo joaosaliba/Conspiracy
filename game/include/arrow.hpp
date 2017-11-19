@@ -14,7 +14,7 @@ public:
 
     Animation * getAnimation(); // make animation in the arrow
 private:
-  void update(double timeElapsed); // update arrow during time
+  void update(double time_elapsed); // update arrow during time
   void draw();
   void init();
 protected:

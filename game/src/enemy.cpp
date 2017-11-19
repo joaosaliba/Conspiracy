@@ -1,9 +1,9 @@
 #include "enemy.hpp"
 
-Enemy::Enemy(std::string objectName, double positionX, double positionY,
+Enemy::Enemy(std::string objectName, double position_x, double position_y,
                                      int width, int height) : GameObject(objectName,
-                                                                         positionX,
-                                                                         positionY,
+                                                                         position_x,
+                                                                         position_y,
                                                                          width, height){
 }
 

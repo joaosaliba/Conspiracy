@@ -106,7 +106,7 @@ int Animation::getCurrentPositionFrame(){
     return currentPositionFrame;
 }
 
-void Animation::setInterval(std::string action){
+void Animation::set_interval(std::string action){
     currentAction = action;
     if(action != interval.first){
         startTime = SDL_GetTicks();
@@ -117,7 +117,7 @@ void Animation::setInterval(std::string action){
         INFO("ACTION: " << action << currentPositionFrame);
     }
 }
-void Animation::setTotalTime(double newTotalTime){
+void Animation::set_total_time(double newTotalTime){
     totalTime = newTotalTime;
 }
 
@@ -131,7 +131,7 @@ std::pair<std::string, std::pair<int, int>> Animation::getInterval(){
     return interval;
 }
 
-void Animation::addAction(std::string name_action, int initial, int last){
+void Animation::add_action(std::string name_action, int initial, int last){
   list_actions[name_action] = std::pair<int, int>(initial, last);
 }
 

@@ -14,12 +14,12 @@ using namespace engine;
 
 class Guard: public Enemy{
 public:
-    Guard(std::string objectName, double positionX, double positionY, int width, int height, std::string initialDirection, int newQuantityRepeatWay, double newWaitingTime);
+    Guard(std::string objectName, double position_x, double position_y, int width, int height, std::string initialDirection, int newQuantityRepeatWay, double newWaitingTime);
     ~Guard();
 
     void addWay(int key, std::pair<std::string, int> way);
     void setWayActive(bool isActive);
-    void verifyDistance(GameObject* alien);
+    void verify_distance(GameObject* alien);
     void talkingToETemer(std::string status);
     void notTalkingToETemer();
     double getTalkingBarPercent();
@@ -29,17 +29,17 @@ public:
     FieldOfVision* getFieldOfVision();
     std::pair<std::pair<int,int>,std::pair<int,int>> getLine();
 private:
-    void update(double timeElapsed);
+    void update(double time_elapsed);
     void draw();
-    void walkInX(double & incX);
-    void walkInY(double & incY);
-    void walkInXSpecial(double & incX);
-    void walkInYSpecial(double & incY);
+    void walk_in_x(double & inc_x);
+    void walk_in_y(double & inc_y);
+    void walk_in_xSpecial(double & inc_x);
+    void walk_in_ySpecial(double & inc_y);
     void selectLine();
-    void specialAction();
+    void special_action();
     void verifyDeadLockHorizontal();
     void verifyDeadLockVertical();
-    void stop(double &incX, double &incY);
+    void stop(double &inc_x, double &inc_y);
     void nextWay();
     int idle_animation_number;
     int wayActual;

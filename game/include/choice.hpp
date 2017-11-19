@@ -13,9 +13,9 @@ using namespace engine;
 
 class Choice: public GameObject{
 public:
-    Choice(std::string objectName, double positionX, double positionY, int width, int height, std::string title, int sizeTitle);
+    Choice(std::string objectName, double position_x, double position_y, int width, int height, std::string title, int sizeTitle);
     ~Choice();
-    void update(double timeElapsed);
+    void update(double time_elapsed);
     void setTextColor(Color * newTextColor);
     void setBackgroundColor(Color * newBackgroundColor);
     void setChosen(bool isChosen);

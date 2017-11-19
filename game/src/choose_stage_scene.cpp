@@ -70,7 +70,7 @@ void ChooseStageScene::load(){
 }
 
 void ChooseStageScene::selectAction(){
-        if(InputManager::instance.isKeyTriggered(InputManager::KeyPress::KEY_PRESS_LEFT)) {
+        if(InputManager::instance.is_key_triggered(InputManager::KeyPress::KEY_PRESS_LEFT)) {
                 soundEffect->pause();
                 soundEffect->play(0);
                 selectButton--;
@@ -78,7 +78,7 @@ void ChooseStageScene::selectAction(){
                         selectButton = MAX_CHOICE;
                 }
         }
-        else if(InputManager::instance.isKeyTriggered(InputManager::KeyPress::KEY_PRESS_RIGHT)) {
+        else if(InputManager::instance.is_key_triggered(InputManager::KeyPress::KEY_PRESS_RIGHT)) {
                 soundEffect->pause();
                 soundEffect->play(0);
                 selectButton++;
@@ -87,7 +87,7 @@ void ChooseStageScene::selectAction(){
                 }
         }
 
-        if(InputManager::instance.isKeyTriggered(InputManager::KeyPress::KEY_PRESS_ENTER)) {
+        if(InputManager::instance.is_key_triggered(InputManager::KeyPress::KEY_PRESS_ENTER)) {
                 switch(selectButton) {
                   case 0:
                           getSceneManager()->loadScene(0);

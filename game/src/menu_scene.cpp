@@ -46,7 +46,7 @@ void MenuScene::update(double timeElapsed){
 }
 
 void MenuScene::selectAction(){
-        if(InputManager::instance.isKeyTriggered(InputManager::KeyPress::KEY_PRESS_UP)) {
+        if(InputManager::instance.is_key_triggered(InputManager::KeyPress::KEY_PRESS_UP)) {
                 buttonEffect->pause();
                 buttonEffect->play(0);
                 selectButton--;
@@ -54,7 +54,7 @@ void MenuScene::selectAction(){
                         selectButton = 3;
                 }
         }
-        else if(InputManager::instance.isKeyTriggered(InputManager::KeyPress::KEY_PRESS_DOWN)) {
+        else if(InputManager::instance.is_key_triggered(InputManager::KeyPress::KEY_PRESS_DOWN)) {
                 buttonEffect->pause();
                 buttonEffect->play(0);
                 selectButton++;
@@ -63,7 +63,7 @@ void MenuScene::selectAction(){
                 }
         }
 
-        if(InputManager::instance.isKeyTriggered(InputManager::KeyPress::KEY_PRESS_ENTER)) {
+        if(InputManager::instance.is_key_triggered(InputManager::KeyPress::KEY_PRESS_ENTER)) {
                 selectEffect->play(0);
                 switch(selectButton) {
                 case 1:

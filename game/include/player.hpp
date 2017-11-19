@@ -14,10 +14,10 @@ using namespace engine;
 
 class Player: public GameObject{
 public:
-    Player(std::pair<int, int> biluPosition, std::pair<int, int> etemerPosition,
+    Player(std::pair<int, int> bilu_position, std::pair<int, int> etemerPosition,
           std::pair<int,int> varginhaPosition, int paperQuantity, int stageNumber);
     ~Player();
-    void update(double timeElapsed);
+    void update(double time_elapsed);
     void draw();
     bool isDead();
     Alien * getBilu();

@@ -62,16 +62,16 @@ void ProgressBar::update(double time_elapsed){
         percent = 0.0;
     }
 
-    back_rect->x = getPositionX();
-    back_rect->y = getPositionY();
+    back_rect->x = get_position_x();
+    back_rect->y = get_position_y();
 
-    pw = (int)((double)getWidth() * percent);
-    px = getPositionX() + (getWidth() - pw);
+    pw = (int)((double)get_width() * percent);
+    px = get_position_x() + (get_width() - pw);
 
     front_rect->x = px;
-    front_rect->y = getPositionY();
+    front_rect->y = get_position_y();
     front_rect->w = pw;
-    front_rect->h = getHeight();
+    front_rect->h = get_height();
     percent -= progress_increment;
 }
 

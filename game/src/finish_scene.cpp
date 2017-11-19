@@ -13,8 +13,8 @@ FinishScene::FinishScene(int id) : Scene(id){
     soundEffect = new Audio("assets/sounds/SELECT6.wav", "EFFECT", 100);
     backgroundSound = new Audio("assets/sounds/FINAL.wav", "MUSIC", 50);
     background = new Animation("assets/sprites/finish.png", 1, 1, 0.8);
-    background->addAction("finish", 0,0);
-    background->setInterval("finish");
+    background->add_action("finish", 0,0);
+    background->set_interval("finish");
 }
 
 FinishScene::~FinishScene(){
@@ -28,7 +28,7 @@ void FinishScene::draw(){
         }
 }
 
-void FinishScene::update(double timeElapsed){
+void FinishScene::update(double time_elapsed){
         selectAction();
 
         background->update();
@@ -42,7 +42,7 @@ void FinishScene::update(double timeElapsed){
                         }
                 }
 
-                (*gameObject.second).update(timeElapsed);
+                (*gameObject.second).update(time_elapsed);
         }
 }
 
@@ -54,7 +54,7 @@ void FinishScene::load(){
 }
 
 void FinishScene::selectAction(){
-        if(InputManager::instance.isKeyTriggered(InputManager::KeyPress::KEY_PRESS_ENTER)) {
+        if(InputManager::instance.is_key_triggered(InputManager::KeyPress::KEY_PRESS_ENTER)) {
                 switch(selectButton) {
                 case 1:
                         getSceneManager()->loadScene(0);

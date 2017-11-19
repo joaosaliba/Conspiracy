@@ -16,5 +16,5 @@ void Ground::update(double time_elapsed){
 }
 
 void Ground::draw(){
-    animator->draw_instant(getPositionX(), getPositionY());
+    animator->draw_instant(get_position_x(), get_position_y());
 }

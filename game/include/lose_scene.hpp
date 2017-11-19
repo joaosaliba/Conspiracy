@@ -18,7 +18,7 @@ public:
     ~LoseScene();
     void load();
     void draw();
-    void update(double timeElapsed);
+    void update(double time_elapsed);
     void unload();
 private:
     void selectAction();

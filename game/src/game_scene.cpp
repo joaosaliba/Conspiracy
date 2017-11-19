@@ -199,7 +199,7 @@ void GameScene::playerIsDead(){
     }
 
     //Verifies winning conditions
-    }else if((all_papers_edited && aliens_in_position) || (InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_K) && skip_timer->total_elapsed_time() >= WIN_TIME)){
+    }else if((all_papers_edited && aliens_in_position) || (InputManager::instance.is_key_pressed(InputManager::KeyPress::KEY_PRESS_K) && skip_timer->total_elapsed_time() >= WIN_TIME)){
         //Loads winning scene
         if(getSceneManager()->get_current_scene_id() == 5){
             getSceneManager()->loadScene(9);
@@ -229,9 +229,9 @@ void GameScene::verifyWinOrLose(){
         std::vector<Guard *> guards;
         //Verifies if the aliens were detected
         for(Guard * guard : guards) {
-            guard->verifyDistance(player->getVarginha());
-            guard->verifyDistance(player->getBilu());
-            ((Etemer *)(player->getEtemer()))->verifyDistance(guard);
+            guard->verify_distance(player->getVarginha());
+            guard->verify_distance(player->getBilu());
+            ((Etemer *)(player->getEtemer()))->verify_distance(guard);
         }
   }
 

@@ -17,7 +17,7 @@ public:
     ~Line();
     std::pair<double,double> getPoint1();
     std::pair<double,double> getPoint2();
-    void updatePosition(double incX, double incY);
+    void updatePosition(double inc_x, double inc_y);
     void setPoint1(double x, double y);
     void setPoint2(double x, double y);
     double getAngle();

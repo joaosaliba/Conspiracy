@@ -20,7 +20,7 @@ public:
     CameraLever* getCameraLever();
     CameraSwitch* getCameraSwitch();
 private:
-  void update(double timeElapsed);
+  void update(double time_elapsed);
   void draw();
     Camera* camera = nullptr; // creat a objecte from camera
     CameraSwitch* camera_switch = nullptr;// creat a objecte from camera_switch

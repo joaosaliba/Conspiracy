@@ -1,10 +1,10 @@
 #include "table.hpp"
 #include "log.h"
 
-Table::Table(std::string objectName, double positionX, double positionY,
+Table::Table(std::string objectName, double position_x, double position_y,
                                      int width, int height) : GameObject(objectName,
-                                                                         positionX,
-                                                                         positionY,
+                                                                         position_x,
+                                                                         position_y,
                                                                          width, height){
 animator = new Animation(objectName, 1, 1, 0.5);
 }
@@ -19,7 +19,7 @@ void Table::update(double timeElapsed){
 }
 
 void Table::draw(){
-    animator->draw(getPositionX(), (getPositionY() - 10));
-    animator->draw_collider(getPositionX(), getPositionY(), getWidth(), getHeight());
+    animator->draw(get_position_x(), (get_position_y() - 10));
+    animator->draw_collider(get_position_x(), get_position_y(), get_width(), get_height());
 
 }

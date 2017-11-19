@@ -12,9 +12,9 @@ using namespace engine;
 
 class PaperTable: public GameObject{
 public:
-    PaperTable(std::string objectName, double positionX, double positionY, int width, int height);
+    PaperTable(std::string objectName, double position_x, double position_y, int width, int height);
     ~PaperTable();
-    void update(double timeElapsed);
+    void update(double time_elapsed);
     void draw();
     void init();
     Animation * getAnimation();

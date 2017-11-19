@@ -2,12 +2,12 @@
 #include "player.hpp"
 using namespace engine;
 
-Player::Player(std::pair<int, int> biluPosition, std::pair<int, int> etemerPosition,
+Player::Player(std::pair<int, int> bilu_position, std::pair<int, int> etemerPosition,
                std::pair<int,int> varginhaPosition, int paperQuantity, int stageNumber){
 
         exclamationAnimation = new Animation("assets/sprites/exclamation2.png",1, 1, 0.5);
 
-        bilu = new Bilu(biluPosition.first, biluPosition.second);
+        bilu = new Bilu(bilu_position.first, bilu_position.second);
         varginha = new Varginha(varginhaPosition.first, varginhaPosition.second);
         etemer = new Etemer(etemerPosition.first, etemerPosition.second);
         header = new Header(0,0, paperQuantity, stageNumber);
@@ -31,16 +31,16 @@ Player::Player(std::pair<int, int> biluPosition, std::pair<int, int> etemerPosit
 Player::~Player(){
 }
 
-void Player::update(double timeElapsed){
+void Player::update(double time_elapsed){
         int beforeAlien = selectedAlien;
 
-        if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_ONE)) {
+        if(InputManager::instance.is_key_pressed(InputManager::KeyPress::KEY_PRESS_ONE)) {
                 selectedAlien = 1;
-        } else if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_TWO)) {
+        } else if(InputManager::instance.is_key_pressed(InputManager::KeyPress::KEY_PRESS_TWO)) {
                 selectedAlien = 2;
-        } else if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_THREE)) {
+        } else if(InputManager::instance.is_key_pressed(InputManager::KeyPress::KEY_PRESS_THREE)) {
                 selectedAlien = 3;
-                ((Varginha *)(varginha))->setDefault();
+                ((Varginha *)(varginha))->set_default();
         }
 
         if(beforeAlien != selectedAlien) {
@@ -59,10 +59,10 @@ void Player::update(double timeElapsed){
 
         exclamationAnimation->update();
 
-        etemer->update(timeElapsed);
-        bilu->update(timeElapsed);
-        varginha->update(timeElapsed);
-        header->update(timeElapsed);
+        etemer->update(time_elapsed);
+        bilu->update(time_elapsed);
+        varginha->update(time_elapsed);
+        header->update(time_elapsed);
 }
 
 void Player::draw(){
@@ -92,24 +92,24 @@ void Player::waitAnimation(int beforeAlien){
 
 void Player::idleAnimation(Alien * alien){
         if(alien->getAnimation()->getInterval().first == "right") {
-                alien->getAnimation()->setInterval("idle_right");
+                alien->getAnimation()->set_interval("idle_right");
         } else if(alien->getAnimation()->getInterval().first == "left") {
-                alien->getAnimation()->setInterval("idle_left");
+                alien->getAnimation()->set_interval("idle_left");
         } else if(alien->getAnimation()->getInterval().first == "up") {
-                alien->getAnimation()->setInterval("idle_up");
+                alien->getAnimation()->set_interval("idle_up");
         }else if(alien->getAnimation()->getInterval().first == "down") {
-                alien->getAnimation()->setInterval("idle_down");
+                alien->getAnimation()->set_interval("idle_down");
         }
 }
 bool Player::isDead(){
         if(!varginha->isEnabled()) {
-                exclamationAnimation->draw(varginha->getPositionX()-5, varginha->getPositionY()-40);
+                exclamationAnimation->draw(varginha->get_position_x()-5, varginha->get_position_y()-40);
                 return true;
         }else if(!bilu->isEnabled()) {
-            exclamationAnimation->draw(bilu->getPositionX(), bilu->getPositionY()-40);
+            exclamationAnimation->draw(bilu->get_position_x(), bilu->get_position_y()-40);
                 return true;
         }else if(!etemer->isEnabled()) {
-            exclamationAnimation->draw(etemer->getPositionX(), etemer->getPositionY()-40);
+            exclamationAnimation->draw(etemer->get_position_x(), etemer->get_position_y()-40);
                 return true;
         }
         return false;

@@ -11,19 +11,19 @@ using namespace engine;
 
 class CollisionManager{
 public:
-    bool verifyCollisionWithWalls(GameObject* game_object);
-    bool verifyCollisionWithWallsAndChairs(GameObject* game_object);
-    bool verifyCollisionWithGuards(GameObject* game_object);
-    bool verifyCollisionWithCameras(GameObject* game_object);
-    bool verifyCollisionWithOtherChairs(GameObject* game_object);
-    GameObject* verifyCollisionWithPapers(GameObject* game_object);
-    GameObject* verifyCollisionWithSwitches(GameObject* game_object);
-    GameObject* verifyCollisionWithCameraSwitches(GameObject* game_object);
-    GameObject* verifyCollisionWithCameraLevers(GameObject* game_object);
-    GameObject* verifyCollisionWithFinishPoints(GameObject* game_object);
-    bool verifyCollision(GameObject* game_object_collision, GameObject* game_object_collision2);
-    std::pair<std::string, GameObject *> verifyCollisionWithChairs(GameObject* game_object_collision);
-    std::string verifyCollisionChair(GameObject* game_object_collision, GameObject* game_object_collision2);
+    bool verify_collisionWithWalls(GameObject* game_object);
+    bool verify_collisionWithWallsAndChairs(GameObject* game_object);
+    bool verify_collision_with_guards(GameObject* game_object);
+    bool verify_collision_with_cameras(GameObject* game_object);
+    bool verify_collisionWithOtherChairs(GameObject* game_object);
+    GameObject* verify_collision_with_papers(GameObject* game_object);
+    GameObject* verify_collision_with_switches(GameObject* game_object);
+    GameObject* verify_collision_with_camera_switches(GameObject* game_object);
+    GameObject* verify_collision_with_camera_levers(GameObject* game_object);
+    GameObject* verify_collision_with_finish_points(GameObject* game_object);
+    bool verify_collision(GameObject* game_object_collision, GameObject* game_object_collision2);
+    std::pair<std::string, GameObject *> verify_collisionWithChairs(GameObject* game_object_collision);
+    std::string verify_collisionChair(GameObject* game_object_collision, GameObject* game_object_collision2);
     void addWall(GameObject* game_object);
     void addGuard(GameObject* game_object);
     void addPaper(GameObject* game_object);
@@ -36,13 +36,13 @@ public:
     void addCameraLever(GameObject* game_object);
     void addFinishPoint(GameObject* game_object);
     void resetLists();
-    bool verifyCollisionWithGuardsBody(GameObject* game_object);
+    bool verify_collision_with_guardsBody(GameObject* game_object);
     static CollisionManager instance;
 private:
     double CCW(std::pair<int, int> line_a, std::pair<int, int> line_b, std::pair<int, int> line_c);
     bool verifyLineCollisionWithLine(std::pair<int, int> line_a, std::pair<int, int> line_b, std::pair<int, int> line_c, std::pair<int, int> line_d);
     bool verifyRectangleCollisionWithLine(GameObject* game_object, std::pair<int, int> line_a, std::pair<int, int> line_b);
-    bool verifyCollisionWithFieldsOfVision(GameObject*game_object_collision, std::vector<FieldOfVision*> fields);
+    bool verify_collisionWithFieldsOfVision(GameObject*game_object_collision, std::vector<FieldOfVision*> fields);
     std::vector<GameObject*> wallList;
     std::vector<GameObject*> guardList;
     std::vector<FieldOfVision*> guardsVision;

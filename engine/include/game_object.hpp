@@ -22,21 +22,21 @@ namespace engine{
         virtual void update(double time_elapsed) = 0;
 
         std::string getName();
-        double getPositionX();
-        double getPositionY();
-        int getWidth();
-        int getHeight();
+        double get_position_x();
+        double get_position_y();
+        int get_width();
+        int get_height();
         std::pair<double,double> getCenter();
         bool isEnabled();
         bool isVisible();
 
         void setName(std::string object_new_name);
-        void setPositionX(double object_new_position);
-        void setPositionY(double object_new_position);
+        void setposition_x(double object_new_position);
+        void setposition_y(double object_new_position);
         void setWidth(int object_new_width);
         void setHeight(int object_new_height);
-        void setEnabled(bool param_enabled);
-        void setVisible(bool param_visible);
+        void set_enabled(bool param_enabled);
+        void set_visible(bool param_visible);
 
     private:
         std::string name;

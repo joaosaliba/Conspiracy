@@ -11,13 +11,13 @@ using namespace engine;
 
 class Camera: public Enemy{
 public:
-    Camera(double positionX, double positionY, std::string direction);
-    Camera(double positionX, double positionY, std::string direction, int angleOfVision, int range, int initialAngle);
+    Camera(double position_x, double position_y, std::string direction);
+    Camera(double position_x, double position_y, std::string direction, int angleOfVision, int range, int initialAngle);
     ~Camera();
-    void update(double timeElapsed);
+    void update(double time_elapsed);
     void draw();
     int getRange();
-    void turnOff();
+    void turn_off();
     bool isTurnedOn();
     void setStates(int angle2, int angle3);
     void changeState(int state);

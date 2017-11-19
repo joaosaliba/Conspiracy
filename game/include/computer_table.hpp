@@ -12,9 +12,9 @@ using namespace engine;
 
 class ComputerTable: public GameObject{
 public:
-    ComputerTable(std::string objectName, double positionX, double positionY, int width, int height);
+    ComputerTable(std::string objectName, double position_x, double position_y, int width, int height);
     ~ComputerTable();
-    void update(double timeElapsed);// update the "computer" during the time
+    void update(double time_elapsed);// update the "computer" during the time
     void draw(); // show the table draw
     void init();
     Animation * getAnimation();

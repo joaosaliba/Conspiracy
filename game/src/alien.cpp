@@ -15,14 +15,14 @@ Alien::Alien(std::string objectName, double position_x, double position_y,
     }
     animator = new Animation(objectName, 2, 10, 0.5);
 
-    animator->addAction("right",6,9);
-    animator->addAction("left",1,4);
-    animator->addAction("up",6,9);
-    animator->addAction("down",1,4);
-    animator->addAction("idle_right",5,5);
-    animator->addAction("idle_left",0,0);
-    animator->addAction("idle_up",5,5);
-    animator->addAction("idle_down",0,0);
+    animator->add_action("right",6,9);
+    animator->add_action("left",1,4);
+    animator->add_action("up",6,9);
+    animator->add_action("down",1,4);
+    animator->add_action("idle_right",5,5);
+    animator->add_action("idle_left",0,0);
+    animator->add_action("idle_up",5,5);
+    animator->add_action("idle_down",0,0);
 
     idle_animation_number = 5;
     block_movement = false;
@@ -32,56 +32,56 @@ Alien::Alien(std::string objectName, double position_x, double position_y,
 
 Alien::~Alien() {}
 
-void Alien::walkInX(double & inc_x) {
+void Alien::walk_in_x(double & inc_x) {
 
-    if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_RIGHT)) {
+    if(InputManager::instance.is_key_pressed(InputManager::KeyPress::KEY_PRESS_RIGHT)) {
         inc_x = inc_x;
         idle_animation_number = 5;
-        animator->setInterval("right");
+        animator->set_interval("right");
     }
-    else if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_LEFT)) {
+    else if(InputManager::instance.is_key_pressed(InputManager::KeyPress::KEY_PRESS_LEFT)) {
         //movement_sound_effect->play(-1);
         inc_x = inc_x * (0-1);
         idle_animation_number = 0;
-        animator->setInterval("left");
+        animator->set_interval("left");
     }
     else {
         inc_x = 0;
     }
-    setPositionX(getPositionX()+inc_x);
-    if(CollisionManager::instance.verifyCollisionWithWallsAndChairs(this)) {
-        setPositionX(getPositionX()+(inc_x*(0-1)));
+    setposition_x(get_position_x()+inc_x);
+    if(CollisionManager::instance.verify_collisionWithWallsAndChairs(this)) {
+        setposition_x(get_position_x()+(inc_x*(0-1)));
     }
 }
 
-void Alien::walkInY(double & inc_y, double inc_x) {
+void Alien::walk_in_y(double & inc_y, double inc_x) {
 
-    if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_UP)) {
+    if(InputManager::instance.is_key_pressed(InputManager::KeyPress::KEY_PRESS_UP)) {
         inc_y = inc_y * (0-1);
         idle_animation_number = 5;
         if(inc_x == 0){
-            animator->setInterval("up");
+            animator->set_interval("up");
         }
     }
-    else if(engine::InputManager::instance.isKeyPressed(engine::InputManager::KeyPress::KEY_PRESS_DOWN)) {
+    else if(engine::InputManager::instance.is_key_pressed(engine::InputManager::KeyPress::KEY_PRESS_DOWN)) {
         inc_y = inc_y;
         idle_animation_number = 0;
         if(inc_x == 0){
-            animator->setInterval("down");
+            animator->set_interval("down");
         }
     }
     else {
         inc_y = 0;
     }
-    setPositionY(getPositionY()+inc_y);
-    if(CollisionManager::instance.verifyCollisionWithWallsAndChairs(this)) {
-        setPositionY(getPositionY()+(inc_y*(0-1)));
+    setposition_y(get_position_y()+inc_y);
+    if(CollisionManager::instance.verify_collisionWithWallsAndChairs(this)) {
+        setposition_y(get_position_y()+(inc_y*(0-1)));
     }
 }
 
 void Alien::draw() {
     INFO("ALIEN DRAW");
-    animator->draw(getPositionX(), getPositionY());
+    animator->draw(get_position_x(), get_position_y());
 }
 
 Animation * Alien::getAnimation() {

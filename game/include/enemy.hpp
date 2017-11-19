@@ -14,7 +14,7 @@ public:
     Enemy(){};
     Enemy(std::string objectName, double positionX, double positionY, int width, int height);
     virtual ~Enemy();
-    virtual void update(double timeElapsed) = 0;
+    virtual void update(double time_elapsed) = 0;
     virtual void draw() = 0;
 };
 

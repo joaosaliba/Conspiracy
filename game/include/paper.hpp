@@ -18,12 +18,12 @@ public:
     void init();
     Animation * getAnimation();
     void animate();
-    void stopAnimation();
+    void stop_animation();
     bool isEdited();
-    double getEditingBarPercent();
-    void resetEditingProgress();
-    void playEffect();
-    void stopEffect();
+    double get_editing_bar_percent();
+    void reset_editing_progress();
+    void play_effect();
+    void stop_effect();
     void getPercentage();
 protected:
     Animation* animator;

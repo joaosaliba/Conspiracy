@@ -10,8 +10,8 @@
 
 /**
  *    @brief door_system object constructor.
- *    @param[in] positionX it sets the x coordinate of the object.
- *    @param[in] positionY it sets the y coordinate of the object.
+ *    @param[in] position_x it sets the x coordinate of the object.
+ *    @param[in] position_y it sets the y coordinate of the object.
  *    @param[in] width it sets the width dimension of the object.
  *    @param[in] height it sets the height dimension of the object.
  *    @param[in] objectName set the name of the object
@@ -55,9 +55,9 @@ void DoorSystem::update(double timeElapsed){
     computerTable->update(timeElapsed);
     if(!computerTable->getDoorSwitch()->isEnabled() && !door->isOpen()){
         door->setOpen(true);
-        door->playEffect();
+        door->play_effect();
         if(door->getDoorSide().compare("DOWN") == 0){
-            door->setEnabled(false);
+            door->set_enabled(false);
         }else{
             door->setHeight(25);
         }

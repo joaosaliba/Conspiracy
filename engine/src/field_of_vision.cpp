@@ -97,6 +97,6 @@ int FieldOfVision::getRange(){
     return range;
 }
 
-void FieldOfVision::playEffect(){
+void FieldOfVision::play_effect(){
     catch_effect->play(0);
 }

@@ -20,7 +20,7 @@ public:
     void setDirection(std::string currentDirection);
 
 private:
-  void update(double timeElapsed);
+  void update(double time_elapsed);
   void draw();
     void init();
 protected:
