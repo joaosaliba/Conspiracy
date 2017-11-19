@@ -2,6 +2,7 @@
 #define ALIEN_VARGINHA_HPP
 
 #include "alien.hpp"
+#include "log.h"
 #include "camera_switch.hpp"
 #include "camera_lever.hpp"
 #include "timer.hpp"

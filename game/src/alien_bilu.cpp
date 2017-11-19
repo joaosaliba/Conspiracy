@@ -119,6 +119,8 @@ void Bilu::update(double time_elapsed) {
     check_final_position(finish_point,in_position);
 
     animator->update();
+
+    INFO("Bilu update ok");
 }
 
 /**
