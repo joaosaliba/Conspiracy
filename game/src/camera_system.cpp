@@ -60,6 +60,7 @@ void CameraSystem::draw(){
 *    @param[in] timeElapsed its about the time
 */
 void CameraSystem::update(double timeElapsed){
+  assert(last_lever_state > –2147483648 || last_lever_state < 2147483648);
     camera->update(timeElapsed);
     camera_switch->update(timeElapsed);
     if(camera_lever != NULL){
@@ -84,20 +85,7 @@ void CameraSystem::update(double timeElapsed){
     INFO("update CameraSystem");
 }
 
-/**
- *   @brief   get the actual camera system
- *   @return camera
- */
-Camera* CameraSystem::getCamera(){
-  if (camera == NULL){
-    ERROR("Failed to start window manager");
-      exit(-1);
-  }
-  else{
-    return camera;
-  }
-  INFO("getCamera CameraSystem");
-}
+
 /**
  *   @brief get the actual camera system
  *   @return camera switch
@@ -113,6 +101,21 @@ CameraSwitch* CameraSystem::getCameraSwitch(){
   }
   INFO("Get System in CameraSystem");
 }
+/**
+ *   @brief   get the actual camera system
+ *   @return camera
+ */
+Camera* CameraSystem::getCamera(){
+  if (camera == NULL){
+    ERROR("Failed to start window manager");
+      exit(-1);
+  }
+  else{
+    return camera;
+  }
+  INFO("getCamera CameraSystem");
+}
+
 /**
  *   @brief  get the actual camera lever
  *   @return camera

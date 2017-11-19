@@ -64,19 +64,7 @@ void DoorSystem::update(double timeElapsed){
     }
 }
 
-/**
- *   @brief get the way that the door be
- *   @return door
- */
-GameObject* DoorSystem::getDoor(){
-  if ( door == NULL){
-    ERROR("Failed to start window manager");
-      exit(-1);
-  }
-  else{
-    return door;
-  }
-}
+
 /**
  *   @brief get the actual way that the switch are
  *   @return computerTable->getDoorSwitch();
@@ -88,6 +76,19 @@ GameObject* DoorSystem::getSwitch(){
   }
   else{
     return computerTable->getDoorSwitch();
+  }
+}
+/**
+ *   @brief get the way that the door be
+ *   @return door
+ */
+GameObject* DoorSystem::getDoor(){
+  if ( door == NULL){
+    ERROR("Failed to start window manager");
+      exit(-1);
+  }
+  else{
+    return door;
   }
 }
 /**

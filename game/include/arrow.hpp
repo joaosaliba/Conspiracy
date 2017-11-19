@@ -11,10 +11,12 @@ class Arrow: public GameObject{
 public:
     Arrow(std::string arrow_name, double arrow_position_x, double arrow_position_y, int arrow_width, int arrow_height);
     ~Arrow();
-    void update(double timeElapsed); // update arrow during time
-    void draw();
-    void init();
+
     Animation * getAnimation(); // make animation in the arrow
+private:
+  void update(double timeElapsed); // update arrow during time
+  void draw();
+  void init();
 protected:
     Animation* animator = nullptr;
 };

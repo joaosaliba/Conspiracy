@@ -17,11 +17,12 @@ class WinScene: public Scene{
 public:
     WinScene(int id);
     ~WinScene();
-    void load();
-    void draw();
-    void update(double timeElapsed);
-    void unload();
+
 private:
+  void load();
+  void draw();
+  void update(double timeElapsed);
+  void unload();
     void selectAction();
     int selectButton;
     std::vector<std::pair<int, GameObject*>> gameObjectsList;

@@ -59,21 +59,8 @@ void Button::update(double timeElapsed) {
        INFO("Update Button");
 }
 
-/**
-*   @brief get a text for the button in the game
-*   @return text
-*/
 
-Text * Button::getText() {
-  if (text == NULL){
-    ERROR("Failed to start window manager");
-      exit(-1);
-  }
-  else{
-    return text;
-  }
-         INFO("Get Text Button");
-}
+
 /**
  *   @brief set a text Color for the button in the game
  *   @return void
@@ -82,4 +69,17 @@ Text * Button::getText() {
 void Button::setTextColor(Color * newTextColor) {
     text->setTextColor(newTextColor);
            INFO("Set Text Collor Button");
+}
+
+
+/**
+*   @brief get a text for the button in the game
+*   @return text
+*/
+
+Text * Button::getText() {
+
+    return text;
+  
+         INFO("Get Text Button");
 }

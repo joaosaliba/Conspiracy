@@ -76,6 +76,16 @@ void Chair::update(double timeElapsed){
 }
 
 
+/**
+ *   @brief if player are move the chair call this function
+ *   @return void
+ */
+void Chair::setMoving(bool chair_move){
+        assert ( chair_move != NULL);
+        isMoving = chair_move;
+        INFO("Set chair movement");
+}
+
 
 /**
  *   @brief set a  new position for the chair in the x plan
@@ -125,15 +135,6 @@ void Chair::moveInY(double move_chair_in_y){
                 setPositionY(getPositionY()+(move_chair_in_y*(0-1)));
         }
         INFO("move chair in Y");
-}
-/**
- *   @brief if player are move the chair call this function
- *   @return void
- */
-void Chair::setMoving(bool chair_move){
-        assert ( chair_move != NULL);
-        isMoving = chair_move;
-        INFO("Set chair movement");
 }
 /**
  *   @brief when move the chair set the correct direction that it was moved

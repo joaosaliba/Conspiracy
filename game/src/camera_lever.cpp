@@ -51,13 +51,9 @@ void CameraLever::draw(){
 */
 void CameraLever::update(double timeElapsed){
     assert ( timeElapsed != NULL);
-    if (timeElapsed == NULL){
-      ERROR("Failed to start window manager");
-        exit(-1);
-    }
-    else{
+
       timeElapsed = timeElapsed;
-    }
+
     animator->update();
      INFO("Update CameraLever");
 }
@@ -66,13 +62,11 @@ void CameraLever::update(double timeElapsed){
  *   @return [int] state
  */
 int CameraLever::getState(){
-  if (state == NULL){
-    ERROR("Failed to start window manager");
-      exit(-1);
-  }
-  else{
+  // verify limits of int
+  assert(state > –2147483648 || state < 2147483648);
+
     return state;
-  }
+  
    INFO("Get State CameraLever");
 }
 /**
@@ -80,6 +74,9 @@ int CameraLever::getState(){
  *   @return void
  */
 void CameraLever::nextState(){
+  // verify int limits
+    assert(state > –2147483648 || state < 2147483648);
+    assert(stateInc > –2147483648 || stateInc < 2147483648);
     if(state >= 2 || state <= 0){
         stateInc *= -1;
     }

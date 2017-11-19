@@ -13,12 +13,16 @@ class Chair: public GameObject{
 public:
     Chair(std::string chair_name, double chair_position_x, double chair_position_y, int chair_width, int chair_height);
     ~Chair();
-    void update(double timeElapsed);
-    void draw();
-    void init();
+
+
     Animation * getAnimation();
     void setMoving(bool move);
     void setDirection(std::string currentDirection);
+
+private:
+  void update(double timeElapsed);
+  void draw();
+    void init();
 protected:
     Timer* audioTimer = nullptr;
     Audio* chairEffect = nullptr;

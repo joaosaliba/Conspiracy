@@ -15,12 +15,13 @@ public:
     CameraSystem(Camera* camera, CameraSwitch* camera_switch);
     CameraSystem(Camera* camera, CameraSwitch* camera_switch, CameraLever* camera_lever);
     ~CameraSystem();
-    void update(double timeElapsed);
-    void draw();
+
     Camera* getCamera();
     CameraLever* getCameraLever();
     CameraSwitch* getCameraSwitch();
 private:
+  void update(double timeElapsed);
+  void draw();
     Camera* camera = nullptr; // creat a objecte from camera
     CameraSwitch* camera_switch = nullptr;// creat a objecte from camera_switch
     CameraLever* camera_lever = nullptr; // creat a objecte from camera_lever
