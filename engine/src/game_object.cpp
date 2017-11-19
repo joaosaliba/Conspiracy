@@ -133,6 +133,7 @@ void GameObject::setName(std::string object_new_name){
     INFO("Setting object name");
     assert(object_new_name != NULL);
     name = object_new_name;
+    assert ( name > -2147483648 || name < 2147483648);
 }
 
 /**
@@ -144,6 +145,7 @@ void GameObject::setPositionX(double object_new_x){
     INFO("Setting object x coordinate");
     assert(object_new_x != NULL);
     position.first = object_new_x;
+    assert ( position.first > -2147483648 || position.first < 2147483648);
 }
 
 /**
@@ -159,6 +161,7 @@ std::pair<double,double> GameObject::getCenter(){
     center.first = (position.first + size.first/HALF);
     center.second = (position.second + size.second/HALF);
     return center;
+    assert ( center > -2147483648 || center < 2147483648);
 }
 
 /**
@@ -170,6 +173,7 @@ void GameObject::setPositionY(double object_new_y){
     INFO("Setting object y coordinate");
     assert(object_new_y != NULL);
     position.second = object_new_y;
+    assert ( position.second > -2147483648 || position.second < 2147483648);
 }
 
 /**
@@ -181,6 +185,7 @@ void GameObject::setWidth(int object_new_width){
     INFO("Getting object width dimension");
     assert(object_new_width != NULL);
     size.first = object_new_width;
+    assert ( size.first > -2147483648 || size.first < 2147483648);
 }
 
 /**
@@ -192,6 +197,7 @@ void GameObject::setHeight(int object_new_height){
     INFO("Setting object height dimension");
     assert(object_new_height != NULL);
     size.second = object_new_height;
+    assert ( size.second > -2147483648 || size.second < 2147483648);  
 }
 
 /**
