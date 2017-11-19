@@ -31,15 +31,6 @@ public:
     GameScene(int id, std::string new_tiled_file);
     GameScene(int id, std::string new_tiled_file, std::string music);
     ~GameScene();
-    void load();
-    void draw();
-    void update(double time_elapsed);
-    void unload();
-    void verifyWinOrLose();
-    void verifyPapers();
-    void allPapersEdited();
-    void aliensInPosition();
-    void playerIsDead();
 protected:
     Player* player;
     Audio* background_music;
@@ -60,6 +51,16 @@ protected:
     void createGameBorders();
     void createGround();
     virtual void createChairs();
+private:
+    void load();
+    void draw();
+    void update(double time_elapsed);
+    void unload();
+    void verifyWinOrLose();
+    void verifyPapers();
+    void allPapersEdited();
+    void aliensInPosition();
+    void playerIsDead();
 };
 
 #endif

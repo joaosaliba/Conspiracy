@@ -13,6 +13,13 @@ class Paper: public GameObject{
 public:
     Paper(std::string object_name, double paper_position_x, double paper_position_y, int paper_width, int paper_height);
     ~Paper();
+protected:
+    Animation* animator;
+    ProgressBar *paper_editing_bar;
+    bool paper_edited;
+    bool paper_is_being_edited;
+    Audio* paper_editing_sound;
+private:
     void update(double time_elapsed);
     void draw();
     void init();
@@ -25,12 +32,6 @@ public:
     void playEffect();
     void stopEffect();
     void getPercentage();
-protected:
-    Animation* animator;
-    ProgressBar *paper_editing_bar;
-    bool paper_edited;
-    bool paper_is_being_edited;
-    Audio* paper_editing_sound;
 };
 
 #endif
