@@ -20,20 +20,20 @@ namespace engine{
         FieldOfVision(double x, double y, int range, double total_angle);
         ~FieldOfVision();
 
-        void update_center(double x, double y);
+        void updateCenter(double x, double y);
         void draw();
 
-        int get_range();
+        int getRange();
 
 
-        int get_angle();
-        void set_angle(double angle);
-        void increment_angle(double angle_increment);
+        int getAngle();
+        void setAngle(double angle);
+        void incrementAngle(double angle_increment);
 
-        bool is_active();
+        bool isActive();
         void deactivate();
 
-        std::vector<Line*> get_lines();
+        std::vector<Line*> getLines();
 
         void play_effect();
     private:
@@ -41,13 +41,13 @@ namespace engine{
 
         bool active;
         int number_of_lines;
-        
+
         std::pair<double,double> center;
         Line* center_line;
         std::vector<Line*> lines;
 
-        void reset_lines();
-        void create_lines(double x, double y, int range);
+        void resetLines();
+        void createLines(double x, double y, int range);
 
         int range;
         double total_angle;

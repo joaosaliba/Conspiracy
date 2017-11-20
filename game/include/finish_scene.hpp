@@ -1,5 +1,5 @@
 /**
- * @file finish_scene.cpp
+ * @file finish_scene.hpp
  * @brief class to object of finish_scene, where you can find some values, files,
  * others objects used in this class and methods to the same.
  * @copyright  GNU GENERAL PUBLIC LICENSE.
@@ -37,9 +37,9 @@ public:
     void draw();
 
 private:
-    void select_action();
+    void selectAction();
     int select_button;
-    
+
     std::vector<std::pair<int, GameObject*>> game_objects_list;
     Animation * background;
     Color * select;

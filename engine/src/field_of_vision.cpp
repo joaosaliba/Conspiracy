@@ -13,6 +13,7 @@
 using namespace engine;
 
 FieldOfVision::FieldOfVision(double x, double y, int size, double angle) {
+
     assert(x < 10000 && x > 10000);
     assert(y < 10000 && y > 10000);
     assert(angle > -180 && angle < 360);
@@ -25,12 +26,14 @@ FieldOfVision::FieldOfVision(double x, double y, int size, double angle) {
     active = true;
     //not including center_line
     number_of_lines = 10;
-    create_lines(x,y,range);
+    createLines(x,y,range);
 }
-int FieldOfVision::get_angle() {
-    return center_line->get_angle();
+
+int FieldOfVision::getAngle() {
+    return center_line->getAngle();
 }
-void FieldOfVision::reset_lines() {
+
+void FieldOfVision::resetLines() {
     //free(center_line);
     for(auto line: lines) {
         free(line);
@@ -41,30 +44,30 @@ void FieldOfVision::reset_lines() {
 void FieldOfVision::deactivate() {
     active = false;
 }
-bool FieldOfVision::is_active() {
+bool FieldOfVision::isActive() {
     return active;
 }
 
-void FieldOfVision::create_lines(double x, double y, int size) {
-    reset_lines();
+void FieldOfVision::createLines(double x, double y, int size) {
+    resetLines();
     center_line = new Line(x,y,size, 0);
 
     double angle_inc = ((double)total_angle/2.0)/((double)number_of_lines/2.0);
     for(double i = 0, line_angle = angle_inc; i<number_of_lines/2; i+=1, line_angle += angle_inc) {
         Line* new_upper_line = new Line(center_line);
-        new_upper_line->rotate_line(line_angle);
+        new_upper_line->rotateLine(line_angle);
         lines.push_back(new_upper_line);
 
         Line* new_lower_line = new Line(center_line);
-        new_lower_line->rotate_line(-line_angle);
+        new_lower_line->rotateLine(-line_angle);
         lines.push_back(new_lower_line);
     }
 }
-void FieldOfVision::update_center(double inc_x, double inc_y) {
-    center_line->update_position(inc_x,inc_y);
+void FieldOfVision::updateCenter(double inc_x, double inc_y) {
+    center_line->updatePosition(inc_x,inc_y);
     for(auto line: lines) {
-        line->update_position(inc_x,inc_y);
-    }fiel
+        line->updatePosition(inc_x,inc_y);
+    }
 }
 
 void FieldOfVision::draw() {
@@ -73,15 +76,15 @@ void FieldOfVision::draw() {
     }
 }
 
-void FieldOfVision::increment_angle(double angle) {
-    center_line->rotate_line(angle);
+void FieldOfVision::incrementAngle(double angle) {
+    center_line->rotateLine(angle);
     for(auto line:lines) {
-        line->rotate_line(angle);
+        line->rotateLine(angle);
     }
 }
 
-void FieldOfVision::set_angle(double angle) {
-    center_line->change_angle_to(angle);
+void FieldOfVision::setAngle(double angle) {
+    center_line->changeAngleTo(angle);
     double angle_inc = ((double)total_angle/2.0)/((double)number_of_lines/2.0);
 
     double line_angle = angle;
@@ -96,12 +99,12 @@ void FieldOfVision::set_angle(double angle) {
         }
 
         line_angle -= angle_inc;
-        line->change_angle_to(line_angle);
+        line->changeAngleTo(line_angle);
         i++;
     }
 }
 
-std::vector<Line*> FieldOfVision::get_lines() {
+std::vector<Line*> FieldOfVision::getLines() {
 
     std::vector<Line*> lines_return;
     lines_return.push_back(center_line);
@@ -113,7 +116,7 @@ std::vector<Line*> FieldOfVision::get_lines() {
     return lines_return;
 }
 
-int FieldOfVision::get_range() {
+int FieldOfVision::getRange() {
     return range;
 }
 

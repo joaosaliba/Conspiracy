@@ -29,8 +29,8 @@ namespace engine{
 
         void play(const int times_to_play);
 
-        void verify_audio_music_error(const int times_to_play);
-        void verify_audio_effect_error(const int times_to_play);
+        void verifyAudioMusicError(const int times_to_play);
+        void verifyAudioEffectError(const int times_to_play);
 
         void pause();
         void resume();
@@ -39,10 +39,10 @@ namespace engine{
         Mix_Music* audio_music = NULL;
         Mix_Chunk* audio_effect = NULL;
 
-        Mix_Music* create_music(std::string audio_type, std::string audio_path, int audio_volume);
-        Mix_Chunk* create_effect(std::string audio_type, std::string audio_path, int audio_volume);
+        Mix_Music* createMusic(std::string audio_type, std::string audio_path, int audio_volume);
+        Mix_Chunk* createEffect(std::string audio_type, std::string audio_path, int audio_volume);
 
-        void verify_error(Mix_Music* audio_music, Mix_Music* audio_effect);
+        void verifyError(Mix_Music* audio_music, Mix_Chunk* audio_effect);
     };
 }
 #endif

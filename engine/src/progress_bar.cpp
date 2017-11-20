@@ -64,17 +64,17 @@ ProgressBar::ProgressBar(double position_x, double position_y, int width,
 
     progress_increment = increment;
 
-    backRect = new SDL_Rect();
-    backRect->x = position_x;
-    backRect->y = position_y;
-    backRect->w =  width;
-    backRect->h =  height;
+    back_rect = new SDL_Rect();
+    back_rect->x = position_x;
+    back_rect->y = position_y;
+    back_rect->w =  width;
+    back_rect->h =  height;
 
-    frontRect = new SDL_Rect();
-    frontRect->x = position_x;
-    frontRect->y = position_y;
-    frontRect->w =  width;
-    frontRect->h =  height;
+    front_rect = new SDL_Rect();
+    front_rect->x = position_x;
+    front_rect->y = position_y;
+    front_rect->w =  width;
+    front_rect->h =  height;
 
     //backColor = {0, 255, 0, 255};
     back_color = {31, 65, 158, 1};
@@ -89,8 +89,8 @@ ProgressBar::ProgressBar(double position_x, double position_y, int width,
 ProgressBar::ProgressBar(double position_x, double position_y, int width,
                                                              int height,
                                                              double increment,
-                                                             std::vector<unsigned int> newBackColor,
-                                                             std::vector<unsigned int> newFrontColor):
+                                                             std::vector<unsigned int> new_back_color,
+                                                             std::vector<unsigned int> new_front_color):
                                                                       GameObject(
                                                                           position_x,
                                                                           position_y,
@@ -135,17 +135,17 @@ ProgressBar::ProgressBar(double position_x, double position_y, int width,
     percent = 1.0;
     progress_increment = increment;
 
-    backRect = new SDL_Rect();
-    backRect->x = position_x;
-    backRect->y = position_y;
-    backRect->w =  width;
-    backRect->h =  height;
+    back_rect = new SDL_Rect();
+    back_rect->x = position_x;
+    back_rect->y = position_y;
+    back_rect->w =  width;
+    back_rect->h =  height;
 
-    frontRect = new SDL_Rect();
-    frontRect->x = position_x;
-    frontRect->y = position_y;
-    frontRect->w =  width;
-    frontRect->h =  height;
+    front_rect = new SDL_Rect();
+    front_rect->x = position_x;
+    front_rect->y = position_y;
+    front_rect->w =  width;
+    front_rect->h =  height;
 
     //backColor = {0, 255, 0, 255};
     back_color = {(uint8_t)new_back_color[0], (uint8_t)new_back_color[1], (uint8_t)new_back_color[2], (uint8_t)new_back_color[3]};
@@ -166,8 +166,8 @@ void ProgressBar::update(double time_elapsed) {
 
     DEBUG("time_elapsed receive: "+time_elapsed);
 
-    if(time_elapsed == NULL) {
-      ERROR("type_elapsed can not be null");
+    if(time_elapsed < 0) {
+      ERROR("type_elapsed can not be negative");
       exit(-1);
     }else {
       //nothing to do
@@ -184,26 +184,34 @@ void ProgressBar::update(double time_elapsed) {
 
     back_rect->x = getPositionX();
 
-    if(getPositionX() == NULL){
-      ERROR("the value of position x cant be null");
+    if(back_rect->x < 0){
+      ERROR("the value of position x cant be negative");
       exit(-1);
+    } else{
+      //nothing to do
     }
 
     back_rect->y = getPositionY();
 
-    if(getPositionY() == NULL){
-      ERROR("the value of position y cant be null");
+    if(back_rect->y < 0){
+      ERROR("the value of position y cant be negative");
       exit(-1);
+    } else{
+      //nothing to do
     }
 
-    pw = (int)((double)getWidth() * percent);
+    int width = getWidth();
 
-    if(getWidth() == NULL){
-      ERROR("the value of position x cant be null");
+    if(width < 0){
+      ERROR("the value of width cant be negative");
       exit(-1);
+    } else{
+      //nothing to do
     }
 
-    px = getPositionX() + (getWidth() - pw);
+    pw = (int)((double)width * percent);
+
+    px = getPositionX() + (width - pw);
 
     front_rect->x = px;
     front_rect->y = getPositionY();

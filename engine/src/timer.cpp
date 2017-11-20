@@ -48,12 +48,8 @@ void Timer::step() {
 */
 
 unsigned int Timer::elapsed_time() {
-    assert(step_ticks > -100000 && step_ticks < 200000);
-
-    if (SDL_GetTicks() == NULL){
-        ERROR("the return of this function can not be null");
-        exit(-1);
-    }
+    //this limits values are so long, because the time is caunting in miliseconds
+    assert(step_ticks > -100000 && step_ticks < 2000000000);
 
     return SDL_GetTicks() - step_ticks;
 }

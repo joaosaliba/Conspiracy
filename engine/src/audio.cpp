@@ -5,6 +5,8 @@
  * @copyright  GNU GENERAL PUBLIC LICENSE.
  */
 
+//#define NDEBUG *uncomment to disable assertions
+
 #include "audio.hpp"
 #include "log.h"
 #include "string"
@@ -36,7 +38,7 @@ Audio::Audio(std::string audio_path, std::string audio_type, int audio_volume) {
   * @return[out] audio_music - Mix_Music*
   */
 
-    audio_music = create_music(audio_type, audio_path, audio_volume);
+    audio_music = createMusic(audio_type, audio_path, audio_volume);
 
     /**
     * @brief Method create_effect
@@ -47,7 +49,7 @@ Audio::Audio(std::string audio_path, std::string audio_type, int audio_volume) {
     * @return[out] audio_effect - Mix_Chunk*
     */
 
-    audio_effect = create_effect(audio_type, audio_path, audio_volume);
+    audio_effect = createEffect(audio_type, audio_path, audio_volume);
 
     /**
     * @brief Method verify_error
@@ -57,14 +59,14 @@ Audio::Audio(std::string audio_path, std::string audio_type, int audio_volume) {
     * @return[out] void
     */
 
-    verify_error(audio_music, audio_effect);
+    verifyError(audio_music, audio_effect);
 
-    INFO("Audio constructor ok");
+    INFO("Audio constructor finished");
 }
 
 
-Audio::create_effect(std::string audio_type, std::string audio_path, int audio_volume){
-    //assert()
+Mix_Chunk* Audio::createEffect(std::string audio_type, std::string audio_path, int audio_volume){
+
     INFO("the method create_effect started");
 
     DEBUG("the volume of the audio: "+audio_volume);
@@ -84,7 +86,7 @@ Audio::create_effect(std::string audio_type, std::string audio_path, int audio_v
 }
 
 
-Audio::create_music(std::string audio_type, std::string audio_path, int audio_volume){
+Mix_Music* Audio::createMusic(std::string audio_type, std::string audio_path, int audio_volume){
     //assert()
 
     DEBUG("the volume of the audio: "+audio_volume);
@@ -107,19 +109,20 @@ Audio::create_music(std::string audio_type, std::string audio_path, int audio_vo
     return audio_music;
 }
 
-Audio::verify_error(Mix_Music* audio_music, Mix_Music* audio_effect){
+void Audio::verifyError(Mix_Music* audio_music, Mix_Chunk* audio_effect){
 
     //flux offset structure, that verify if the music and audio effect are null and throw a error.
     if(audio_music == NULL & audio_effect == NULL){
       ERROR("Audio type is not correct");
+    } else{
+      //nothing to do
     }
 }
-
-
 
 /**
   *    @brief Audio object destructor.
  */
+
 Audio::~Audio(){}
 
 /**
@@ -138,9 +141,9 @@ void Audio::play(const int times_to_play) {
 
     DEBUG("times to play receive: "+times_to_play);
 
-    verify_audio_music_error(times_to_play);
+    verifyAudioMusicError(times_to_play);
 
-    verify_audio_effect_error(times_to_play);
+    verifyAudioEffectError(times_to_play);
 
   /**  if(audio_music != NULL) {
         //if the audio music is differente of null he get in and make others logical flows
@@ -159,7 +162,7 @@ void Audio::play(const int times_to_play) {
     INFO("method init is working");
 }
 
-Audio::verify_audio_music_error(const int times_to_play){
+void Audio::verifyAudioMusicError(const int times_to_play){
 
     assert ( times_to_play != NULL);
 
@@ -175,7 +178,7 @@ Audio::verify_audio_music_error(const int times_to_play){
       }
 }
 
-Audio::verify_audio_effect_error(const int times_to_play){
+void Audio::verifyAudioEffectError(const int times_to_play){
     assert (times_to_play != NULL);
 
     if(audio_effect != NULL){

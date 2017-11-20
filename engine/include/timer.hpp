@@ -1,5 +1,8 @@
-/**class to object of Timer, where you can find some variables, files, others objects
- *and meths to the same.
+/**
+ * @file timer.hpp
+ * @brief class to object of timer, where you can find some values, files,
+ * others objects used in this class and methods to the same.
+ * @copyright  GNU GENERAL PUBLIC LICENSE.
  */
 
 #ifndef TIMER_HPP
@@ -20,7 +23,7 @@ namespace engine {
 
         unsigned int elapsed_time();
         unsigned int total_elapsed_time();
-        
+
     private:
         unsigned int ticks;
         unsigned int step_ticks;

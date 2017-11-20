@@ -28,18 +28,18 @@ public:
 
     void draw();
 
-    int get_range();
+    int getRange();
 
-    void turn_off();
-    bool is_turned_on();
+    void turnOff();
+    bool isTurnedOn();
 
-    void set_states(int angle2, int angle3);
-    void change_state(int state);
+    void setStates(int angle2, int angle3);
+    void changeState(int state);
 
     FieldOfVision* getFieldOfVision();
 private:
-    void initialize_vision(int p_range, int p_angle_of_vision, std::string direction);
-    void initialize_animator(std::string filename);
+    void initializeVision(int p_range, int p_angle_of_vision, std::string direction);
+    void initializeAnimator(std::string filename);
 
     int range = 0;
 
@@ -50,7 +50,7 @@ private:
     int initial_angle = 0;
 
     int state = 0;
-    
+
     FieldOfVision* fieldOfVision = nullptr;
     Animation* animator = nullptr;
 };

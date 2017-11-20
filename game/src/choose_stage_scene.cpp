@@ -113,41 +113,33 @@ void ChooseStageScene::select_action_2() {
 }
 
 void ChooseStageScene::select_action_3(){
-    
+
     if(InputManager::instance.is_key_triggered(InputManager::KeyPress::KEY_PRESS_ENTER)) {
+      if(select_button <= SaveManager::instance.get_stage_number_unlock()) {
         switch(select_button) {
         case 0:
                 getSceneManager()->load_scene(0);
                 break;
         case 1:
-                if(select_button <= SaveManager::instance.get_stage_number_unlock()) {
-                    getSceneManager()->load_scene(22);
-                }
+                getSceneManager()->load_scene(22);
                 break;
         case 2:
-                if(select_button <= SaveManager::instance.get_stage_number_unlock()) {
-                    getSceneManager()->load_scene(2);
-                }
+                getSceneManager()->load_scene(2);
                 break;
         case 3:
-                if(select_button <= SaveManager::instance.get_stage_number_unlock()) {
-                    getSceneManager()->load_scene(3);
-                }
+                getSceneManager()->load_scene(3);
                 break;
         case 4:
-                if(select_button <= SaveManager::instance.get_stage_number_unlock()) {
-                    getSceneManager()->load_scene(4);
-                }
+                getSceneManager()->load_scene(4);
                 break;
         case 5:
-                if(select_button <= SaveManager::instance.get_stage_number_unlock()) {
-                    getSceneManager()->load_scene(5);
-                }
+                getSceneManager()->load_scene(5);
                 break;
         default:
                 //nothing to do
                 break;
         }
+      }
 
     }
 

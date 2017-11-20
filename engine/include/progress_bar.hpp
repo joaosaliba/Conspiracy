@@ -13,6 +13,7 @@
 #include "window_manager.hpp"
 #include "game_object.hpp"
 #include "log.h"
+
 #include <vector>
 
 namespace engine {
@@ -24,8 +25,8 @@ namespace engine {
         ~ProgressBar();
         void update(double time_elapsed);
         void draw();
-        double get_percent();
-        void reset_percent();
+        double getPercent();
+        void resetPercent();
 
     private:
         double percent = 0.0;
@@ -34,9 +35,9 @@ namespace engine {
         int px = 0;
         SDL_Rect *back_rect = nullptr;
         SDL_Rect *front_rect = nullptr;
-        SDL_Color back_color;
-        SDL_Color front_color;
-        SDL_Color old_color;
+        SDL_Color back_color{};
+        SDL_Color front_color{};
+        SDL_Color old_color{};
     };
 }
 
