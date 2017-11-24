@@ -66,10 +66,7 @@ Const SELECTEDCOLOR[0]=255;
 Const SELECTEDCOLOR[1]=255;
 Const SELECTEDCOLOR[2]=255;
 Const SELECTEDCOLOR[3]=0;
-
-SELECTEDCOLOR
-NOTSELECTEDCOLOR
- 
+Conts int TIMESTOPLAY=0;  
 #include <typeinfo>
 #include <iostream>
 
@@ -100,7 +97,7 @@ void LoseScene::draw(){
 
 void LoseScene::update(double timeElapsed){
         selectAction();
-
+        assert(timeElapsed>0);
         background->update();
 
         for(auto gameObject : gameObjectsList) {
@@ -122,7 +119,7 @@ POSITIONCONTINUE, "Continue", 50)));
         gameObjectsList.push_back(std::pair<int, GameObject*>( NUMBERMENU,new Button("assets/fonts/font.ttf" OBJECTMENU, POSITIONMENU,"Menu", 50)));
         AnimationManager::instance.setBackgroundColor(new Color(BACKGROUND));
 ));
-        backgroundMusic->play(0);
+        backgroundMusic->play(TIMESTOPLAY);
 
 }
 void  selectActionLessThanContinue(){
