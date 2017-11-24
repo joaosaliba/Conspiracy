@@ -8,8 +8,10 @@
 #define MARGIN 5
 
 Header::Header(double positionAxisX, double positionAxisY, int max_papers, int stageNumber) : GameObject(FILENAME, positionAxisX, positionAxisY, WIDTH, HEIGHT){
-       assert(positionAxisX>0);
-       assert(positionAxisY>0);    
+       INFO(" entrou no metodo construtor da classe header");
+       
+        assert(positionAxisX>0);
+        assert(positionAxisY>0);    
         stageText = new Text("Stage "+std::to_string(stageNumber),"assets/fonts/font.ttf", 40, true, new Color(100,100,100,1), new Color(0,0,0,0));
         paperIcon = new Animation("assets/sprites/papeis(19X21).png", 1, 4, 0.5);
         paperIcon->setDrawSize(40,50);
@@ -32,6 +34,7 @@ Header::~Header(){
 }
 
 void Header::update(double timeElapsed){
+        INFO(" entrou no metodo update da classe header");
         assert(timeElapsed>0);
         timeElapsed = timeElapsed;
         verifySelect();
@@ -40,6 +43,7 @@ void Header::update(double timeElapsed){
 }
 
 void Header::draw(){
+        INFO(" entrou no metodo draw da classe header");      
         assert(getPositionY()>0);//assert para verificar se y e positivo.
         assert(getPositionX()>0);
         animator->draw(getPositionX()+MARGIN, getPositionY()+MARGIN);
@@ -49,7 +53,9 @@ void Header::draw(){
 }
 
 void Header::updatePaperQuantity(int newValue){// assert para verificar se  newValue apresenta algum valor.
-   assert(newValue!=NULL);
+    INFO(" entrou no metodo updatePaperQuantity da classe header");
+    assert(newValue!=NULL);
+    DEBUG("valor de entrada  newValue valido");   
     paper_text = convertToText(newValue);
 }
 
@@ -58,6 +64,7 @@ Text* Header::convertToText(int newValue){// assert para verificar se  newValue 
        return new Text(std::to_string(newValue)+"/"+std::to_string(totalPapers),"assets/fonts/font.ttf", 40, true, new Color(100,100,100,1), new Color(0,0,0,0));
 }
 void Header::verifySelect(){
+        INFO("entrou no metodo verifySelect da classe header"); 
         switch(alienSelect) {
         case 0:
                 animator->setInterval("none");
