@@ -42,8 +42,11 @@ using namespace engine;
         drawHeight = h;
     }
     void Sprite::draw(int x, int y){// procurar o arquivo onde axis esta definido.
+        INFO(" entrou no metodo draw da classe sprite");
         assert(x>0);
+        DEBUG(" valor de x valido");
         assert(y>0); 
+        DEBUG("valor de y valido");
         axis.horizontal = x;
         axis.vertical = y;
          //Crop image
