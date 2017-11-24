@@ -67,19 +67,7 @@ void Player::update(double timeElapsed){
         }else{
          WARN("ets number isn't correct!");
 
-        if(beforeAlien != selectedAlien) {
-                header->setAlienSelect(selectedAlien);
-                etemer->setAlienDeselect();
-                bilu->setAlienDeselect();
-                varginha->setAlienDeselect();
-
-                waitAnimation(beforeAlien);
-                switch(selectedAlien) {
-                case ETEMER: etemer->setAlienSelected(); etemer_sound_effect->play(TIMESTOPLAY); break;
-                case BILU: bilu->setAlienSelected(); bilu_sound_effect->play(TIMESTOPLAY); break;
-                case VARGINA: varginha->setAlienSelected(); varginha_sound_effect->play(TIMESTOPLAY);break;
-                }
-        }
+        selectedAlien(int beforeAlien) 
 
         exclamationAnimation->update();
 
@@ -88,6 +76,21 @@ void Player::update(double timeElapsed){
         varginha->update(timeElapsed);
         header->update(timeElapsed);
 }
+  
+void   selectedAlien(){ 
+    if(beforeAlien != selectedAlien) {
+                header->setAlienSelect(selectedAlien);
+                etemer->setAlienDeselect();
+                bilu->setAlienDeselect();
+                varginha->setAlienDeselect();
+                waitAnimation(beforeAlien);
+                switch(selectedAlien) {
+                case ETEMER: etemer->setAlienSelected(); etemer_sound_effect->play(TIMESTOPLAY); break;
+                case BILU: bilu->setAlienSelected(); bilu_sound_effect->play(TIMESTOPLAY); break;
+                case VARGINA: varginha->setAlienSelected(); varginha_sound_effect->play(TIMESTOPLAY);break;
+                }
+        }
+  }
 
 void Player::draw(){
         INFO("PLAYER DRAW");
