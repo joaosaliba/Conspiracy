@@ -24,7 +24,7 @@ struct  size{
 #define size  VARGINADIMENSIONS.columns=1;
 Player::Player(std::pair<int, int> biluPosition, std::pair<int, int> etemerPosition,
                std::pair<int,int> varginhaPosition, int paperQuantity, int stageNumber){
-
+  INFO(" entrou no construtor");
         exclamationAnimation = new Animation("assets/sprites/exclamation2.png",VARGINADIMENSIONS,  VARGINATIME );
 
         bilu = new Bilu(biluPosition.first, biluPosition.second);
@@ -46,6 +46,7 @@ Player::Player(std::pair<int, int> biluPosition, std::pair<int, int> etemerPosit
         bilu_sound_effect = new 
 
 Audio("assets/sounds/TROCABILU.wav", "EFFECT", VOLUMESOUNDBILU);
+        INFO(" entrou no play). 
         varginha_sound_effect = new Audio("assets/sounds/TROCAVARGINHA.wav", "EFFECT", VOLUMESOUNDVARGINA);
         etemer_sound_effect = new Audio("assets/sounds/TROCATEMER.wav", "EFFECT", VOLUMESOUNDETEMER);
 }
@@ -55,7 +56,7 @@ Player::~Player(){
 
 void Player::update(double timeElapsed){
         int beforeAlien = selectedAlien;
-
+      
         if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_ONE)) {
                 selectedAlien = ETEMER;
         } else if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_TWO)) {
@@ -110,10 +111,13 @@ void Player::waitAnimation(int beforeAlien){
         } else if(beforeAlien== VARGINA) {
                 idleAnimation(varginha);
                 varginha->update(NOTUPDATE);
-        }
+        }else{
+          Warn("alienbefore invalid");
+        }  
 }
 
 void Player::idleAnimation(Alien * alien){
+      INFO("entrou no metodo iddle animation")
         if(alien->getAnimation()->getInterval().first == "right") {
                 alien->getAnimation()->setInterval("idle_right");
         } else if(alien->getAnimation()->getInterval().first == "left") {
@@ -122,7 +126,8 @@ void Player::idleAnimation(Alien * alien){
                 alien->getAnimation()->setInterval("idle_up");
         }else if(alien->getAnimation()->getInterval().first == "down") {
                 alien->getAnimation()->setInterval("idle_down");
-        }
+        }else{
+          WARN( "inavalid position")
 }
 bool Player::isDead(){
         if(!varginha->isEnabled()) {
@@ -134,7 +139,8 @@ bool Player::isDead(){
         }else if(!etemer->isEnabled()) {
             exclamationAnimation->draw(etemer->getPositionX(), etemer->getPositionY()-40);
                 return true;
-        }
+        }else{
+          \\do nothefing
         return false;
 }
 
