@@ -39,7 +39,9 @@ void Header::update(double timeElapsed){
         paperIcon->update();
 }
 
-void Header::draw(){//assert para verificar se y e positivo. 
+void Header::draw(){
+        assert(getPositionY()>0);//assert para verificar se y e positivo.
+        assert(getPositionX()>0);
         animator->draw(getPositionX()+MARGIN, getPositionY()+MARGIN);
         paperIcon->draw(getPositionX()+800, getPositionY()- MARGIN);
         paper_text->draw(getPositionX()+840, getPositionY()+MARGIN);
@@ -47,11 +49,13 @@ void Header::draw(){//assert para verificar se y e positivo.
 }
 
 void Header::updatePaperQuantity(int newValue){// assert para verificar se  newValue apresenta algum valor.
+   assert(newValue!=NULL);
     paper_text = convertToText(newValue);
 }
 
 Text* Header::convertToText(int newValue){// assert para verificar se  newValue apresenta algum valor.
-    return new Text(std::to_string(newValue)+"/"+std::to_string(totalPapers),"assets/fonts/font.ttf", 40, true, new Color(100,100,100,1), new Color(0,0,0,0));
+       assert(newValue!=NULL);
+       return new Text(std::to_string(newValue)+"/"+std::to_string(totalPapers),"assets/fonts/font.ttf", 40, true, new Color(100,100,100,1), new Color(0,0,0,0));
 }
 void Header::verifySelect(){
         switch(alienSelect) {
