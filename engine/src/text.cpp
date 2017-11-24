@@ -3,7 +3,7 @@
 #include "engine.hpp"
 #include "text_manager.hpp"
 #include<string>
-
+#include <assert.h>
 
 using namespace engine;
 
@@ -21,6 +21,7 @@ using namespace engine;
     init();
    }
 void init(){
+    INFO("entrou no construtor");	
     if ( font_path == "") {
         WARN("Invalid path for font!");
         exit(-1);
@@ -80,6 +81,9 @@ void shutdown() {
 }
 
 void draw(int x, int y) {
+    INFO("entrou no metodo draw");	
+    assert(x>0);
+    assert(y>0);	
     SDL_Rect renderQuad = {
         x,  y, width, height
     };
@@ -89,11 +93,13 @@ void draw(int x, int y) {
 
 
 void setBackground(std:: string new_back_ground) {
+    INFO("entrou no metodo setBackground);
     background = new_back_ground;
     init();
 }
 
 void setTextColor(std::string new_text_color) {
+    INFO(entoru no metodo setTextColor");	
     text_color = new_text_color;
     init();
 }
