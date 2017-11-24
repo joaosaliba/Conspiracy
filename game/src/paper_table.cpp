@@ -17,7 +17,8 @@ PaperTable::~PaperTable(){
 
 }
 
-void PaperTable::update(double timeElapsed){\\ assert para verificar se timeelapsed e positivo. 
+void PaperTable::update(double timeElapsed){
+   assert(timeElapsed>0);\\ assert para verificar se timeelapsed e positivo. 
    table->update(timeElapsed);
    paper->update(timeElapsed);
 }
