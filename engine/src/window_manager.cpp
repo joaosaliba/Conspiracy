@@ -1,3 +1,4 @@
+
 #include "window_manager.hpp"
 using namespace engine;
 
@@ -10,10 +11,13 @@ bool WindowManager::createWindow(std::string window_title, std::pair<int, int> w
     SDL_WINDOWPOS_CENTERED, window_size.first,
     window_size.second, SDL_WINDOW_SHOWN);
 
+    
     if(game_window == NULL) {
         return false;
     }
 
+    
+    
     INFO("Create canvas");
     game_canvas = SDL_CreateRenderer(game_window, -1,
         SDL_RENDERER_ACCELERATED);
@@ -56,10 +60,12 @@ bool WindowManager::createWindow(std::string window_title, std::pair<int, int> w
       SDL_Surface * image = NULL;
       image = IMG_Load(std::string("assets/sprites/alien.png").c_str());
 
+        
       if(image == NULL) {
             exit(-1);
       }
 
+        
       SDL_SetWindowIcon(game_window, image);
       SDL_FreeSurface(image);
 
