@@ -113,18 +113,20 @@ void WinScene::load(){
         AnimationManager::instance.setBackgroundColor(new Color(ANIMATION ));
 
 }
-
+  
+void loadandgetbeforescene(){  
+    if(getSceneManager()->get_before_scene_id() == 1){
+               getSceneManager()->loadScene(25);
+    }else if(getSceneManager()->get_before_scene_id() == 2){
+               getSceneManager()->loadScene(23);
+    }else{
+       getSceneManager()->loadScene(getSceneManager()->get_before_scene_id()+1);
+    }
+ }
 void  EnterSelect ()  {
                 switch(selectButton) {
                 case 1:
-                        if(getSceneManager()->get_before_scene_id() == 1){
-                            getSceneManager()->loadScene(25);
-                        }else if(getSceneManager()->get_before_scene_id() == 2){
-                            getSceneManager()->loadScene(23);
-                        }else{
-                            getSceneManager()->loadScene(getSceneManager()->get_before_scene_id()+1);
-                        }
-
+                        loadandgetbeforescene();                        
                         break;
                 case 2:
                         getSceneManager()->loadScene(0);
