@@ -8,6 +8,7 @@ Table::Table(std::string objectName, double positionX, double positionY,
                                                                          positionY,
                                                                          width, height){
 animator = new Animation(objectName, 1, 1, 0.5);
+assert( background.getCurrentPositionFrame()==0);
 }
 
 Table::~Table(){
