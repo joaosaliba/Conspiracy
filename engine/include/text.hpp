@@ -25,15 +25,15 @@ namespace engine{
         SDL_Texture * texture;
         TTF_Font * font;
 
-        std::string text;
-        std::string font_path;
-        int size;
-        bool high_quality;
+        std::string text;// documentação do proprio texto 
+        std::string font_path;// documentação do caminho da fonte. 
+        int size;// delcaração da variavel tamanho. 
+        bool high_quality; //declaraçaõ da qualidade da apresentação. 
 
-        Color *background;
-        Color *text_color;
-        int width;
-        int height;
+        Color *background;// documentaçaõ cor de fundo
+        Color *text_color;// documentacao cor do texto.
+        int width;// documentaçao da alrgura
+        int height;// dopcumentação da altura. 
     };
 }
 
