@@ -8,11 +8,11 @@ using namespace engine;
 
 LoseScene::LoseScene(int id) : Scene(id){
     selectButton = 1;
-    select = new Color(255, 255, 255, 0);
-    notSelect = new Color(0, 0, 0, 0);
-    soundEffect = new Audio("assets/sounds/SELECT6.wav", "EFFECT", 100);
-    backgroundMusic = new Audio("assets/sounds/GAMEOVER.wav", "MUSIC", 50);
-    background = new Animation("assets/sprites/lose.png", 1, 4, 0.8);
+    select = new Color(255, 255, 255, 0);// seta a cor para seleção 
+    notSelect = new Color(0, 0, 0, 0);// seta a cor quando nao ha seleção
+    soundEffect = new Audio("assets/sounds/SELECT6.wav", "EFFECT", 100);// seta o efeito do audio
+    backgroundMusic = new Audio("assets/sounds/GAMEOVER.wav", "MUSIC", 50);//seta a musica da cena. 
+    background = new Animation("assets/sprites/lose.png", 1, 4, 0.8);// seta a animação para a cena.
     background->addAction("lose", 0,3);
     background->setInterval("lose");
 }
@@ -47,33 +47,17 @@ void LoseScene::update(double timeElapsed){
 }
 
 void LoseScene::load(){
-        gameObjectsList.push_back(std::pair<int, GameObject*>(1,new Button("assets/fonts/font.ttf", 700, 500, 500, 500, "Continue", 50)));
-        gameObjectsList.push_back(std::pair<int, GameObject*>(2,new Button("assets/fonts/font.ttf", 50, 500, 500, 500, "Menu", 50)));
+        Button1 button= new Button("assets/fonts/font.ttf", 700, 500, 500, 500, "Continue", 50;  
+        gameObjectsList.push_back(std::pair<int, GameObject*>(1,button));
+        Button button4 =new Button("assets/fonts/font.ttf", 50, 500, 500, 500, "Menu", 50;
+        gameObjectsList.push_back(std::pair<int, GameObject*>(2,button4));
         AnimationManager::instance.setBackgroundColor(new Color(255,160,156, 125));
         backgroundMusic->play(0);
 
 }
 
-void LoseScene::selectAction(){
-        if(InputManager::instance.isKeyTriggered(InputManager::KeyPress::KEY_PRESS_LEFT)) {
-                soundEffect->pause();
-                soundEffect->play(0);
-                selectButton--;
-                if(selectButton <= 0) {
-                        selectButton = 2;
-                }
-        }
-        else if(InputManager::instance.isKeyTriggered(InputManager::KeyPress::KEY_PRESS_RIGHT)) {
-                soundEffect->pause();
-                soundEffect->play(0);
-                selectButton++;
-                if(selectButton > 2) {
-                        selectButton = 1;
-                }
-        }
-
-        if(InputManager::instance.isKeyTriggered(InputManager::KeyPress::KEY_PRESS_ENTER)) {
-                switch(selectButton) {
+void enter_function(){
+            switch(selectButton) {
                 case 1:
                         getSceneManager()->loadScene(getSceneManager()->get_before_scene_id());
                         break;
@@ -84,6 +68,32 @@ void LoseScene::selectAction(){
                         break;
                 }
 
+}        
+void right_function(){
+
+                                   
+         soundEffect->pause();
+                soundEffect->play(0);
+                selectButton++;
+                if(selectButton > 2) {
+                        selectButton = 1;
+                }
+        }
+}                                   
+void LoseScene::selectAction(){
+        if(InputManager::instance.isKeyTriggered(InputManager::KeyPress::KEY_PRESS_LEFT)) {
+                soundEffect->pause();
+                soundEffect->play(0);
+                selectButton--;
+                if(selectButton <= 0) {
+                        selectButton = 2;
+                }
+        }
+        else if(InputManager::instance.isKeyTriggered(InputManager::KeyPress::KEY_PRESS_RIGHT)) {
+        right_function()
+
+        if(InputManager::instance.isKeyTriggered(InputManager::KeyPress::KEY_PRESS_ENTER)) {
+           enter_function();        
         }
 }
 
