@@ -80,6 +80,7 @@ LoseScene::LoseScene(int id) : Scene(id){
     soundEffect = new Audio("assets/sounds/SELECT6.wav",”EFFECT”, SOUNDEFFECT );
     backgroundMusic = new Audio("assets/sounds/GAMEOVER.wav", "MUSIC", BACKGROUNMUSIC );
     background = new Animation("assets/sprites/lose.png",ANIMATIONSIZE,ANIMATIONTIME);
+    assert(background.getCurrentPositionFrame()==0);
     background->addAction("lose",POSITION);
     background->setInterval("lose");
 }
@@ -115,8 +116,10 @@ void LoseScene::update(double timeElapsed){
 
 void LoseScene::load(){
         Button  button2=new Button("assets/fonts/font.ttf", OBJECTCONTINUE, POSITIONCONTINUE, "Continue", 50) 
+        assert(button2.getText().text="");
         gameObjectsList.push_back(std::pair<int, GameObject*>( NUMBERCONTINUE,button2));
         Button button3=new Button("assets/fonts/font.ttf" OBJECTMENU, POSITIONMENU,"Menu", 50)
+        assert(button3.getText().text="Menu");
         gameObjectsList.push_back(std::pair<int, GameObject*>( NUMBERMENU,button3));
         AnimationManager::instance.setBackgroundColor(new Color(BACKGROUND));
 ));
