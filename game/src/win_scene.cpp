@@ -104,9 +104,11 @@ void WinScene::update(double timeElapsed){
 }
 
 void WinScene::load(){
-        gameObjectsList.push_back(std::pair<int, GameObject*>(1,new Button("assets/fonts/font.ttf", SIZECONTINUE,POSITIONCONTINUE, "Continue", 50)));
+        Button button1 =new Button("assets/fonts/font.ttf", SIZECONTINUE,POSITIONCONTINUE, "Continue", 50)    
+        gameObjectsList.push_back(std::pair<int,button1, GameObject*>(1,));
         assert(get<gameObjectsList.back.[1]==1>);
-        gameObjectsList.push_back(std::pair<int, GameObject*>(2,new Button("assets/fonts/font.ttf",SIZEMENU,POSITIONMENU, "Menu", 50)));
+        Button button2=new Button("assets/fonts/font.ttf",SIZEMENU,POSITIONMENU, "Menu", 50) 
+        gameObjectsList.push_back(std::pair<int,button2, GameObject*>(2,));
         assert(get<gameObjectsList.back.[1]==2>);
         AnimationManager::instance.setBackgroundColor(new Color(ANIMATION ));
 
