@@ -20,48 +20,8 @@ using namespace engine;
     std::string text_color= new_text_color;
     init();
    }
-void init(){
-	
-	
-	
-    INFO("entrou no construtor");	
-    if ( font_path == "") {// verifica se p caminho da ofnte e valido . 
-        WARN("Invalid path for font!");
-        exit(-1);
-    }
-	
-	
-	
-	
-
-    TTF_Font* font = TextManager::instance.loadFont( font_path,  size);
-
-    SDL_Color color = {text_color->r, text_color->g, text_color->b, text_color->a};
-    SDL_Color bg_color = {background->r, background->g, background->b, background->a};
-
-    SDL_Surface * surface = NULL;
-
-    if (high_quality && bg_color.a == 0x00) {
-        surface = TTF_RenderText_Blended(
-            font, c_str(), color
-        );
-    }
-    else if (high_quality) {
-        surface = TTF_RenderText_Shaded(
-            font, c_str(), color, bg_color
-        );
-    }
-    else {
-        surface = TTF_RenderText_Solid(
-            font,c_str(), color
-       );
-    }
-
-    if(surface == NULL) {
-        exit(-1);
-    }
-
-    if(texture != NULL) {
+void texture(){
+	   if(texture != NULL) {
 		SDL_DestroyTexture(texture);
 	}
 
@@ -71,11 +31,60 @@ void init(){
         exit(-1);
     }
 
+
+}
+ bool is_high_quality(){
+ bool high_quality=true;
+   if (high_quality && bg_color.a == 0x00) {
+        surface = TTF_RenderText_Blended(
+            font, c_str(), color
+        );
+    }
+     	  
+    else if (high_quality) {
+        surface = TTF_RenderText_Shaded(
+            font, c_str(), color, bg_color
+        );
+    }else{
+       high_quality=false;
+   }	    
+ }     	    
+ 
+void init(){
+	
+        	
+	
+    INFO("entrou no construtor");	
+    if ( font_path == "") {// verifica se p caminho da ofnte e valido . 
+        WARN("Invalid path for font!");
+        exit(-1);
+    }
+	
+	
+    TTF_Font* font = TextManager::instance.loadFont( font_path,  size);
+
+    SDL_Color color = {text_color->r, text_color->g, text_color->b, text_color->a};
+    SDL_Color bg_color = {background->r, background->g, background->b, background->a};
+
+    SDL_Surface * surface = NULL;
+
+    (!is_high_quality()) {
+        surface = TTF_RenderText_Solid(
+            font,c_str(), color
+       );
+    }
+
+    if(surface == NULL) {
+        exit(-1);
+    }
+
+    texture();
     width = surface->w;
     height = surface->h;
 
     SDL_FreeSurface(surface);
 }
+
 
 void shutdown() {
     INFO("Shutdown Text");
