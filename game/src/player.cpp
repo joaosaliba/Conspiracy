@@ -63,8 +63,11 @@ void Player::update(double timeElapsed){
         } else if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_THREE)) {
                 selectedAlien = 3;
                 ((Varginha *)(varginha))->setDefault();
-        }
-  alien_selected(selectedAlien);
+        }else{
+         printf("personagem escolhido invalido"); 
+         exit(-1);  
+        }  
+      alien_selected(selectedAlien);
 }
 
  
