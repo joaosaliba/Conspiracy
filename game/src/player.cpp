@@ -30,20 +30,9 @@ Player::Player(std::pair<int, int> biluPosition, std::pair<int, int> etemerPosit
 
 Player::~Player(){
 }
-
-void Player::update(double timeElapsed){
-        int beforeAlien = selectedAlien;
-
-        if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_ONE)) {
-                selectedAlien = 1;
-        } else if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_TWO)) {
-                selectedAlien = 2;
-        } else if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_THREE)) {
-                selectedAlien = 3;
-                ((Varginha *)(varginha))->setDefault();
-        }
-
-        if(beforeAlien != selectedAlien) {
+void alien_selected(int selectedAlien){
+  
+  if(beforeAlien != selectedAlien) {
                 header->setAlienSelect(selectedAlien);
                 etemer->setAlienDeselect();
                 bilu->setAlienDeselect();
@@ -64,6 +53,21 @@ void Player::update(double timeElapsed){
         varginha->update(timeElapsed);
         header->update(timeElapsed);
 }
+void Player::update(double timeElapsed){
+        int beforeAlien = selectedAlien;
+
+        if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_ONE)) {
+                selectedAlien = 1;
+        } else if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_TWO)) {
+                selectedAlien = 2;
+        } else if(InputManager::instance.isKeyPressed(InputManager::KeyPress::KEY_PRESS_THREE)) {
+                selectedAlien = 3;
+                ((Varginha *)(varginha))->setDefault();
+        }
+  alien_selected(selectedAlien);
+}
+
+ 
 
 void Player::draw(){
         INFO("PLAYER DRAW");
