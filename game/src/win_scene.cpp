@@ -75,12 +75,14 @@ WinScene::WinScene(int id) : Scene(id){
 WinScene::~WinScene(){
 }
 
+
 void WinScene::draw(){
         background->draw_instant(DRAW);
-        for(auto gameObject : gameObjectsList) {
+        for(auto gameObject : gameObjectsList) {// controla o desenho da cena na tela. 
                 (*gameObject.second).draw();
         }
 }
+
 
 void WinScene::update(double timeElapsed){
         selectAction();
