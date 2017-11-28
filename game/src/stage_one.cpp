@@ -22,8 +22,10 @@ void StageOne::createGuards(){
     guard1->addWay(4, wayFour1);
     guard1->addWay(5, wayFive1);
 
-    gameObjectsList.push_back(guard1);
+    
+    gameObjectsList.push_back(guard1);// slava o quarda na game Objects List 
 
+    
     std::pair <std::string, int> wayOne2 ("right", 920);
     std::pair <std::string, int> wayTwo2 ("down", HEADER_SIZE + 550);
     std::pair <std::string, int> wayThree2 ("left", 860);
@@ -44,7 +46,8 @@ void StageOne::createGuards(){
     guard2->addWay(9, wayFive2);
     guard2->addWay(10, waySix2);
 
-    gameObjectsList.push_back(guard2);
+    
+    gameObjectsList.push_back(guard2);//salva o quarda na game object List
 
 }
 
