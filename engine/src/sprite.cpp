@@ -16,7 +16,7 @@ using namespace engine;
 
         
         
-        if(image == NULL){
+        if(image == NULL){// encera o metodo se a image for iqual a nulo. 
             ERROR("INIT SPRITE ERROR.");
             exit(-1);
         }
@@ -27,7 +27,7 @@ using namespace engine;
 
         
         
-        if(texture == NULL){
+        if(texture == NULL){// encera o metodo se nao houver uma textura. 
             ERROR("CREATE TEXTURE SPRITE ERROR.");
             exit(-1);
         }
