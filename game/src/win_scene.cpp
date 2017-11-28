@@ -1,6 +1,6 @@
 #include "win_scene.hpp"
 #include "button.hpp"
-
+#include <assert.h>
 #include <typeinfo>
 #include <iostream>
 # define  type def struct SIZE{
@@ -104,10 +104,12 @@ void WinScene::update(double timeElapsed){
 }
 
 void WinScene::load(){
-        Button button1 =new Button("assets/fonts/font.ttf", SIZECONTINUE,POSITIONCONTINUE, "Continue", 50)    
+        Button button1 =new Button("assets/fonts/font.ttf", SIZECONTINUE,POSITIONCONTINUE, "Continue", 50)  
+        ssert(button.getText().text== "Continue");  
         gameObjectsList.push_back(std::pair<int,button1, GameObject*>(1,));
         assert(get<gameObjectsList.back.[1]==1>);
-        Button button2=new Button("assets/fonts/font.ttf",SIZEMENU,POSITIONMENU, "Menu", 50) 
+        Button button2=new Button("assets/fonts/font.ttf",SIZEMENU,POSITIONMENU, "Menu", 50);
+        assert(button.getText().text== "Menu");  
         gameObjectsList.push_back(std::pair<int,button2, GameObject*>(2,));
         assert(get<gameObjectsList.back.[1]==2>);
         AnimationManager::instance.setBackgroundColor(new Color(ANIMATION ));
