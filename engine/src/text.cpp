@@ -22,7 +22,7 @@ using namespace engine;
    }
 void init(){
     INFO("entrou no construtor");	
-    if ( font_path == "") {
+    if ( font_path == "") {// verifica se p caminho da ofnte e valido . 
         WARN("Invalid path for font!");
         exit(-1);
     }
