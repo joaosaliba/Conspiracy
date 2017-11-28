@@ -14,18 +14,26 @@ using namespace engine;
         SDLSurface * image = NULL;
         image = IMG_Load(directory.c_str());
 
+        
+        
         if(image == NULL){
             ERROR("INIT SPRITE ERROR.");
             exit(-1);
         }
 
+        
+        
         texture = SDL_CreateTextureFromSurface(WindowManager::getGameCanvas(), image);
 
+        
+        
         if(texture == NULL){
             ERROR("CREATE TEXTURE SPRITE ERROR.");
             exit(-1);
         }
 
+        
+        
         drawWidth = lenght.first = image->w;
         drawHeight = lenght.second = image->h;
         SDL_FreeSurface(image);
