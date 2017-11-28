@@ -114,7 +114,7 @@ void WinScene::load(){
 
 }
   
-void loadandgetbeforescene(){  
+void load_and_get_before_scene(){  
     if(getSceneManager()->get_before_scene_id() == 1){
                getSceneManager()->loadScene(25);
     }else if(getSceneManager()->get_before_scene_id() == 2){
@@ -126,7 +126,7 @@ void loadandgetbeforescene(){
 void  EnterSelect ()  {
                 switch(selectButton) {
                 case 1:
-                        loadandgetbeforescene();                        
+                        load_and_get_before_scene();                        
                         break;
                 case 2:
                         getSceneManager()->loadScene(0);
