@@ -21,11 +21,18 @@ using namespace engine;
     init();
    }
 void init(){
+	
+	
+	
     INFO("entrou no construtor");	
     if ( font_path == "") {// verifica se p caminho da ofnte e valido . 
         WARN("Invalid path for font!");
         exit(-1);
     }
+	
+	
+	
+	
 
     TTF_Font* font = TextManager::instance.loadFont( font_path,  size);
 
