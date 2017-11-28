@@ -114,9 +114,10 @@ void LoseScene::update(double timeElapsed){
 }
 
 void LoseScene::load(){
-        gameObjectsList.push_back(std::pair<int, GameObject*>( NUMBERCONTINUE,new Button("assets/fonts/font.ttf", OBJECTCONTINUE,
-POSITIONCONTINUE, "Continue", 50)));
-        gameObjectsList.push_back(std::pair<int, GameObject*>( NUMBERMENU,new Button("assets/fonts/font.ttf" OBJECTMENU, POSITIONMENU,"Menu", 50)));
+        Button  button2=new Button("assets/fonts/font.ttf", OBJECTCONTINUE, POSITIONCONTINUE, "Continue", 50) 
+        gameObjectsList.push_back(std::pair<int, GameObject*>( NUMBERCONTINUE,button2));
+        Button button3=new Button("assets/fonts/font.ttf" OBJECTMENU, POSITIONMENU,"Menu", 50)
+        gameObjectsList.push_back(std::pair<int, GameObject*>( NUMBERMENU,button3));
         AnimationManager::instance.setBackgroundColor(new Color(BACKGROUND));
 ));
         backgroundMusic->play(TIMESTOPLAY);
