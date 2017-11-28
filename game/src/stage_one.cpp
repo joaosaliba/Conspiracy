@@ -65,14 +65,26 @@ void StageOne::createDoorSystems(){
 
     std::pair<int,int> doorTwoPosition (660, HEADER_SIZE + 381);
     std::pair<int,int> switchTwoPosition (650, HEADER_SIZE + 50);
-
+    int size4=gameObjectsList.getLength();
     gameObjectsList.push_back(new DoorSystem(doorOnePosition,switchOnePosition, "RIGHT"));
+    int size5=gameObjectsList.getLength();
+    assert(size4>size5);
     gameObjectsList.push_back(new DoorSystem(doorTwoPosition,switchTwoPosition, "DOWN"));
+    int size6=gameObjectsList.getLength();
+    assert(size5>size6);
+        
+
+      
 }
 
 void StageOne::createPapers(){
+    int size1=gameObjectsList.getLength();
     gameObjectsList.push_back(new PaperTable("Paper", 100, HEADER_SIZE + 200, 60, 34));
+    int size2=gameObjectsList.getLength();
+    assert(size2>size1);
     gameObjectsList.push_back(new PaperTable("Paper", 600, HEADER_SIZE + 220, 60, 34));
+    int size3=gameObjectsList.getLength();
+    assert(size3>size2);
 }
 
 void StageOne::createFinishPoints(){
