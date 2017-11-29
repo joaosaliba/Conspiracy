@@ -46,6 +46,7 @@
   Int BEGIN;
  Int LAST;
 }
+# define const COLOR_LIMIT=8589934591;
 #define const SIZEOBJECT SIZECONTINUE.WITDH=700;
 #define const SIZEOBJECT  SIZECONTINUE.HEIGH=500;
 #define const POSITION POSITIONCONTINUE.BEGIN=500;
@@ -58,10 +59,26 @@
 SIZEMENU,POSITIONMENU
 using namespace engine;
 
+Bool test_color(Color color){//
+  if(color.red<COLOR_LIMIT){
+     if(color.green<COLOR_LIMIT){
+      if(color.black<COLOR_LIMIT){
+        return True;
+      }else{
+        return False;
+      }
+     }else{
+         return False;
+   }else{
+       return False;
+     }
+} 
 
 WinScene::WinScene(int id) : Scene(id){
     selectButton = 1;
+    assert(!test_color(SELECTEDCOLOR)); 
     select = new Color( SELECTCOLOR);
+    assert(!test_color(NOTSELECTEDCOLOR)); 
     notSelect = new Color(NOTSELECTCOLOR);
     soundEffect = new Audio("assets/sounds/SELECT6.wav", "EFFECT",100);
     background = new Animation("assets/sprites/win.png", ANIMATION, ANIMATIONTIME);
