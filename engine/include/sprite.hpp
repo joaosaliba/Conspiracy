@@ -25,6 +25,8 @@ namespace engine{
         std::pair<int, int> axis;
         SDL_Rect renderQuad;
         SDL_Rect clipRect;
+        void test_texture();
+        void test_image();
         int drawWidth;
         int drawHeight;
     };
