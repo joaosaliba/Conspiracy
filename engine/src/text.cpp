@@ -16,14 +16,37 @@ Text::Text( std::string  newText, std::string new_font_path, int new_size, bool 
     init();
 }
 
-
-void Text::init() {
-
-    if (font_path == "") {
+ void test_texture(){
+	  if (font_path == "") {
         WARN("Invalid path for font!");
         exit(-1);
     }
+ }	
+ void test_surface(){
+	 if(surface == NULL) {// testa se no caso de nao ser high_quality o metodo foi testado corretamente.
+        exit(-1);
+    }
+ }
+void test_texture(){
+ if (texture == NULL) {// testa se a textura foi colocada corretamente
+        exit(-1);
+    }
+	
+}
+void Text::init() {
 
+    test_texture(); 
+	
+
+    if(texture != NULL) {
+		SDL_DestroyTexture(texture);
+	}
+
+    texture = SDL_CreateTextureFromSurface(WindowManager::getGameCanvas(), surface);
+
+   test_texture();	
+	
+   
     font = TextManager::instance.loadFont(font_path, size);
 
     SDL_Color color = {text_color->r, text_color->g, text_color->b, text_color->a};
@@ -46,21 +69,8 @@ void Text::init() {
             font, text.c_str(), color
         );
     }
-
-    if(surface == NULL) {
-        exit(-1);
-    }
-
-    if(texture != NULL) {
-		SDL_DestroyTexture(texture);
-	}
-
-    texture = SDL_CreateTextureFromSurface(WindowManager::getGameCanvas(), surface);
-
-    if (texture == NULL) {
-        exit(-1);
-    }
-
+   void test_surface()
+	
     width = surface->w;
     height = surface->h;
 
