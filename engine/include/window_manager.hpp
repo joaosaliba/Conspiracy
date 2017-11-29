@@ -12,6 +12,8 @@ namespace engine{
         bool destroyWindow();
         SDL_Window* GetGameWindow();
         static SDL_Renderer* getGameCanvas();
+        void     test_image(){
+
     private:
         void setImageIcon();
     };
