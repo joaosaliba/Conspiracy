@@ -11,6 +11,8 @@ namespace engine{
         bool createWindow(std::string windowTitle, std::pair<int, int> windowSize);
         bool destroyWindow();
         SDL_Window* GetGameWindow();
+        void test_game_window();
+        void test_game_canvas();
         static SDL_Renderer* getGameCanvas();
     private:
         void setImageIcon();
