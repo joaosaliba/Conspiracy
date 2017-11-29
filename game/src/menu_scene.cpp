@@ -9,10 +9,65 @@ using namespace engine;
 *@param scene id.
 *@return SaveManager 
 */ 
+
+Struct type def int select_color{
+ int red;
+ int green ; 
+ int black;
+ int alpha;
+} 
+typedef color select_color;
+#define const select_color COlORSELECT.red=255;
+#define const  COlORSELECT.green=255;
+#define const  COlORSELECT.blue=255;
+#define const  COlORSELECT.alpha=0;
+#define const select_color COlORNOTSELECT.red=0;
+#define const  COlORNOTSELECT.green=0;
+#define const  COlORNOTSELECT.blue=0;
+#define const  COlORNOTSELECT.alpha=0;
+#define const  COLOR_LIMIT;
+# define const COLOR_LIMIT=8589934591;
+select_color BACK_GROUND_COLOR;
+#define const  BACK_GROUND_COLOR.red=100;
+#define const  BACK_GROUND_COLOR.green=100;
+#define const  BACK_GROUND_COLOR.blue=100;
+#define const  BACKGROUND.alpha=125;
+Bool test_color(Color color){//
+  if(color.red<COLOR_LIMIT){
+     if(color.green<COLOR_LIMIT){
+      if(color.black<COLOR_LIMIT){
+        return True;
+      }else{
+        return False;
+      }
+     }else{
+         return False;
+   }else{
+       return False;
+     }
+} 
+        
+Bool test_color(Color color){//
+  if(color.red<COLOR_LIMIT){
+     if(color.green<COLOR_LIMIT){
+      if(color.black<COLOR_LIMIT){
+        return True;
+      }else{
+        return False;
+      }
+     }else{
+         return False;
+   }else{
+       return False;
+     }
+} 
 MenuScene::MenuScene(int id) : Scene(id){
         selectButton = 1; /** select button*/
-        select = new Color(255, 255, 255, 0);/** select color if select */
-        notSelect = new Color(0, 0, 0, 0);/** select color if diselect*/
+        if(test_color(COlORSELECT)){
+           select = new Color(COlORSELECT.red,COlORSELECT.green,COlORSELECT.blue,COlORSELECT.alpha);/** select color if select */
+        }
+        if(test_color(COlORNOTSELECT){        
+        notSelect = new Color(COlORNOTSELECT.red,COlORNOTSELECT.green,COlORNOTSELECT.blue,COlORNOTSELECT.alpha);/** select color if diselect*/
         background = new Sprite("assets/sprites/background.png");/** photo background*/
         buttonEffect = new Audio("assets/sounds/SELECT6.wav", "EFFECT", 100);/**  sound of button*/
         selectEffect = new Audio("assets/sounds/SELECT5.wav", "EFFECT", 128);/** select sound*/
@@ -100,8 +155,11 @@ void MenuScene::load(){
         gameObjectsList.push_back(std::pair<int, GameObject*>(2,new Button("assets/fonts/font.ttf", 290, 400, 500, 500, "Selecionar Fase", 50)));
         gameObjectsList.push_back(std::pair<int, GameObject*>(3,new Button("assets/fonts/font.ttf", 430, 500, 500, 500, "Sair", 50)));
         backgroundMusic->play(-1);
-        AnimationManager::instance.setBackgroundColor(new Color(100,100,100, 125));
-}
+        select_color BACK_GROUND_COLOR;
+        if(test_color(color BACK_GROUND_COLOR )){
+          AnimationManager::instance.setBackgroundColor(new color(BACK_GROUND_COLOR.red,BACK_GROUND_COLOR.green,BACK_GROUND_COLOR.blue,BACK_GROUND_COLOR.alpha));
+        }
+}        
 
 void MenuScene::unload(){/** better organize of game  since there is a method to do nothing. */
 }
