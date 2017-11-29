@@ -4,36 +4,34 @@
 #include <assert.h>
 using namespace engine;
 
+   void test_image(){
+        if(image == NULL){// encera o metodo se a image for iqual a nulo. 
+            ERROR("INIT SPRITE ERROR.");
+            exit(-1);
+    }  
+   void test_texture(){
+     if(texture == NULL){// encera o metodo se nao houver uma textura. 
+            ERROR("CREATE TEXTURE SPRITE ERROR.");
+            exit(-1);
+        }
+   }
+       
     Sprite::Sprite(std::string newDirectory){
         directory = newDirectory;
-        init();
-    }
-
+        init(); 
+    }    
     void Sprite::init(){
         INFO("Init sprite.");
         SDLSurface * image = NULL;
         image = IMG_Load(directory.c_str());
 
-        
-        
-        if(image == NULL){// encera o metodo se a image for iqual a nulo. 
-            ERROR("INIT SPRITE ERROR.");
-            exit(-1);
-        }
-
+        test_image();     
         
         
         texture = SDL_CreateTextureFromSurface(WindowManager::getGameCanvas(), image);
-
-        
-        
-        if(texture == NULL){// encera o metodo se nao houver uma textura. 
-            ERROR("CREATE TEXTURE SPRITE ERROR.");
-            exit(-1);
-        }
-
-        
-        
+     
+        test_texture();          
+   
         drawWidth = lenght.first = image->w;
         drawHeight = lenght.second = image->h;
         SDL_FreeSurface(image);
