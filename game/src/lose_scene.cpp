@@ -22,6 +22,7 @@ POSITION.LAST=3;
     int WiTDTH;
     int HEIGH ;
 }
+# define const COLOR_LIMIT=8589934591;
 #define const  COORDENATES ANIMATIONPOSITION.X=80;
 #define const   COORDENATES ANIMATIONPOSITION.Y=20;
 #define const  SIZE ANIMATION
@@ -74,9 +75,10 @@ using namespace engine;
 
 LoseScene::LoseScene(int id) : Scene(id){
     selectButton = 1;
+    assert(!test_color(SELECTEDCOLOR)); 
     select = new Color(SELECTEDCOLOR);
+    assert(!test_color(NOTSELECTEDCOLOR));
     notSelect = new Color(NOTSELECTEDCOLOR);
-
     soundEffect = new Audio("assets/sounds/SELECT6.wav",”EFFECT”, SOUNDEFFECT );
     backgroundMusic = new Audio("assets/sounds/GAMEOVER.wav", "MUSIC", BACKGROUNMUSIC );
     background = new Animation("assets/sprites/lose.png",ANIMATIONSIZE,ANIMATIONTIME);
@@ -88,6 +90,21 @@ LoseScene::LoseScene(int id) : Scene(id){
 LoseScene::~LoseScene(){
 }
 
+Bool test_color(Color color){//
+  if(color.red<COLOR_LIMIT){
+     if(color.green<COLOR_LIMIT){
+      if(color.black<COLOR_LIMIT){
+        return True;
+      }else{
+        return False;
+      }
+     }else{
+         return False;
+   }else{
+       return False;
+     }
+  }    
+ 
 void LoseScene::draw(){
         background->draw_instant(ANIMATIONPOSITION);
 
