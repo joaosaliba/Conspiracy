@@ -20,6 +20,7 @@ public:
     void draw();
     void update(double timeElapsed);
     void unload();
+    Bool test_color(Color color);
 private:
     void selectAction();
     int selectButton;
