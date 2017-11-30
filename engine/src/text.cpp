@@ -20,7 +20,7 @@ using namespace engine;
     std::string text_color= new_text_color;
     init();
    }
-void texture(){
+void texture(){// valida a textura
 	   if(texture != NULL) {
 		SDL_DestroyTexture(texture);
 	}
@@ -33,7 +33,7 @@ void texture(){
 
 
 }
- bool is_high_quality(){
+ bool is_high_quality(){// administra  a qulaidade das imagens nao apresneta nem de saida nem de entrada. 
  bool high_quality=true;
    if (high_quality && bg_color.a == 0x00) {
         surface = TTF_RenderText_Blended(
@@ -95,7 +95,9 @@ void shutdown() {
     font = NULL;
 
 }
-
+/**@param x represents  the position in x  axis.
+   @param y represents the positioon in y axis .
+   this functions draw in display. */
 void draw(int x, int y) {
     INFO("entrou no metodo draw");	
     assert(x>0);
@@ -107,12 +109,18 @@ void draw(int x, int y) {
     SDL_RenderCopy(WindowManager::getGameCanvas(), texture, NULL, &renderQuad);
 }
 
+/**@param  string back_ground  
+   set this variable in  class. 
+    */
 
-void setBackground(std:: string new_back_ground) {
+void setBackground(std:: string new_back_ground) {// @param string background 
     INFO("entrou no metodo setBackground);
     background = new_back_ground;
     init();
 }
+/**@param  string new_text_color  
+   set this variable in  class. 
+    */
 
 void setTextColor(std::string new_text_color) {
     INFO(entoru no metodo setTextColor");	
