@@ -8,6 +8,48 @@
 #include "paper.hpp"
 #include <assert.h>
 #include "log.h"
+struct { 
+    int red;
+    int green;
+    int blue;
+    int alpha;
+} color;
+type def struct color color2;
+color2 BACK_COLOR;
+#define BACK_COLOR.red=22;
+#define BACK_COLOR.green=206;
+#define BACK_COLOR.blue=26;
+#define BACK_COLOR.alpha=1;
+struct {
+    int initial_position;
+    int last_postion;
+} action;
+typdef action paper_action;
+paper_action WATING;
+#define const WATING.initial_position=0;
+#define const WATING.last_position=0;
+paper_action MOVE.
+#define const MOVE.initial_position=1;
+#define const WATING.last_position=3;
+WATING.last_position,MOVE.initial_position
+    
+
+color2 FRONT_COLOR;
+#define FRONT_COLOR.red=116;
+#define FRONT_COLOR.green=225;
+#define FRONT_COLOR.blue=117;
+#define FRONT_COLOR.alpha=1;
+struct{
+    int columns;
+    int rows,
+    int time;
+}animation;    
+typedef animation animationpaper;
+animationpaper ANIMATION_PAPER;
+#define const ANIMATION_PAPER.columns=1;
+#define const ANIMATION_PAPER.rows=4;
+#define const ANIMATION_PAPER.time=0.5;
+
 
 #define INITIAL_PERCENTAGE 0.0
 
@@ -25,13 +67,13 @@ Paper::Paper(std::string object_name, double paper_position_x, double paper_posi
                                                                          paper_position_y,
                                                                          paper_width, paper_height) {
 
-    animator = new Animation(object_name, 1, 4, 0.5);
+    animator = new Animation(object_name,ANIMATION_PAPER.columns,ANIMATION_PAPER.rows,ANIMATION_PAPER.time );
     assert(animator != NULL);
-    animator->addAction("idle",0,0);
-    animator->addAction("beingEdited",1,3);
+    animator->addAction("idle",WATING.initial_position,WATING.last_position);
+    animator->addAction("beingEdited",WATING.last_position,MOVE.initial_position);
 
-    std::vector<unsigned int> back_color = {22, 206, 26, 1};
-    std::vector<unsigned int> front_color = {116, 225, 117, 1};
+    std::vector<unsigned int> back_color = {BACK_COLOR.red,BACK_COLOR.green,BACK_COLOR.blue,BACK_COLOR.alpha};
+    std::vector<unsigned int> front_color = {FRONT_COLOR.red,FRONT_COLOR.green,FRONT_COLOR.blue,FRONT_COLOR.alpha};
     assert(back_color != NULL);
     assert(front_color != NULL);
 
