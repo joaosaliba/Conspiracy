@@ -11,6 +11,7 @@ void test_game_window(){
  void test game_canvas(){
   
    if(game_canvas == NULL){
+       DEBUG(" ocorreu um erro no game canvas");
             return false;
         }
  }
