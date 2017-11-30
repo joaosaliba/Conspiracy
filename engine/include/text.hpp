@@ -15,6 +15,9 @@ using namespace  std;
         void loadFont();/** retrail the text font*/
         void setBackground(Color * newBackground);/** set the text background*/
         void setTextColor(Color * newTextColor);/** set the text color*/
+        void test_path();
+        void test_surface();
+        void test_texture();
     protected:
         SDL_Texture * texture; /** the text texture */ 
         TTF_Font * font;/** the text font*/
