@@ -3,7 +3,15 @@
 
 #include <typeinfo>
 #include <iostream>
-
+struct animation_data{
+       int rows;
+       int colums;
+       int time;
+}
+tyṕedef animation_data NEW_ANIMATION;
+#define const NEW_ANIMATION.rows=1;
+#define const NEW_ANIMATION.columns=5;
+#define const NEW_ANIMATION.time=0.8;
 using namespace engine;
 
 WinScene::WinScene(int id) : Scene(id){
@@ -11,7 +19,7 @@ WinScene::WinScene(int id) : Scene(id){
     select = new Color(255, 255, 255, 0);
     notSelect = new Color(0, 0, 0, 0);
     soundEffect = new Audio("assets/sounds/SELECT6.wav", "EFFECT",100);
-    background = new Animation("assets/sprites/win.png", 1, 5, 0.8);
+    background = new Animation("assets/sprites/win.png", NEW_ANIMATION.rows,NEW_ANIMATION.columns ,NEW_ANIMATION.time );
     background->addAction("win", 0, 4);
     background->setInterval("win");
 }
