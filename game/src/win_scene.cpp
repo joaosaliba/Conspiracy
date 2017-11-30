@@ -58,7 +58,30 @@ void WinScene::load(){
         AnimationManager::instance.setBackgroundColor(new Color(158,228,159, 125));
 
 }
+  void  load_scene(){
+        if(getSceneManager()->get_before_scene_id() == 1){
+                            getSceneManager()->loadScene(25);
+                        }else if(getSceneManager()->get_before_scene_id() == 2){
+                            getSceneManager()->loadScene(23);
+                        }else{
+                            getSceneManager()->loadScene(getSceneManager()->get_before_scene_id()+1);
+                        }
+  }
+  void enter_button(){ 
+   if(InputManager::instance.isKeyTriggered(InputManager::KeyPress::KEY_PRESS_ENTER)) {
+                switch(selectButton) {
+                case 1:
+                       load_scene();
+                        break;
+                case 2:
+                        getSceneManager()->loadScene(0);
+                        break;
+                default:
+                        break;
+                }
 
+        }
+  }         
 void WinScene::selectAction(){
         if(InputManager::instance.isKeyTriggered(InputManager::KeyPress::KEY_PRESS_LEFT)) {
                 soundEffect->pause();
@@ -76,28 +99,9 @@ void WinScene::selectAction(){
                         selectButton = 1;
                 }
         }
-
-        if(InputManager::instance.isKeyTriggered(InputManager::KeyPress::KEY_PRESS_ENTER)) {
-                switch(selectButton) {
-                case 1:
-                        if(getSceneManager()->get_before_scene_id() == 1){
-                            getSceneManager()->loadScene(25);
-                        }else if(getSceneManager()->get_before_scene_id() == 2){
-                            getSceneManager()->loadScene(23);
-                        }else{
-                            getSceneManager()->loadScene(getSceneManager()->get_before_scene_id()+1);
-                        }
-
-                        break;
-                case 2:
-                        getSceneManager()->loadScene(0);
-                        break;
-                default:
-                        break;
-                }
-
-        }
-}
+ 
+       enter_button();       
+ }
 
 void WinScene::unload(){
 }
