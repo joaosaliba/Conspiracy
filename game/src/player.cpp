@@ -34,11 +34,13 @@ Player::Player(std::pair<int, int> biluPosition, std::pair<int, int> etemerPosit
 
         selectedAlien = ETEMER;
 
+  
         etemer->update(NOTUPDATE);
         bilu->update(NOTUPDATE);
         varginha->update(NOTUPDATE);
         header->update(NOTUPDATE);
 
+  
         bilu->setAlienDeselect();
         varginha->setAlienDeselect();
         etemer->setAlienSelected();
@@ -69,8 +71,10 @@ void Player::update(double timeElapsed){
 
         selectedAlien(int beforeAlien) 
 
+          
         exclamationAnimation->update();
 
+          
         etemer->update(timeElapsed);
         bilu->update(timeElapsed);
         varginha->update(timeElapsed);
