@@ -17,6 +17,7 @@ void test_game_window(){
  }
 void     test_image(){
       if(image == NULL){
+           DEBUG(" ocorreu um erro na imagem");
             exit(-1);
       }
 }
