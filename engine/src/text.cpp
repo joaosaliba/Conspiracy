@@ -17,7 +17,7 @@ Text::Text( std::string  newText, std::string new_font_path, int new_size, bool 
 }
 
  void test_texture(){
-	  if (font_path == "") {
+	  if (font_path == "") {// valid if path is valid. 
         WARN("Invalid path for font!");
         exit(-1);
     }
