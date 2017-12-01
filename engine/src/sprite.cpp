@@ -32,8 +32,8 @@ using namespace engine;
      
         test_texture();          
    
-        drawWidth = lenght.first = image->w;
-        drawHeight = lenght.second = image->h;
+        drawWidth = lenght.first = image->width;
+        drawHeight = lenght.second = image->height;
         SDL_FreeSurface(image);
 
     }
@@ -43,9 +43,11 @@ using namespace engine;
         SDL_DestroyTexture(texture);
         texture = NULL;
     }
-    void Sprite::setDrawSize(int w, int h){
-        drawWidth = w;
-        drawHeight = h;
+    void Sprite::setDrawSize(int width, int height){
+        assert (height>0);
+        assert(width>0);
+        drawWidth = width;
+        drawHeight = height;
     }
     void Sprite::draw(int x, int y){// procurar o arquivo onde axis esta definido.
         INFO(" entrou no metodo draw da classe sprite");
