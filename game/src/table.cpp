@@ -7,7 +7,8 @@
 #define const LINES=1;
 #define const COLUMS=1;
 #define const TIME=0.5;
-
+/** @  test if the numeber of lines and colums is  valid.
+   @valida the varible to zinalize if number of lines and colums is valid or not.*/ 
 Bool test_animation(int colums,int lines){
      Bool valida;
      if(colums<MAX_COLUMS){
